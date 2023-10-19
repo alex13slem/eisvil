@@ -1,0 +1,18 @@
+:root {
+  --container-width: 1290px;
+  --container-offset: 4ch;
+
+  --color-bg: 28, 29, 43;
+  --color-accent: 239, 129, 27;
+  --color-white: 255, 255, 255;
+  --color-text: var(--color-white);
+
+  --gradient: linear-gradient(180deg, #e32521 0%, #ef811b 100%);
+  --gradient-blue: linear-gradient(135deg, #64a4ed 0%, #1d6dc8 39%);
+  --gradient-green: linear-gradient(135deg, #78f89c 0%, #1fb148 39%);
+  --gradient-orange: linear-gradient(135deg, #f4b67b 0%, #df7614 39%);
+  --gradient-red: linear-gradient(135deg, #ff7c96 0%, #d72749 39%);
+
+  --trans-default: 0.3s ease-in-out;
+  --trans-steps: 0.3s steps(5);
+}

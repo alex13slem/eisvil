@@ -1,0 +1,48 @@
+body {
+  font-size: 16px;
+  line-height: 1.125;
+
+  background: rgb(var(--color-bg));
+  color: rgb(var(--color-text));
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+.container {
+  max-width: calc(var(--container-width) + (var(--container-offset) * 2));
+  width: 100%;
+  padding-inline: var(--container-offset);
+  margin-inline: auto;
+}
+
+h2 {
+  margin-bottom: 1.5em;
+
+  font-size: 2.25rem;
+}
+
+h3 {
+  margin-bottom: 1.5em;
+
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+p {
+  margin-bottom: 0.7em;
+
+  &:last-of-type {
+    margin-bottom: 2em;
+  }
+}
+
+section {
+  padding-block: 50px;
+}

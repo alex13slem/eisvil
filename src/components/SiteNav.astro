@@ -1,0 +1,38 @@
+---
+import NavLink from './NavLink.astro';
+---
+
+<nav class="root">
+  <NavLink>Наши игры</NavLink>
+  <NavLink>Услуги</NavLink>
+  <NavLink>Издательство</NavLink>
+  <NavLink>Карьера</NavLink>
+  <NavLink>Контакты</NavLink>
+</nav>
+
+<style>
+  .root {
+    position: relative;
+    display: flex;
+    gap: 5px;
+  }
+  .root::after {
+  }
+  .root.variant-blur::after {
+  }
+  .root.variant-oval::after {
+    content: '';
+    z-index: -1;
+
+    width: 150%;
+    position: absolute;
+    top: 10px;
+    left: -25%;
+    aspect-ratio: 7/1;
+    background: radial-gradient(
+      50% 50%,
+      rgb(var(--color-accent), 80%),
+      transparent
+    );
+  }
+</style>
