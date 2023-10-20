@@ -123,6 +123,8 @@ const { class: className, ...props } = Astro.props;
     font-size: 10px;
     font-weight: 700;
     text-align: center;
+    /* cursor: default; */
+    user-select: none;
   }
   .all-rights span {
     text-decoration: underline;
@@ -157,6 +159,7 @@ const { class: className, ...props } = Astro.props;
     justify-content: space-between;
     gap: 1rem;
   }
+
   .platforms {
   }
   .platforms h2 {
@@ -170,6 +173,7 @@ const { class: className, ...props } = Astro.props;
     justify-content: start;
     gap: 10px 5px;
   }
+
   .link {
     color: rgb(var(--color-text), 30%);
     transition: color var(--trans-default);
