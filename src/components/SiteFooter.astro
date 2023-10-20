@@ -13,6 +13,17 @@ import vkSVG from "@/img/vk.svg";
 import xBoxSVG from "@/img/x-box.svg";
 import supportSVG from "@/img/support.svg";
 import { Image } from "astro:assets";
+import SVGApple from "@/components/svg/SVGApple.astro";
+import SVGGoogle from "./svg/SVGGoogle.astro";
+import SVGRusstore from "./svg/SVGRusstore.astro";
+import SVGHuawei from "./svg/SVGHuawei.astro";
+import SVGPlaygame from "./svg/SVGPlaygame.astro";
+import SVGVk from "./svg/SVGVk.astro";
+import SVGSteam from "./svg/SVGSteam.astro";
+import SVGNintendo from "./svg/SVGNintendo.astro";
+import SVGXBox from "./svg/SVGXBox.astro";
+import SVGSony from "./svg/SVGSony.astro";
+import SVGSupport from "./svg/SVGSupport.astro";
 
 interface Props extends HTMLAttributes<"footer"> {}
 
@@ -52,20 +63,23 @@ const { class: className, ...props } = Astro.props;
         <div class="platforms">
           <h2>Мы на платформах</h2>
           <div class="links">
-            <a href="" class="link"><Image src={appleSVG} alt={""} /></a>
-            <a href="" class="link"><Image src={googleSVG} alt={""} /></a>
-            <a href="" class="link"><Image src={russtoreSVG} alt={""} /></a>
-            <a href="" class="link"><Image src={huaveiSVG} alt={""} /></a>
-            <a href="" class="link"><Image src={playgameSVG} alt={""} /></a>
-            <a href="" class="link"><Image src={vkSVG} alt={""} /></a>
-            <a href="" class="link"><Image src={steamSVG} alt={""} /></a>
-            <a href="" class="link"><Image src={nintendoSVG} alt={""} /></a>
-            <a href="" class="link"><Image src={xBoxSVG} alt={""} /></a>
-            <a href="" class="link"><Image src={sonySVG} alt={""} /></a>
+            <!-- <a href="" class="link"><Image src={appleSVG} alt={""} /></a> -->
+            <a href="" class="link"><SVGApple /></a>
+            <a href="" class="link"><SVGGoogle /></a>
+            <a href="" class="link"><SVGRusstore /></a>
+            <a href="" class="link"><SVGHuawei /></a>
+            <a href="" class="link"><SVGPlaygame /></a>
+            <a href="" class="link"><SVGVk /></a>
+            <a href="" class="link">
+              <SVGSteam />
+            </a>
+            <a href="" class="link"><SVGNintendo /></a>
+            <a href="" class="link"><SVGXBox /></a>
+            <a href="" class="link"><SVGSony /></a>
           </div>
         </div>
         <div class="bottom-block">
-          <Image src={supportSVG} alt={""} />
+          <a href=""><SVGSupport /></a>
         </div>
       </div>
     </div>
@@ -130,6 +144,10 @@ const { class: className, ...props } = Astro.props;
   .nav-link {
     color: rgb(var(--color-text), 30%);
     font-weight: 300;
+    transition: color var(--trans-default);
+  }
+  .nav-link:hover {
+    color: rgb(var(--color-text), 50%);
   }
 
   .right-panel {
@@ -152,7 +170,11 @@ const { class: className, ...props } = Astro.props;
     justify-content: start;
     gap: 10px 5px;
   }
-  .link path {
-    /* fill: bisque; */
+  .link {
+    color: rgb(var(--color-text), 30%);
+    transition: color var(--trans-default);
+  }
+  .link:hover {
+    color: rgb(var(--color-text), 50%);
   }
 </style>
