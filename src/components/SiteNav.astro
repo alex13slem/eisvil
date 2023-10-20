@@ -1,8 +1,8 @@
 ---
-import NavLink from './NavLink.astro';
+import NavLink from "./NavLink.astro";
 ---
 
-<nav class="root">
+<nav class="site-nav">
   <NavLink>Наши игры</NavLink>
   <NavLink>Услуги</NavLink>
   <NavLink>Издательство</NavLink>
@@ -11,17 +11,17 @@ import NavLink from './NavLink.astro';
 </nav>
 
 <style>
-  .root {
+  .site-nav {
     position: relative;
     display: flex;
     gap: 5px;
   }
-  .root::after {
+  .site-nav::after {
   }
-  .root.variant-blur::after {
+  .site-nav.variant-blur::after {
   }
-  .root.variant-oval::after {
-    content: '';
+  .site-nav.variant-oval::after {
+    content: "";
     z-index: -1;
 
     width: 150%;

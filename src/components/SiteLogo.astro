@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { Image } from "astro:assets";
+import siteLogo from "@/img/site-logo.svg";
+
+interface Props extends HTMLAttributes<"a"> {}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<a href="/" class:list={["site-logo", className]} {...props}
+  ><Image class="svg" src={siteLogo} alt="site-logo" /></a
+>
+
+<style>
+  .svg {
+    height: 43px;
+  }
+</style>

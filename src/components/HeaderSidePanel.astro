@@ -1,0 +1,26 @@
+---
+const { class: className, ...props } = Astro.props;
+---
+
+<div class:list={["side-panel", className]} {...props}>
+  <slot />
+</div>
+
+<style>
+  .side-panel {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .side-panel::after {
+    position: absolute;
+
+    bottom: -50%;
+    height: 100%;
+    content: "";
+    background: radial-gradient(50% 50%, rgba(239, 129, 27, 0.25), transparent);
+    aspect-ratio: 2/1;
+  }
+</style>

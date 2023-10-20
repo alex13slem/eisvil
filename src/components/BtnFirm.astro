@@ -1,8 +1,8 @@
 ---
-const {class: className, ...props} = Astro.props;
+const { class: className, ...props } = Astro.props;
 ---
 
-<button class:list={['root', className]} {...props}>
+<button class:list={["firm-btn", className]} {...props}>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="9"
@@ -43,7 +43,8 @@ const {class: className, ...props} = Astro.props;
 </button>
 
 <style>
-  .root {
+  .firm-btn {
+    position: relative;
     padding: 0 4ch;
     line-height: 3;
 
@@ -56,7 +57,7 @@ const {class: className, ...props} = Astro.props;
 
   .arrow {
     position: absolute;
-    content: '';
+    content: "";
   }
   .arrow-left {
     top: 0;
@@ -83,7 +84,7 @@ const {class: className, ...props} = Astro.props;
     );
   }
 
-  .root:hover {
+  .firm-btn:hover {
     transform: scale(101%);
   }
   span.text {

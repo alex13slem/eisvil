@@ -1,10 +1,10 @@
 ---
-import {Image} from 'astro:assets';
-import banner from '@/img/hero.jpg';
-import BtnFirm from '../components/BtnFirm.astro';
+import { Image } from "astro:assets";
+import banner from "@/img/hero.jpg";
+import BtnFirm from "../components/BtnFirm.astro";
 ---
 
-<div class="root">
+<div class="sect-hero">
   <Image class="banner" src={banner} alt="Site-banner" />
   <div class="content">
     <h1>EISVIL</h1>
@@ -14,7 +14,7 @@ import BtnFirm from '../components/BtnFirm.astro';
 </div>
 
 <style>
-  .root {
+  .sect-hero {
     --banner-height: 760px;
 
     position: relative;
