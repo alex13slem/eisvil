@@ -14,7 +14,9 @@
   --gradient-red: linear-gradient(135deg, #ff7c96 0%, #d72749 39%);
 
   --trans-default: 0.3s ease-in-out;
+  --trans-slow: 0.7s ease-in-out;
   --trans-steps: 0.3s steps(5);
 
   --border: 1px solid rgb(var(--color-white), 10%);
+  --border-card: 1px solid rgb(var(--color-white), 30%);
 }

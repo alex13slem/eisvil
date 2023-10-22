@@ -1,8 +1,6 @@
----
 
----
 
-<a href="" class="nav-link variant-blur"><span></span><slot /></a>
+<a href="/" class="nav-link"><span></span><slot /></a>
 
 <style>
   .nav-link {

@@ -1,14 +1,11 @@
----
-const { class: className, ...props } = Astro.props;
----
 
-<button class:list={["firm-btn", className]} {...props}>
+<button class="btn-firm">
   <span class="bg"></span>
   <span class="text"><slot /></span>
 </button>
 
 <style>
-  .firm-btn {
+  .btn-firm {
     position: relative;
     padding: 0 4ch;
     line-height: 3;
@@ -20,20 +17,20 @@ const { class: className, ...props } = Astro.props;
     transition: transform var(--trans-default);
   }
 
-  .firm-btn::before,
-  .firm-btn::after {
+  .btn-firm::before,
+  .btn-firm::after {
     position: absolute;
     content: "";
     width: 0.5em;
     aspect-ratio: 1/1;
     background: url("../img/btn-arrow.svg") no-repeat;
   }
-  .firm-btn::after {
+  .btn-firm::after {
     bottom: 0;
     right: 0;
     transform: rotate(180deg);
   }
-  .firm-btn::before {
+  .btn-firm::before {
     top: 0;
     left: 0;
   }
@@ -53,7 +50,7 @@ const { class: className, ...props } = Astro.props;
     );
   }
 
-  .firm-btn:hover {
+  .btn-firm:hover {
     transform: scale(101%);
   }
   span.text {

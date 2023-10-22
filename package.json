@@ -10,16 +10,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^3.0.3",
+    "@astrojs/cloudflare": "^7.6.1",
+    "@astrojs/svelte": "^4.0.3",
     "@fontsource/inter": "^5.0.13",
-    "@nanostores/react": "^0.7.1",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
     "astro": "^3.3.1",
     "nanostores": "^0.9.4",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "sass": "^1.69.4"
+    "sass": "^1.69.4",
+    "svelte": "^4.2.2"
   },
   "devDependencies": {
     "prettier": "^3.0.3",

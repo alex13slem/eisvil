@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Form from "../components/Form.svelte";
+import BtnFirm from "../components/BtnFirm.svelte";
+import FormCard from "../components/FormCard.astro";
+
+interface Props extends HTMLAttributes<"section"> {}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<section class:list={["sect-form", className]} {...props}>
+  <div class="container">
+    <h2>Сми или блогер</h2>
+    <FormCard>
+      <Fragment slot="description">
+        Журналисты или подтверждённые блогеры <br /><span>ПЕРВЫМИ</span> узнают
+        о тестировании игры
+      </Fragment>
+    </FormCard>
+  </div>
+</section>
+
+<style></style>

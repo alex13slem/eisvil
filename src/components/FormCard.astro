@@ -1,0 +1,102 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import BtnFirm from "./BtnFirm.svelte";
+import Form from "./Form.svelte";
+import { Image } from "astro:assets";
+import bgPreview from "@/img/hero.jpg";
+
+interface Props extends HTMLAttributes<"div"> {}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<script>
+  const body = document.querySelector(".form-card .body");
+  const fields = body?.querySelectorAll("input, textarea");
+  fields?.length &&
+    fields.forEach((field) => {
+      field.addEventListener("blur", () => {
+        body?.classList.remove("active");
+      });
+    });
+  fields?.length &&
+    fields.forEach((field) => {
+      field.addEventListener("focus", () => {
+        body?.classList.add("active");
+      });
+    });
+</script>
+
+<div class:list={["form-card", className]} {...props}>
+  <p class="description">
+    <slot name="description" />
+  </p>
+  <div class="body">
+    <div class="preview">
+      <BtnFirm>Заполнить форму</BtnFirm>
+      <Image class={"img"} src={bgPreview} alt={""} />
+    </div>
+    <Form client:load />
+  </div>
+</div>
+
+<style lang="scss">
+  .form-card {
+    border: var(--border-card);
+  }
+
+  .description {
+    padding: 2rem;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+  }
+  .description :global(span) {
+    color: rgb(var(--color-accent));
+  }
+
+  .body {
+    z-index: 0;
+    position: relative;
+  }
+  .body:hover,
+  .body.active {
+    .preview {
+      opacity: 0;
+    }
+    :global(.form) {
+      opacity: 1;
+    }
+  }
+
+  .preview {
+    z-index: 1;
+    opacity: 1;
+    position: absolute;
+    inset: 0;
+    border-top: var(--border-card);
+    pointer-events: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: opacity var(--trans-slow);
+
+    /* display: none; */
+  }
+  .preview .img {
+    z-index: -1;
+    position: absolute;
+    object-fit: cover;
+    object-position: center;
+    inset: 0;
+    height: 100%;
+  }
+
+  .form-card :global(.form) {
+    opacity: 0;
+
+    transition: opacity var(--trans-slow);
+  }
+</style>

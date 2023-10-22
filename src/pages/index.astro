@@ -1,11 +1,15 @@
 ---
 import HtmlBase from "@/layouts/HtmlBase.astro";
 import SectHero from "@/sections/SectHero.astro";
+import SectForm from "@/sections/SectForm.astro";
+
+export const prerender = true;
 ---
 
 <HtmlBase title="E I S V I L">
   <main class="main">
     <SectHero />
+    <SectForm />
   </main>
 </HtmlBase>
 
