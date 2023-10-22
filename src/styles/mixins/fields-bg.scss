@@ -1,0 +1,9 @@
+@mixin fields-bg {
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+
+  @include firm-clip;
+  background-color: rgb(var(--color-white), 40%);
+  transition: background-color var(--trans-default);
+}

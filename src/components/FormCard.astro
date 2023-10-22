@@ -11,41 +11,113 @@ const { class: className, ...props } = Astro.props;
 ---
 
 <script>
-  const body = document.querySelector(".form-card .body");
-  const fields = body?.querySelectorAll("input, textarea");
+  const formCard = document.querySelector(".form-card");
+  const fields = formCard?.querySelectorAll("input, textarea");
   fields?.length &&
     fields.forEach((field) => {
       field.addEventListener("blur", () => {
-        body?.classList.remove("active");
+        formCard?.classList.remove("active");
       });
     });
   fields?.length &&
     fields.forEach((field) => {
       field.addEventListener("focus", () => {
-        body?.classList.add("active");
+        formCard?.classList.add("active");
       });
     });
 </script>
 
 <div class:list={["form-card", className]} {...props}>
+  <Image class={"img"} src={bgPreview} alt={""} />
   <p class="description">
     <slot name="description" />
   </p>
   <div class="body">
     <div class="preview">
       <BtnFirm>Заполнить форму</BtnFirm>
-      <Image class={"img"} src={bgPreview} alt={""} />
     </div>
-    <Form client:load />
+    <Form />
   </div>
 </div>
 
 <style lang="scss">
   .form-card {
+    position: relative;
     border: var(--border-card);
+
+    // Углы start
+    &::after,
+    &::before,
+    .body::before,
+    :global(.form)::before {
+      content: "";
+      position: absolute;
+      background-color: rgb(var(--color-bg));
+      transform: rotate(45deg);
+    }
+    .body::after {
+      content: "";
+      position: absolute;
+      background-color: rgb(var(--color-card));
+      transform: rotate(45deg);
+    }
+    &::after,
+    .body::after {
+      right: -1rem;
+      top: -1rem;
+      width: 2rem;
+      height: 2rem;
+      border-bottom: var(--border-card);
+      transition: border-color var(--trans-slow);
+    }
+    &,
+    .body,
+    :global(.form) {
+      &::before {
+        width: 8rem;
+        height: 8rem;
+        left: -4rem;
+        bottom: -4rem;
+        border-top: var(--border-card);
+      }
+    }
+    // Углы end
+
+    // Фокус start
+    &:hover,
+    &.active {
+      .body {
+        background-color: rgb(var(--color-card), 90%);
+        &::after {
+          border-color: transparent;
+        }
+      }
+
+      .preview {
+        border-color: transparent;
+        :global(.btn-firm) {
+          opacity: 0;
+        }
+      }
+
+      :global(.form) {
+        opacity: 1;
+      }
+    }
+    // Фокус end
+  }
+
+  .img {
+    z-index: -1;
+    position: absolute;
+    object-fit: cover;
+    object-position: center;
+    inset: 0;
+    height: 100%;
   }
 
   .description {
+    background-color: rgb(var(--color-card), 90%);
     padding: 2rem;
     font-size: 18px;
     font-weight: 600;
@@ -56,21 +128,14 @@ const { class: className, ...props } = Astro.props;
   }
 
   .body {
-    z-index: 0;
+    overflow: hidden;
     position: relative;
-  }
-  .body:hover,
-  .body.active {
-    .preview {
-      opacity: 0;
-    }
-    :global(.form) {
-      opacity: 1;
-    }
+    background-color: rgb(var(--color-card), 50%);
+
+    transition: background-color var(--trans-slow);
   }
 
   .preview {
-    z-index: 1;
     opacity: 1;
     position: absolute;
     inset: 0;
@@ -81,20 +146,16 @@ const { class: className, ...props } = Astro.props;
     justify-content: center;
     align-items: center;
 
-    transition: opacity var(--trans-slow);
+    transition: border-color var(--trans-slow);
 
+    :global(.btn-firm) {
+      transition: opacity var(--trans-slow);
+    }
     /* display: none; */
-  }
-  .preview .img {
-    z-index: -1;
-    position: absolute;
-    object-fit: cover;
-    object-position: center;
-    inset: 0;
-    height: 100%;
   }
 
   .form-card :global(.form) {
+    position: relative;
     opacity: 0;
 
     transition: opacity var(--trans-slow);

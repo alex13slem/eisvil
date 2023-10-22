@@ -1,10 +1,11 @@
-
 <button class="btn-firm">
-  <span class="bg"></span>
+  <span class="bg" />
   <span class="text"><slot /></span>
 </button>
 
-<style>
+<style lang="scss">
+  @import "../styles/mixins";
+
   .btn-firm {
     position: relative;
     padding: 0 4ch;
@@ -15,24 +16,12 @@
     cursor: pointer;
 
     transition: transform var(--trans-default);
-  }
 
-  .btn-firm::before,
-  .btn-firm::after {
-    position: absolute;
-    content: "";
-    width: 0.5em;
-    aspect-ratio: 1/1;
-    background: url("../img/btn-arrow.svg") no-repeat;
-  }
-  .btn-firm::after {
-    bottom: 0;
-    right: 0;
-    transform: rotate(180deg);
-  }
-  .btn-firm::before {
-    top: 0;
-    left: 0;
+    @include firm-arrows;
+
+    &:hover {
+      transform: scale(101%);
+    }
   }
 
   span.bg {
@@ -40,19 +29,9 @@
     inset: 0;
 
     background: var(--gradient);
-    clip-path: polygon(
-      1.7em 0%,
-      100% 0,
-      100% 50%,
-      calc(100% - 1.7em) 100%,
-      0% 100%,
-      0 50%
-    );
+    @include firm-clip;
   }
 
-  .btn-firm:hover {
-    transform: scale(101%);
-  }
   span.text {
     position: relative;
 

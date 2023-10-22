@@ -37,7 +37,7 @@
 
 <style lang="scss">
   form {
-    padding: 1rem;
+    padding: 30px;
     padding-top: 0;
 
     display: flex;
@@ -48,6 +48,7 @@
     all: unset;
     display: grid;
 
+    grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
       "name contact"
       "from_link comment"

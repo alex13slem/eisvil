@@ -17,19 +17,27 @@
     use:typeAction
     {...$$restProps}
   />
+  <div class="bg" />
 </div>
 
 <style lang="scss">
+  @import "../styles/mixins";
+
+  .form-field {
+    position: relative;
+    z-index: 0;
+
+    @include firm-arrows(0.3);
+  }
+
   input {
     width: 100%;
     padding-inline: 30px;
 
     line-height: 3.375rem;
     color: rgb(var(--color-text));
-    background-color: rgb(var(--color-white), 30%);
+    background-color: transparent;
     border: none;
-
-    transition: background var(--trans-default);
 
     &::placeholder {
       font-size: 12px;
@@ -37,7 +45,13 @@
     }
     &:focus-visible {
       outline: none;
-      background-color: rgb(var(--color-white), 50%);
+      & ~ .bg {
+        background-color: rgb(var(--color-white), 50%);
+      }
     }
+  }
+
+  .bg {
+    @include fields-bg;
   }
 </style>
