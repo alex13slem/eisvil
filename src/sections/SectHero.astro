@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import banner from "@/img/hero.jpg";
-import BtnFirm from "../components/BtnFirm.astro";
+import BtnFirm from "@/components/BtnFirm.svelte";
 ---
 
 <div class="sect-hero">
@@ -9,7 +9,7 @@ import BtnFirm from "../components/BtnFirm.astro";
   <div class="content">
     <h1>EISVIL</h1>
     <h2 class="description">место, где идея становится игрой</h2>
-    <BtnFirm class="button">Создать новый мир</BtnFirm>
+    <BtnFirm>Создать новый мир</BtnFirm>
   </div>
 </div>
 
@@ -69,7 +69,7 @@ import BtnFirm from "../components/BtnFirm.astro";
     font-weight: 400;
   }
 
-  .button {
+  .sect-hero :global(.btn-firm) {
     align-self: center;
     margin-inline: auto;
   }
