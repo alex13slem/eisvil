@@ -1,0 +1,21 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import GameCard from "../components/GameCard.astro";
+import image from "@/img/hero.jpg";
+import { getCollection } from "astro:content";
+
+interface Props extends HTMLAttributes<"section"> {}
+
+const { class: className, ...props } = Astro.props;
+
+const games = await getCollection("games");
+---
+
+<section class:list={["sect-our-games", className]} {...props}>
+  <div class="container">
+    <h2>Наши игры</h2>
+    {games.map((game) => <GameCard game={game} />)}
+  </div>
+</section>
+
+<style></style>

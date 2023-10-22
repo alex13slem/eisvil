@@ -1,0 +1,112 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { Image } from "astro:assets";
+import SVGPlaygame from "./svg/SVGPlaygame.svelte";
+import SVGApple from "./svg/SVGApple.svelte";
+import SVGGoogle from "./svg/SVGGoogle.svelte";
+import CardBadge from "./CardBadge.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props extends HTMLAttributes<"article"> {
+  game: CollectionEntry<"games">;
+}
+
+const {
+  class: className,
+  game: { data },
+  ...props
+} = Astro.props;
+
+const { name, image, tags, links, category } = data;
+---
+
+<article class:list={["game-card", className]} {...props}>
+  {category && <CardBadge type={category} />}
+  <!-- <Image src={img} alt={name}  /> -->
+  <img src={image.src} alt={image.alt} />
+  <div class="body">
+    <h3>{name}</h3>
+    <p class="genre">{tags && tags.map((tag) => <span>{tag}</span>)}</p>
+    <div class="links">
+      {
+        links?.playgame && (
+          <a href={links.playgame}>
+            <SVGPlaygame />
+          </a>
+        )
+      }
+      {
+        links?.apple && (
+          <a href={links.apple}>
+            <SVGApple />
+          </a>
+        )
+      }
+      {
+        links?.google && (
+          <a href={links.google}>
+            <SVGGoogle />
+          </a>
+        )
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .game-card {
+    position: relative;
+    max-width: 300px;
+    background-color: rgb(var(--color-card));
+  }
+  .game-card img {
+    height: 160px;
+    object-fit: cover;
+    object-position: center;
+  }
+  .body {
+    padding: 14px 10px 10px;
+    display: grid;
+    grid-template-areas:
+      "name name"
+      "genre links";
+  }
+  .body h3 {
+    grid-area: name;
+    font-size: 16px;
+    margin-bottom: 1em;
+    text-transform: uppercase;
+  }
+  .genre {
+    margin: 0;
+    grid-area: genre;
+    display: flex;
+    align-items: end;
+    gap: 0.5ch;
+
+    font-size: 10px;
+    letter-spacing: 0.15ch;
+    color: rgb(var(--color-text), 30%);
+    font-weight: 300;
+  }
+  .genre :global(span) {
+  }
+  .genre :global(span):not(:last-of-type)::after {
+    content: "|";
+    margin-left: 0.5ch;
+  }
+  .links {
+    grid-area: links;
+
+    display: flex;
+    justify-content: end;
+    gap: 0.5rem;
+  }
+  .links a {
+    color: rgb(var(--color-text), 10%);
+    transition: color var(--trans-default);
+  }
+  .links a:hover {
+    color: rgb(var(--color-text), 30%);
+  }
+</style>
