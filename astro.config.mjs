@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import cloudflare from "@astrojs/cloudflare";
 
 import svelte from "@astrojs/svelte";
 
@@ -7,5 +6,4 @@ import svelte from "@astrojs/svelte";
 export default defineConfig({
   integrations: [svelte()],
   output: "server",
-  adapter: cloudflare()
 });

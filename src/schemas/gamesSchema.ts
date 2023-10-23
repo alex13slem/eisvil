@@ -14,5 +14,5 @@ export const gamesSchema = z.object({
       google: z.string().url().optional(),
     })
     .optional(),
-  category: z.enum(["test", "dev", "hot", "new"]).optional(),
+  category: z.enum(["test", "dev", "hot", "new", ""]).optional(),
 });
