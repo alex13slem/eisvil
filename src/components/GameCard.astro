@@ -1,10 +1,10 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { Image } from "astro:assets";
 import SVGPlaygame from "./svg/SVGPlaygame.svelte";
 import SVGApple from "./svg/SVGApple.svelte";
 import SVGGoogle from "./svg/SVGGoogle.svelte";
 import CardBadge from "./CardBadge.astro";
+import BtnFirm from "./BtnFirm.svelte";
 import type { CollectionEntry } from "astro:content";
 
 interface Props extends HTMLAttributes<"article"> {
@@ -23,7 +23,10 @@ const { name, image, tags, links, category } = data;
 <article class:list={["game-card", className]} {...props}>
   {category && <CardBadge type={category} />}
   <!-- <Image src={img} alt={name}  /> -->
-  <img src={image.src} alt={image.alt} />
+  <div class="image">
+    <img src={image.src} alt={image.alt} />
+    <BtnFirm variant="transparent"><a href="/">ПОДРОБНЕЕ</a></BtnFirm>
+  </div>
   <div class="body">
     <h3>{name}</h3>
     <p class="genre">{tags && tags.map((tag) => <span>{tag}</span>)}</p>
@@ -55,21 +58,57 @@ const { name, image, tags, links, category } = data;
 
 <style>
   .game-card {
+    --op-border: 1px solid transparent;
     position: relative;
     max-width: 300px;
     background-color: rgb(var(--color-card));
+    transition-property: transform, box-shadow, border-color;
+    transition: var(--trans-default);
+    border: var(--op-border);
   }
-  .game-card img {
+  .game-card:hover {
+    --op-border: var(--border);
+    transform: scale(102%);
+    box-shadow: 0px 1px 15px 0px rgba(7, 13, 27, 0.7);
+  }
+  .game-card:hover .image img {
+    filter: blur(7px);
+  }
+  .game-card:hover .image :global(.btn-firm) {
+    opacity: 1;
+  }
+
+  .image {
     height: 160px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .image :global(.btn-firm) {
+    opacity: 0;
+    transition-property: opacity;
+    transition: var(--trans-default);
+  }
+  .image img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
     object-fit: cover;
     object-position: center;
+    transition-property: filter;
+    transition: var(--trans-default);
   }
+
   .body {
+    border-top: var(--op-border);
     padding: 14px 10px 10px;
     display: grid;
     grid-template-areas:
       "name name"
       "genre links";
+    transition-property: border-color;
+    transition: var(--trans-default);
   }
   .body h3 {
     grid-area: name;
@@ -77,13 +116,13 @@ const { name, image, tags, links, category } = data;
     margin-bottom: 1em;
     text-transform: uppercase;
   }
+
   .genre {
     margin: 0;
     grid-area: genre;
     display: flex;
     align-items: end;
     gap: 0.5ch;
-
     font-size: 10px;
     letter-spacing: 0.15ch;
     color: rgb(var(--color-text), 30%);
@@ -95,9 +134,9 @@ const { name, image, tags, links, category } = data;
     content: "|";
     margin-left: 0.5ch;
   }
+
   .links {
     grid-area: links;
-
     display: flex;
     justify-content: end;
     gap: 0.5rem;

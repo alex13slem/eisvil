@@ -1,20 +1,25 @@
 @mixin firm-arrows($opacity: 1) {
-  &::before,
-  &::after {
+  .arrow {
     position: absolute;
-    content: "";
-    width: 0.5em;
-    aspect-ratio: 1/1;
-    background: url("/src/img/btn-arrow.svg") no-repeat;
-    opacity: $opacity;
+
+    color: rgb(var(--color-white), $opacity);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2em;
+    height: 1.5em;
+    :global(svg) {
+      transform: rotate(45deg);
+    }
   }
-  &::after {
-    bottom: 0;
-    right: 0;
-    transform: rotate(180deg);
+  .arrow.right {
+    bottom: -0.5em;
+    right: -0.75em;
+    transform: rotate(135deg);
   }
-  &::before {
-    top: 0;
-    left: 0;
+  .arrow.left {
+    top: -0.5em;
+    left: -0.75em;
+    transform: rotate(-45deg);
   }
 }

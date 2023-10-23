@@ -12,7 +12,7 @@
 
 "@astrojs/compiler@^1.5.5":
   version "1.8.2"
-  resolved "https://registry.npmjs.org/@astrojs/compiler/-/compiler-1.8.2.tgz"
+  resolved "https://registry.yarnpkg.com/@astrojs/compiler/-/compiler-1.8.2.tgz#f305d5724c45a9932a8ef4e87b2e7227d15d1c2b"
   integrity sha512-o/ObKgtMzl8SlpIdzaxFnt7SATKPxu4oIP/1NL+HDJRzxfJcAkOTAb/ZKMRyULbz4q+1t2/DAebs2Z1QairkZw==
 
 "@astrojs/compiler@^2.1.0":
@@ -2718,7 +2718,7 @@ preferred-pm@^3.1.2:
 
 prettier-plugin-astro@^0.12.0:
   version "0.12.0"
-  resolved "https://registry.npmjs.org/prettier-plugin-astro/-/prettier-plugin-astro-0.12.0.tgz"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-astro/-/prettier-plugin-astro-0.12.0.tgz#4faf0d0fcc7ca005668917109f399a548473a6fd"
   integrity sha512-8E+9YQR6/5CPZJs8XsfBw579zrwZkc0Wb7x0fRVm/51JC8Iys4lBw4ecV8fHwpbQnzve86TUa4fJ08BJzqfWnA==
   dependencies:
     "@astrojs/compiler" "^1.5.5"
@@ -2727,7 +2727,7 @@ prettier-plugin-astro@^0.12.0:
 
 prettier@^3.0.0, prettier@^3.0.3:
   version "3.0.3"
-  resolved "https://registry.npmjs.org/prettier/-/prettier-3.0.3.tgz"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.0.3.tgz#432a51f7ba422d1469096c0fdc28e235db8f9643"
   integrity sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==
 
 prismjs@^1.29.0:
@@ -2954,7 +2954,7 @@ run-parallel@^1.1.9:
 
 s.color@0.0.15:
   version "0.0.15"
-  resolved "https://registry.npmjs.org/s.color/-/s.color-0.0.15.tgz"
+  resolved "https://registry.yarnpkg.com/s.color/-/s.color-0.0.15.tgz#6b32cd22d8dba95703a5122ddede2020a1560186"
   integrity sha512-AUNrbEUHeKY8XsYr/DYpl+qk5+aM+DChopnWOPEzn8YKzOhv4l2zH6LzZms3tOZP3wwdOyc0RmTciyi46HLIuA==
 
 sade@^1.7.3:
@@ -2976,7 +2976,7 @@ safe-buffer@^5.0.1, safe-buffer@~5.2.0:
 
 sass-formatter@^0.7.6:
   version "0.7.8"
-  resolved "https://registry.npmjs.org/sass-formatter/-/sass-formatter-0.7.8.tgz"
+  resolved "https://registry.yarnpkg.com/sass-formatter/-/sass-formatter-0.7.8.tgz#7b648f91e502cd783119eee3c8fffea0d4e07265"
   integrity sha512-7fI2a8THglflhhYis7k06eUf92VQuJoXzEs2KRP0r1bluFxKFvLx0Ns7c478oYGM0fPfrr846ZRWVi2MAgHt9Q==
   dependencies:
     suf-log "^2.5.3"
@@ -3204,7 +3204,7 @@ strip-json-comments@~2.0.1:
 
 suf-log@^2.5.3:
   version "2.5.3"
-  resolved "https://registry.npmjs.org/suf-log/-/suf-log-2.5.3.tgz"
+  resolved "https://registry.yarnpkg.com/suf-log/-/suf-log-2.5.3.tgz#0919a7fceea532a99b578c97814c4e335b2d64d1"
   integrity sha512-KvC8OPjzdNOe+xQ4XWJV2whQA0aM1kGVczMQ8+dStAO6KfEB140JEVQ9dE76ONZ0/Ylf67ni4tILPJB41U0eow==
   dependencies:
     s.color "0.0.15"
@@ -3252,6 +3252,11 @@ svelte@^4.2.2:
     locate-character "^3.0.0"
     magic-string "^0.30.4"
     periscopic "^3.1.0"
+
+swiper@^10.3.1:
+  version "10.3.1"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-10.3.1.tgz#4d19d7e9d0bd184c30accf2c1b180cfe41b9f4af"
+  integrity sha512-24Wk3YUdZHxjc9faID97GTu6xnLNia+adMt6qMTZG/HgdSUt4fS0REsGUXJOgpTED0Amh/j+gRGQxsLayJUlBQ==
 
 tar-fs@^2.0.0:
   version "2.1.1"

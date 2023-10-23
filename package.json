@@ -15,7 +15,8 @@
     "astro": "^3.3.1",
     "nanostores": "^0.9.4",
     "sass": "^1.69.4",
-    "svelte": "^4.2.2"
+    "svelte": "^4.2.2",
+    "swiper": "^10.3.1"
   },
   "devDependencies": {
     "prettier": "^3.0.3",

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import SVGArrow from "./svg/SVGArrow.svelte";
   export let placeholder: string | null = null;
   export let value: string | null = null;
 </script>
@@ -6,6 +7,8 @@
 <div class="form-textarea">
   <textarea {...$$restProps} on:input bind:value {placeholder} />
   <div class="bg" />
+  <span class="arrow left"><SVGArrow /></span>
+  <span class="arrow right"><SVGArrow /></span>
 </div>
 
 <style lang="scss">

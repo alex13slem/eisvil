@@ -1,4 +1,5 @@
 <script lang="ts">
+  import SVGArrow from "./svg/SVGArrow.svelte";
   export let type: "text" | "email" | "password" = "text";
   export let placeholder: string | null = null;
   export let value: string | null = null;
@@ -18,6 +19,8 @@
     {...$$restProps}
   />
   <div class="bg" />
+  <span class="arrow left"><SVGArrow /></span>
+  <span class="arrow right"><SVGArrow /></span>
 </div>
 
 <style lang="scss">
