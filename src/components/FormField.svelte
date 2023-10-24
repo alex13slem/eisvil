@@ -17,6 +17,7 @@
     {placeholder}
     use:typeAction
     {...$$restProps}
+    class={value && "typing"}
   />
   <div class="bg" />
   <span class="arrow left"><SVGArrow /></span>
@@ -41,16 +42,11 @@
     color: rgb(var(--color-text));
     background-color: transparent;
     border: none;
+    outline: none;
 
     &::placeholder {
       font-size: 12px;
       color: rgb(var(--color-bg));
-    }
-    &:focus-visible {
-      outline: none;
-      & ~ .bg {
-        background-color: rgb(var(--color-white), 50%);
-      }
     }
   }
 

@@ -3,6 +3,7 @@ import type { HTMLAttributes } from "astro/types";
 import GameCard from "../components/GameCard.astro";
 import image from "@/img/hero.jpg";
 import { getCollection } from "astro:content";
+import type { Code, Debug } from "astro:components";
 
 interface Props extends HTMLAttributes<"section"> {}
 
@@ -19,7 +20,7 @@ const games = await getCollection("games");
   import "swiper/css";
   // import "swiper/css/pagination";
 
-  const swiper = new Swiper(".sect-our-games .swiper", {
+  const swiper = new Swiper(".sect-games .swiper", {
     modules: [Pagination],
     slidesPerView: 1,
     spaceBetween: 10,
@@ -52,16 +53,16 @@ const games = await getCollection("games");
   });
 </script>
 
-<section class:list={["sect-our-games", className]} {...props}>
+<section class:list={["sect-games", className]} {...props}>
   <div class="container">
     <h2>Наши игры</h2>
 
     <div class="swiper">
       <div class="swiper-wrapper">
         {
-          games.map((game) => (
+          games.map((data) => (
             <div class="swiper-slide">
-              <GameCard game={game} />
+              <GameCard {...data} />
             </div>
           ))
         }
@@ -81,7 +82,7 @@ const games = await getCollection("games");
   }
   .swiper::after,
   .swiper::before {
-    z-index: 1;
+    z-index: 2;
     content: "";
     position: absolute;
     height: 100%;

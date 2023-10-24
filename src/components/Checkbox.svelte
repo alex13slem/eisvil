@@ -1,40 +1,36 @@
-<label>
+<label class="checkbox">
   <input type="checkbox" {...$$restProps} />
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="17"
-    height="16"
-    viewBox="0 0 17 16"
-    fill="none"
-  >
-    <rect
-      opacity="0.5"
-      x="0.5"
-      y="0.5"
-      width="16"
-      height="15"
-      rx="1.5"
-      stroke="white"
-    />
-    <rect class="inner" x="3" y="3" width="11" height="10" fill="#EF811B" />
-  </svg>
+  <span />
 </label>
 
 <style lang="scss">
+  .checkbox {
+    width: 17px;
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    border: 1px solid rgb(var(--color-white), 50%);
+    cursor: pointer;
+  }
+
+  span {
+    width: 11px;
+    height: 10px;
+    transition: background-color var(--trans-default);
+  }
+
   input {
     position: absolute;
     width: 0;
     height: 0;
     opacity: 0;
   }
-  svg {
-    cursor: pointer;
+  input:hover ~ span {
+    background-color: rgb(var(--color-white), 30%);
   }
-  .inner {
-    fill: rgb(var(--color-accent), 70%);
-    transition: fill var(--trans-default);
-  }
-  input:checked ~ * .inner {
-    fill: rgb(var(--color-accent), 100%);
+  input:checked ~ span {
+    background-color: rgb(var(--color-accent));
   }
 </style>

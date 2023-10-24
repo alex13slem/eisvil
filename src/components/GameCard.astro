@@ -1,21 +1,15 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import SVGPlaygame from "./svg/SVGPlaygame.svelte";
-import SVGApple from "./svg/SVGApple.svelte";
-import SVGGoogle from "./svg/SVGGoogle.svelte";
+import SVGPlaygame from "./svg/platforms/SVGPlaygame.svelte";
+import SVGApple from "./svg/platforms/SVGApple.svelte";
+import SVGGoogle from "./svg/platforms/SVGGoogle.svelte";
 import CardBadge from "./CardBadge.astro";
 import BtnFirm from "./BtnFirm.svelte";
 import type { CollectionEntry } from "astro:content";
 
-interface Props extends HTMLAttributes<"article"> {
-  game: CollectionEntry<"games">;
-}
+type Props = HTMLAttributes<"article"> & CollectionEntry<"games">;
 
-const {
-  class: className,
-  game: { data },
-  ...props
-} = Astro.props;
+const { class: className, data, ...props } = Astro.props;
 
 const { name, image, tags, links, category } = data;
 ---

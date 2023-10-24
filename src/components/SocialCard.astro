@@ -1,0 +1,157 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { CollectionEntry } from "astro:content";
+import SVGDiscordIcon from "./svg/socials/SVGDiscordIcon.svelte";
+import SVGDiscordName from "./svg/socials/SVGDiscordName.svelte";
+import SVGVkIcon from "./svg/socials/SVGVkIcon.svelte";
+import SVGVkName from "./svg/socials/SVGVkName.svelte";
+import SVGFbIcon from "./svg/socials/SVGFbIcon.svelte";
+import SVGFbName from "./svg/socials/SVGFbName.svelte";
+import SVGLinkedIcon from "./svg/socials/SVGLinkedIcon.svelte";
+import SVGLinkedName from "./svg/socials/SVGLinkedName.svelte";
+import SVGTgIcon from "./svg/socials/SVGTgIcon.svelte";
+import SVGTgName from "./svg/socials/SVGTgName.svelte";
+import SVGTwIcon from "./svg/socials/SVGTwIcon.svelte";
+import SVGTwName from "./svg/socials/SVGTwName.svelte";
+
+type Props = HTMLAttributes<"article"> & CollectionEntry<"socials">;
+
+const {
+  class: className,
+  id,
+  data: { name, link },
+  ...props
+} = Astro.props;
+---
+
+<article class:list={["social-card", className]} {...props}>
+  <a href={link}>
+    <h3>{name}</h3>
+    <div class="body">
+      {
+        id === "discord" && (
+          <>
+            <SVGDiscordIcon />
+            <SVGDiscordName />
+          </>
+        )
+      }
+      {
+        id === "vk" && (
+          <>
+            <SVGVkIcon />
+            <SVGVkName />
+          </>
+        )
+      }
+      {
+        id === "telegram" && (
+          <>
+            <SVGTgIcon />
+            <SVGTgName />
+          </>
+        )
+      }
+      {
+        id === "linkedin" && (
+          <>
+            <SVGLinkedIcon />
+            <SVGLinkedName />
+          </>
+        )
+      }
+      {
+        id === "facebook" && (
+          <>
+            <SVGFbIcon />
+            <SVGFbName />
+          </>
+        )
+      }
+      {
+        id === "twitter" && (
+          <>
+            <SVGTwIcon />
+            <SVGTwName />
+          </>
+        )
+      }
+    </div>
+  </a>
+</article>
+
+<style>
+  .social-card {
+    overflow: hidden;
+    position: relative;
+    --border: 1px solid rgb(var(--color-white));
+
+    border-right: var(--border);
+
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    background-color: rgb(var(--color-card));
+    transition: background-color var(--trans-default);
+  }
+  .social-card a {
+    all: unset;
+    display: contents;
+  }
+  .social-card::after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    background: var(--gradient);
+    opacity: 0;
+    transition: opacity var(--trans-default);
+  }
+  .social-card:hover {
+    background-color: transparent;
+  }
+  .social-card:hover::after {
+    opacity: 1;
+  }
+  h3 {
+    position: relative;
+    align-self: flex-start;
+    min-width: 90px;
+    min-height: 30px;
+    font-size: 12px;
+    margin: 0;
+    text-transform: uppercase;
+    background-color: rgb(var(--color-bg));
+    border-bottom: var(--border);
+  }
+  h3::after {
+    content: "";
+    position: absolute;
+    top: -21px;
+    left: calc(100% - 21px);
+    transform: rotate(45deg);
+    width: 42px;
+    height: 42px;
+    background-color: rgb(var(--color-bg));
+    border-right: var(--border);
+  }
+  h3::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: calc(100% + 21px);
+    width: 100%;
+    height: 1px;
+    background-color: rgb(var(--color-white));
+  }
+  .body {
+    flex: 1 1 auto;
+    border: var(--border);
+    border-top: none;
+    border-right: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+</style>

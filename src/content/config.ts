@@ -1,11 +1,17 @@
+import { gamesSchema, socialsSchema } from "@/schemas";
 import { defineCollection } from "astro:content";
-import { gamesSchema } from "../schemas";
 
 const gamesCollection = defineCollection({
   type: "data",
   schema: gamesSchema,
 });
 
+const socialsCollection = defineCollection({
+  type: "data",
+  schema: socialsSchema
+})
+
 export const collections = {
   games: gamesCollection,
+  socials: socialsCollection
 };

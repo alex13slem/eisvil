@@ -1,0 +1,29 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { getCollection } from "astro:content";
+import SocialCard from "../components/SocialCard.astro";
+
+interface Props extends HTMLAttributes<"section"> {}
+
+const { class: className, ...props } = Astro.props;
+
+const socials = await getCollection("socials");
+---
+
+<section class:list={["sect-socials", className]} {...props}>
+  <div class="container">
+    <h2>Наши сообщества</h2>
+    <div class="body">
+      {socials.map((data) => <SocialCard {...data} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .body {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 7rem;
+    gap: 30px;
+  }
+</style>

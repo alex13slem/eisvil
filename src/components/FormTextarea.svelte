@@ -5,7 +5,13 @@
 </script>
 
 <div class="form-textarea">
-  <textarea {...$$restProps} on:input bind:value {placeholder} />
+  <textarea
+    {...$$restProps}
+    on:input
+    bind:value
+    {placeholder}
+    class={value && "typing"}
+  />
   <div class="bg" />
   <span class="arrow left"><SVGArrow /></span>
   <span class="arrow right"><SVGArrow /></span>
@@ -31,17 +37,12 @@
     color: rgb(var(--color-text));
     background-color: transparent;
     border: none;
+    outline: none;
 
-    transition: background var(--trans-default);
+    transition: background-color var(--trans-default);
     &::placeholder {
       font-size: 12px;
       color: rgb(var(--color-bg));
-    }
-    &:focus-visible {
-      outline: none;
-      & ~ .bg {
-        background-color: rgb(var(--color-white), 50%);
-      }
     }
   }
 
