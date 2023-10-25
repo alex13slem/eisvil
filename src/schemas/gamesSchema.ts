@@ -1,4 +1,4 @@
-import { z } from "astro:content";
+import { z } from "astro/zod";
 
 export const gamesSchema = z.object({
   name: z.string(),

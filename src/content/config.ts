@@ -1,6 +1,6 @@
 import { gamesSchema, socialsSchema } from "@/schemas";
-import { defineCollection } from "astro:content";
 import { servicesSchema } from "../schemas/servicesSchema";
+import { defineCollection } from "astro:content";
 
 const gamesCollection = defineCollection({
   type: "data",
@@ -9,16 +9,16 @@ const gamesCollection = defineCollection({
 
 const socialsCollection = defineCollection({
   type: "data",
-  schema: socialsSchema
-})
+  schema: socialsSchema,
+});
 
 const servicesCollection = defineCollection({
   type: "content",
-  schema: servicesSchema
-})
+  schema: servicesSchema,
+});
 
 export const collections = {
   games: gamesCollection,
   socials: socialsCollection,
-  services: servicesCollection
+  services: servicesCollection,
 };
