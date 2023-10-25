@@ -3,11 +3,7 @@
   "compilerOptions": {
     "baseUrl": "C:/Users/user/Documents/Code/startup/eisvil",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
+      "@/*": ["src/*"]
+    }
   }
 }

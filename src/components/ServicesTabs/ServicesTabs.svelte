@@ -11,11 +11,10 @@
     TabList,
     TabPanel,
     TabPanels,
-    Transition,
   } from "@rgossiaux/svelte-headlessui";
 
   import css from "./style.module.scss";
-  import { cn } from "../../utils/helpers";
+  import { cn } from "@/utils/helpers";
   import BtnFirm from "../BtnFirm.svelte";
   import { fade } from "svelte/transition";
 
