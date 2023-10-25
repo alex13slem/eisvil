@@ -1,0 +1,118 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import GameCard from "./GameCard.astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+interface Props extends HTMLAttributes<"div"> {}
+
+const games = await getCollection("games");
+
+const { class: className, ...props } = Astro.props;
+---
+
+<script>
+  import Swiper from "swiper";
+  import { Pagination } from "swiper/modules";
+
+  // import Swiper styles
+  import "swiper/css";
+  // import "swiper/css/pagination";
+
+  const swiper = new Swiper(".sect-games .swiper", {
+    modules: [Pagination],
+    slidesPerView: 1,
+    spaceBetween: 10,
+    // Responsive breakpoints
+    breakpoints: {
+      // when window width is >= 320px
+      320: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      // when window width is >= 480px
+      480: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+      // when window width is >= 640px
+      640: {
+        slidesPerView: 4,
+        spaceBetween: 30,
+      },
+    },
+    // loop: true,
+
+    pagination: {
+      clickable: true,
+      el: ".pagination",
+      bulletClass: "bullet",
+      bulletActiveClass: "active",
+    },
+  });
+</script>
+
+<div class:list={["swiper", className]} {...props}>
+  <div class="swiper-wrapper">
+    {
+      games.map((data) => (
+        <div class="swiper-slide">
+          <GameCard {...data} />
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="pagination"></div>
+</div>
+
+<style>
+  .swiper {
+    position: relative;
+    z-index: 0;
+    padding: 30px;
+    margin: -30px;
+  }
+  .swiper::after,
+  .swiper::before {
+    z-index: 2;
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 30px;
+    top: 0;
+    background: linear-gradient(90deg, rgb(var(--color-bg)), transparent);
+  }
+  .swiper::after {
+    right: 0;
+    transform: rotate(180deg);
+  }
+  .swiper::before {
+    left: 0;
+  }
+
+  .swiper-wrapper {
+    padding-block: 30px;
+  }
+
+  .pagination {
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .pagination :global(.bullet) {
+    font-size: 10px;
+    height: 1em;
+    width: 1em;
+    margin: 0.65em;
+    border: 1px solid rgb(var(--color-accent));
+    cursor: pointer;
+    transition-property: transform, background-color;
+    transition: 0.3s ease-in-out;
+  }
+  .pagination :global(.bullet).active {
+    transform: rotate(45deg) scale(150%);
+    background-color: rgb(var(--color-accent));
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import ServicesTabs from "../components/ServicesTabs";
+
+interface Props extends HTMLAttributes<"section"> {}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<!-- <script>
+  import { targetService } from "../components/store/sections/SectServicesStore";
+
+  const navItems = document.querySelectorAll(".sect-services nav h3");
+  navItems.forEach((nav) =>
+    nav.addEventListener("click", ({ target } : {target: HTMLDivElement}) => {
+      // console.log(target.dataset.slug);
+      targetService.set(target?.dataset.slug);
+    }),
+  );
+</script> -->
+<section class:list={["sect-services", className]} {...props}>
+  <div class="container">
+    <h2>Услуги</h2>
+    <ServicesTabs client:load />
+  </div>
+</section>
+
+<style>
+  nav {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

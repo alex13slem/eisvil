@@ -16,6 +16,7 @@
     type="text"
     {placeholder}
     use:typeAction
+    autocomplete="off"
     {...$$restProps}
     class={value && "typing"}
   />
