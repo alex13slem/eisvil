@@ -1,7 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": "C:/Users/user/Documents/Code/startup/eisvil",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     }
