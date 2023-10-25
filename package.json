@@ -10,21 +10,17 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^3.0.4",
     "@astrojs/svelte": "^4.0.3",
     "@fontsource/inter": "^5.0.13",
-    "@mui/base": "^5.0.0-beta.21",
-    "@types/react": "^18.2.31",
-    "@types/react-dom": "^18.2.14",
     "astro": "^3.3.1",
+    "marked": "^9.1.2",
     "nanostores": "^0.9.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "sass": "^1.69.4",
     "svelte": "^4.2.2",
     "swiper": "^10.3.1"
   },
   "devDependencies": {
+    "@rgossiaux/svelte-headlessui": "^2.0.0",
     "prettier": "^3.0.3",
     "prettier-plugin-astro": "^0.12.0"
   }

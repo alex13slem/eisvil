@@ -1,27 +1,23 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import ServicesTabs from "../components/ServicesTabs";
+import ServicesTabs from "../components/ServicesTabs/ServicesTabs.svelte";
+import { getCollection } from "astro:content";
 
 interface Props extends HTMLAttributes<"section"> {}
 
 const { class: className, ...props } = Astro.props;
+
+const services = await getCollection("services");
+
+const orderedServices = [...services].sort(
+  (a, b) => a.data.order - b.data.order,
+);
 ---
 
-<!-- <script>
-  import { targetService } from "../components/store/sections/SectServicesStore";
-
-  const navItems = document.querySelectorAll(".sect-services nav h3");
-  navItems.forEach((nav) =>
-    nav.addEventListener("click", ({ target } : {target: HTMLDivElement}) => {
-      // console.log(target.dataset.slug);
-      targetService.set(target?.dataset.slug);
-    }),
-  );
-</script> -->
 <section class:list={["sect-services", className]} {...props}>
   <div class="container">
     <h2>Услуги</h2>
-    <ServicesTabs client:load />
+    <ServicesTabs client:visible data={orderedServices} />
   </div>
 </section>
 

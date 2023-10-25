@@ -1,6 +1,6 @@
 <script lang="ts">
   import SVGArrow from "@/components/svg/SVGArrow.svelte";
-  export let variant: "firm" | "transparent" = "firm";
+  export let variant: "firm" | "transparent" | "contrast" = "firm";
 </script>
 
 <button class="btn-firm v-{variant}">
@@ -40,9 +40,17 @@
       border-bottom: 1px solid currentColor;
     }
   }
+  .v-contrast {
+    span.text {
+      color: rgb(var(--color-bg));
+    }
+    span.bg {
+      background-color: rgb(var(--color-white));
+    }
+  }
 
   .btn-firm :global(a) {
-    all: unset;
+    color: currentColor;
   }
 
   span.bg {
