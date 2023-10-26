@@ -1,6 +1,7 @@
 .root {
   display: flex;
   gap: 30px;
+  min-height: 450px;
 }
 
 .nav {
@@ -50,9 +51,6 @@
   &::before {
     bottom: -1em;
   }
-}
-
-.preview {
 }
 
 .images {

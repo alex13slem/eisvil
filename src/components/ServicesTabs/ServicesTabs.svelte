@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { CollectionEntry } from "astro:content";
-  import { marked } from "marked";
+  import { parse } from "marked";
 
   import {
     Popover,
@@ -54,7 +54,7 @@
           {/each}
         </div>
 
-        {@html marked.parse(body)}
+        {@html parse(body)}
 
         <BtnFirm variant="contrast">
           <a href={link}>Расчитать</a>

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { pubTabIdx } from "@/components/PublishingTabs/store.ts";
-  import type { CollectionEntry } from "astro:content";
-  import PublishingCard from "./PublishingCard.svelte";
+  import { pubTabIdx } from '@/components/PublishingTabs/store.ts';
+  import type { CollectionEntry } from 'astro:content';
+  import PublishingCard from './PublishingCard.svelte';
 
-  export let data: CollectionEntry<"publishing">[];
+  export let data: CollectionEntry<'publishing'>[];
   let curIdx: number;
 
   pubTabIdx.subscribe((idx) => {
