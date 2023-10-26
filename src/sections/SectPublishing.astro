@@ -1,0 +1,34 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { getCollection } from "astro:content";
+import PublishingTabs from "@/components/PublishingTabs/PublishingTabs.svelte";
+import PublishingCards from "@/components/PublishingCards.svelte";
+
+interface Props extends HTMLAttributes<"section"> {}
+
+const { class: className, ...props } = Astro.props;
+
+const publishing = await getCollection("publishing");
+
+const orderedPublishing = [...publishing].sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<section class:list={["publishing", className]} {...props}>
+  <div class="container">
+    <h2>Издательство</h2>
+    <div class="body">
+      <PublishingTabs client:load data={orderedPublishing} />
+      <PublishingCards client:load data={orderedPublishing} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .body {
+    display: flex;
+    gap: 90px;
+    min-height: 370px;
+  }
+</style>

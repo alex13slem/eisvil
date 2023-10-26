@@ -81,7 +81,7 @@
 
   &:hover {
     img {
-      filter: grayscale(100%) brightness(100%) saturate(100%);
+      filter: brightness(100%);
     }
     button::after {
       opacity: 1;
@@ -118,7 +118,7 @@
     object-fit: cover;
     object-position: center;
 
-    filter: grayscale(50%) brightness(50%) saturate(50%);
+    filter: brightness(50%);
 
     transition: filter var(--trans-default);
   }
