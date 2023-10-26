@@ -87,7 +87,7 @@
     all: unset;
     cursor: pointer;
     text-align: center;
-    border: 1px solid rgb(var(--color-card));
+    /* border: 1px solid rgb(var(--color-card)); */
     &::after {
       content: "";
       opacity: 0;
@@ -143,6 +143,9 @@
     object-position: center;
     filter: brightness(50%);
 
+    border: 1px solid rgb(var(--color-card));
+    border-bottom: none;
+
     transition-property: width, height, filter;
     transition: var(--trans-slow);
   }
@@ -171,7 +174,8 @@
       width: calc(100% + 8px);
       top: 0;
       left: -4px;
-      border-top: 1px solid var(--border-color);
+      border: 1px solid rgb(var(--color-card));
+      border-top-color: var(--border-color);
     }
   }
 
