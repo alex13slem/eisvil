@@ -14,9 +14,17 @@
     },
   } = data;
 
+  let currentIdx: number;
+  $: targetIdx;
+
   function handleClick() {
     pubTabIdx.set(targetIdx);
   }
+  function setCurrIxd(idx: number) {
+    currentIdx = idx;
+  }
+
+  pubTabIdx.subscribe(setCurrIxd);
 </script>
 
 <article class:active={isActive}>
@@ -30,14 +38,20 @@
 </article>
 
 <style lang="scss">
+  /* 
+  style="--idx: {targetIdx === currentIdx
+    ? targetIdx - 1
+    : currentIdx - targetIdx}"
+  */
   article {
     --border-color: rgb(58, 79, 125);
     --img-size: 255px;
-    overflow: hidden;
+    /* order: var(--idx); */
+    /* overflow: hidden; */
     position: relative;
     background-color: rgb(var(--color-card));
 
-    transition: box-shadow var(--trans-default);
+    transition: box-shadow var(--trans-slow);
 
     &:hover {
       img {
@@ -59,12 +73,13 @@
         }
       }
       .body {
-        border-image: linear-gradient(
+        box-shadow: var(--box-shadow);
+        /* border-image: linear-gradient(
             100deg,
             rgb(var(--color-card)),
             rgb(var(--color-accent), 30%)
           )
-          30;
+          30; */
       }
     }
   }
@@ -76,6 +91,7 @@
     &::after {
       content: "";
       opacity: 0;
+      z-index: 2;
       position: absolute;
       top: 13px;
       left: 13px;
@@ -86,25 +102,27 @@
       border-right: none;
 
       transition-property: width, height, opacity;
-      transition: var(--trans-default);
+      transition: var(--trans-slow);
     }
     &::before {
       content: "";
       opacity: 0;
-      z-index: 1;
+      z-index: 2;
       position: absolute;
       inset: 0;
       width: 6px;
       height: 6px;
       top: 11px;
       left: 11px;
-      background: rgb(var(--color-accent), 30%);
+      background: var(--border-color);
 
       transition: opacity var(--trans-default);
     }
   }
   .image {
+    overflow: hidden;
     position: relative;
+    z-index: 1;
 
     &::after {
       content: "";
@@ -126,7 +144,7 @@
     filter: brightness(50%);
 
     transition-property: width, height, filter;
-    transition: var(--trans-default);
+    transition: var(--trans-slow);
   }
   .body {
     position: relative;
@@ -144,7 +162,8 @@
     border-style: solid;
     border-top: 0;
 
-    transition: border-image var(--trans-default);
+    transition: box-shadow border-image;
+    transition: var(--trans-slow);
 
     &::after {
       content: "";

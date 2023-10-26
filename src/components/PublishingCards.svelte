@@ -4,9 +4,11 @@
   import PublishingCard from "./PublishingCard.svelte";
 
   export let data: CollectionEntry<"publishing">[];
-
   let curIdx: number;
-  pubTabIdx.subscribe((idx) => (curIdx = idx));
+
+  pubTabIdx.subscribe((idx) => {
+    return (curIdx = idx);
+  });
 </script>
 
 <div class="cards">
@@ -15,9 +17,11 @@
   {/each}
 </div>
 
-<style>
+<style lang="scss">
   .cards {
+    position: relative;
     display: flex;
+    /* flex-direction: row-reverse; */
     align-items: start;
     gap: 30px;
   }
