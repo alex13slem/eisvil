@@ -6,11 +6,11 @@
 
 <div class="form-textarea">
   <textarea
-    {...$$restProps}
     on:input
     bind:value
     {placeholder}
     class={value && "typing"}
+    {...$$restProps}
   />
   <div class="bg" />
   <span class="arrow left"><SVGArrow /></span>

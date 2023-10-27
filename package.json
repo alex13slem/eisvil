@@ -13,6 +13,7 @@
     "@astrojs/svelte": "^4.0.3",
     "@fontsource/inter": "^5.0.13",
     "astro": "^3.3.1",
+    "axios": "^1.6.0",
     "marked": "^9.1.2",
     "nanostores": "^0.9.4",
     "sass": "^1.69.4",
