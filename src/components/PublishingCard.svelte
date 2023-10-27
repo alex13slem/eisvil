@@ -56,45 +56,13 @@
     transition-property: transform, filter, left;
     transition: var(--trans-slow);
 
-    transform: translate3d(0, 0, -100px);
-    &:first-child {
-      z-index: 2;
-      transform-origin: right;
-      transform: rotateY(45deg) translate3d(70px, 0, -50px);
-
-      :global(.anim) & {
-        animation-name: anim-left-card;
-        animation-duration: 0.7s;
-        animation-timing-function: linear;
-      }
-    }
-    &:last-child {
-      z-index: 1;
-      transform-origin: left;
-      transform: rotateY(-45deg) translate3d(-70px, 0, -50px);
-
-      :global(.anim) & {
-        animation-name: anim-right-card;
-        animation-duration: 0.7s;
-        animation-timing-function: linear;
-      }
-    }
-
     &:hover {
       filter: brightness(75%);
     }
     &.active {
-      --img-size: 280px;
+      // --img-size: 280px;
+      transform: scale(110%);
 
-      z-index: 2;
-      transform: rotateY(0) translate3d(0, 0, 0);
-
-      &:first-child {
-        transform: rotateY(0) translate3d(70px, 0, 0);
-      }
-      &:last-child {
-        transform: rotateY(0) translate3d(-70px, 0, 0);
-      }
       filter: drop-shadow(var(--box-shadow)) brightness(100%);
       // filter: drop-shadow(0 0 70px rgb(var(--color-bg)));
 
@@ -205,24 +173,5 @@
   p {
     margin: 0;
     font-size: 11px;
-  }
-
-  @keyframes anim-right-card {
-    0%,
-    100% {
-      left: 0;
-    }
-    50% {
-      left: 50px;
-    }
-  }
-  @keyframes anim-left-card {
-    0%,
-    100% {
-      right: 0;
-    }
-    50% {
-      right: 50px;
-    }
   }
 </style>

@@ -5,18 +5,18 @@
 
   export let data: CollectionEntry<"publishing">[];
   let curIdx: number;
-  let animClass: string;
+  // let animClass: string;
 
   pubTabIdx.subscribe((idx) => {
-    animClass = "anim";
-    setTimeout(() => {
-      animClass = "";
-    }, 700);
+    // animClass = "anim";
+    // setTimeout(() => {
+    //   animClass = "";
+    // }, 700);
     return (curIdx = idx);
   });
 </script>
 
-<div class="cards {animClass}">
+<div class="cards">
   {#each data as item, idx}
     <PublishingCard data={item} isActive={idx === curIdx} targetIdx={idx} />
   {/each}
@@ -29,10 +29,5 @@
     display: flex;
     align-items: start;
     gap: 30px;
-
-    perspective: 1300px;
-
-    &.anim {
-    }
   }
 </style>
