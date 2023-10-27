@@ -53,6 +53,7 @@
 
     filter: brightness(50%);
 
+    transform-origin: top;
     transition-property: transform, filter, left;
     transition: var(--trans-slow);
 
@@ -61,7 +62,7 @@
     }
     &.active {
       // --img-size: 280px;
-      transform: scale(110%);
+      transform: scale(107%);
 
       filter: drop-shadow(var(--box-shadow)) brightness(100%);
       // filter: drop-shadow(0 0 70px rgb(var(--color-bg)));
