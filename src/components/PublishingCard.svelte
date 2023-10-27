@@ -46,12 +46,12 @@
   article {
     --border-color: rgb(58, 79, 125);
     --img-size: 255px;
+    flex: 1 1 auto;
     /* order: var(--idx); */
     /* overflow: hidden; */
     position: relative;
-    background-color: rgb(var(--color-card));
 
-    transition: box-shadow var(--trans-slow);
+    transition: filter var(--trans-slow);
 
     &:hover {
       img {
@@ -61,8 +61,7 @@
     &.active {
       --img-size: 280px;
 
-      /* box-shadow: var(--box-shadow); */
-      /* box-shadow: 0 60px 20px 10px rgba(0, 0, 0, 0.171); */
+      filter: drop-shadow(var(--box-shadow));
       img {
         filter: brightness(100%);
       }
@@ -72,22 +71,12 @@
           opacity: 1;
         }
       }
-      .body {
-        box-shadow: var(--box-shadow);
-        /* border-image: linear-gradient(
-            100deg,
-            rgb(var(--color-card)),
-            rgb(var(--color-accent), 30%)
-          )
-          30; */
-      }
     }
   }
   button {
     all: unset;
     cursor: pointer;
     text-align: center;
-    /* border: 1px solid rgb(var(--color-card)); */
     &::after {
       content: "";
       opacity: 0;
@@ -95,7 +84,7 @@
       position: absolute;
       top: 13px;
       left: 13px;
-      width: calc(var(--img-size) - 13px);
+      width: calc(100% - 13px);
       height: calc(var(--img-size) - 13px);
       border: 1px solid var(--border-color);
       border-bottom: none;
@@ -123,22 +112,19 @@
     overflow: hidden;
     position: relative;
     z-index: 1;
+    clip-path: polygon(
+      calc(var(--img-size) / 4) 0,
+      100% 0,
+      100% 100%,
+      0 100%,
+      0 calc(var(--img-size) / 4)
+    );
 
-    &::after {
-      content: "";
-      position: absolute;
-      top: -40px;
-      left: -40px;
-      width: 80px;
-      height: 80px;
-      transform: rotate(45deg);
-      border-right: 1px solid rgb(var(--color-card));
-      background-color: rgb(var(--color-bg));
-    }
+    transition: clip-path var(--trans-slow);
   }
   img {
     height: var(--img-size);
-    width: var(--img-size);
+    width: 100%;
     object-fit: cover;
     object-position: center;
     filter: brightness(50%);
@@ -155,6 +141,7 @@
 
     color: rgb(var(--color-text));
 
+    background-color: rgb(var(--color-card));
     border-image: linear-gradient(
         160deg,
         rgb(var(--color-card)),
@@ -165,8 +152,7 @@
     border-style: solid;
     border-top: 0;
 
-    transition: box-shadow border-image;
-    transition: var(--trans-slow);
+    transition: border-image var(--trans-slow);
 
     &::after {
       content: "";

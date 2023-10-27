@@ -85,73 +85,97 @@ const {
     overflow: hidden;
     position: relative;
     --border: 1px solid rgb(var(--color-white));
-
-    border-right: var(--border);
+    --h-width: 86px;
+    --h-height: 28px;
 
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    background-color: rgb(var(--color-card));
-    transition: background-color var(--trans-default);
+
+    transition: filter var(--trans-default);
   }
   .social-card a {
     all: unset;
     display: contents;
   }
-  .social-card::after {
+  .social-card::after,
+  .social-card::before {
     content: "";
-    z-index: -1;
+    /* z-index: -1; */
     position: absolute;
     inset: 0;
+    clip-path: polygon(
+      calc(var(--h-width) + var(--h-height)) 0,
+      100% 0,
+      100% calc(100% - var(--h-height)),
+      calc(100% - var(--h-height)) 100%,
+      0 100%,
+      0 var(--h-height),
+      var(--h-width) var(--h-height)
+    );
+  }
+  .social-card::before {
+    z-index: -1;
+    background-color: rgb(var(--color-card));
+
+    transition: background-color var(--trans-default);
+    border: var(--border);
+  }
+  .social-card::after {
+    z-index: -2;
     background: var(--gradient);
     opacity: 0;
     transition: opacity var(--trans-default);
   }
   .social-card:hover {
-    background-color: transparent;
+    filter: drop-shadow(var(--box-shadow));
   }
   .social-card:hover::after {
     opacity: 1;
   }
+  .social-card:hover::before {
+    background-color: transparent;
+  }
+
   h3 {
     position: relative;
     align-self: flex-start;
-    min-width: 90px;
-    min-height: 30px;
+    min-width: var(--h-width);
+    min-height: var(--h-height);
     font-size: 12px;
     margin: 0;
     text-transform: uppercase;
-    background-color: rgb(var(--color-bg));
     border-bottom: var(--border);
   }
   h3::after {
-    content: "";
-    position: absolute;
-    top: -21px;
-    left: calc(100% - 21px);
-    transform: rotate(45deg);
-    width: 42px;
-    height: 42px;
-    background-color: rgb(var(--color-bg));
-    border-right: var(--border);
+    bottom: -1px;
+    right: -1px;
   }
-  h3::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: calc(100% + 21px);
-    width: 100%;
-    height: 1px;
-    background-color: rgb(var(--color-white));
-  }
+
   .body {
+    position: relative;
+    min-height: calc(var(--h-height) * 3);
     flex: 1 1 auto;
-    border: var(--border);
-    border-top: none;
-    border-right: none;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
+  }
+  .body::after {
+    bottom: -0.5px;
+    right: calc(var(--h-height) - 0.5px);
+  }
+
+  h3::after,
+  .body::after {
+    z-index: 1;
+    position: absolute;
+    content: "";
+    height: calc(var(--h-height) * 1.5);
+    aspect-ratio: 1 / 1;
+    transform-origin: right bottom;
+    transform: rotate(45deg);
+
+    border-right: var(--border);
   }
 </style>

@@ -31,57 +31,67 @@ const { class: className, ...props } = Astro.props;
 </section>
 
 <style lang="scss">
+  .sect-carrier {
+    filter: drop-shadow(var(--box-shadow));
+  }
   .container {
-    --sect-offset-x: calc(var(--container-offset) + 40px);
-    padding: 40px 0 40px var(--sect-offset-x);
+    --sect-offset-x: calc(var(--container-offset) + 30px);
+    padding: 40px var(--container-offset) 40px var(--sect-offset-x);
     position: relative;
     min-height: 400px;
 
     display: flex;
     flex-direction: column;
 
-    background:
-      url("../img/sections/career/decor.svg") var(--container-offset) 50% /
-        320px 100% no-repeat,
-      url("../img/sections/career/triangle.svg") var(--container-offset) 50% /
-        contain no-repeat,
-      url("../img/sections/career/triangle-shadow.svg")
-        calc(var(--container-offset) + 10px) 50% / contain no-repeat;
+    &::after {
+      z-index: -1;
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        url("../img/sections/career/decor.svg") var(--container-offset) 50% /
+          320px 100% no-repeat,
+        url("../img/sections/career/triangle.svg") var(--container-offset) 50% /
+          contain no-repeat,
+        url("../img/sections/career/triangle-shadow.svg")
+          calc(var(--container-offset) + 10px) 50% / contain no-repeat;
+    }
   }
   .image {
     position: absolute;
     top: -40px;
-    right: 0;
+    right: 60px;
   }
   .inner {
     position: relative;
     flex: 1 1 auto;
 
     display: flex;
+    gap: 30px;
 
-    background: url("../img/sections/career/mask.svg") center/cover no-repeat;
-
-    &::after {
+    &::after,
+    &::before {
       content: "";
       z-index: -1;
       position: absolute;
       inset: 0;
+    }
+    &::after {
+      background: url("../img/sections/career/mask.svg") center/cover no-repeat;
+    }
+    &::before {
       background-color: rgb(var(--color-accent));
-      // background: rgb(var(--color-accent)),
-      //   url("../img/sections/career/mask.svg");
-      // background-position: center, center;
-      // background-repeat: no-repeat, no-repeat;
-
-      // , rgba(255, 255, 255, 0);
-      // background-repeat: no-repeat;
-      // background-position:
-      //   bottom right,
-      //   left,
-      //   right;
+      clip-path: polygon(
+        100% 0,
+        100% calc(100% - 80px),
+        calc(100% - 80px) 100%,
+        0 100%,
+        0 0
+      );
     }
   }
   h2 {
-    flex: 0 0 370px;
+    flex: 0 0 var(--right-panel-w);
     margin: 0;
   }
   .body {
@@ -98,8 +108,5 @@ const { class: className, ...props } = Astro.props;
   h3,
   p {
     margin: 0;
-  }
-
-  .description {
   }
 </style>
