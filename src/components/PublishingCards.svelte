@@ -24,5 +24,7 @@
     display: flex;
     align-items: start;
     gap: 30px;
+
+    perspective: 1300px;
   }
 </style>

@@ -51,7 +51,17 @@
     /* overflow: hidden; */
     position: relative;
 
-    transition: filter var(--trans-slow);
+    transition-property: transform, filter;
+    transition: var(--trans-slow);
+
+    &:first-child {
+      transform-origin: right;
+      transform: rotateY(45deg) translate3d(30px, 15px, -50px);
+    }
+    &:last-child {
+      transform-origin: left;
+      transform: rotateY(-45deg) translate3d(-30px, 15px, -50px);
+    }
 
     &:hover {
       img {
@@ -61,6 +71,7 @@
     &.active {
       --img-size: 280px;
 
+      transform: rotateY(0) translate3d(0, 0, 0);
       filter: drop-shadow(var(--box-shadow));
       img {
         filter: brightness(100%);
