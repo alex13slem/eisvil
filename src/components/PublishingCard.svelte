@@ -51,31 +51,53 @@
     /* overflow: hidden; */
     position: relative;
 
-    transition-property: transform, filter;
+    filter: brightness(50%);
+
+    transition-property: transform, filter, left;
     transition: var(--trans-slow);
 
+    transform: translate3d(0, 0, -100px);
     &:first-child {
+      z-index: 2;
       transform-origin: right;
-      transform: rotateY(45deg) translate3d(30px, 15px, -50px);
+      transform: rotateY(45deg) translate3d(70px, 0, -50px);
+
+      :global(.anim) & {
+        animation-name: anim-left-card;
+        animation-duration: 0.7s;
+        animation-timing-function: linear;
+      }
     }
     &:last-child {
+      z-index: 1;
       transform-origin: left;
-      transform: rotateY(-45deg) translate3d(-30px, 15px, -50px);
+      transform: rotateY(-45deg) translate3d(-70px, 0, -50px);
+
+      :global(.anim) & {
+        animation-name: anim-right-card;
+        animation-duration: 0.7s;
+        animation-timing-function: linear;
+      }
     }
 
     &:hover {
-      img {
-        filter: brightness(75%);
-      }
+      filter: brightness(75%);
     }
     &.active {
       --img-size: 280px;
 
+      z-index: 2;
       transform: rotateY(0) translate3d(0, 0, 0);
-      filter: drop-shadow(var(--box-shadow));
-      img {
-        filter: brightness(100%);
+
+      &:first-child {
+        transform: rotateY(0) translate3d(70px, 0, 0);
       }
+      &:last-child {
+        transform: rotateY(0) translate3d(-70px, 0, 0);
+      }
+      filter: drop-shadow(var(--box-shadow)) brightness(100%);
+      // filter: drop-shadow(0 0 70px rgb(var(--color-bg)));
+
       button {
         &::after,
         &::before {
@@ -138,7 +160,6 @@
     width: 100%;
     object-fit: cover;
     object-position: center;
-    filter: brightness(50%);
 
     border: 1px solid rgb(var(--color-card));
     border-bottom: none;
@@ -184,5 +205,24 @@
   p {
     margin: 0;
     font-size: 11px;
+  }
+
+  @keyframes anim-right-card {
+    0%,
+    100% {
+      left: 0;
+    }
+    50% {
+      left: 50px;
+    }
+  }
+  @keyframes anim-left-card {
+    0%,
+    100% {
+      right: 0;
+    }
+    50% {
+      right: 50px;
+    }
   }
 </style>

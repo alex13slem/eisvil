@@ -5,13 +5,18 @@
 
   export let data: CollectionEntry<"publishing">[];
   let curIdx: number;
+  let animClass: string;
 
   pubTabIdx.subscribe((idx) => {
+    animClass = "anim";
+    setTimeout(() => {
+      animClass = "";
+    }, 700);
     return (curIdx = idx);
   });
 </script>
 
-<div class="cards">
+<div class="cards {animClass}">
   {#each data as item, idx}
     <PublishingCard data={item} isActive={idx === curIdx} targetIdx={idx} />
   {/each}
@@ -26,5 +31,8 @@
     gap: 30px;
 
     perspective: 1300px;
+
+    &.anim {
+    }
   }
 </style>
