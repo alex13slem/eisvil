@@ -3,28 +3,87 @@
   import Checkbox from "./Checkbox.svelte";
   import FormField from "./FormField.svelte";
   import FormTextarea from "./FormTextarea.svelte";
+
+  type ServerState = { ok: boolean; msg: string };
+
+  let botField: string;
+
+  let name: string;
+  let email: string;
+  let fromLink: string;
+  let contact: string;
+  let comment: string;
+
+  let access: boolean;
+
+  let serverState: ServerState;
+  $: submitting = false;
+
+  function handleServerResponse(ok: boolean, msg: string) {
+    serverState = { ok, msg };
+  }
+
+  const handleSubmit = async () => {
+    console.log({ email, name, fromLink, contact, comment, access });
+    try {
+      submitting = true;
+      await fetch("/.netlify/functions/contact-form-message", {
+        method: "POST",
+        credentials: "omit",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          botField,
+          email,
+          name,
+          fromLink,
+          contact,
+          access,
+        }),
+      });
+      submitting = false;
+      handleServerResponse(true, "");
+    } catch (error) {
+      console.error(`Eror: ${error}`);
+      submitting = false;
+      handleServerResponse(
+        false,
+        "Unable to send your message at the moment.  Please try again later."
+      );
+    }
+  };
 </script>
 
-<form class="form">
+<form on:submit|preventDefault={handleSubmit} class="form">
+  <input
+    aria-hidden="true"
+    type="hidden"
+    name="bot-field"
+    bind:value={botField}
+  />
   <fieldset>
-    <FormField placeholder="Ваше имя" name="name" required />
+    <FormField placeholder="Ваше имя" bind:value={name} name="name" required />
     <FormField
       placeholder="Из какого вы издания или блога? Пожалуйста, укажите ссылку"
+      bind:value={fromLink}
       name="from_link"
       required
     />
-    <FormField placeholder="E-mail" type="email" name="email" required />
+    <FormField placeholder="E-mail" bind:value={email} type="email" required />
     <FormField
       placeholder="Другой удобный способ связи с Вами"
+      bind:value={contact}
       name="contact"
     />
     <FormTextarea
       placeholder="Оставьте комментарий или просто напишите нам :)"
+      bind:value={comment}
       name="comment"
     />
     <!-- svelte-ignore a11y-label-has-associated-control -->
     <label class="access">
-      <Checkbox name="access" required />
+      <Checkbox name="access" bind:checked={access} required />
       <p>
         Нажимая на кнопку, вы соглашаетесь с
         <a href="/">политикой конфиденциальности</a><br /> и на обработку персональных
@@ -32,7 +91,10 @@
       </p>
     </label>
   </fieldset>
-  <BtnFirm>Отправить</BtnFirm>
+  <BtnFirm type="submit" disabled={submitting}>Отправить</BtnFirm>
+  {#if serverState}<p class={!serverState.ok ? "errorMsg" : ""}>
+      {serverState.msg}
+    </p>{/if}
 </form>
 
 <style lang="scss">

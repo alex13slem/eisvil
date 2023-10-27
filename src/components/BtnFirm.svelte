@@ -3,7 +3,7 @@
   export let variant: "firm" | "transparent" | "contrast" = "firm";
 </script>
 
-<button class="btn-firm v-{variant}">
+<button class="btn-firm v-{variant}" {...$$restProps}>
   <span class="bg" />
   <span class="text"><slot /></span>
   <span class="arrow left"><SVGArrow /></span>
