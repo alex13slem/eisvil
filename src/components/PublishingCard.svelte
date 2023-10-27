@@ -60,8 +60,8 @@
       filter: brightness(75%);
     }
     &.active {
-      // --img-size: 280px;
-      transform: scale(110%);
+      --img-size: 280px;
+      // transform: scale(110%);
 
       filter: drop-shadow(var(--box-shadow)) brightness(100%);
       // filter: drop-shadow(0 0 70px rgb(var(--color-bg)));
