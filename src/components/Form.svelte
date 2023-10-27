@@ -27,7 +27,7 @@
     console.log({ email, name, fromLink, contact, comment, access });
     try {
       submitting = true;
-      await fetch("/api/functions/contact-form-message", {
+      await fetch("/.netlify/functions/contact-form-message", {
         method: "POST",
         credentials: "omit",
         headers: {
