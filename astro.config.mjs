@@ -7,5 +7,5 @@ import netlify from "@astrojs/netlify/functions";
 export default defineConfig({
   integrations: [svelte()],
   output: "server",
-  adapter: netlify()
+  adapter: netlify(),
 });
