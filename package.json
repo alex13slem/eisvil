@@ -10,7 +10,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/netlify": "^3.0.3",
     "@astrojs/svelte": "^4.0.3",
     "@fontsource/inter": "^5.0.13",
     "astro": "^3.3.1",
