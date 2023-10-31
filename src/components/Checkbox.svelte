@@ -3,7 +3,7 @@
 </script>
 
 <label class="checkbox">
-  <input type="checkbox" on:input bind:checked {...$$restProps} />
+  <input type="checkbox" on:input on:blur bind:checked {...$$restProps} />
   <span />
 </label>
 
@@ -36,5 +36,17 @@
   }
   input:checked ~ span {
     background-color: rgb(var(--color-accent));
+  }
+  input[invalid="true"] ~ span {
+    animation: pulsar 0.6s ease infinite alternate;
+  }
+
+  @keyframes pulsar {
+    0% {
+      background-color: transparent;
+    }
+    100% {
+      background-color: rgba(255, 0, 0, 0.459);
+    }
   }
 </style>

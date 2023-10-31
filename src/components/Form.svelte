@@ -3,31 +3,81 @@
   import Checkbox from "./Checkbox.svelte";
   import FormField from "./FormField.svelte";
   import FormTextarea from "./FormTextarea.svelte";
+  import { formSchema } from "../schemas/formSchema";
+  import type { ZodFormattedError } from "astro/zod";
+  import FormFieldError from "./FormFieldError.svelte";
 
   type ServerState = { ok: boolean; msg: string };
+  type FormValues = {
+    botField: boolean;
+    name: string;
+    email: string;
+    fromLink: string;
+    contact: string;
+    comment: string;
+    access: boolean;
+  };
 
-  let botField: string;
+  const formValuesInit: FormValues = {
+    access: false,
+    botField: false,
+    comment: "",
+    contact: "",
+    email: "",
+    fromLink: "",
+    name: "",
+  };
 
-  let name: string;
-  let email: string;
-  let fromLink: string;
-  let contact: string;
-  let comment: string;
+  let formValues = formValuesInit;
 
-  let access: boolean;
+  let errors: ZodFormattedError<
+    {
+      botField?: boolean | undefined;
+      contact?: string | undefined;
+      comment?: string | undefined;
+      name: string;
+      email: string;
+      fromLink: string;
+      access: boolean;
+    },
+    string
+  >;
 
-  let serverState: ServerState;
-  $: submitting = false;
+  let serverState: ServerState = { ok: false, msg: "" };
+  let submitting = false;
+  let sendingAttempt = false;
+
+  $: validationResult = formSchema.safeParse(formValues);
+  $: if (validationResult) {
+    checkValidate();
+  }
 
   function handleServerResponse(ok: boolean, msg: string) {
     serverState = { ok, msg };
   }
 
+  function checkValidate() {
+    if (!validationResult.success) {
+      errors = validationResult.error.format();
+      return false;
+    } else {
+      errors = { _errors: [] };
+      return true;
+    }
+  }
+
   const handleSubmit = async () => {
-    console.log({ email, name, fromLink, contact, comment, access });
+    sendingAttempt = true;
+
+    if (!checkValidate() || !formValues.access) return;
+
+    const { botField, name, email, fromLink, contact, comment, access } =
+      formValues;
+
     try {
       submitting = true;
-      await fetch("/.netlify/functions/contact-form-message", {
+
+      await fetch("/api/contact-form-message", {
         method: "POST",
         credentials: "omit",
         headers: {
@@ -39,9 +89,11 @@
           name,
           fromLink,
           contact,
+          comment,
           access,
         }),
       });
+
       submitting = false;
       handleServerResponse(true, "");
     } catch (error) {
@@ -49,41 +101,66 @@
       submitting = false;
       handleServerResponse(
         false,
-        "Unable to send your message at the moment.  Please try again later."
+        "Не удалось отправить сообщение. Попробуйте позже."
       );
+    } finally {
+      formValues = formValuesInit;
     }
   };
 </script>
 
-<form on:submit|preventDefault={handleSubmit} class="form">
+<form on:submit|preventDefault={handleSubmit}>
   <input
+    name="bot-field"
     aria-hidden="true"
     type="hidden"
-    name="bot-field"
-    bind:value={botField}
+    bind:value={formValues.botField}
   />
   <fieldset>
-    <FormField placeholder="Ваше имя" bind:value={name} name="name" required />
+    <FormField name="name" placeholder="Ваше имя" bind:value={formValues.name}>
+      {#if errors?.name && sendingAttempt}
+        <FormFieldError errors={errors.name} />
+      {/if}
+    </FormField>
+
     <FormField
-      placeholder="Из какого вы издания или блога? Пожалуйста, укажите ссылку"
-      bind:value={fromLink}
       name="from_link"
-      required
-    />
-    <FormField placeholder="E-mail" bind:value={email} type="email" required />
+      placeholder="Из какого вы издания или блога? Пожалуйста, укажите ссылку"
+      bind:value={formValues.fromLink}
+    >
+      {#if errors?.fromLink && sendingAttempt}
+        <FormFieldError errors={errors.fromLink} />
+      {/if}
+    </FormField>
+
+    <FormField type="email" placeholder="E-mail" bind:value={formValues.email}>
+      {#if errors?.email && sendingAttempt}
+        <FormFieldError errors={errors.email} />
+      {/if}
+    </FormField>
+
     <FormField
-      placeholder="Другой удобный способ связи с Вами"
-      bind:value={contact}
       name="contact"
-    />
+      placeholder="Другой удобный способ связи с Вами"
+      bind:value={formValues.contact}
+    >
+      {#if errors?.contact && sendingAttempt}
+        <FormFieldError errors={errors.contact} />
+      {/if}
+    </FormField>
+
     <FormTextarea
-      placeholder="Оставьте комментарий или просто напишите нам :)"
-      bind:value={comment}
       name="comment"
+      placeholder="Оставьте комментарий или просто напишите нам :)"
+      bind:value={formValues.comment}
     />
     <!-- svelte-ignore a11y-label-has-associated-control -->
     <label class="access">
-      <Checkbox name="access" bind:checked={access} required />
+      <Checkbox
+        name="access"
+        invalid={sendingAttempt && !formValues.access}
+        bind:checked={formValues.access}
+      />
       <p>
         Нажимая на кнопку, вы соглашаетесь с
         <a href="/">политикой конфиденциальности</a><br /> и на обработку персональных
@@ -91,10 +168,15 @@
       </p>
     </label>
   </fieldset>
-  <BtnFirm type="submit" disabled={submitting}>Отправить</BtnFirm>
-  {#if serverState}<p class={!serverState.ok ? "errorMsg" : ""}>
-      {serverState.msg}
-    </p>{/if}
+  <BtnFirm
+    type="submit"
+    disabled={((!validationResult.success || !formValues.access) &&
+      sendingAttempt) ||
+      submitting ||
+      serverState.ok}
+  >
+    {serverState.ok ? "Благодарим!" : "Отправить"}
+  </BtnFirm>
 </form>
 
 <style lang="scss">

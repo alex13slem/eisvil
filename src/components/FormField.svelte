@@ -12,14 +12,16 @@
 <div class="form-field">
   <input
     on:input
+    on:blur
     bind:value
     type="text"
     {placeholder}
     use:typeAction
-    autocomplete="off"
+    autocomplete="new-password"
     {...$$restProps}
     class={value && "typing"}
   />
+  <slot />
   <div class="bg" />
   <span class="arrow left"><SVGArrow /></span>
   <span class="arrow right"><SVGArrow /></span>
@@ -30,12 +32,13 @@
 
   .form-field {
     position: relative;
-    z-index: 0;
 
     @include firm-arrows(0.3);
   }
 
   input {
+    position: relative;
+    z-index: 1;
     width: 100%;
     padding-inline: 30px;
 

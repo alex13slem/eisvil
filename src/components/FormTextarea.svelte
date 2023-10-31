@@ -22,12 +22,13 @@
 
   .form-textarea {
     position: relative;
-    z-index: 0;
 
     @include firm-arrows(0.3);
   }
 
   textarea {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 100%;
     resize: none;

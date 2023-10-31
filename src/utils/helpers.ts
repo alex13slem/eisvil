@@ -1,15 +1,15 @@
-import {normaliseStrapiResponse} from '@/strapi-client/normalize';
-import type {StrapiEntity, StrapiPaginatedArray} from '@/types/strapi';
+import { normaliseStrapiResponse } from "@/strapi-client/normalize";
+import type { StrapiEntity, StrapiPaginatedArray } from "@/types/strapi";
 
 export const cn = (...cNames: any): string =>
-  cNames.filter(Boolean, String).join(' ');
+  cNames.filter(Boolean, String).join(" ");
 
 export const createWrapperAndAppendToBody = (
   wrapperId: string,
-  cn?: string
+  cn?: string,
 ): HTMLDivElement => {
-  const wrapperElement = document.createElement('div');
-  wrapperElement.setAttribute('id', wrapperId);
+  const wrapperElement = document.createElement("div");
+  wrapperElement.setAttribute("id", wrapperId);
   cn ? (wrapperElement.className = cn) : null;
   document.body.appendChild(wrapperElement);
   return wrapperElement;
@@ -31,3 +31,6 @@ export async function fetchStrapiMany<Fields>(type: string) {
   const url = `${import.meta.env.PUBLIC_API}/${type}?populate=deep`;
   return await fetchStrapi<StrapiPaginatedArray<StrapiEntity & Fields>>(url);
 }
+
+export const formatErrors = (error: { _errors: string[] }) =>
+  error._errors.join(", ");

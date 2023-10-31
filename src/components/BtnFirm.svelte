@@ -20,18 +20,27 @@
 
     border: none;
     background: transparent;
-    cursor: pointer;
+    &:not(:disabled) {
+      cursor: pointer;
+    }
 
-    transition: transform var(--trans-default);
+    transition-property: transform, filter;
+    transition: var(--trans-default);
 
     @include firm-arrows;
-    &:hover {
+    &:not(:disabled):hover {
       transform: scale(101%);
     }
   }
-  .v-firm span.bg {
-    background: var(--gradient);
+  .v-firm {
+    &:disabled {
+      filter: grayscale(100%);
+    }
+    span.bg {
+      background: var(--gradient);
+    }
   }
+
   .v-transparent {
     span.bg {
       border: 1px solid #fff;

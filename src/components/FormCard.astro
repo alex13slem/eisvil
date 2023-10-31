@@ -42,44 +42,50 @@ const { class: className, ...props } = Astro.props;
 
 <style lang="scss">
   .form-card {
+    overflow: hidden;
     position: relative;
     border: var(--border-card);
 
     // Углы start
+    --clip-lb: 120px;
+    --clip-rt: 30px;
+    clip-path: polygon(
+      0 0,
+      calc(100% - var(--clip-rt)) 0,
+      100% var(--clip-rt),
+      100% 100%,
+      var(--clip-lb) 100%,
+      0 calc(100% - var(--clip-lb))
+    );
+
     &::after,
     &::before,
-    .body::before,
-    :global(.form)::before {
-      content: "";
-      position: absolute;
-      background-color: rgb(var(--color-bg));
-      transform: rotate(45deg);
-    }
     .body::after {
+      --size: calc(var(--clip-size) * 1.4);
+      z-index: 1;
       content: "";
       position: absolute;
-      background-color: rgb(var(--color-card));
-      transform: rotate(45deg);
+      inset: calc(var(--size) * -0.5);
+      width: var(--size);
+      aspect-ratio: 1 / 1;
+      border-bottom: var(--border-card);
     }
     &::after,
     .body::after {
-      right: -1rem;
-      top: -1rem;
-      width: 2rem;
-      height: 2rem;
-      border-bottom: var(--border-card);
-      transition: border-color var(--trans-slow);
+      --clip-size: var(--clip-rt);
+      transform: rotate(45deg);
+      bottom: auto;
+      left: auto;
     }
-    &,
-    .body,
-    :global(.form) {
-      &::before {
-        width: 8rem;
-        height: 8rem;
-        left: -4rem;
-        bottom: -4rem;
-        border-top: var(--border-card);
-      }
+    &::before {
+      --clip-size: var(--clip-lb);
+      transform: rotate(-135deg);
+      top: auto;
+      right: auto;
+    }
+    .body::after {
+      background-color: rgb(var(--color-card));
+      transition: border-color var(--trans-slow);
     }
     // Углы end
 
@@ -100,7 +106,7 @@ const { class: className, ...props } = Astro.props;
         }
       }
 
-      :global(.form) {
+      :global(form) {
         opacity: 1;
       }
     }
@@ -129,7 +135,7 @@ const { class: className, ...props } = Astro.props;
   }
 
   .body {
-    overflow: hidden;
+    // overflow: hidden;
     position: relative;
     background-color: rgb(var(--color-card), 50%);
 
@@ -155,7 +161,7 @@ const { class: className, ...props } = Astro.props;
     /* display: none; */
   }
 
-  .form-card :global(.form) {
+  .form-card :global(form) {
     position: relative;
     opacity: 0;
 

@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "ntf": "netlify dev",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
@@ -12,12 +13,14 @@
   "dependencies": {
     "@astrojs/svelte": "^4.0.3",
     "@fontsource/inter": "^5.0.13",
+    "@netlify/functions": "^2.3.0",
     "astro": "^3.3.1",
     "axios": "^1.6.0",
     "marked": "^9.1.2",
     "nanostores": "^0.9.4",
     "sass": "^1.69.4",
     "svelte": "^4.0.0",
+    "svelte-forms-lib": "^2.0.1",
     "swiper": "^10.3.1"
   },
   "devDependencies": {
