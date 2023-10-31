@@ -28,7 +28,7 @@
     name: "",
   };
 
-  let formValues = formValuesInit;
+  let formValues = { ...formValuesInit };
 
   let errors: ZodFormattedError<
     {
@@ -48,7 +48,7 @@
   let sendingAttempt = false;
 
   $: validationResult = formSchema.safeParse(formValues);
-  $: if (validationResult) {
+  $: if (validationResult && !serverState.ok) {
     checkValidate();
   }
 
@@ -104,7 +104,8 @@
         "Не удалось отправить сообщение. Попробуйте позже."
       );
     } finally {
-      formValues = formValuesInit;
+      formValues = { ...formValuesInit };
+      console.log(formValues);
     }
   };
 </script>
@@ -158,7 +159,7 @@
     <label class="access">
       <Checkbox
         name="access"
-        invalid={sendingAttempt && !formValues.access}
+        invalid={sendingAttempt && !formValues.access && !serverState.ok}
         bind:checked={formValues.access}
       />
       <p>
