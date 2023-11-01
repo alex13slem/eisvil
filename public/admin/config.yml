@@ -8,37 +8,81 @@ media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - name: "games"
-    label: "Games"
+  - name: "games-rus"
+    label: "Игры (Рус)"
     folder: "src/content/games/ru"
     create: true
     slug: "{{title}}"
     extention: "json"
     format: "json"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
+      - label: "Заголовок"
+        name: "title"
+        widget: "string"
 
-      - label: "Image"
+      - label: "Картинка"
         name: "image"
         widget: "object"
         fields:
-          - { label: "Source", name: "src", widget: "image" }
-          - { label: "Alt-text", name: "alt", widget: "string" }
+          - { label: "Источник", name: "src", widget: "image" }
+          - { label: "Альтернативный текст", name: "alt", widget: "string" }
 
-      - { label: "Tags", name: tags, widget: "list" }
+      - label: "Теги"
+        name: "tags"
+        widget: "list"
 
-      - label: "Links"
+      - label: "Ссылки на платформы"
         name: "links"
         widget: "object"
         fields:
           - { label: "Google", name: "google", widget: "string" }
           - { label: "Apple", name: "apple", widget: "string" }
 
-      - label: "Category"
+      - label: "Ссылка на раздел"
+        name: "link"
+        widget: "string"
+
+      - label: "Категория"
         name: "category"
         widget: "select"
+        default: { label: "Нет", value: "" }
         options:
-          - { label: "Dev", value: "dev" }
-          - { label: "New", value: "new" }
-          - { label: "Hot", value: "hot" }
-          - { label: "Test", value: "test" }
+          - { label: "Нет", value: "" }
+          - { label: "В разработке", value: "dev" }
+          - { label: "Новинка", value: "new" }
+          - { label: "Популярные", value: "hot" }
+          - { label: "В тесте", value: "test" }
+
+  - name: "publishing-rus"
+    label: "Издательство (Рус)"
+    folder: "src/content/publishing/ru"
+    create: true
+    slug: "{{title}}"
+    fields:
+      - label: "Заголовок"
+        name: "title"
+        widget: "string"
+
+      - label: "Описание"
+        name: "description"
+        widget: "string"
+
+      - label: "Картинка"
+        name: "image"
+        widget: "object"
+        fields:
+          - { label: "Источник", name: "src", widget: "image" }
+          - { label: "Альтернативный текст", name: "alt", widget: "string" }
+
+      - label: "Ссылка на раздел"
+        name: "link"
+        widget: "string"
+
+      - label: "Порядок в секции"
+        name: "order"
+        widget: "number"
+        value_type: "int"
+
+      - label: "Подробное описание"
+        name: "body"
+        widget: "markdown"

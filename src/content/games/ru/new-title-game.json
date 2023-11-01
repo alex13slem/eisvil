@@ -4,13 +4,11 @@
     "src": "/images/uploads/eisvil.jpg",
     "alt": "eisvil"
   },
+  "link": "/",
   "links": {
     "google": "https://eisvil.netlify.app/admin/#/collections/games/new",
     "apple": "https://eisvil.netlify.app/admin/#/collections/games/new"
   },
-  "tags": [
-    "eisvil",
-    "title"
-  ],
+  "tags": ["eisvil", "title"],
   "category": "new"
 }

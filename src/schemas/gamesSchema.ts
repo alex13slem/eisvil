@@ -7,6 +7,7 @@ export const gamesSchema = z.object({
     alt: z.string(),
   }),
   tags: z.array(z.string()).optional(),
+  link: z.string().url().optional(),
   links: z
     .object({
       playgame: z.string().url().optional(),

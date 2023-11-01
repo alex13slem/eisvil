@@ -5,6 +5,7 @@
     "alt": "test alt"
   },
   "tags": ["Fight", "test"],
+  "link": "/",
   "links": {
     "apple": "https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data",
     "google": "https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data"

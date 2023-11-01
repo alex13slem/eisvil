@@ -11,7 +11,7 @@ type Props = HTMLAttributes<"article"> & CollectionEntry<"games">;
 
 const { class: className, data, ...props } = Astro.props;
 
-const { title, image, tags, links, category } = data;
+const { title, image, tags, links, link, category } = data;
 ---
 
 <article class:list={["game-card", className]} {...props}>
@@ -19,7 +19,7 @@ const { title, image, tags, links, category } = data;
   <!-- <Image src={img} alt={title}  /> -->
   <div class="image">
     <img src={image.src} alt={image.alt} />
-    <BtnFirm variant="transparent"><a href="/">ПОДРОБНЕЕ</a></BtnFirm>
+    <BtnFirm variant="transparent"><a href={link}>ПОДРОБНЕЕ</a></BtnFirm>
   </div>
   <div class="body">
     <h3>{title}</h3>
