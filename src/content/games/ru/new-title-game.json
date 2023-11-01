@@ -1,9 +1,6 @@
 {
   "title": "New Title Game",
-  "image": {
-    "src": "/images/uploads/eisvil.jpg",
-    "alt": "eisvil"
-  },
+  "thumbnail": "/images/uploads/eisvil.jpg",
   "link": "https://eisvil.netlify.app/",
   "links": {
     "google": "https://eisvil.netlify.app/admin/#/collections/games/new",
