@@ -12,11 +12,11 @@ collections:
     label: "Games"
     folder: "src/content/games/ru"
     create: true
-    slug: "{{name}}"
+    slug: "{{title}}"
     extention: "json"
     format: "json"
     fields:
-      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
 
       - label: "Image"
         name: "image"

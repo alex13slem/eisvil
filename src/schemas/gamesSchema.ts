@@ -1,7 +1,7 @@
 import { z } from "astro/zod";
 
 export const gamesSchema = z.object({
-  name: z.string(),
+  title: z.string(),
   image: z.object({
     src: z.string(),
     alt: z.string(),
