@@ -1,5 +1,4 @@
 {
-	"name": "Telegram",
-	"link": "https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data",
-	"fontFamily" : ""
+  "title": "Telegram",
+  "link": "https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data"
 }

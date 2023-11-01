@@ -19,14 +19,14 @@ type Props = HTMLAttributes<"article"> & CollectionEntry<"socials">;
 const {
   class: className,
   id,
-  data: { name, link },
+  data: { title, link },
   ...props
 } = Astro.props;
 ---
 
 <article class:list={["social-card", className]} {...props}>
   <a href={link}>
-    <h3>{name}</h3>
+    <h3>{title}</h3>
     <div class="body">
       {
         id === "discord" && (

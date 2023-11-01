@@ -1,5 +1,4 @@
 {
-	"name": "LinkedIn",
-	"link": "https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data",
-	"fontFamily" : ""
+  "title": "LinkedIn",
+  "link": "https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data"
 }

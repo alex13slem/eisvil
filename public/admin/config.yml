@@ -8,6 +8,22 @@ media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
+  - name: "socials"
+    label: "Соцсети"
+    folder: "src/content/socials"
+    create: true
+    slug: "{{title}}"
+    extention: "json"
+    format: "json"
+    fields:
+      - label: "Название"
+        name: "title"
+        widget: "string"
+
+      - label: "Ссылка"
+        name: "link"
+        widget: "string"
+
   - name: "games-rus"
     label: "Игры (Рус)"
     folder: "src/content/games/ru"
@@ -105,6 +121,7 @@ collections:
         name: "images"
         widget: "list"
         summary: "{{fields.alt}}"
+        label_singular: "Добавить картинку"
         fields:
           - { label: Ссылка, name: src, widget: image }
           - { label: Описание, name: alt, widget: string }

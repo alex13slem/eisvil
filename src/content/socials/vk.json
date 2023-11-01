@@ -1,5 +1,4 @@
 {
-	"name": "VK",
-	"link": "https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data",
-	"fontFamily" : ""
+  "title": "VK",
+  "link": "https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data"
 }
