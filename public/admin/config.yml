@@ -20,12 +20,10 @@ collections:
         name: "title"
         widget: "string"
 
-      - label: "Картинка"
-        name: "image"
-        widget: "object"
-        fields:
-          - { label: "Источник", name: "src", widget: "image" }
-          - { label: "Альтернативный текст", name: "alt", widget: "string" }
+      - label: "Обложка"
+        name: "thumbnail"
+        allow_multiple: false
+        widget: "image"
 
       - label: "Теги"
         name: "tags"
@@ -69,16 +67,46 @@ collections:
         name: "description"
         widget: "string"
 
-      - label: "Картинка"
-        name: "image"
-        widget: "object"
-        fields:
-          - { label: "Источник", name: "src", widget: "image" }
-          - { label: "Альтернативный текст", name: "alt", widget: "string" }
+      - label: "Обложка"
+        name: "thumbnail"
+        allow_multiple: false
+        widget: "image"
 
       - label: "Ссылка на раздел"
         name: "link"
         widget: "string"
+
+      - label: "Порядок в секции"
+        name: "order"
+        widget: "number"
+        value_type: "int"
+
+      - label: "Подробное описание"
+        name: "body"
+        widget: "markdown"
+
+  - name: "services-rus"
+    label: "Услуги (Рус)"
+    folder: "src/content/services/ru"
+    extention: "md"
+    format: "frontmatter"
+    create: true
+    slug: "{{title}}"
+    fields:
+      - label: "Заголовок"
+        name: "title"
+        widget: "string"
+
+      - label: "Ссылка на раздел"
+        name: "link"
+        widget: "string"
+
+      - label: "Галлерея"
+        name: "images"
+        widget: "list"
+        fields:
+          - { label: Ссылка, name: src, widget: image }
+          - { label: Описание, name: alt, widget: string }
 
       - label: "Порядок в секции"
         name: "order"

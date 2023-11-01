@@ -4,7 +4,7 @@ export const servicesSchema = z.object({
   title: z.string(),
   images: z.array(
     z.object({
-      src: z.string().url(),
+      src: z.string(),
       alt: z.string(),
     }),
   ),

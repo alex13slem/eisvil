@@ -11,14 +11,14 @@ type Props = HTMLAttributes<"article"> & CollectionEntry<"games">;
 
 const { class: className, data, ...props } = Astro.props;
 
-const { title, image, tags, links, link, category } = data;
+const { title, thumbnail, tags, links, link, category } = data;
 ---
 
 <article class:list={["game-card", className]} {...props}>
   {category && <CardBadge type={category} />}
   <!-- <Image src={img} alt={title}  /> -->
   <div class="image">
-    <img src={image.src} alt={image.alt} />
+    <img src={thumbnail} alt={title} />
     <BtnFirm variant="transparent"><a href={link}>ПОДРОБНЕЕ</a></BtnFirm>
   </div>
   <div class="body">

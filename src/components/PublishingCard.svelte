@@ -7,11 +7,7 @@
   export let targetIdx: number;
 
   const {
-    data: {
-      image: { src, alt },
-      description,
-      title,
-    },
+    data: { thumbnail, description, title },
   } = data;
 
   let currentIdx: number;
@@ -29,7 +25,7 @@
 
 <article class:active={isActive}>
   <button on:click={handleClick}>
-    <div class="image"><img {src} {alt} /></div>
+    <div class="image"><img src={thumbnail} alt={title} /></div>
     <div class="body">
       <h3>{title}</h3>
       <p>{description}</p>

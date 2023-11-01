@@ -1,24 +1,18 @@
 ---
 title: 2D-Графика
+
 link: "https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data"
-images: [
-	{
-		src: "https://i.pinimg.com/originals/db/3c/69/db3c6932ab7f48aa37911fa229efa7ba.jpg",
-		alt: "test"
-	},
-	{
-		src: "https://i.pinimg.com/originals/db/3c/69/db3c6932ab7f48aa37911fa229efa7ba.jpg",
-		alt: "test"
-	},
-	{
-		src: "https://i.pinimg.com/originals/db/3c/69/db3c6932ab7f48aa37911fa229efa7ba.jpg",
-		alt: "test"
-	},
-	{
-		src: "https://i.pinimg.com/originals/db/3c/69/db3c6932ab7f48aa37911fa229efa7ba.jpg",
-		alt: "test"
-	}
-]
+
+images:
+  - src: "https://i.pinimg.com/originals/db/3c/69/db3c6932ab7f48aa37911fa229efa7ba.jpg"
+    alt: "test"
+  - src: "https://i.pinimg.com/originals/db/3c/69/db3c6932ab7f48aa37911fa229efa7ba.jpg"
+    alt: "test"
+  - src: "https://i.pinimg.com/originals/db/3c/69/db3c6932ab7f48aa37911fa229efa7ba.jpg"
+    alt: "test"
+  - src: "https://i.pinimg.com/originals/db/3c/69/db3c6932ab7f48aa37911fa229efa7ba.jpg"
+    alt: "test"
+
 order: 1
 ---
 
