@@ -13,6 +13,8 @@ collections:
     folder: "src/content/games/ru"
     create: true
     slug: "{{slug}}"
+    extention: "json"
+    format: "json"
     fields:
       - { label: "Name", name: "name", widget: "string" }
 
