@@ -5,7 +5,7 @@
     "alt": "test alt"
   },
   "tags": ["nikita", "privet"],
-  "link": "/",
+  "link": "https://eisvil.netlify.app/",
   "links": {
     "apple": "https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data",
     "google": "https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data"

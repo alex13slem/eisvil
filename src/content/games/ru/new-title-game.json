@@ -4,7 +4,7 @@
     "src": "/images/uploads/eisvil.jpg",
     "alt": "eisvil"
   },
-  "link": "/",
+  "link": "https://eisvil.netlify.app/",
   "links": {
     "google": "https://eisvil.netlify.app/admin/#/collections/games/new",
     "apple": "https://eisvil.netlify.app/admin/#/collections/games/new"
