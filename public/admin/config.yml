@@ -57,7 +57,7 @@ collections:
     label: "Издательство (Рус)"
     folder: "src/content/publishing/ru"
     extention: "md"
-    format: "yaml-frontmatter"
+    format: "frontmatter"
     create: true
     slug: "{{title}}"
     fields:
