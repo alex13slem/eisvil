@@ -40,11 +40,9 @@
     : currentIdx - targetIdx}"
   */
   article {
-    // --border-color: rgb(58, 79, 125);
+    /* order: var(--idx); */
     --img-size: 255px;
     flex: 1 1 auto;
-    /* order: var(--idx); */
-    /* overflow: hidden; */
     position: relative;
 
     filter: brightness(50%);
@@ -69,6 +67,23 @@
           opacity: 1;
         }
       }
+
+      .image {
+        &::after {
+          border-color: rgb(var(--color-accent), 50%);
+        }
+        &::before {
+          opacity: 1;
+        }
+        img {
+          border-image: linear-gradient(
+              135deg,
+              rgb(var(--color-accent), 50%) calc(var(--img-size) / 4),
+              transparent 50%
+            )
+            30;
+        }
+      }
     }
   }
   button {
@@ -89,7 +104,7 @@
       border: 1px solid;
       border-image: linear-gradient(
           135deg,
-          rgb(var(--border-card-accent-color)) 0%,
+          rgb(var(--border-card-accent-color)) calc(var(--img-size) / 4),
           transparent 50%
         )
         30;
@@ -112,7 +127,7 @@
       left: 11px;
       background: rgb(var(--border-card-accent-color));
 
-      transition: opacity var(--trans-default);
+      transition: opacity var(--trans-slow);
     }
   }
   .image {
@@ -126,21 +141,56 @@
       0 100%,
       0 calc(var(--img-size) / 4)
     );
-    border-bottom: var(--border-card-accent);
+    border-bottom: 2px solid rgb(var(--border-card-accent-color));
 
     transition: clip-path var(--trans-slow);
-  }
-  img {
-    height: var(--img-size);
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
 
-    border: 1px solid rgb(var(--color-card));
-    border-bottom: none;
+    &::after {
+      --size: calc((var(--img-size) / 4) * 1.435);
+      content: "";
+      position: absolute;
+      top: calc(var(--size) / 2 * -1);
+      left: calc(var(--size) / 2 * -1);
+      width: var(--size);
+      transform: rotate(-45deg);
+      aspect-ratio: 1 / 1;
+      border: 1px solid rgb(var(--color-card));
 
-    transition-property: width, height, filter;
-    transition: var(--trans-slow);
+      transition: border-color var(--trans-slow);
+    }
+
+    &::before {
+      opacity: 0;
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgb(var(--color-accent), 50%) 0%,
+        transparent 66.6%
+      );
+
+      transition: opacity var(--trans-slow);
+    }
+
+    img {
+      height: var(--img-size);
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+
+      border: 1px solid;
+      border-image: linear-gradient(
+          135deg,
+          rgb(var(--color-card)) 0%,
+          rgb(var(--color-card)) 50%
+        )
+        30;
+      border-bottom: none;
+
+      transition-property: filter, border-image;
+      transition: var(--trans-slow);
+    }
   }
   .body {
     position: relative;
