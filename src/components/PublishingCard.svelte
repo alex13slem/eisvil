@@ -117,6 +117,7 @@
       0 100%,
       0 calc(var(--img-size) / 4)
     );
+    border-bottom: var(--border-card-accent);
 
     transition: clip-path var(--trans-slow);
   }
@@ -151,15 +152,15 @@
 
     transition: border-image var(--trans-slow);
 
-    &::after {
-      content: "";
-      position: absolute;
-      width: calc(100% + 8px);
-      top: 0;
-      left: -4px;
-      border: 1px solid rgb(var(--color-card));
-      border-top-color: var(--border-color);
-    }
+    // &::after {
+    //   content: "";
+    //   position: absolute;
+    //   width: calc(100% + 8px);
+    //   top: 0;
+    //   left: -4px;
+    //   border: 1px solid rgb(var(--color-card));
+    //   border-top-color: var(--border-color);
+    // }
   }
 
   h3 {

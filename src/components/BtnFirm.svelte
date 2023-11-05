@@ -28,9 +28,6 @@
     transition: var(--trans-default);
 
     @include firm-arrows;
-    &:not(:disabled):hover {
-      transform: scale(101%);
-    }
   }
   .v-firm {
     &:disabled {
@@ -38,6 +35,12 @@
     }
     span.bg {
       background: var(--gradient);
+    }
+    &:not(:disabled):hover {
+      @include hover-text1(
+        $sh-lt-color: rgb(var(--color-accent), 20%),
+        $sh-rb-color: rgb(var(--color-white), 20%)
+      );
     }
   }
 
@@ -49,12 +52,25 @@
       border-bottom: 1px solid currentColor;
     }
   }
+
   .v-contrast {
     span.text {
       color: rgb(var(--color-bg));
     }
     span.bg {
       background-color: rgb(var(--color-white));
+      transition: background-color var(--trans-default);
+    }
+    .arrow {
+      transition: color var(--trans-default);
+    }
+    &:not(:disabled):hover {
+      span.bg {
+        background-color: rgb(var(--color-accent));
+      }
+      .arrow {
+        color: rgb(var(--color-accent));
+      }
     }
   }
 

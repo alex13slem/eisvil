@@ -29,7 +29,11 @@
   &.active {
     font-size: 20px;
     font-weight: 600;
-    color: rgb(var(--color-accent));
+    // color: rgb(var(--color-accent));
+    background: linear-gradient(180deg, #e32521 0%, #ef811b 40%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
     border-color: rgb(var(--color-accent));
   }
 }

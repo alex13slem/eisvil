@@ -1,8 +1,7 @@
+<a href="/" class="nav-link"><span /><slot /></a>
 
-
-<a href="/" class="nav-link"><span></span><slot /></a>
-
-<style>
+<style lang="scss">
+  @import "../styles/mixins";
   .nav-link {
     position: relative;
     padding-inline: 2.5ch;
@@ -15,10 +14,8 @@
 
     text-transform: uppercase;
 
-    transition:
-      background-color var(--trans-default),
-      color var(--trans-default),
-      text-shadow var(--trans-steps);
+    transition: background-color var(--trans-default),
+      color var(--trans-default), text-shadow var(--trans-steps);
   }
 
   .nav-link::after {
@@ -38,10 +35,11 @@
   }
 
   .nav-link:hover {
-    color: rgb(var(--color-accent));
-    text-shadow:
-      -3px -3px rgb(var(--color-accent), 20%),
-      2.5px 2.5px rgb(var(--color-white), 20%);
+    @include hover-text1(
+      $t-color: rgb(var(--color-accent)),
+      $sh-lt-color: rgb(var(--color-accent), 20%),
+      $sh-rb-color: rgb(var(--color-white), 20%)
+    );
   }
 
   .nav-link::before,

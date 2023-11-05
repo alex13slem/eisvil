@@ -2,22 +2,36 @@
 import { Image } from "astro:assets";
 import banner from "@/img/hero.jpg";
 import BtnFirm from "@/components/BtnFirm.svelte";
+import SVGHeroText from "../components/svg/SVGHeroText.svelte";
 ---
 
 <div class="sect-hero">
   <Image class="banner" src={banner} alt="Site-banner" />
   <div class="content">
-    <h1>EISVIL</h1>
+    <!-- <h1>EISVIL</h1> -->
+    <SVGHeroText />
     <h2 class="description">место, где идея становится игрой</h2>
     <BtnFirm><a href="/">Создать новый мир</a></BtnFirm>
   </div>
 </div>
 
-<style>
+<style style="scss">
   .sect-hero {
     --banner-height: 760px;
 
     position: relative;
+
+    &::after {
+      position: absolute;
+      content: "";
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(28, 29, 43, 0) 50%,
+        rgba(28, 29, 43, 0.31) 80%,
+        #1c1d2b 100%
+      );
+    }
   }
 
   .banner {
@@ -27,7 +41,8 @@ import BtnFirm from "@/components/BtnFirm.svelte";
   }
 
   .content {
-    margin-top: 415px;
+    z-index: 1;
+    margin-top: 410px;
     position: absolute;
     inset: 0;
 
