@@ -5,29 +5,69 @@
 
   export let data: CollectionEntry<"publishing">[];
   let curIdx: number;
-  // let animClass: string;
 
   pubTabIdx.subscribe((idx) => {
-    // animClass = "anim";
-    // setTimeout(() => {
-    //   animClass = "";
-    // }, 700);
     return (curIdx = idx);
   });
+  const lastElem = [...data].shift();
+  const firstElem = [...data].pop();
 </script>
 
 <div class="cards">
-  {#each data as item, idx}
-    <PublishingCard data={item} isActive={idx === curIdx} targetIdx={idx} />
-  {/each}
+  <div
+    class="wrap"
+    class:center={curIdx === 1}
+    class:left={curIdx === 0}
+    class:right={curIdx === 2}
+  >
+    {#if firstElem}
+      <PublishingCard data={firstElem} targetIdx={null} />
+    {/if}
+    {#each data as item, idx}
+      <PublishingCard data={item} isActive={idx === curIdx} targetIdx={idx} />
+    {/each}
+    {#if lastElem}
+      <PublishingCard data={lastElem} targetIdx={null} />
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">
   .cards {
-    flex: 1 1 auto;
+    position: relative;
+    overflow: hidden;
+    margin: -30px;
+    padding: 30px;
+
+    &::after,
+    &::before {
+      z-index: 2;
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 30px;
+      background: linear-gradient(90deg, rgb(var(--color-bg)), transparent);
+    }
+    &::before {
+      left: auto;
+      transform: rotate(180deg);
+    }
+  }
+  .wrap {
     position: relative;
     display: flex;
     align-items: start;
     gap: 30px;
+
+    transition: transform var(--trans-slow);
+
+    &.center {
+      transform: translateX(calc((33.3% + 10px) * -1));
+    }
+    &.left {
+    }
+    &.right {
+      transform: translateX(calc((33.3% + 10px) * -2));
+    }
   }
 </style>

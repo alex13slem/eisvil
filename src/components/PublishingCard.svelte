@@ -3,8 +3,8 @@
   import { pubTabIdx } from "./PublishingTabs/store";
 
   export let data: CollectionEntry<"publishing">;
-  export let isActive: boolean;
-  export let targetIdx: number;
+  export let isActive: boolean = false;
+  export let targetIdx: number | null;
 
   const {
     data: { thumbnail, description, title },
@@ -14,6 +14,7 @@
   $: targetIdx;
 
   function handleClick() {
+    if (targetIdx === null) return;
     pubTabIdx.set(targetIdx);
   }
   function setCurrIxd(idx: number) {
@@ -23,7 +24,7 @@
   pubTabIdx.subscribe(setCurrIxd);
 </script>
 
-<article class:active={isActive}>
+<article class:active={isActive} class:inactive={targetIdx === null}>
   <button on:click={handleClick}>
     <div class="image"><img src={thumbnail} alt={title} /></div>
     <div class="body">
@@ -42,7 +43,7 @@
   article {
     /* order: var(--idx); */
     --img-size: 255px;
-    flex: 1 1 auto;
+    flex: 0 0 calc(33.3% - 20px);
     position: relative;
 
     filter: brightness(50%);
@@ -84,6 +85,10 @@
             30;
         }
       }
+    }
+
+    &.inactive {
+      pointer-events: none;
     }
   }
   button {
@@ -146,7 +151,7 @@
     transition: clip-path var(--trans-slow);
 
     &::after {
-      --size: calc((var(--img-size) / 4) * 1.435);
+      --size: calc((var(--img-size) / 4) * 1.45);
       content: "";
       position: absolute;
       top: calc(var(--size) / 2 * -1);
