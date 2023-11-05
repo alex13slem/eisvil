@@ -49,8 +49,10 @@
   display: flex;
   flex-direction: column;
   min-height: 235px;
+  pointer-events: none;
 
   &.active {
+    pointer-events: all;
     opacity: 1;
   }
   button {

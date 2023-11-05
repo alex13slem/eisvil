@@ -20,8 +20,9 @@
   }
 
   span {
-    width: 11px;
+    width: 12px;
     height: 10px;
+    border-radius: 1px;
     transition: background-color var(--trans-default);
   }
 

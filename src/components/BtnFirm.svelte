@@ -37,10 +37,12 @@
       background: var(--gradient);
     }
     &:not(:disabled):hover {
-      @include hover-text1(
-        $sh-lt-color: rgb(var(--color-accent), 20%),
-        $sh-rb-color: rgb(var(--color-white), 20%)
-      );
+      span.text {
+        @include hover-text1(
+          $sh-lt-color: rgb(var(--color-accent), 20%),
+          $sh-rb-color: rgb(var(--color-white), 20%)
+        );
+      }
     }
   }
 

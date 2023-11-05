@@ -1,4 +1,8 @@
-@mixin hover-text1($t-color: currentcolor, $sh-lt-color, $sh-rb-color) {
+@mixin hover-text1(
+  $t-color: rgb(var(--color-text)),
+  $sh-lt-color,
+  $sh-rb-color
+) {
   color: $t-color;
   text-shadow:
     -3px -3px $sh-lt-color,
