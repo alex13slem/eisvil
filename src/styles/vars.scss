@@ -20,7 +20,8 @@
 
   --border: 1px solid rgb(var(--color-white), 10%);
   --border-card: 1px solid rgb(var(--color-white), 30%);
-  --border-card-accent: 1px solid #3a4f7e;
+  --border-card-accent-color: 58, 79, 126;
+  --border-card-accent: 1px solid rgb(var(--border-card-accent-color));
 
   --box-shadow: 0px 1px 15px rgba(7, 13, 27, 0.7);
 
