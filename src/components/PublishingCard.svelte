@@ -103,9 +103,9 @@
       // border: var(--border-card-accent);
       border: 1px solid;
       border-image: linear-gradient(
-          135deg,
+          140deg,
           rgb(var(--border-card-accent-color)) calc(var(--img-size) / 4),
-          transparent 50%
+          transparent 45%
         )
         30;
 
@@ -167,7 +167,7 @@
       background: linear-gradient(
         135deg,
         rgb(var(--color-accent), 50%) 0%,
-        transparent 66.6%
+        transparent 60%
       );
 
       transition: opacity var(--trans-slow);
