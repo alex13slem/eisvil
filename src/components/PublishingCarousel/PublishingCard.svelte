@@ -1,30 +1,31 @@
 <script lang="ts">
   import type { CollectionEntry } from "astro:content";
-  import { pubTabIdx } from "./PublishingTabs/store";
+  import { moveLeft, moveRight, pubTabIdx } from "./store";
+  import { crossfade, fade, fly, scale } from "svelte/transition";
+  import { quintOut } from "svelte/easing";
+  import { onMount } from "svelte";
 
+  export let idx: number;
   export let data: CollectionEntry<"publishing">;
-  export let isActive: boolean = false;
-  export let targetIdx: number | null;
+
+  $: isLeft = idx === 0;
+  $: isCenter = idx === 1;
+  $: isRight = idx === 2;
 
   const {
     data: { thumbnail, description, title },
   } = data;
 
-  let currentIdx: number;
-  $: targetIdx;
-
   function handleClick() {
-    if (targetIdx === null) return;
-    pubTabIdx.set(targetIdx);
-  }
-  function setCurrIxd(idx: number) {
-    currentIdx = idx;
+    isLeft && moveLeft();
+    isRight && moveRight();
   }
 
-  pubTabIdx.subscribe(setCurrIxd);
+  onMount(() => console.log("init"));
 </script>
 
-<article class:active={isActive} class:inactive={targetIdx === null}>
+<!--  -->
+<article class:left={isLeft} class:right={isRight} class:active={isCenter}>
   <button on:click={handleClick}>
     <div class="image"><img src={thumbnail} alt={title} /></div>
     <div class="body">
