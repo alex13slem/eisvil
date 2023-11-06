@@ -46,14 +46,14 @@
     flex: 0 0 calc(33.3% - 20px);
     position: relative;
 
-    filter: brightness(50%);
-
     transform-origin: top;
     transition-property: transform, filter, left;
     transition: var(--trans-slow);
 
     &:hover {
-      filter: brightness(75%);
+      .image {
+        filter: brightness(75%);
+      }
     }
     &.active {
       // --img-size: 280px;
@@ -70,6 +70,7 @@
       }
 
       .image {
+        filter: brightness(100%);
         &::after {
           border-color: rgb(var(--color-accent), 50%);
         }
@@ -89,6 +90,21 @@
 
     &.inactive {
       pointer-events: none;
+      position: relative;
+      &::after {
+        z-index: 2;
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          rgb(var(--color-bg)) 20%,
+          transparent 200%
+        );
+      }
+      &:last-child::after {
+        transform: rotate(180deg);
+      }
     }
   }
   button {
@@ -147,8 +163,10 @@
       0 calc(var(--img-size) / 4)
     );
     border-bottom: 2px solid rgb(var(--border-card-accent-color));
+    filter: brightness(50%);
 
-    transition: clip-path var(--trans-slow);
+    transition-property: clip-path, filter;
+    transition: var(--trans-slow);
 
     &::after {
       --size: calc((var(--img-size) / 4) * 1.45);
