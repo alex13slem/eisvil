@@ -8,6 +8,7 @@ import { ViewTransitions } from "astro:transitions";
 import SiteHeader from "../components/SiteHeader.astro";
 import "@/styles/index.scss";
 import SiteFooter from "../components/SiteFooter.astro";
+import MobileMenu from "../components/MobileMenu.svelte";
 
 interface Props {
   title: string;
@@ -33,6 +34,9 @@ const { title } = Astro.props;
     <SiteHeader />
     <slot />
     <SiteFooter />
+
+    <MobileMenu client:load />
+
     <script>
       declare global {
         interface Window {

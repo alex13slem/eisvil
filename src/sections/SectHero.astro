@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import banner from "@/img/hero.jpg";
-import BtnFirm from "@/components/BtnFirm.svelte";
 import SVGHeroText from "../components/svg/SVGHeroText.svelte";
+import Modal from "../components/Modal.svelte";
 ---
 
 <div class="sect-hero">
@@ -11,7 +11,9 @@ import SVGHeroText from "../components/svg/SVGHeroText.svelte";
     <!-- <h1>EISVIL</h1> -->
     <SVGHeroText />
     <h2 class="description">место, где идея становится игрой</h2>
-    <BtnFirm><a href="/">Создать новый мир</a></BtnFirm>
+    <Modal btnText="Создать новый мир" client:load>
+      <p>test</p>
+    </Modal>
   </div>
 </div>
 

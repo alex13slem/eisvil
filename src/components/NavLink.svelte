@@ -22,13 +22,16 @@
     opacity: 0;
     position: absolute;
     inset: 0;
-    content: "";
+
     background: linear-gradient(
       180deg,
       rgba(239, 129, 27, 0) 47%,
       rgba(239, 129, 27, 0.25) 100%
     );
     transition: opacity var(--trans-default);
+    @media (min-width: 1024.1px) {
+      content: "";
+    }
   }
   .nav-link:hover::after {
     opacity: 1;

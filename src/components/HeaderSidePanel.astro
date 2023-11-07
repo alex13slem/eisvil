@@ -6,7 +6,7 @@ const { class: className, ...props } = Astro.props;
   <slot />
 </div>
 
-<style>
+<style lang="scss">
   .side-panel {
     padding-top: 0.5rem;
     padding-bottom: calc(0.5rem - 2px);
@@ -25,5 +25,22 @@ const { class: className, ...props } = Astro.props;
     content: "";
     background: radial-gradient(50% 50%, rgba(239, 129, 27, 0.25), transparent);
     aspect-ratio: 2/1;
+  }
+  .side-panel:first-child {
+    &::after {
+      right: -60px;
+    }
+  }
+  .side-panel:last-child {
+    justify-content: end;
+    &::after {
+      left: -60px;
+    }
+  }
+
+  @media (orientation: portrait), (max-width: 1024px) {
+    .side-panel::after {
+      content: none;
+    }
   }
 </style>

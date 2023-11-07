@@ -1,16 +1,18 @@
 ---
-import SiteNav from "./SiteNav.astro";
+import SiteNav from "./SiteNav.svelte";
 import HeaderSidePanel from "./HeaderSidePanel.astro";
 import SiteLogo from "./SiteLogo.svelte";
+import SiteMenuToggle from "./SiteMenuToggle.svelte";
 ---
 
 <header class="header">
   <div class="container">
-    <HeaderSidePanel class="left-panel">
+    <HeaderSidePanel>
       <SiteLogo />
     </HeaderSidePanel>
-    <SiteNav />
-    <HeaderSidePanel class="right-panel">
+    <SiteNav onHeader />
+    <HeaderSidePanel>
+      <SiteMenuToggle client:visible />
       <!-- <Image class="site-logo" src={siteLogo} alt="site-logo" /> -->
     </HeaderSidePanel>
   </div>
@@ -49,19 +51,14 @@ import SiteLogo from "./SiteLogo.svelte";
     gap: 5px;
   }
 
-  .right-panel {
-    justify-content: end;
-  }
-
-  .left-panel::after {
-    right: -60px;
-  }
-  .right-panel::after {
-    left: -60px;
-  }
-
   .site-logo {
     box-sizing: content-box;
     padding-block: 0.5rem;
+  }
+
+  @media (orientation: portrait), (max-width: 1024px) {
+    .container {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 </style>
