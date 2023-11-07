@@ -16,6 +16,7 @@
     background: transparent;
     border: none;
     padding: 0;
+    cursor: pointer;
 
     display: flex;
     flex-direction: column;

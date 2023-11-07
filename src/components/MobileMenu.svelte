@@ -13,7 +13,7 @@
 <style>
   .m-menu {
     position: fixed;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-top: 60px;
     inset: 0;
     min-height: calc(100dvh - 60px);

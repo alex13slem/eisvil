@@ -16,6 +16,9 @@
 
     transition: background-color var(--trans-default),
       color var(--trans-default), text-shadow var(--trans-steps);
+    @media (orientation: portrait), (max-width: 1024px) {
+      font-size: 3vmax;
+    }
   }
 
   .nav-link::after {
@@ -29,8 +32,8 @@
       rgba(239, 129, 27, 0.25) 100%
     );
     transition: opacity var(--trans-default);
-    @media (min-width: 1024.1px) {
-      content: "";
+    @media (orientation: portrait), (max-width: 1024px) {
+      display: none;
     }
   }
   .nav-link:hover::after {
@@ -48,7 +51,6 @@
   .nav-link::before,
   .nav-link:first-of-type span {
     bottom: -2px;
-    content: "";
     position: absolute;
     background: linear-gradient(
       180deg,
@@ -57,6 +59,10 @@
     );
     width: 1px;
     height: 100%;
+
+    @media (orientation: portrait), (max-width: 1024px) {
+      display: none;
+    }
   }
   .nav-link::before {
     right: -3px;
