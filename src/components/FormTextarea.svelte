@@ -1,17 +1,13 @@
 <script lang="ts">
+  import { cn } from "../utils/helpers";
   import SVGArrow from "./svg/SVGArrow.svelte";
   export let placeholder: string | null = null;
   export let value: string | null = null;
+  export let className: string = "";
 </script>
 
-<div class="form-textarea">
-  <textarea
-    on:input
-    bind:value
-    {placeholder}
-    class={value && "typing"}
-    {...$$restProps}
-  />
+<div class={cn("form-textarea", className)} class:typing={value}>
+  <textarea on:input bind:value {placeholder} {...$$restProps} />
   <div class="bg" />
   <span class="arrow left"><SVGArrow /></span>
   <span class="arrow right"><SVGArrow /></span>

@@ -5,11 +5,11 @@
 </script>
 
 <nav class="site-nav" class:onHeader class:onMobMenu {...$$restProps}>
-  <NavLink>Наши игры</NavLink>
-  <NavLink>Услуги</NavLink>
-  <NavLink>Издательство</NavLink>
-  <NavLink>Карьера</NavLink>
-  <NavLink>Контакты</NavLink>
+  <NavLink {onHeader} {onMobMenu}>Наши игры</NavLink>
+  <NavLink {onHeader} {onMobMenu}>Услуги</NavLink>
+  <NavLink {onHeader} {onMobMenu}>Издательство</NavLink>
+  <NavLink {onHeader} {onMobMenu}>Карьера</NavLink>
+  <NavLink {onHeader} {onMobMenu}>Контакты</NavLink>
 </nav>
 
 <style>

@@ -9,7 +9,7 @@
   *:focus-visible ~ & {
     background-color: rgb(var(--color-white), 45%);
   }
-  .typing ~ & {
+  .typing & {
     background-color: rgb(var(--color-accent));
   }
 }

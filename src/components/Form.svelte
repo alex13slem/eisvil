@@ -118,7 +118,12 @@
     bind:value={formValues.botField}
   />
   <fieldset>
-    <FormField name="name" placeholder="Ваше имя" bind:value={formValues.name}>
+    <FormField
+      className="name"
+      name="name"
+      placeholder="Ваше имя"
+      bind:value={formValues.name}
+    >
       {#if errors?.name && sendingAttempt}
         <FormFieldError errors={errors.name} />
       {/if}
@@ -126,6 +131,7 @@
 
     <FormField
       name="from_link"
+      className="from-link"
       placeholder="Из какого вы издания или блога? Пожалуйста, укажите ссылку"
       bind:value={formValues.fromLink}
     >
@@ -134,7 +140,12 @@
       {/if}
     </FormField>
 
-    <FormField type="email" placeholder="E-mail" bind:value={formValues.email}>
+    <FormField
+      type="email"
+      className="email"
+      placeholder="E-mail"
+      bind:value={formValues.email}
+    >
       {#if errors?.email && sendingAttempt}
         <FormFieldError errors={errors.email} />
       {/if}
@@ -142,6 +153,7 @@
 
     <FormField
       name="contact"
+      className="contact"
       placeholder="Другой удобный способ связи с Вами"
       bind:value={formValues.contact}
     >
@@ -152,6 +164,7 @@
 
     <FormTextarea
       name="comment"
+      className="comment"
       placeholder="Оставьте комментарий или просто напишите нам :)"
       bind:value={formValues.comment}
     />
@@ -196,24 +209,24 @@
     grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
       "name contact"
-      "from_link comment"
+      "from-link comment"
       "email comment"
       ". access";
     gap: 10px 30px;
   }
-  fieldset :global(.form-field:has(input[name="name"])) {
+  fieldset :global(.name) {
     grid-area: name;
   }
-  fieldset :global(.form-field:has(input[name="from_link"])) {
-    grid-area: from_link;
+  fieldset :global(.from-link) {
+    grid-area: from-link;
   }
-  fieldset :global(.form-field:has(input[name="email"])) {
+  fieldset :global(.email) {
     grid-area: email;
   }
-  fieldset :global(.form-field:has(input[name="contact"])) {
+  fieldset :global(.contact) {
     grid-area: contact;
   }
-  fieldset :global(.form-textarea) {
+  fieldset :global(.comment) {
     grid-area: comment;
   }
   .access {

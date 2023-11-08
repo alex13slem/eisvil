@@ -13,7 +13,6 @@ import SiteMenuToggle from "./MobileMenuToggler.svelte";
     <SiteNav onHeader />
     <HeaderSidePanel>
       <SiteMenuToggle client:visible />
-      <!-- <Image class="site-logo" src={siteLogo} alt="site-logo" /> -->
     </HeaderSidePanel>
   </div>
 </header>
@@ -21,9 +20,9 @@ import SiteMenuToggle from "./MobileMenuToggler.svelte";
 <style>
   .header {
     z-index: 1;
-    position: fixed;
+    position: sticky;
     overflow: hidden;
-
+    padding-top: 0.5rem;
     padding-bottom: 2px;
 
     background: rgb(var(--color-bg), 50%);

@@ -4,6 +4,16 @@
   import { fade } from "svelte/transition";
 </script>
 
+<svelte:head>
+  {#if $isOpen}
+    <style>
+      :root {
+        overflow: hidden;
+      }
+    </style>
+  {/if}
+</svelte:head>
+
 {#if $isOpen}
   <div class="m-menu" transition:fade>
     <SiteNav onMobMenu />

@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { cn } from "../utils/helpers";
+
   export let checked: boolean | null = null;
+  export let className: string = "";
 </script>
 
-<label class="checkbox">
+<label class={cn("checkbox", className)}>
   <input type="checkbox" on:input on:blur bind:checked {...$$restProps} />
   <span />
 </label>

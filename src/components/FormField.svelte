@@ -1,15 +1,17 @@
 <script lang="ts">
+  import { cn } from "../utils/helpers";
   import SVGArrow from "./svg/SVGArrow.svelte";
   export let type: "text" | "email" | "password" = "text";
   export let placeholder: string | null = null;
   export let value: string | null = null;
+  export let className: string = "";
 
   function typeAction(node: HTMLInputElement) {
     node.type = type;
   }
 </script>
 
-<div class="form-field">
+<div class={cn("form-field", className)} class:typing={value}>
   <input
     on:input
     on:blur
@@ -19,7 +21,6 @@
     use:typeAction
     autocomplete="new-password"
     {...$$restProps}
-    class={value && "typing"}
   />
   <slot />
   <div class="bg" />

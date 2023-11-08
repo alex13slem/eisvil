@@ -1,32 +1,11 @@
 <script lang="ts">
-  import {
-    Dialog,
-    DialogOverlay,
-    Transition,
-  } from "@rgossiaux/svelte-headlessui";
-  import BtnFirm from "./BtnFirm.svelte";
-  import { blur, fade } from "svelte/transition";
+  import { blur } from "svelte/transition";
   import Portal from "./Portal.svelte";
-  export let btnText: string;
-  export let variantBtn: "firm" | "transparent" | "contrast" = "firm";
+  import Icon from "@iconify/svelte";
 
-  let isOpen = false;
+  export let title: string = "";
+  export let isOpen = false;
 </script>
-
-<svelte:head>
-  {#if isOpen}
-    <!-- <style>
-      html {
-        overflow: hidden;
-        padding-right: 20px;
-      }
-    </style> -->
-  {/if}
-</svelte:head>
-
-<BtnFirm variant={variantBtn} on:click={() => (isOpen = true)}
-  >{btnText}</BtnFirm
->
 
 {#if isOpen}
   <Portal>
@@ -40,26 +19,42 @@
       />
 
       <div class="window">
-        <slot />
+        <div class="header">
+          <h2>{title}</h2>
+          <button
+            class="btn-x"
+            on:click={() => {
+              isOpen = false;
+            }}
+          >
+            <Icon icon="mdi:close" color="white" width="43" />
+          </button>
+        </div>
 
-        <button on:click={() => (isOpen = false)}>Deactivate</button>
-        <button on:click={() => (isOpen = false)}>Cancel</button>
+        <div class="body">
+          <slot />
+        </div>
+
+        <div class="footer">
+          <slot name="footer" />
+        </div>
       </div>
     </div>
   </Portal>
 {/if}
 
-<style>
+<style lang="scss">
   .modal {
     position: fixed;
     overflow-y: auto;
     inset: 0;
     margin-top: 60px;
     min-height: calc(100vh - 60px);
+    padding: 4rem 1rem;
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
   }
   .overlay {
     z-index: -1;
@@ -67,5 +62,41 @@
     inset: 0;
     background: rgb(var(--color-bg), 50%);
     /* backdrop-filter: blur(10px); */
+  }
+
+  .window {
+    max-width: 770px;
+    width: 100%;
+    background-color: rgb(var(--color-bg));
+    border: var(--border);
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+
+    border-bottom: var(--border);
+    h2 {
+      flex: 1 1 auto;
+      margin: 0;
+    }
+  }
+  .btn-x {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+  }
+  .body {
+    padding: 1rem;
+  }
+  .footer {
+    padding: 1rem;
+    border-top: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    &:empty {
+      display: none;
+    }
   }
 </style>

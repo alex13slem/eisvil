@@ -3,6 +3,16 @@
   $: ref && document.body.appendChild(ref);
 </script>
 
-<div bind:this={ref}>
+<svelte:head>
+  {#if ref}
+    <style>
+      :root {
+        overflow: hidden;
+      }
+    </style>
+  {/if}
+</svelte:head>
+
+<div class="portal" bind:this={ref}>
   <slot />
 </div>

@@ -1,4 +1,23 @@
-<a href="/" class="nav-link"><span /><slot /></a>
+<script>
+  import { isOpen } from "@/store/site-menu";
+
+  export let href = "/";
+  export let onHeader = false;
+  export let onMobMenu = false;
+
+  function handleClick() {
+    onMobMenu && isOpen.set(false);
+  }
+</script>
+
+<a
+  class="nav-link"
+  class:onHeader
+  class:onMobMenu
+  on:click={handleClick}
+  {href}
+  {...$$restProps}><span /><slot /></a
+>
 
 <style lang="scss">
   @import "../styles/mixins";
@@ -23,6 +42,7 @@
 
   .nav-link::after {
     opacity: 0;
+    content: "";
     position: absolute;
     inset: 0;
 
@@ -51,6 +71,7 @@
   .nav-link::before,
   .nav-link:first-of-type span {
     bottom: -2px;
+    content: "";
     position: absolute;
     background: linear-gradient(
       180deg,

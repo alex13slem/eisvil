@@ -5,6 +5,7 @@
 
   scrollbar-color: var(--sb-c-tb) var(--sb-c-bg);
   scrollbar-width: thin;
+  scrollbar-gutter: stable;
 }
 
 ::-webkit-scrollbar {
