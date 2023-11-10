@@ -12,7 +12,7 @@ export const prerender = true;
 ---
 
 <HtmlBase title="E I S V I L">
-  <main class="main">
+  <main>
     <SectHero />
     <SectGames />
     <SectServices />
@@ -24,7 +24,10 @@ export const prerender = true;
 </HtmlBase>
 
 <style>
-  section {
+  main {
+    min-height: calc(100vh - 60px);
+  }
+  main :global(section) {
     padding-block: 50px;
   }
 </style>

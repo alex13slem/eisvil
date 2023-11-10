@@ -9,6 +9,7 @@ body {
 body {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 main {
@@ -46,8 +47,4 @@ p {
   &:last-of-type {
     margin-bottom: 2em;
   }
-}
-
-section {
-  padding-block: 50px;
 }

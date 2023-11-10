@@ -1,24 +1,24 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-import SiteLogo from './SiteLogo.svelte';
-import SVGApple from '@/components/svg/platforms/SVGApple.svelte';
-import SVGGoogle from './svg/platforms/SVGGoogle.svelte';
-import SVGRusstore from './svg/platforms/SVGRusstore.svelte';
-import SVGHuawei from './svg/platforms/SVGHuawei.svelte';
-import SVGPlaygame from './svg/platforms/SVGPlaygame.svelte';
-import SVGVk from './svg/platforms/SVGVk.svelte';
-import SVGSteam from './svg/platforms/SVGSteam.svelte';
-import SVGNintendo from './svg/platforms/SVGNintendo.svelte';
-import SVGXBox from './svg/platforms/SVGXBox.svelte';
-import SVGSony from './svg/platforms/SVGSony.svelte';
-import SVGSupport from './svg/SVGSupport.svelte';
+import type { HTMLAttributes } from "astro/types";
+import SiteLogo from "./SiteLogo.svelte";
+import SVGApple from "@/components/svg/platforms/SVGApple.svelte";
+import SVGGoogle from "./svg/platforms/SVGGoogle.svelte";
+import SVGRusstore from "./svg/platforms/SVGRusstore.svelte";
+import SVGHuawei from "./svg/platforms/SVGHuawei.svelte";
+import SVGPlaygame from "./svg/platforms/SVGPlaygame.svelte";
+import SVGVk from "./svg/platforms/SVGVk.svelte";
+import SVGSteam from "./svg/platforms/SVGSteam.svelte";
+import SVGNintendo from "./svg/platforms/SVGNintendo.svelte";
+import SVGXBox from "./svg/platforms/SVGXBox.svelte";
+import SVGSony from "./svg/platforms/SVGSony.svelte";
+import SVGSupport from "./svg/SVGSupport.svelte";
 
-interface Props extends HTMLAttributes<'footer'> {}
+interface Props extends HTMLAttributes<"footer"> {}
 
 const { class: className, ...props } = Astro.props;
 ---
 
-<footer class:list={['footer', className]} {...props}>
+<footer class:list={["footer", className]} {...props}>
   <div class="container">
     <div class="inner">
       <div class="left-panel">
@@ -75,14 +75,13 @@ const { class: className, ...props } = Astro.props;
 
 <style>
   .footer {
+    border-top: var(--border);
   }
   .inner {
     min-height: 242px;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     padding-block: 2rem;
-
-    border-top: var(--border);
   }
 
   .left-panel {

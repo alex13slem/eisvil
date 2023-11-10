@@ -38,10 +38,7 @@
     }
     &:not(:disabled):hover {
       span.text {
-        @include hover-text1(
-          $sh-lt-color: rgb(var(--color-accent), 20%),
-          $sh-rb-color: rgb(var(--color-white), 20%)
-        );
+        @include hover-text1();
       }
     }
   }

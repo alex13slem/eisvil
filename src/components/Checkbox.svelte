@@ -23,8 +23,8 @@
   }
 
   span {
-    width: 12px;
-    height: 10px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
     border-radius: 1px;
     transition: background-color var(--trans-default);
   }

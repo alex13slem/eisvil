@@ -48,8 +48,8 @@
 
     background: linear-gradient(
       180deg,
-      rgba(239, 129, 27, 0) 47%,
-      rgba(239, 129, 27, 0.25) 100%
+      transparent 47%,
+      rgb(var(--color-accent), 0.25) 100%
     );
     transition: opacity var(--trans-default);
     @media (orientation: portrait), (max-width: 1024px) {
@@ -61,11 +61,7 @@
   }
 
   .nav-link:hover {
-    @include hover-text1(
-      $t-color: rgb(var(--color-accent)),
-      $sh-lt-color: rgb(var(--color-accent), 20%),
-      $sh-rb-color: rgb(var(--color-white), 20%)
-    );
+    @include hover-text1($t-color: rgb(var(--color-accent)));
   }
 
   .nav-link::before,

@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { getCollection } from "astro:content";
+import GalleryNav from "../components/GalleryNav.svelte";
+
+interface Props extends HTMLAttributes<"section"> {}
+
+const { class: className, ...props } = Astro.props;
+
+let services = await getCollection("services");
+---
+
+<section class:list={["gallery", className]} {...props}>
+  <GalleryNav client:load data={services} />
+</section>
+
+<style lang="scss">
+  .gallery {
+    flex: 1 1 auto;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 370px 1fr 370px;
+  }
+</style>

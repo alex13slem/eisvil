@@ -46,7 +46,7 @@
 <style lang="scss">
   .modal {
     position: fixed;
-    overflow-y: auto;
+    overflow-y: scroll;
     inset: 0;
     margin-top: 60px;
     min-height: calc(100vh - 60px);
@@ -58,8 +58,10 @@
   }
   .overlay {
     z-index: -1;
-    position: absolute;
+    position: fixed;
     inset: 0;
+    margin-top: auto;
+    height: calc(100vh - 60px);
     background: rgb(var(--color-bg), 50%);
     /* backdrop-filter: blur(10px); */
   }
