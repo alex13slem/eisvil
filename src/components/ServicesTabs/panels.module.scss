@@ -41,7 +41,8 @@
 .slide-wrap {
   padding: 16px;
   width: 100%;
-  height: calc(var(--height) + 30px);
+  aspect-ratio: 4/3;
+  // height: calc(var(--height) + 30px);
 
   display: flex;
   align-items: center;
