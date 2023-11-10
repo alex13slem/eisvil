@@ -42,7 +42,8 @@
   */
   article {
     /* order: var(--idx); */
-    --img-size: 255px;
+    // --img-size: 255px;
+    aspect-ratio: 4/5;
     flex: 0 0 calc(33.3% - 20px);
     position: relative;
 
@@ -80,7 +81,7 @@
         img {
           border-image: linear-gradient(
               135deg,
-              rgb(var(--color-accent), 50%) calc(var(--img-size) / 4),
+              rgb(var(--color-accent), 50%) 25%,
               transparent 50%
             )
             30;
@@ -111,6 +112,9 @@
     all: unset;
     cursor: pointer;
     text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     &::after {
       content: "";
       opacity: 0;
@@ -119,16 +123,24 @@
       top: 13px;
       left: 13px;
       width: calc(100% - 13px);
-      height: calc(var(--img-size) - 13px);
+      aspect-ratio: 1;
+      // height: calc(var(--img-size) - 13px);
+      // height: calc(280px - 13px);
 
       // border: var(--border-card-accent);
       border: 1px solid;
       border-image: linear-gradient(
-          140deg,
-          rgb(var(--border-card-accent-color)) calc(var(--img-size) / 4),
-          transparent 45%
+          135deg,
+          rgb(var(--border-card-accent-color)),
+          transparent 50%
         )
         30;
+      // border-image: linear-gradient(
+      //     140deg,
+      //     rgb(var(--border-card-accent-color)) calc(var(--img-size) / 4),
+      //     transparent 45%
+      //   )
+      //   30;
 
       border-bottom: none;
       border-right: none;
@@ -152,16 +164,11 @@
     }
   }
   .image {
+    flex: 1 1 auto;
     overflow: hidden;
     position: relative;
     z-index: 1;
-    clip-path: polygon(
-      calc(var(--img-size) / 4) 0,
-      100% 0,
-      100% 100%,
-      0 100%,
-      0 calc(var(--img-size) / 4)
-    );
+    clip-path: polygon(4rem 0, 100% 0, 100% 100%, 0 100%, 0 4rem);
     border-bottom: 2px solid rgb(var(--border-card-accent-color));
     filter: brightness(50%);
 
@@ -169,7 +176,7 @@
     transition: var(--trans-slow);
 
     &::after {
-      --size: calc((var(--img-size) / 4) * 1.45);
+      --size: calc(4rem * 1.45);
       content: "";
       position: absolute;
       top: calc(var(--size) / 2 * -1);
@@ -197,7 +204,8 @@
     }
 
     img {
-      height: var(--img-size);
+      // height: var(--img-size);
+      height: 100%;
       width: 100%;
       object-fit: cover;
       object-position: center;

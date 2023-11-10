@@ -84,7 +84,8 @@ const {
   .social-card {
     overflow: hidden;
     position: relative;
-    --border: 1px solid rgb(var(--color-white));
+    --hover-white: rgb(var(--color-white), 60%);
+    /* --border: 1px solid var(--hover-white); */
     --h-width: 86px;
     --h-height: 28px;
     aspect-ratio: 16/9;
@@ -118,9 +119,10 @@ const {
   .social-card::before {
     z-index: -1;
     background-color: rgb(var(--color-card));
+    border: var(--border-card);
 
-    transition: background-color var(--trans-default);
-    border: var(--border);
+    transition-property: border-color, background-color;
+    transition: var(--trans-default);
   }
   .social-card::after {
     z-index: -2;
@@ -130,6 +132,8 @@ const {
   }
   .social-card:hover {
     filter: drop-shadow(var(--box-shadow));
+    --hover-white: rgb(var(--color-white), 100%);
+    --border-card: 1px solid var(--hover-white);
   }
   .social-card:hover::after {
     opacity: 1;
@@ -146,7 +150,9 @@ const {
     font-size: 12px;
     margin: 0;
     text-transform: uppercase;
-    border-bottom: var(--border);
+    border-bottom: var(--border-card);
+    transition-property: border-color;
+    transition: var(--trans-default);
   }
   h3::after {
     bottom: -1px;
@@ -161,6 +167,8 @@ const {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    color: var(--hover-white);
+    transition: color var(--trans-default);
   }
   .body::after {
     bottom: -0.5px;
@@ -177,6 +185,8 @@ const {
     transform-origin: right bottom;
     transform: rotate(45deg);
 
-    border-right: var(--border);
+    border-right: var(--border-card);
+    transition-property: border-color;
+    transition: var(--trans-default);
   }
 </style>

@@ -52,35 +52,11 @@
           <swiper-slide>
             <div class={css["slide-wrap"]}>
               <BtnFirm variant="transparent"
-                ><a href="gallery/{collection}/{slug}">В галлерею</a></BtnFirm
+                ><a href="gallery/{collection}/{slug}">В раздел</a></BtnFirm
               >
             </div>
           </swiper-slide>
         </swiper-container>
-        <!-- <button
-          class={cn(css["btn-nav"], css.right)}
-          class:isEnd
-          on:click={() => {
-            swiperEl.swiper.slideNext();
-          }}
-        >
-          <Icon
-            icon="icon-park-outline:right-c"
-            color="rgb(255, 255, 255, 0.9)"
-          />
-        </button>
-        <button
-          class={cn(css["btn-nav"], css.left)}
-          class:isBeginning
-          on:click={() => {
-            swiperEl.swiper.slidePrev();
-          }}
-        >
-          <Icon
-            icon="icon-park-outline:left-c"
-            color="rgb(255, 255, 255, 0.9)"
-          />
-        </button> -->
       </div>
 
       {@html parse(body)}

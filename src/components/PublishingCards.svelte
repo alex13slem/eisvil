@@ -38,6 +38,7 @@
     overflow: hidden;
     margin: -30px;
     padding: 30px;
+    min-height: 485px;
 
     &::after,
     &::before {
