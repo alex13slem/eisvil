@@ -19,14 +19,14 @@ const { category, slug } = Astro.params as Params;
 
 <style>
   aside {
-    grid-area: aside;
-    overflow-y: auto;
+    flex: 0 0 calc(var(--left-panel-w) + 2px);
+    border-right: var(--border-card);
   }
 
   nav {
-    min-height: 100%;
+    position: sticky;
+    top: 60px;
     display: flex;
     flex-direction: column;
-    border-right: var(--border);
   }
 </style>

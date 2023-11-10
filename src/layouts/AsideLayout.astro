@@ -1,0 +1,25 @@
+---
+import AsideNav from "../components/AsideNav.astro";
+import HtmlBase from "./HtmlBase.astro";
+
+const { title, description } = Astro.props;
+---
+
+<HtmlBase title={title} description={description}>
+  <div class="container">
+    <AsideNav />
+    <main>main</main>
+    <!-- <slot /> -->
+  </div>
+</HtmlBase>
+
+<style>
+  .container {
+    display: flex;
+  }
+  main {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 60px);
+  }
+</style>

@@ -67,7 +67,7 @@ const { class: className, ...props } = Astro.props;
     flex: 1 1 auto;
 
     display: flex;
-    gap: 30px;
+    gap: 1rem;
 
     &::after,
     &::before {
@@ -91,7 +91,7 @@ const { class: className, ...props } = Astro.props;
     }
   }
   h2 {
-    flex: 0 0 var(--right-panel-w);
+    flex: 0 0 calc(var(--left-panel-w) - var(--sect-offset-x));
     margin: 0;
   }
   .body {

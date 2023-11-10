@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import GalleryLayout from "@/layouts/GalleryLayout.astro";
+import AsideLayout from "@/layouts/AsideLayout.astro";
 import SectGallery from "@/sections/SectGallery.astro";
 
 export async function getStaticPaths() {
@@ -20,8 +20,8 @@ export async function getStaticPaths() {
 const { title } = Astro.props;
 ---
 
-<GalleryLayout>
+<AsideLayout>
   <main>
     <SectGallery title={title} />
   </main>
-</GalleryLayout>
+</AsideLayout>

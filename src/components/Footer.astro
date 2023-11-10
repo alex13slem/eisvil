@@ -75,13 +75,14 @@ const { class: className, ...props } = Astro.props;
 
 <style>
   .footer {
-    border-top: var(--border);
+    border-top: 1px solid transparent;
+    border-image: var(--border-image-head-foot);
     grid-area: footer;
   }
   .inner {
     min-height: 242px;
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: var(--left-panel-w) auto 1fr;
     padding-block: 2rem;
   }
 

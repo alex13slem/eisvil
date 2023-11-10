@@ -5,7 +5,7 @@
 }
 
 .nav {
-  flex: 0 0 var(--right-panel-w);
+  flex: 0 0 var(--left-panel-w);
   display: flex;
   flex-direction: column;
 }
