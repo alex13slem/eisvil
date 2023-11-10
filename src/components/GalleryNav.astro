@@ -3,13 +3,14 @@ import GalleryNavPart from "./GalleryNavPart.svelte";
 import type { InferGetStaticParamsType } from "astro";
 import type { getStaticPaths } from "../pages/gallery/[category]/[lang]/[slug].astro";
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;
-const { category, lang, slug } = Astro.params as Params;
+const { category, slug } = Astro.params as Params;
 ---
 
 <aside>
   <nav>
     <GalleryNavPart
-      path={{ category, lang, slug }}
+      path={{ category, slug }}
+      url={Astro.url}
       collection="services"
       title="Услуги"
       client:visible

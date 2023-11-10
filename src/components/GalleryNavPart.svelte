@@ -5,7 +5,7 @@
 
   export let collection: CollectionKey;
   export let title: string;
-  export let path: { category: string; lang: string; slug: string };
+  export let path: { category: string; slug: string };
   let active = collection === path.category;
   let collectionData;
   onMount(async () => {
@@ -19,7 +19,7 @@
     {#if collectionData?.length}
       {#each collectionData as { slug, id, data } (slug || id)}
         <li class:active={window.location.href.includes(slug || id)}>
-          <a href="./{slug.split('/')[1] || id.split('/')[1]}">{data.title}</a>
+          <a href="/gallery/{path.category}/{slug || id}">{data.title}</a>
         </li>
       {/each}
     {/if}
