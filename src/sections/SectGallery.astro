@@ -1,24 +1,29 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import { getCollection } from "astro:content";
-import GalleryNav from "../components/GalleryNav.svelte";
+import type { InferGetStaticParamsType } from "astro";
+import { getEntryBySlug } from "astro:content";
+import type { getStaticPaths } from "@/pages/gallery/[category]/[lang]/[slug].astro";
+import GalleryThumbs from "../components/GalleryThumbs.svelte";
+import GalleryDetail from "../components/GalleryDetail.svelte";
 
-interface Props extends HTMLAttributes<"section"> {}
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+const { title } = Astro.props;
+const { category, lang, slug } = Astro.params as Params;
 
-const { class: className, ...props } = Astro.props;
+const categoryData = await getEntryBySlug(category, `${lang}/${slug}`);
 
-let services = await getCollection("services");
+const {
+  data: { images },
+} = categoryData;
 ---
 
-<section class:list={["gallery", className]} {...props}>
-  <GalleryNav client:load data={services} />
+<section>
+  <GalleryDetail />
+  <GalleryThumbs client:load data={images} />
 </section>
 
 <style lang="scss">
-  .gallery {
-    flex: 1 1 auto;
+  section {
     height: 100%;
-    display: grid;
-    grid-template-columns: 370px 1fr 370px;
+    display: flex;
   }
 </style>

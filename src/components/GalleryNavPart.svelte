@@ -5,8 +5,8 @@
 
   export let collection: CollectionKey;
   export let title: string;
-
-  let active = false;
+  export let path: { category: string; lang: string; slug: string };
+  let active = collection === path.category;
   let collectionData;
   onMount(async () => {
     collectionData = await getCollection(collection);
@@ -17,9 +17,9 @@
 {#if active}
   <ul transition:fly>
     {#if collectionData?.length}
-      {#each collectionData as { collection, slug, id, data } (slug || id)}
-        <li>
-          <a href="./{collection}/{slug || id}">{data.title}</a>
+      {#each collectionData as { slug, id, data } (slug || id)}
+        <li class:active={window.location.href.includes(slug || id)}>
+          <a href="./{slug.split('/')[1] || id.split('/')[1]}">{data.title}</a>
         </li>
       {/each}
     {/if}
@@ -100,7 +100,8 @@
     line-height: 3;
     transition-property: text-shadow;
     transition: var(--trans-default);
-    &:hover {
+    &:hover,
+    &.active {
       @include hover-text1();
     }
   }

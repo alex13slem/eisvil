@@ -1,0 +1,32 @@
+---
+import GalleryNavPart from "./GalleryNavPart.svelte";
+import type { InferGetStaticParamsType } from "astro";
+import type { getStaticPaths } from "../pages/gallery/[category]/[lang]/[slug].astro";
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+const { category, lang, slug } = Astro.params as Params;
+---
+
+<aside>
+  <nav>
+    <GalleryNavPart
+      path={{ category, lang, slug }}
+      collection="services"
+      title="Услуги"
+      client:visible
+    />
+  </nav>
+</aside>
+
+<style>
+  aside {
+    grid-area: aside;
+    overflow-y: auto;
+  }
+
+  nav {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-right: var(--border);
+  }
+</style>

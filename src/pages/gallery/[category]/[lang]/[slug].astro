@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import GalleryLayout from "@/layouts/GalleryLayout.astro";
+import SectGallery from "@/sections/SectGallery.astro";
+
+export async function getStaticPaths() {
+  const services = await getCollection("services");
+  const servicesPaths = services.map((service) => ({
+    params: {
+      category: service.collection,
+      lang: service.slug.split("/")[0],
+      slug: service.slug.split("/")[1],
+    },
+    props: { title: "Услуги" },
+  }));
+
+  return [...servicesPaths];
+}
+
+const { title } = Astro.props;
+---
+
+<GalleryLayout>
+  <main>
+    <SectGallery title={title} />
+  </main>
+</GalleryLayout>
