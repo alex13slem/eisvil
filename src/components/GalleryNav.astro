@@ -10,7 +10,6 @@ const { category, slug } = Astro.params as Params;
   <nav>
     <GalleryNavPart
       path={{ category, slug }}
-      url={Astro.url}
       collection="services"
       title="Услуги"
       client:visible

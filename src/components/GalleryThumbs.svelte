@@ -29,6 +29,7 @@
 
 <style>
   .wrap {
+    flex-shrink: 0;
     direction: rtl;
     width: 370px;
     padding: 1rem;
