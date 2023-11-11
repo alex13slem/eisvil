@@ -3,6 +3,9 @@ import { Image } from "astro:assets";
 import banner from "@/img/hero.jpg";
 import SVGHeroText from "../components/svg/SVGHeroText.svelte";
 import ModalForm from "../components/ModalForm.svelte";
+import { getCollection } from "astro:content";
+
+const services = await getCollection("services");
 ---
 
 <div class="sect-hero">
@@ -11,7 +14,7 @@ import ModalForm from "../components/ModalForm.svelte";
     <!-- <h1>EISVIL</h1> -->
     <SVGHeroText />
     <h2 class="description">место, где идея становится игрой</h2>
-    <ModalForm client:load />
+    <ModalForm client:load services={services} />
   </div>
 </div>
 

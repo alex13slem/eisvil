@@ -1,15 +1,8 @@
----
-import type { HTMLAttributes } from "astro/types";
-import type { TCardBadge } from "@/types/TCardBadge";
+<script lang="ts">
+  export let type: "test" | "dev" | "hot" | "new";
+</script>
 
-interface Props extends HTMLAttributes<"div"> {
-  type: TCardBadge;
-}
-
-const { class: className, type, ...props } = Astro.props;
----
-
-<div class:list={["card-badge", type, className]} {...props}>
+<div class="card-badge {type}">
   <span>{type}</span>
 </div>
 

@@ -9,11 +9,9 @@ type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 const { title } = Astro.props;
 const { category, lang, slug } = Astro.params as Params;
 
-const categoryData = await getEntryBySlug(category, `${lang}/${slug}`);
-
 const {
   data: { images },
-} = categoryData;
+} = await getEntryBySlug(category, `${lang}/${slug}`);
 ---
 
 <section>

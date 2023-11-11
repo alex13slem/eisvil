@@ -8,17 +8,8 @@
   import FormFieldError from "./FormFieldError.svelte";
 
   type ServerState = { ok: boolean; msg: string };
-  type FormValues = {
-    botField: boolean;
-    name: string;
-    email: string;
-    fromLink: string;
-    contact: string;
-    comment: string;
-    access: boolean;
-  };
 
-  const formValuesInit: FormValues = {
+  const formValuesInit = {
     access: false,
     botField: false,
     comment: "",

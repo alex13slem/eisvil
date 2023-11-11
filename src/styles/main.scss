@@ -1,15 +1,17 @@
-body {
-  font-size: 16px;
-  line-height: 1.125;
-
-  background: rgb(var(--color-bg));
-  color: rgb(var(--color-text));
+:root {
+  overflow-x: hidden;
 }
 
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
+  font-size: 16px;
+  line-height: 1.125;
+
+  background: rgb(var(--color-bg));
+  color: rgb(var(--color-text));
 }
 
 main {

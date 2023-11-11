@@ -12,6 +12,7 @@
 
 <style lang="scss">
   .checkbox {
+    flex: 0 0 auto;
     width: 17px;
     height: 16px;
     display: flex;

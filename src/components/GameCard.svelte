@@ -1,51 +1,48 @@
----
-import type { HTMLAttributes } from "astro/types";
-import SVGPlaygame from "./svg/platforms/SVGPlaygame.svelte";
-import SVGApple from "./svg/platforms/SVGApple.svelte";
-import SVGGoogle from "./svg/platforms/SVGGoogle.svelte";
-import CardBadge from "./CardBadge.astro";
-import BtnFirm from "./BtnFirm.svelte";
-import type { CollectionEntry } from "astro:content";
+<script lang="ts">
+  import SVGPlaygame from "./svg/platforms/SVGPlaygame.svelte";
+  import SVGApple from "./svg/platforms/SVGApple.svelte";
+  import SVGGoogle from "./svg/platforms/SVGGoogle.svelte";
+  import CardBadge from "./CardBadge.svelte";
+  import BtnFirm from "./BtnFirm.svelte";
+  import type { CollectionEntry } from "astro:content";
 
-type Props = HTMLAttributes<"article"> & CollectionEntry<"games">;
+  export let game: CollectionEntry<"games">;
 
-const { class: className, data, ...props } = Astro.props;
+  const { title, thumbnail, tags, links, link, category } = game.data;
+</script>
 
-const { title, thumbnail, tags, links, link, category } = data;
----
+<article class="game-card" {...$$restProps}>
+  {#if category}
+    <CardBadge type={category} />
+  {/if}
 
-<article class:list={["game-card", className]} {...props}>
-  {category && <CardBadge type={category} />}
-  <!-- <Image src={img} alt={title}  /> -->
   <div class="image">
     <img src={thumbnail} alt={title} />
     <BtnFirm variant="transparent"><a href={link}>ПОДРОБНЕЕ</a></BtnFirm>
   </div>
   <div class="body">
     <h3>{title}</h3>
-    <p class="genre">{tags && tags.map((tag) => <span>{tag}</span>)}</p>
+    <p class="genre">
+      {#each tags as tag}
+        <span>{tag}</span>
+      {/each}
+    </p>
     <div class="links">
-      {
-        links?.playgame && (
-          <a href={links.playgame}>
-            <SVGPlaygame />
-          </a>
-        )
-      }
-      {
-        links?.apple && (
-          <a href={links.apple}>
-            <SVGApple />
-          </a>
-        )
-      }
-      {
-        links?.google && (
-          <a href={links.google}>
-            <SVGGoogle />
-          </a>
-        )
-      }
+      {#if links?.playgame}
+        <a href={links.playgame}>
+          <SVGPlaygame />
+        </a>
+      {/if}
+      {#if links?.apple}
+        <a href={links.apple}>
+          <SVGApple />
+        </a>
+      {/if}
+      {#if links?.google}
+        <a href={links.google}>
+          <SVGGoogle />
+        </a>
+      {/if}
     </div>
   </div>
 </article>

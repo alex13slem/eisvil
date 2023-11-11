@@ -27,7 +27,7 @@
               isOpen = false;
             }}
           >
-            <Icon icon="mdi:close" color="white" width="43" />
+            <Icon icon="mdi:close" width="24" />
           </button>
         </div>
 
@@ -45,6 +45,8 @@
 
 <style lang="scss">
   .modal {
+    --padding: 2rem;
+
     position: fixed;
     overflow-y: scroll;
     inset: 0;
@@ -55,6 +57,8 @@
     display: flex;
     justify-content: center;
     align-items: start;
+    background: rgb(var(--color-bg), 50%);
+    backdrop-filter: blur(13px);
   }
   .overlay {
     z-index: -1;
@@ -62,38 +66,63 @@
     inset: 0;
     margin-top: auto;
     height: calc(100vh - 60px);
-    background: rgb(var(--color-bg), 50%);
-    /* backdrop-filter: blur(10px); */
   }
 
   .window {
-    max-width: 770px;
+    overflow: hidden;
+    max-width: 960px;
     width: 100%;
     background-color: rgb(var(--color-bg));
-    border: var(--border);
+    border: var(--border-card);
   }
   .header {
+    position: relative;
     display: flex;
     align-items: center;
-    padding: 1rem;
+    padding: var(--padding);
+    padding-top: 3rem;
 
-    border-bottom: var(--border);
+    border-bottom: var(--border-card);
     h2 {
       flex: 1 1 auto;
       margin: 0;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: -10px;
+      right: -10px;
+      transform: rotate(45deg);
+      background-color: rgb(var(--color-white), 30%);
     }
   }
   .btn-x {
     padding: 0;
     border: 0;
     background-color: transparent;
+
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    transform: rotate(45deg);
+    color: white;
+
+    transition-property: transform, color;
+    transition: var(--trans-default);
+
+    &:hover {
+      transform: rotate(0);
+      color: rgb(var(--color-accent));
+    }
   }
   .body {
-    padding: 1rem;
+    padding: var(--padding);
   }
   .footer {
-    padding: 1rem;
-    border-top: var(--border);
+    padding: var(--padding);
+    border-top: var(--border-card);
     display: flex;
     align-items: center;
     justify-content: end;
