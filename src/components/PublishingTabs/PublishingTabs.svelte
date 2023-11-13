@@ -1,18 +1,29 @@
 <script lang="ts">
   import type { CollectionEntry } from "astro:content";
   import { parse } from "marked";
-  import BtnFirm from "../BtnFirm.svelte";
-  import { cn } from "../../utils/helpers";
+  import { cn } from "@/utils/helpers";
   import css from "./style.module.scss";
   import { pubTabIdx } from "./store";
+  import ModalTrigger from "../ModalTrigger.svelte";
+  import { onMount } from "svelte";
+  import { publishingModalForm } from "../../store/modals";
 
   export let data: CollectionEntry<"publishing">[];
 
   function handleClick(idx: number) {
     pubTabIdx.set(idx);
+    setTargetPublishing(data[idx].data.title);
   }
   let currIdx: number;
   pubTabIdx.subscribe((idx) => (currIdx = idx));
+
+  function setTargetPublishing(value: string) {
+    publishingModalForm.set({ ...$publishingModalForm, target: value });
+  }
+
+  onMount(() => {
+    setTargetPublishing(data[1].data.title);
+  });
 </script>
 
 <div class={css.root}>
@@ -31,7 +42,9 @@
     {#each data as { body, data: { link } }, idx}
       <div class={cn(css.preview, idx === currIdx && css.active)}>
         <div class={css.body}>{@html parse(body)}</div>
-        <BtnFirm><a href={link}>Подать заявку</a></BtnFirm>
+        <ModalTrigger type="publishing" defaultValue="store"
+          >Подать заявку</ModalTrigger
+        >
       </div>
     {/each}
   </div>

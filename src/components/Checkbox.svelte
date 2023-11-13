@@ -1,7 +1,7 @@
 <script lang="ts">
   import { cn } from "../utils/helpers";
 
-  export let checked: boolean | null = null;
+  export let checked: boolean = false;
   export let className: string = "";
 </script>
 

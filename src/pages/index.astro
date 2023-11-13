@@ -9,8 +9,10 @@ import SectServices from "@/sections/SectServices.astro";
 import SectPublishing from "@/sections/SectPublishing.astro";
 import SectCarrier from "@/sections/SectCarrier.astro";
 import ServicesModalForm from "@/components/ServicesModalForm.svelte";
+import PublishingModalForm from "../components/PublishingModalForm.svelte";
 
 const services = await getCollection("services");
+const publishing = await getCollection("publishing");
 ---
 
 <HtmlBase title="E I S V I L">
@@ -25,6 +27,7 @@ const services = await getCollection("services");
   </main>
 
   <ServicesModalForm client:load services={services} />
+  <PublishingModalForm client:load publishing={publishing} />
 </HtmlBase>
 
 <style>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { publishingModalForm } from "../store/modals";
   import BtnFirm from "./BtnFirm.svelte";
   import Checkbox from "./Checkbox.svelte";
   import FormField from "./FormField.svelte";
@@ -8,33 +9,50 @@
 
   import type { CollectionEntry } from "astro:content";
 
-  export let services: CollectionEntry<"services">[];
+  type FormValues = {
+    accessSecure: boolean;
+    accessUser: boolean;
+    botField: boolean;
+    name: string | null;
+    email: string | null;
+    linkPreview: string | null;
+    linkBuild: string | null;
+    info: string | null;
+    selectedDir: string | null;
+  };
 
-  const servicesOptions = services.map(({ slug, data: { title: value } }) => ({
-    slug,
-    value,
-    disabled: false,
-  }));
+  export let publishing: CollectionEntry<"publishing">[];
 
-  let isOpen = false;
+  const publishingOptions = publishing.map(
+    ({ slug, data: { title: value } }) => ({
+      slug,
+      value,
+      disabled: false,
+    })
+  );
 
-  const formValuesInit = {
-    access: false,
+  const formValuesInit: FormValues = {
+    accessSecure: false,
+    accessUser: false,
     botField: false,
     name: "",
     email: "",
+    linkPreview: "",
+    linkBuild: "",
     info: "",
-    selectedService: null,
+    selectedDir: null,
   };
 
-  $: formValues = { ...formValuesInit };
+  let formValues = { ...formValuesInit };
+
+  publishingModalForm.subscribe(({ target }) => {
+    formValues.selectedDir = target;
+  });
 </script>
 
-<BtnFirm on:click={() => (isOpen = true)}>Создать новый мир</BtnFirm>
-
 <Modal
-  bind:isOpen
-  title="СВЯЗЬ С НАМИ"
+  bind:isOpen={$publishingModalForm.isOpen}
+  title="ПОДАТЬ ЗАЯВКУ НА ИЗДАТЕЛЬСТВО"
   links={{
     contacts: [{ href: "mailto:mail@to.aw", text: "mail@to.aw" }],
     other: [
@@ -57,25 +75,44 @@
         name="email"
         bind:value={formValues.email}
       />
+      <FormField
+        placeholder="Ссылка на трейлер или запись геймплея (не обязательно)"
+        name="linkPreview"
+        bind:value={formValues.linkPreview}
+      />
+      <FormField
+        placeholder="Ссылка на билд"
+        name="linkBuild"
+        bind:value={formValues.linkBuild}
+      />
       <FormTextarea
-        placeholder="Ссылка на документацию проекта или иные данные ..."
+        placeholder="Описание игры"
         name="info"
         bind:value={formValues.info}
       />
     </fieldset>
 
     <FormSelect
-      options={servicesOptions}
-      bind:value={formValues.selectedService}
+      options={publishingOptions}
+      bind:value={formValues.selectedDir}
+      placeholder="Выбрать направление"
     />
 
     <div class="access">
-      <Checkbox name="access" bind:value={formValues.access} />
+      <Checkbox name="access" bind:checked={formValues.accessSecure} />
       <span>
         Нажимая на кнопку, вы соглашаетесь с
         <a href="/">политикой конфиденциальности</a>
-        и на
-        <a href="/">обработку персональных данных</a>
+        и на обработку персональных данных
+      </span>
+    </div>
+
+    <div class="access">
+      <Checkbox name="access" bind:checked={formValues.accessUser} />
+      <span>
+        Нажимая на кнопку, вы соглашаетесь с <a href="/"
+          >пользовательстким соглашением</a
+        >
       </span>
     </div>
 

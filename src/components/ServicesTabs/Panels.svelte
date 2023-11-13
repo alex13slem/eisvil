@@ -71,7 +71,7 @@
 
           {@html parse(body)}
 
-          <ModalTrigger variant="contrast" type="services"
+          <ModalTrigger variant="contrast" type="services" defaultValue="store"
             >Расчитать</ModalTrigger
           >
         </div>

@@ -9,6 +9,15 @@
 
   import type { CollectionEntry } from "astro:content";
 
+  type FormValues = {
+    access: boolean;
+    botField: boolean;
+    name: string | null;
+    email: string | null;
+    info: string | null;
+    selectedService: string | null;
+  };
+
   export let services: CollectionEntry<"services">[];
 
   const servicesOptions = services.map(({ slug, data: { title: value } }) => ({
@@ -17,9 +26,7 @@
     disabled: false,
   }));
 
-  let isOpen = false;
-
-  const formValuesInit = {
+  const formValuesInit: FormValues = {
     access: false,
     botField: false,
     name: "",
@@ -28,14 +35,15 @@
     selectedService: null,
   };
 
-  servicesModalForm.subscribe(({ isOpen: store }) => {
-    isOpen = store;
+  let formValues = { ...formValuesInit };
+
+  servicesModalForm.subscribe(({ target }) => {
+    formValues.selectedService = target;
   });
-  $: formValues = { ...formValuesInit };
 </script>
 
 <Modal
-  bind:isOpen
+  bind:isOpen={$servicesModalForm.isOpen}
   title="СВЯЗЬ С НАМИ"
   links={{
     contacts: [{ href: "mailto:mail@to.aw", text: "mail@to.aw" }],
@@ -69,15 +77,15 @@
     <FormSelect
       options={servicesOptions}
       bind:value={formValues.selectedService}
+      placeholder="Выбрать направление"
     />
 
     <div class="access">
-      <Checkbox name="access" bind:value={formValues.access} />
+      <Checkbox name="access" bind:checked={formValues.access} />
       <span>
         Нажимая на кнопку, вы соглашаетесь с
         <a href="/">политикой конфиденциальности</a>
-        и на
-        <a href="/">обработку персональных данных</a>
+        и на обработку персональных данных
       </span>
     </div>
 

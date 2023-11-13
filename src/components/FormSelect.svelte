@@ -13,6 +13,14 @@
 
   export let value: string | null = null;
   export let options: { slug: string; value: string; disabled: boolean }[];
+  export let placeholder: string = "";
+
+  $: options.map((option, idx) => {
+    console.log(value, option.value);
+    if (option.value === value) targetIdx = idx + 1;
+  });
+
+  // $: console.log(value);
 </script>
 
 <div class="wrap">
@@ -24,7 +32,7 @@
       {#if open && !value}
         ...
       {:else}
-        {value || "Выбрать направление"}
+        {value || placeholder}
       {/if}
       <span class="arrow left"><SVGArrow /></span>
       {#if !open}
