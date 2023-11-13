@@ -6,6 +6,7 @@
 
 .link {
   all: unset;
+  box-sizing: border-box;
   overflow: hidden;
   position: relative;
   line-height: 3em;

@@ -195,6 +195,7 @@
   }
   fieldset {
     all: unset;
+    box-sizing: border-box;
     display: grid;
 
     grid-template-columns: repeat(2, 1fr);

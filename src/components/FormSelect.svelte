@@ -1,0 +1,213 @@
+<script lang="ts">
+  import {
+    Listbox,
+    ListboxButton,
+    ListboxOption,
+    ListboxOptions,
+  } from "@rgossiaux/svelte-headlessui";
+  import SVGArrow from "./svg/SVGArrow.svelte";
+  import { blur, fade, fly, slide, scale } from "svelte/transition";
+  import { cn } from "../utils/helpers";
+
+  export let options: { slug: string; value: string; disabled: boolean }[];
+
+  let selectedOption: string;
+  let targetIdx: number;
+</script>
+
+<div class="wrap">
+  <Listbox class="box" bind:value={selectedOption} let:open>
+    <ListboxButton
+      class={cn("selected-option", open && "open", !selectedOption && "empty")}
+      style="--curr-idx: {targetIdx || 0}"
+    >
+      {#if open && !selectedOption}
+        ...
+      {:else}
+        {selectedOption || "Выбрать направление"}
+      {/if}
+      <span class="arrow left"><SVGArrow /></span>
+      {#if !open}
+        <span transition:fly class="arrow right"><SVGArrow /></span>
+      {/if}
+    </ListboxButton>
+    {#if open}
+      <div transition:fly>
+        <ListboxOptions class="options-list" static>
+          {#each options as { slug, value, disabled }, idx (slug)}
+            <ListboxOption
+              class={cn("option", value === selectedOption && "active")}
+              {value}
+              {disabled}
+              on:click={() => {
+                targetIdx = idx + 1;
+              }}
+            >
+              <span>{value}</span>
+            </ListboxOption>
+          {/each}
+        </ListboxOptions>
+      </div>
+    {/if}
+  </Listbox>
+</div>
+
+<style lang="scss">
+  @import "../styles/mixins";
+  .wrap {
+    display: contents;
+
+    :global(.box) {
+      z-index: 1;
+      position: relative;
+    }
+    :global(.selected-option) {
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      text-align: left;
+
+      z-index: 2;
+      width: 100%;
+      position: relative;
+      padding-inline: 30px;
+      line-height: 3.375rem;
+      font-size: 12px;
+      color: rgb(var(--color-bg));
+
+      @include firm-arrows(0.3);
+
+      &::after,
+      &::before {
+        content: "";
+        position: absolute;
+      }
+      &::after {
+        z-index: -1;
+        inset: 0;
+        clip-path: polygon(
+          20px 0%,
+          100% 0,
+          100% calc(100% - 25px),
+          calc(100% - 5px) calc(100% - 20px),
+          calc(100% - 40px) calc(100% - 20px),
+          calc(100% - 60px) 100%,
+          0 100%,
+          0 20px
+        );
+        background-color: rgb(var(--color-white), 30%);
+        transition: background-color var(--trans-default);
+      }
+      &::before {
+        --lh: 36px;
+        --offset: 10px;
+        right: 9px;
+        bottom: -13px;
+        border: 14px solid transparent;
+        border-top-color: rgb(var(--color-white), 25%);
+        transition-property: border-color transform;
+        transition: var(--trans-default);
+      }
+      &:hover {
+        &::after {
+          background-color: rgb(var(--color-white), 45%);
+        }
+        &::before {
+          border-top-color: rgb(var(--color-accent), 70%);
+        }
+      }
+    }
+    :global(.selected-option.open) {
+      &::before {
+        border-top-color: rgb(var(--color-white));
+        transform: scale(-1)
+          translateY(calc(var(--offset) - var(--lh) * var(--curr-idx)));
+      }
+    }
+    :global(.selected-option.open.empty) {
+      &::before {
+        animation: pulsar-bt-c 0.6s ease infinite alternate;
+        transform: scale(-1) translate(7px, 10px);
+      }
+    }
+    :global(.selected-option:not(.empty)) {
+      font-weight: 600;
+      color: rgb(var(--color-white));
+      &::after {
+        background-color: rgb(var(--color-accent), 70%);
+      }
+    }
+    :global(.options-list) {
+      all: unset;
+      box-sizing: border-box;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+
+      position: absolute;
+      width: calc(100% - 5px);
+      top: calc(100% - 17px);
+      left: 0;
+
+      padding-inline: 2rem;
+      padding-top: calc(0.5rem + 23px);
+      padding-bottom: 0.5rem;
+
+      &::after {
+        z-index: -1;
+        position: absolute;
+        inset: 0;
+        content: "";
+        clip-path: polygon(
+          calc(100% - 54px) 20px,
+          calc(100% - 34px) 0,
+          100% 0,
+          100% 100%,
+          0 100%,
+          0 20px
+        );
+        background-color: rgb(var(--color-grey));
+      }
+    }
+
+    :global(.option) {
+      all: unset;
+      box-sizing: border-box;
+      cursor: pointer;
+      position: relative;
+
+      font-size: 12px;
+      color: rgb(var(--color-bg));
+      line-height: 3;
+
+      transition-property: color;
+      transition: var(--trans-default);
+
+      &::before {
+        position: absolute;
+        content: "";
+        inset: 0;
+        left: -20px;
+        opacity: 0;
+        width: calc(100% + 2rem + 25px);
+
+        background-color: rgb(var(--color-accent));
+        transition-property: opacity;
+        transition: var(--trans-default);
+      }
+
+      &:hover {
+        color: rgb(var(--color-accent));
+      }
+    }
+    :global(.option.active) {
+      color: rgb(var(--color-white));
+      &::before {
+        opacity: 1;
+      }
+    }
+    :global(.option span) {
+      position: relative;
+    }
+  }
+</style>

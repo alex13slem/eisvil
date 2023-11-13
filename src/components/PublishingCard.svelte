@@ -110,6 +110,7 @@
   }
   button {
     all: unset;
+    box-sizing: border-box;
     cursor: pointer;
     text-align: center;
     height: 100%;

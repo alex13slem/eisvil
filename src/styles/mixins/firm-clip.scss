@@ -1,10 +1,10 @@
 @mixin firm-clip {
   clip-path: polygon(
-    1.5em 0%,
+    25px 0%,
     100% 0,
-    100% calc(100% - 1.5em),
-    calc(100% - 1.5em) 100%,
+    100% calc(100% - 25px),
+    calc(100% - 25px) 100%,
     0% 100%,
-    0 1.5em
+    0 25px
   );
 }

@@ -43,15 +43,6 @@
     background-color: rgb(var(--color-accent));
   }
   input[invalid="true"] ~ span {
-    animation: pulsar 0.6s ease infinite alternate;
-  }
-
-  @keyframes pulsar {
-    0% {
-      background-color: transparent;
-    }
-    100% {
-      background-color: rgba(255, 0, 0, 0.459);
-    }
+    animation: pulsar-bg-c 0.6s ease infinite alternate;
   }
 </style>

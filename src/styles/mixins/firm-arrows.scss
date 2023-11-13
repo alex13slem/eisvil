@@ -1,25 +1,25 @@
 @mixin firm-arrows($opacity: 1) {
-  .arrow {
+  :global(.arrow) {
     position: absolute;
 
     color: rgb(var(--color-white), $opacity);
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 2em;
-    height: 1.5em;
+    width: 9px;
+    height: 9px;
     :global(svg) {
       transform: rotate(45deg);
     }
   }
-  .arrow.right {
-    bottom: -0.5em;
-    right: -0.75em;
+  :global(.arrow.right) {
+    bottom: 0;
+    right: 0;
     transform: rotate(135deg);
   }
-  .arrow.left {
-    top: -0.5em;
-    left: -0.75em;
+  :global(.arrow.left) {
+    top: 0;
+    left: 0;
     transform: rotate(-45deg);
   }
 }
