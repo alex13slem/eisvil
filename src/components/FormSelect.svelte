@@ -6,25 +6,25 @@
     ListboxOptions,
   } from "@rgossiaux/svelte-headlessui";
   import SVGArrow from "./svg/SVGArrow.svelte";
-  import { blur, fade, fly, slide, scale } from "svelte/transition";
+  import { fly } from "svelte/transition";
   import { cn } from "../utils/helpers";
 
-  export let options: { slug: string; value: string; disabled: boolean }[];
-
-  let selectedOption: string;
   let targetIdx: number;
+
+  export let value: string | null = null;
+  export let options: { slug: string; value: string; disabled: boolean }[];
 </script>
 
 <div class="wrap">
-  <Listbox class="box" bind:value={selectedOption} let:open>
+  <Listbox class="box" bind:value let:open>
     <ListboxButton
-      class={cn("selected-option", open && "open", !selectedOption && "empty")}
+      class={cn("selected-option", open && "open", !value && "empty")}
       style="--curr-idx: {targetIdx || 0}"
     >
-      {#if open && !selectedOption}
+      {#if open && !value}
         ...
       {:else}
-        {selectedOption || "Выбрать направление"}
+        {value || "Выбрать направление"}
       {/if}
       <span class="arrow left"><SVGArrow /></span>
       {#if !open}
@@ -34,16 +34,16 @@
     {#if open}
       <div transition:fly>
         <ListboxOptions class="options-list" static>
-          {#each options as { slug, value, disabled }, idx (slug)}
+          {#each options as { slug, value: selfValue, disabled }, idx (slug)}
             <ListboxOption
-              class={cn("option", value === selectedOption && "active")}
-              {value}
+              class={cn("option", value === selfValue && "active")}
+              value={selfValue}
               {disabled}
               on:click={() => {
                 targetIdx = idx + 1;
               }}
             >
-              <span>{value}</span>
+              <span>{selfValue}</span>
             </ListboxOption>
           {/each}
         </ListboxOptions>
@@ -134,7 +134,7 @@
       font-weight: 600;
       color: rgb(var(--color-white));
       &::after {
-        background-color: rgb(var(--color-accent), 70%);
+        background-color: rgb(var(--color-accent), 65%);
       }
     }
     :global(.options-list) {

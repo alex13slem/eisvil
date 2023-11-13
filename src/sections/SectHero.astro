@@ -1,20 +1,16 @@
 ---
 import { Image } from "astro:assets";
 import banner from "@/img/hero.jpg";
-import SVGHeroText from "../components/svg/SVGHeroText.svelte";
-import ModalForm from "../components/ServicesModalForm.svelte";
-import { getCollection } from "astro:content";
-
-const services = await getCollection("services");
+import SVGHeroText from "@/components/svg/SVGHeroText.svelte";
+import ModalTrigger from "@/components/ModalTrigger.svelte";
 ---
 
 <div class="sect-hero">
   <Image class="banner" src={banner} alt="Site-banner" />
   <div class="content">
-    <!-- <h1>EISVIL</h1> -->
     <SVGHeroText />
     <h2 class="description">место, где идея становится игрой</h2>
-    <ModalForm client:load services={services} />
+    <ModalTrigger client:load type={"services"}>Создать новый мир</ModalTrigger>
   </div>
 </div>
 

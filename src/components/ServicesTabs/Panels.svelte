@@ -5,6 +5,8 @@
   import css from "./panels.module.scss";
   import BtnFirm from "../BtnFirm.svelte";
   import { register, type SwiperContainer } from "swiper/element/bundle";
+  import ModalTrigger from "../ModalTrigger.svelte";
+  import { blur, fade, fly } from "svelte/transition";
 
   export let data: CollectionEntry<"services">[];
 
@@ -22,48 +24,58 @@
   };
 </script>
 
-<TabPanels>
-  {#each data as { data: { images, link, order }, body, collection, slug }}
-    <TabPanel>
-      <div class={css.slider}>
-        <swiper-container
-          class={css["slider-wrap"]}
-          class:isEnd
-          class:isBeginning
-          mousewheel={{}}
-          bind:this={swiperEl}
-          slidesPerView="3.5"
-          spaceBetween="-10"
-          cssMode
-          on:swiperprogress={onProgress}
-        >
-          {#each images as { src, alt }}
-            <swiper-slide lazy="true">
-              <div class={css["slide-wrap"]}>
-                <a
-                  href="gallery/{collection}/{slug}/#{order}"
-                  class={css.image}
-                >
-                  <img {src} {alt} loading="lazy" />
-                </a>
-              </div>
-            </swiper-slide>
-          {/each}
-          <swiper-slide>
-            <div class={css["slide-wrap"]}>
-              <BtnFirm variant="transparent"
-                ><a href="gallery/{collection}/{slug}">В раздел</a></BtnFirm
-              >
-            </div>
-          </swiper-slide>
-        </swiper-container>
-      </div>
+<div class={css.wrap}>
+  <TabPanels let:selectedIndex>
+    {#each data as { data: { images, order }, body, collection, slug }, idx (slug)}
+      {#if selectedIndex === idx}
+        <div class={css.panel} transition:fly>
+          <div class={css.slider}>
+            <swiper-container
+              class={css["slider-wrap"]}
+              class:isEnd
+              class:isBeginning
+              mousewheel={{}}
+              bind:this={swiperEl}
+              slidesPerView="3.5"
+              spaceBetween="-10"
+              cssMode
+              on:swiperprogress={onProgress}
+            >
+              {#each images as { src, alt }}
+                <swiper-slide lazy="true">
+                  <div class={css["slide-wrap"]}>
+                    <a
+                      href="gallery/{collection}/{slug}/#{order}"
+                      class={css.image}
+                    >
+                      <img
+                        {src}
+                        {alt}
+                        width="268"
+                        height="193"
+                        loading="lazy"
+                      />
+                    </a>
+                  </div>
+                </swiper-slide>
+              {/each}
+              <swiper-slide>
+                <div class={css["slide-wrap"]}>
+                  <BtnFirm variant="transparent"
+                    ><a href="gallery/{collection}/{slug}">В раздел</a></BtnFirm
+                  >
+                </div>
+              </swiper-slide>
+            </swiper-container>
+          </div>
 
-      {@html parse(body)}
+          {@html parse(body)}
 
-      <BtnFirm variant="contrast">
-        <a href={link}>Расчитать</a>
-      </BtnFirm>
-    </TabPanel>
-  {/each}
-</TabPanels>
+          <ModalTrigger variant="contrast" type="services"
+            >Расчитать</ModalTrigger
+          >
+        </div>
+      {/if}
+    {/each}
+  </TabPanels>
+</div>

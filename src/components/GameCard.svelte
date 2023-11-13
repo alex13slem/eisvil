@@ -17,7 +17,7 @@
   {/if}
 
   <div class="image">
-    <img src={thumbnail} alt={title} />
+    <img src={thumbnail} alt={title} width="336" height="202" />
     <BtnFirm variant="transparent"><a href={link}>ПОДРОБНЕЕ</a></BtnFirm>
   </div>
   <div class="body">
@@ -100,8 +100,6 @@
   .image img {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
     object-fit: cover;
     object-position: center;
     transition-property: filter;

@@ -2,6 +2,7 @@
   import GameCard from "./GameCard.svelte";
   import { type CollectionEntry } from "astro:content";
   import { onMount } from "svelte";
+  import { fade, fly } from "svelte/transition";
   import { register, type SwiperContainer } from "swiper/element/bundle";
   import { Mousewheel, Pagination } from "swiper/modules";
   import type { SwiperOptions } from "swiper/types";
@@ -51,53 +52,32 @@
     swiperEl.initialize();
   });
 
-  const onProgress = (e: any) => {
+  function onProgress(e: any) {
     const [swiper, progress] = e.detail;
-  };
+  }
 </script>
 
 <div class="wrap">
   <swiper-container bind:this={swiperEl} init="false">
-    {#each games as game}
-      <swiper-slide>
-        <div class="slide-wrap">
-          <GameCard {game} />
-        </div>
-      </swiper-slide>
-    {/each}
+    {#if swiperEl}
+      {#each games as game}
+        <swiper-slide transition:fade>
+          <div class="slide-wrap">
+            <GameCard {game} />
+          </div>
+        </swiper-slide>
+      {/each}
+    {/if}
   </swiper-container>
   <div class="pagination" />
 </div>
-
-<!-- 
-mousewheel
-loop
-breakpoints={{
-  320: {
-    slidesPerView: 2,
-    spaceBetween: 20,
-  },
-  480: {
-    slidesPerView: 3,
-    spaceBetween: 30,
-  },
-  640: {
-    slidesPerView: 4,
-  },
-}}
-pagination={{
-  clickable: true,
-  el: ".pagination",
-  bulletClass: "bullet",
-  bulletActiveClass: "active",
-}} -->
 
 <style>
   .wrap {
     position: relative;
     z-index: 0;
-    /* padding: 30px; */
     margin: -30px;
+    min-height: 378px;
   }
   .wrap::after,
   .wrap::before {
@@ -117,16 +97,12 @@ pagination={{
     left: 0;
   }
 
-  /* .swiper-container {
-    padding-block: 30px;
-  } */
-
   .slide-wrap {
     padding: 30px;
+    min-width: 270px;
   }
-  swiper-slide {
-    /* padding: 30px;
-    margin-inline: -30px; */
+  swiper-container {
+    display: flex;
   }
 
   .pagination {

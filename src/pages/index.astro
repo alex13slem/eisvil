@@ -1,4 +1,5 @@
 ---
+import { getCollection } from "astro:content";
 import HtmlBase from "@/layouts/HtmlBase.astro";
 import SectHero from "@/sections/SectHero.astro";
 import SectForm from "@/sections/SectForm.astro";
@@ -7,8 +8,9 @@ import SectSocials from "@/sections/SectSocials.astro";
 import SectServices from "@/sections/SectServices.astro";
 import SectPublishing from "@/sections/SectPublishing.astro";
 import SectCarrier from "@/sections/SectCarrier.astro";
+import ServicesModalForm from "@/components/ServicesModalForm.svelte";
 
-export const prerender = true;
+const services = await getCollection("services");
 ---
 
 <HtmlBase title="E I S V I L">
@@ -21,6 +23,8 @@ export const prerender = true;
     <SectSocials />
     <SectForm />
   </main>
+
+  <ServicesModalForm client:load services={services} />
 </HtmlBase>
 
 <style>

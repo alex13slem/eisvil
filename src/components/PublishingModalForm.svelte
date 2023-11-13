@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { servicesModalForm } from "../store/modals";
   import BtnFirm from "./BtnFirm.svelte";
   import Checkbox from "./Checkbox.svelte";
   import FormField from "./FormField.svelte";
@@ -28,11 +27,10 @@
     selectedService: null,
   };
 
-  servicesModalForm.subscribe(({ isOpen: store }) => {
-    isOpen = store;
-  });
   $: formValues = { ...formValuesInit };
 </script>
+
+<BtnFirm on:click={() => (isOpen = true)}>Создать новый мир</BtnFirm>
 
 <Modal
   bind:isOpen
