@@ -22,8 +22,6 @@
     isEnd = swiper.isEnd;
     isBeginning = swiper.isBeginning;
   };
-
-  console.log(data);
 </script>
 
 <div class={css.wrap}>
@@ -74,7 +72,7 @@
 
           {@html parse(description)}
 
-          <ModalTrigger variant="contrast" type="services" defaultValue="store"
+          <ModalTrigger variant="contrast" type="services" {slug}
             >Расчитать</ModalTrigger
           >
         </div>

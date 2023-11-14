@@ -57,7 +57,7 @@
   .wrap {
     position: relative;
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     gap: 30px;
 
     transition: transform var(--trans-slow);
@@ -65,8 +65,8 @@
     &.center {
       transform: translateX(calc((33.3% + 10px) * -1));
     }
-    &.left {
-    }
+    // &.left {
+    // }
     &.right {
       transform: translateX(calc((33.3% + 10px) * -2));
     }

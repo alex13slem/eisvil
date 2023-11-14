@@ -37,8 +37,9 @@
 
   let formValues = { ...formValuesInit };
 
-  servicesModalForm.subscribe(({ target }) => {
-    formValues.selectedService = target;
+  servicesModalForm.subscribe(({ slug }) => {
+    formValues.selectedService =
+      servicesOptions.find((option) => option.slug === slug)?.value || null;
   });
 </script>
 
@@ -111,7 +112,7 @@
     min-height: 118px;
   }
   form :global(button) {
-    align-self: start;
+    align-self: flex-start;
   }
 
   .access {

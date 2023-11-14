@@ -27,8 +27,8 @@
     inset: 0;
     left: auto;
     display: flex;
-    justify-content: end;
-    align-items: start;
+    justify-content: flex-end;
+    align-items: flex-start;
     padding-top: 1rem;
     padding-inline: 1rem;
 

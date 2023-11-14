@@ -16,11 +16,8 @@
   export let placeholder: string = "";
 
   $: options.map((option, idx) => {
-    console.log(value, option.value);
     if (option.value === value) targetIdx = idx + 1;
   });
-
-  // $: console.log(value);
 </script>
 
 <div class="wrap">
@@ -42,9 +39,9 @@
     {#if open}
       <div transition:fly>
         <ListboxOptions class="options-list" static>
-          {#each options as { slug, value: selfValue, disabled }, idx (slug)}
+          {#each options as { slug: selfSlug, value: selfValue, disabled }, idx (selfSlug)}
             <ListboxOption
-              class={cn("option", value === selfValue && "active")}
+              class={cn("option", selfValue === value && "active")}
               value={selfValue}
               {disabled}
               on:click={() => {

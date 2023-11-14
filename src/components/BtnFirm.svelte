@@ -1,9 +1,14 @@
 <script lang="ts">
   import SVGArrow from "@/components/svg/SVGArrow.svelte";
   export let variant: "firm" | "transparent" | "contrast" = "firm";
+  export let flexPosition: "start" | "end" | null = null;
 </script>
 
-<button class="btn-firm v-{variant}" on:click {...$$restProps}>
+<button
+  class="btn-firm v-{variant} {flexPosition || ''}"
+  on:click
+  {...$$restProps}
+>
   <span class="bg" />
   <span class="text"><slot /></span>
   <span class="arrow left"><SVGArrow /></span>
@@ -28,6 +33,13 @@
     transition: var(--trans-default);
 
     @include firm-arrows;
+
+    &.start {
+      align-self: flex-start;
+    }
+    &.end {
+      align-self: flex-end;
+    }
   }
   .v-firm {
     &:disabled {

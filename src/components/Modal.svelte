@@ -80,7 +80,7 @@
 
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: flex-start;
     background: rgb(var(--color-bg), 50%);
     backdrop-filter: blur(13px);
   }
@@ -182,7 +182,7 @@
     border-top: var(--border-card);
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     &:empty {
       display: none;
     }

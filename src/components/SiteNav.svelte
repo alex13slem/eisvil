@@ -36,7 +36,7 @@
   }
   .site-nav.onMobMenu {
     flex-direction: column;
-    align-items: end;
+    align-items: flex-end;
   }
 
   @media (orientation: portrait), (max-width: 1024px) {

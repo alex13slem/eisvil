@@ -45,8 +45,9 @@
 
   let formValues = { ...formValuesInit };
 
-  publishingModalForm.subscribe(({ target }) => {
-    formValues.selectedDir = target;
+  publishingModalForm.subscribe(({ slug }) => {
+    formValues.selectedDir =
+      publishingOptions.find((option) => option.slug === slug)?.value || null;
   });
 </script>
 
@@ -138,7 +139,7 @@
     min-height: 118px;
   }
   form :global(button) {
-    align-self: start;
+    align-self: flex-start;
   }
 
   .access {

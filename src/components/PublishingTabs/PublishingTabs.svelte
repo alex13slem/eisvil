@@ -39,12 +39,10 @@
   </nav>
 
   <div class={css["preview-wrap"]}>
-    {#each data as { body, data: { link } }, idx}
+    {#each data as { body, slug }, idx}
       <div class={cn(css.preview, idx === currIdx && css.active)}>
         <div class={css.body}>{@html parse(body)}</div>
-        <ModalTrigger type="publishing" defaultValue="store"
-          >Подать заявку</ModalTrigger
-        >
+        <ModalTrigger type="publishing" {slug}>Подать заявку</ModalTrigger>
       </div>
     {/each}
   </div>

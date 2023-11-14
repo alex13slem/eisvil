@@ -18,7 +18,7 @@
   };
 </script>
 
-<div class="wrap">
+<section>
   <swiper-container
     class="detail-slider"
     class:load={!swiperDetail}
@@ -26,6 +26,7 @@
     mousewheel
     thumbs-swiper=".preview-slider"
     hash-navigation-watch-state
+    effect="fade"
   >
     {#each data as { src, alt }}
       <swiper-slide
@@ -56,10 +57,10 @@
       </swiper-slide>
     {/each}
   </swiper-container>
-</div>
+</section>
 
 <style lang="scss">
-  .wrap {
+  section {
     --load-fade: 0.1s ease;
   }
 
@@ -110,8 +111,6 @@
       inset: -1px;
       width: 15%;
       background: linear-gradient(90deg, transparent, rgb(var(--color-bg)));
-
-      transition: opacity var(--trans-default);
     }
     &::after {
       left: auto;

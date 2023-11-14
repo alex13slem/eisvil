@@ -3,23 +3,24 @@
   import { publishingModalForm, servicesModalForm } from "../store/modals";
 
   export let type: "services" | "publishing" | null = null;
-  export let defaultValue: "store" | null = null;
+  export let slug: string | null = null;
   export let variant: "firm" | "transparent" | "contrast" = "firm";
+  export let flexPosition: "start" | "end" | null = null;
 
   function handleClick() {
     if (type === "services") {
       servicesModalForm.set({
         isOpen: true,
-        target: defaultValue && $servicesModalForm.target,
+        slug,
       });
     }
     if (type === "publishing") {
       publishingModalForm.set({
         isOpen: true,
-        target: defaultValue && $publishingModalForm.target,
+        slug,
       });
     }
   }
 </script>
 
-<BtnFirm {variant} on:click={handleClick}><slot /></BtnFirm>
+<BtnFirm {variant} {flexPosition} on:click={handleClick}><slot /></BtnFirm>

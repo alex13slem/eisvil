@@ -64,6 +64,7 @@
   all: unset;
   box-sizing: border-box;
   cursor: pointer;
+  height: 100%;
 
   position: relative;
   border: 1px solid transparent;
@@ -115,6 +116,8 @@
 .image img {
   object-fit: cover;
   object-position: center;
+  height: 100%;
+  width: 100%;
 }
 
 // .btn-nav {

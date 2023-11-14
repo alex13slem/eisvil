@@ -100,6 +100,8 @@
   .image img {
     position: absolute;
     inset: 0;
+    height: 100%;
+    width: 100%;
     object-fit: cover;
     object-position: center;
     transition-property: filter;
@@ -127,7 +129,7 @@
     margin: 0;
     grid-area: genre;
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     gap: 0.5ch;
     font-size: 10px;
     letter-spacing: 0.15ch;
@@ -144,7 +146,7 @@
   .links {
     grid-area: links;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     gap: 0.5rem;
   }
   .links a {
