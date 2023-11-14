@@ -22,11 +22,13 @@
     isEnd = swiper.isEnd;
     isBeginning = swiper.isBeginning;
   };
+
+  console.log(data);
 </script>
 
 <div class={css.wrap}>
   <TabPanels let:selectedIndex>
-    {#each data as { data: { images, order }, body, collection, slug }, idx (slug)}
+    {#each data as { data: { images, description }, collection, slug }, idx (slug)}
       {#if selectedIndex === idx}
         <div class={css.panel} transition:fly>
           <div class={css.slider}>
@@ -70,7 +72,7 @@
             </swiper-container>
           </div>
 
-          {@html parse(body)}
+          {@html parse(description)}
 
           <ModalTrigger variant="contrast" type="services" defaultValue="store"
             >Расчитать</ModalTrigger

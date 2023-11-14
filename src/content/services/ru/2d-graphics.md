@@ -13,6 +13,15 @@ images:
   - src: /images/uploads/eisvil.jpg
     alt: asdasd
 order: 1
+description: >-
+  ## 2D-Графика
+
+
+
+  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+
+
+  Amet quia reprehenderit nisi officiis assumenda fugiat blanditiis non qui quae labore sed eveniet quaerat dolorem, voluptas error illo, praesentium ipsam enim?
 ---
 
 ## 2D-Графика

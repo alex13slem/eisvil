@@ -17,6 +17,16 @@ images:
     alt: "test4"
 
 order: 2
+
+description: >-
+  ## Полный цикл разработки
+
+
+
+  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+
+
+  Amet quia reprehenderit nisi officiis assumenda fugiat blanditiis non qui quae labore sed eveniet quaerat dolorem, voluptas error illo, praesentium ipsam enim?
 ---
 
 Полный цикл разработки
