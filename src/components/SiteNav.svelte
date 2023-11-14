@@ -13,7 +13,7 @@
     active={url.pathname.includes("/services")}
     {onHeader}
     {onMobMenu}
-    href="/services">Услуги</NavLink
+    href="/services/2d-graphics">Услуги</NavLink
   >
   <NavLink active={url.pathname.includes("asd")} {onHeader} {onMobMenu}
     >Издательство</NavLink
