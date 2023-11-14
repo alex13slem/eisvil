@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import AsideLayout from "@/layouts/AsideLayout.astro";
 import type { InferGetStaticParamsType } from "astro";
 import FullscreenSliderWThumbs from "../../components/FullscreenSliderWThumbs.svelte";
+import { parse } from "marked";
 
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 
@@ -23,9 +24,9 @@ const { services } = Astro.props;
 
 const links = services
   .sort((a, b) => a.data.order - b.data.order)
-  .map(({ data: { title }, slug }) => ({
+  .map(({ data: { title }, slug, collection }) => ({
     text: title,
-    href: slug.split("/")[1],
+    href: `/${collection}/${slug.split("/")[1]}`,
   }));
 
 const category = services.find(
@@ -33,10 +34,16 @@ const category = services.find(
 );
 ---
 
-<AsideLayout title="E I S V I L | Услуги" h1="Услуги" links={links}>
+<AsideLayout title="E I S V I L | Услуги" category="Услуги" links={links}>
   {
     category && (
-      <FullscreenSliderWThumbs client:load data={category.data.images} />
+      <>
+        <FullscreenSliderWThumbs client:load data={category.data.images} />
+
+        <div class="text">
+          <Fragment set:html={parse(category.body)} />
+        </div>
+      </>
     )
   }
 </AsideLayout>

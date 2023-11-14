@@ -3,14 +3,15 @@ import type { HTMLAttributes } from "astro/types";
 import AsideNavLink from "./AsideNavLink.astro";
 
 interface Props extends HTMLAttributes<"aside"> {
+  category: string;
   links: { href: string; text: string }[];
 }
 
-const { title, links } = Astro.props;
+const { category, links } = Astro.props;
 ---
 
 <aside>
-  <h1>{title}</h1>
+  <h2>{category}</h2>
   <nav>
     {
       links.map(({ text, href }) => (
@@ -26,7 +27,8 @@ const { title, links } = Astro.props;
     border-right: var(--border-card);
   }
 
-  h1 {
+  h2 {
+    margin: 0;
     position: relative;
     padding: 0 1rem;
     line-height: 3;

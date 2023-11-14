@@ -1,15 +1,29 @@
-<script>
+<script lang="ts">
   export let onHeader = false;
   export let onMobMenu = false;
+  export let url: URL;
   import NavLink from "./NavLink.svelte";
 </script>
 
 <nav class="site-nav" class:onHeader class:onMobMenu {...$$restProps}>
-  <NavLink {onHeader} {onMobMenu}>Наши игры</NavLink>
-  <NavLink {onHeader} {onMobMenu} href="/services">Услуги</NavLink>
-  <NavLink {onHeader} {onMobMenu}>Издательство</NavLink>
-  <NavLink {onHeader} {onMobMenu}>Карьера</NavLink>
-  <NavLink {onHeader} {onMobMenu}>Контакты</NavLink>
+  <NavLink active={url.pathname.includes("asd")} {onHeader} {onMobMenu}
+    >Наши игры</NavLink
+  >
+  <NavLink
+    active={url.pathname.includes("/services")}
+    {onHeader}
+    {onMobMenu}
+    href="/services">Услуги</NavLink
+  >
+  <NavLink active={url.pathname.includes("asd")} {onHeader} {onMobMenu}
+    >Издательство</NavLink
+  >
+  <NavLink active={url.pathname.includes("asd")} {onHeader} {onMobMenu}
+    >Карьера</NavLink
+  >
+  <NavLink active={url.pathname.includes("asd")} {onHeader} {onMobMenu}
+    >Контакты</NavLink
+  >
 </nav>
 
 <style>

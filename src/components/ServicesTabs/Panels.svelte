@@ -45,8 +45,9 @@
                 <swiper-slide lazy="true">
                   <div class={css["slide-wrap"]}>
                     <a
-                      href="gallery/{collection}/{slug}/#{order}"
+                      href="{collection}/{slug.split('/')[1]}/#{alt}"
                       class={css.image}
+                      data-astro-reload
                     >
                       <img
                         {src}
@@ -61,8 +62,8 @@
               {/each}
               <swiper-slide>
                 <div class={css["slide-wrap"]}>
-                  <BtnFirm variant="transparent"
-                    ><a href="gallery/{collection}/{slug}">В раздел</a></BtnFirm
+                  <a href="{collection}/{slug.split('/')[1]}"
+                    ><BtnFirm variant="transparent">В раздел</BtnFirm></a
                   >
                 </div>
               </swiper-slide>

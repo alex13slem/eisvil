@@ -2,6 +2,7 @@
   import { isOpen } from "@/store/site-menu";
 
   export let href = "/";
+  export let active = false;
   export let onHeader = false;
   export let onMobMenu = false;
 
@@ -14,6 +15,7 @@
   class="nav-link"
   class:onHeader
   class:onMobMenu
+  class:active
   on:click={handleClick}
   {href}
   {...$$restProps}><span /><slot /></a
@@ -56,12 +58,14 @@
       display: none;
     }
   }
-  .nav-link:hover::after {
-    opacity: 1;
-  }
 
-  .nav-link:hover {
+  .nav-link:hover,
+  .nav-link.active {
     @include hover-text1($t-color: rgb(var(--color-accent)));
+
+    &::after {
+      opacity: 1;
+    }
   }
 
   .nav-link::before,

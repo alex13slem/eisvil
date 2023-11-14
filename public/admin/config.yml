@@ -131,6 +131,10 @@ collections:
         widget: "number"
         value_type: "int"
 
+      - label: "Краткое описание"
+        name: "description"
+        widget: "markdown"
+
       - label: "Подробное описание"
         name: "body"
         widget: "markdown"

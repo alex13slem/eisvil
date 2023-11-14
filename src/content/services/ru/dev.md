@@ -5,16 +5,16 @@ link: "https://docs.astro.build/en/guides/content-collections/#accessing-referen
 
 images:
   - src: "https://i.pinimg.com/originals/db/3c/69/db3c6932ab7f48aa37911fa229efa7ba.jpg"
-    alt: "test"
+    alt: "test1"
 
   - src: "https://i.pinimg.com/originals/db/3c/69/db3c6932ab7f48aa37911fa229efa7ba.jpg"
-    alt: "test"
+    alt: "test2"
 
   - src: "https://i.pinimg.com/originals/db/3c/69/db3c6932ab7f48aa37911fa229efa7ba.jpg"
-    alt: "test"
+    alt: "test3"
 
   - src: "https://i.pinimg.com/originals/db/3c/69/db3c6932ab7f48aa37911fa229efa7ba.jpg"
-    alt: "test"
+    alt: "test4"
 
 order: 2
 ---

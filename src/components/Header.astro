@@ -10,7 +10,7 @@ import SiteMenuToggle from "./MobileMenuToggler.svelte";
     <HeaderSidePanel>
       <SiteLogo />
     </HeaderSidePanel>
-    <SiteNav onHeader />
+    <SiteNav url={Astro.url} onHeader />
     <HeaderSidePanel>
       <SiteMenuToggle client:visible />
     </HeaderSidePanel>

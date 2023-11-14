@@ -27,7 +27,8 @@
     width: 15%;
     background: linear-gradient(90deg, transparent, rgb(var(--color-bg)));
 
-    transition: opacity var(--trans-default);
+    transition-property: opacity;
+    transition: var(--trans-default);
   }
   &::after {
     left: auto;

@@ -21,13 +21,19 @@
 <div class="wrap">
   <swiper-container
     class="detail-slider"
+    class:load={!swiperDetail}
     bind:this={swiperDetail}
     mousewheel
     thumbs-swiper=".preview-slider"
+    hash-navigation-watch-state
   >
     {#each data as { src, alt }}
-      <swiper-slide class="detail-slide" style="background-image: url({src});">
-        <img {src} {alt} />
+      <swiper-slide
+        class="detail-slide"
+        data-hash={alt}
+        style="background-image: url({src});"
+      >
+        <img {src} {alt} height="600" />
       </swiper-slide>
     {/each}
   </swiper-container>
@@ -35,8 +41,9 @@
     class="preview-slider"
     class:isEnd
     class:isBeginning
-    mousewheel
+    class:load={!swiperPreview}
     bind:this={swiperPreview}
+    mousewheel
     slides-per-view="3.33"
     watch-slides-progress
     on:swiperprogress={onProgress}
@@ -53,14 +60,21 @@
 
 <style lang="scss">
   .wrap {
-    padding: 2rem;
-    padding-right: 0;
+    --load-fade: 0.1s ease;
+  }
+
+  .detail-slider.load,
+  .preview-slider.load {
+    opacity: 0;
   }
 
   .detail-slider {
     margin-bottom: 2rem;
     background-color: rgb(var(--color-white), 10%);
     box-shadow: var(--box-shadow);
+
+    transition-property: opacity;
+    transition: var(--load-fade);
   }
 
   .detail-slide {
@@ -85,6 +99,8 @@
   .preview-slider {
     margin: -16px;
     position: relative;
+    transition-property: opacity;
+    transition: var(--load-fade);
     &::after,
     &::before {
       pointer-events: none;

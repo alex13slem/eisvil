@@ -2,12 +2,12 @@
 import AsideNav from "../components/AsideNav.astro";
 import HtmlBase from "./HtmlBase.astro";
 
-const { title, description, h1, links } = Astro.props;
+const { title, description, category, links } = Astro.props;
 ---
 
 <HtmlBase title={title} description={description}>
   <div class="container">
-    <AsideNav title={h1} links={links} />
+    <AsideNav category={category} links={links} />
     <main>
       <slot />
     </main>
@@ -19,8 +19,11 @@ const { title, description, h1, links } = Astro.props;
     display: flex;
   }
   main {
+    padding: 2rem;
+    padding-right: 0;
     display: flex;
     flex-direction: column;
+    gap: 4rem;
     min-height: calc(100vh - 60px);
   }
 </style>
