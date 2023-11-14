@@ -1,19 +1,22 @@
 ---
-import GalleryNavPart from "./GalleryNavPart.svelte";
-import type { InferGetStaticParamsType } from "astro";
-import type { getStaticPaths } from "../pages/gallery/[category]/[lang]/[slug].astro";
-type Params = InferGetStaticParamsType<typeof getStaticPaths>;
-const { category, slug } = Astro.params as Params;
+import type { HTMLAttributes } from "astro/types";
+import AsideNavLink from "./AsideNavLink.astro";
+
+interface Props extends HTMLAttributes<"aside"> {
+  links: { href: string; text: string }[];
+}
+
+const { title, links } = Astro.props;
 ---
 
 <aside>
+  <h1>{title}</h1>
   <nav>
-    <GalleryNavPart
-      path={{ category, slug }}
-      collection="services"
-      title="Услуги"
-      client:visible
-    />
+    {
+      links.map(({ text, href }) => (
+        <AsideNavLink href={href}>{text}</AsideNavLink>
+      ))
+    }
   </nav>
 </aside>
 
@@ -23,6 +26,30 @@ const { category, slug } = Astro.params as Params;
     border-right: var(--border-card);
   }
 
+  h1 {
+    position: relative;
+    padding: 0 1rem;
+    line-height: 3;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    &::after {
+      position: absolute;
+      content: "";
+      inset: 0;
+      right: auto;
+      width: 100%;
+      background: linear-gradient(
+        90deg,
+        rgb(var(--color-accent), 25%),
+        transparent
+      );
+
+      transition-property: width;
+      transition: var(--trans-default);
+    }
+  }
   nav {
     position: sticky;
     top: 60px;

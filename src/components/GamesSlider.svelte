@@ -34,7 +34,6 @@
           spaceBetween: -30,
         },
       },
-      loop: true,
       mousewheel: {},
 
       pagination: {

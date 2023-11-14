@@ -6,7 +6,7 @@
 
 <nav class="site-nav" class:onHeader class:onMobMenu {...$$restProps}>
   <NavLink {onHeader} {onMobMenu}>Наши игры</NavLink>
-  <NavLink {onHeader} {onMobMenu}>Услуги</NavLink>
+  <NavLink {onHeader} {onMobMenu} href="/services">Услуги</NavLink>
   <NavLink {onHeader} {onMobMenu}>Издательство</NavLink>
   <NavLink {onHeader} {onMobMenu}>Карьера</NavLink>
   <NavLink {onHeader} {onMobMenu}>Контакты</NavLink>

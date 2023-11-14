@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import AsideLayout from "@/layouts/AsideLayout.astro";
+import type { InferGetStaticParamsType } from "astro";
+import FullscreenSliderWThumbs from "../../components/FullscreenSliderWThumbs.svelte";
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+
+export async function getStaticPaths() {
+  const services = await getCollection("services");
+  const servicesPaths = services.map((service) => ({
+    params: {
+      slug: service.slug.split("/")[1],
+    },
+    props: { services },
+  }));
+
+  return servicesPaths;
+}
+
+const { slug } = Astro.params as Params;
+const { services } = Astro.props;
+
+const links = services
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(({ data: { title }, slug }) => ({
+    text: title,
+    href: slug.split("/")[1],
+  }));
+
+const category = services.find(
+  ({ slug: currSlug }) => currSlug.split("/")[1] === slug,
+);
+---
+
+<AsideLayout title="E I S V I L | Услуги" h1="Услуги" links={links}>
+  {
+    category && (
+      <FullscreenSliderWThumbs client:load data={category.data.images} />
+    )
+  }
+</AsideLayout>

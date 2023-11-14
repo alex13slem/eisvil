@@ -2,14 +2,15 @@
 import AsideNav from "../components/AsideNav.astro";
 import HtmlBase from "./HtmlBase.astro";
 
-const { title, description } = Astro.props;
+const { title, description, h1, links } = Astro.props;
 ---
 
 <HtmlBase title={title} description={description}>
   <div class="container">
-    <AsideNav />
-    <main>main</main>
-    <!-- <slot /> -->
+    <AsideNav title={h1} links={links} />
+    <main>
+      <slot />
+    </main>
   </div>
 </HtmlBase>
 

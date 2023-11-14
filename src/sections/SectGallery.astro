@@ -1,13 +1,11 @@
 ---
-import type { InferGetStaticParamsType } from "astro";
+
 import { getEntryBySlug } from "astro:content";
-import type { getStaticPaths } from "@/pages/gallery/[category]/[lang]/[slug].astro";
+
 import GalleryThumbs from "../components/GalleryThumbs.svelte";
 import GalleryDetail from "../components/GalleryDetail.svelte";
 
-type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 const { title } = Astro.props;
-const { category, lang, slug } = Astro.params as Params;
 
 const {
   data: { images },
