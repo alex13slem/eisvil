@@ -1,5 +1,4 @@
 <script lang="ts">
-  import SVGArrow from "@/components/svg/SVGArrow.svelte";
   export let variant: "firm" | "transparent" | "contrast" = "firm";
   export let flexPosition: "start" | "end" | "center" | null = null;
 </script>
@@ -11,8 +10,6 @@
 >
   <span class="bg" />
   <span class="text"><slot /></span>
-  <span class="arrow left"><SVGArrow /></span>
-  <span class="arrow right"><SVGArrow /></span>
 </button>
 
 <style lang="scss">
@@ -29,6 +26,8 @@
       cursor: pointer;
     }
 
+    color: rgb(var(--color-text));
+
     transition-property: transform, filter;
     transition: var(--trans-default);
 
@@ -44,11 +43,12 @@
       align-self: center;
     }
   }
+
   .v-firm {
     &:disabled {
       filter: grayscale(100%);
     }
-    span.bg {
+    .bg {
       background: var(--gradient);
     }
     &:not(:disabled):hover {
@@ -60,10 +60,7 @@
 
   .v-transparent {
     span.bg {
-      border: 1px solid #fff;
-    }
-    .arrow {
-      border-bottom: 1px solid currentColor;
+      border: 1px solid currentColor;
     }
   }
 
@@ -72,19 +69,10 @@
       color: rgb(var(--color-bg));
     }
     span.bg {
-      background-color: rgb(var(--color-white));
-      transition: background-color var(--trans-default);
-    }
-    .arrow {
-      transition: color var(--trans-default);
+      background-color: currentColor;
     }
     &:not(:disabled):hover {
-      span.bg {
-        background-color: rgb(var(--color-accent));
-      }
-      .arrow {
-        color: rgb(var(--color-accent));
-      }
+      color: rgb(var(--color-accent));
     }
   }
 
@@ -92,19 +80,20 @@
     color: currentColor;
   }
 
-  span.bg {
+  .bg {
     position: absolute;
     inset: 0;
+    transition: background-color var(--trans-default);
 
     @include firm-clip;
   }
 
-  span.text {
+  .text {
     position: relative;
 
     font-size: 14px;
     font-weight: 900;
-    color: rgb(var(--color-text));
+    color: currentColor;
     text-transform: uppercase;
   }
 </style>

@@ -5,7 +5,6 @@
     ListboxOption,
     ListboxOptions,
   } from "@rgossiaux/svelte-headlessui";
-  import SVGArrow from "./svg/SVGArrow.svelte";
   import { fly } from "svelte/transition";
   import { cn } from "../utils/helpers";
 
@@ -23,7 +22,7 @@
 <div class="wrap">
   <Listbox class="box" bind:value let:open>
     <ListboxButton
-      class={cn("selected-option", open && "open", !value && "empty")}
+      class={cn("selected-option", open && "open", value && "active")}
       style="--curr-idx: {targetIdx || 0}"
     >
       {#if open && !value}
@@ -31,10 +30,8 @@
       {:else}
         {value || placeholder}
       {/if}
-      <span class="arrow left"><SVGArrow /></span>
-      {#if !open}
-        <span transition:fly class="arrow right"><SVGArrow /></span>
-      {/if}
+      <span class="selected-option-bg" />
+      <button class="selected-option-arrow" />
     </ListboxButton>
     {#if open}
       <div transition:fly>
@@ -60,6 +57,8 @@
 <style lang="scss">
   @import "../styles/mixins";
   .wrap {
+    --field-color: rgb(var(--color-white), 30%);
+    --arrow-color: rgb(var(--color-white), 25%);
     display: contents;
 
     :global(.box) {
@@ -80,68 +79,39 @@
       font-size: 12px;
       color: rgb(var(--color-bg));
 
-      @include firm-arrows(0.3);
+      @include firm-arrows($color: var(--field-color));
 
-      &::after,
-      &::before {
-        content: "";
-        position: absolute;
+      &:hover,
+      &:is(.open) {
+        --field-color: rgb(var(--color-white), 45%);
+        --arrow-color: rgb(var(--color-accent), 70%);
       }
-      &::after {
-        z-index: -1;
-        inset: 0;
-        clip-path: polygon(
-          20px 0%,
-          100% 0,
-          100% calc(100% - 25px),
-          calc(100% - 5px) calc(100% - 20px),
-          calc(100% - 40px) calc(100% - 20px),
-          calc(100% - 60px) 100%,
-          0 100%,
-          0 20px
-        );
-        background-color: rgb(var(--color-white), 30%);
-        transition: background-color var(--trans-default);
-      }
-      &::before {
-        --lh: 36px;
-        --offset: 10px;
-        right: 9px;
-        bottom: -13px;
-        border: 14px solid transparent;
-        border-top-color: rgb(var(--color-white), 25%);
-        transition-property: border-color transform;
-        transition: var(--trans-default);
-      }
-      &:hover {
+
+      &:is(.open) {
+        --arrow-color: rgb(var(--color-white));
         &::after {
-          background-color: rgb(var(--color-white), 45%);
+          opacity: 0;
         }
-        &::before {
-          border-top-color: rgb(var(--color-accent), 70%);
+        :global(.selected-option-arrow) {
+          transform: scale(-1)
+            translateY(calc(var(--offset) - var(--lh) * var(--curr-idx)));
+        }
+      }
+
+      &:is(.active) {
+        --field-color: rgb(var(--color-accent), 65%);
+        font-weight: 600;
+        color: rgb(var(--color-text));
+      }
+
+      &:is(.open):not(.active) {
+        :global(.selected-option-arrow) {
+          animation: pulsar-bt-c 0.6s ease infinite alternate;
+          transform: scale(-1) translate(7px, 10px);
         }
       }
     }
-    :global(.selected-option.open) {
-      &::before {
-        border-top-color: rgb(var(--color-white));
-        transform: scale(-1)
-          translateY(calc(var(--offset) - var(--lh) * var(--curr-idx)));
-      }
-    }
-    :global(.selected-option.open.empty) {
-      &::before {
-        animation: pulsar-bt-c 0.6s ease infinite alternate;
-        transform: scale(-1) translate(7px, 10px);
-      }
-    }
-    :global(.selected-option:not(.empty)) {
-      font-weight: 600;
-      color: rgb(var(--color-white));
-      &::after {
-        background-color: rgb(var(--color-accent), 65%);
-      }
-    }
+
     :global(.options-list) {
       all: unset;
       box-sizing: border-box;
@@ -204,15 +174,51 @@
       &:hover {
         color: rgb(var(--color-accent));
       }
-    }
-    :global(.option.active) {
-      color: rgb(var(--color-white));
-      &::before {
-        opacity: 1;
+
+      &:is(.active) {
+        color: rgb(var(--color-white));
+        &::before {
+          opacity: 1;
+        }
       }
     }
+
     :global(.option span) {
       position: relative;
     }
+  }
+
+  .selected-option-bg {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    clip-path: polygon(
+      20px 0%,
+      100% 0,
+      100% calc(100% - 25px),
+      calc(100% - 5px) calc(100% - 20px),
+      calc(100% - 40px) calc(100% - 20px),
+      calc(100% - 60px) 100%,
+      0 100%,
+      0 20px
+    );
+    background-color: var(--field-color);
+    transition: background-color var(--trans-default);
+  }
+
+  .selected-option-arrow {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+
+    position: absolute;
+    --lh: 36px;
+    --offset: 10px;
+    right: 9px;
+    bottom: -13px;
+    border: 14px solid transparent;
+    border-top-color: var(--arrow-color);
+    transition-property: border-color transform;
+    transition: var(--trans-default);
   }
 </style>

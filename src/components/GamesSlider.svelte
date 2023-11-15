@@ -57,21 +57,19 @@
 </script>
 
 <div class="wrap">
-  <swiper-container bind:this={swiperEl} init="false">
-    {#if swiperEl}
-      {#each games as game}
-        <swiper-slide transition:fade>
-          <div class="slide-wrap">
-            <GameCard {game} />
-          </div>
-        </swiper-slide>
-      {/each}
-    {/if}
+  <swiper-container bind:this={swiperEl} class:load={!swiperEl} init="false">
+    {#each games as game}
+      <swiper-slide>
+        <div class="slide-wrap">
+          <GameCard {game} />
+        </div>
+      </swiper-slide>
+    {/each}
   </swiper-container>
   <div class="pagination" />
 </div>
 
-<style>
+<style style="scss">
   .wrap {
     position: relative;
     z-index: 0;
@@ -102,6 +100,11 @@
   }
   swiper-container {
     display: flex;
+
+    transition: opacity var(--load-fade);
+    &.load {
+      opacity: 0;
+    }
   }
 
   .pagination {

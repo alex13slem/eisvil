@@ -1,15 +1,23 @@
 @mixin fields-bg {
-  position: absolute;
-  inset: 0;
+  --field-color: rgb(var(--color-white), 30%);
+  position: relative;
 
-  @include firm-clip;
-  background-color: rgb(var(--color-white), 30%);
-  transition: background-color var(--trans-default);
+  @include firm-arrows($color: var(--field-color));
 
-  *:focus-visible ~ & {
-    background-color: rgb(var(--color-white), 45%);
+  &:hover {
+    --field-color: rgb(var(--color-white), 45%);
   }
-  .typing & {
-    background-color: rgb(var(--color-accent));
+
+  &.typing {
+    --field-color: rgb(var(--color-accent), 65%);
+  }
+
+  .bg {
+    position: absolute;
+    inset: 0;
+
+    @include firm-clip;
+    background-color: var(--field-color);
+    transition: background-color var(--trans-default);
   }
 }

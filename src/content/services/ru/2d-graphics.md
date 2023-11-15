@@ -3,7 +3,7 @@ title: 2D-Графика
 link: https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data
 images:
   - src: https://i.pinimg.com/originals/db/3c/69/db3c6932ab7f48aa37911fa229efa7ba.jpg
-    alt: test1
+    alt: русский мир
   - src: https://i.pinimg.com/originals/db/3c/69/db3c6932ab7f48aa37911fa229efa7ba.jpg
     alt: test2
   - src: https://i.pinimg.com/originals/db/3c/69/db3c6932ab7f48aa37911fa229efa7ba.jpg

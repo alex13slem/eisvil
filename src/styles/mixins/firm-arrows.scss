@@ -1,25 +1,26 @@
-@mixin firm-arrows($opacity: 1) {
-  :global(.arrow) {
+@mixin firm-arrows($opacity: 1, $color: currentColor) {
+  &::after,
+  &::before {
+    content: "";
     position: absolute;
-
-    color: rgb(var(--color-white), $opacity);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border: 1px solid $color;
     width: 9px;
     height: 9px;
-    :global(svg) {
-      transform: rotate(45deg);
-    }
+    opacity: $opacity;
+
+    transition: border-color var(--trans-default);
   }
-  :global(.arrow.right) {
+
+  &::after {
     bottom: 0;
     right: 0;
-    transform: rotate(135deg);
+    border-left-color: transparent;
+    border-top-color: transparent;
   }
-  :global(.arrow.left) {
+  &::before {
     top: 0;
     left: 0;
-    transform: rotate(-45deg);
+    border-right-color: transparent;
+    border-bottom-color: transparent;
   }
 }

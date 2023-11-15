@@ -1,5 +1,6 @@
 <script lang="ts">
   import { register, type SwiperContainer } from "swiper/element/bundle";
+  import { formatStrToId } from "../utils/helpers";
 
   export let data: { src: string; alt: string }[];
 
@@ -31,7 +32,7 @@
     {#each data as { src, alt }}
       <swiper-slide
         class="detail-slide"
-        data-hash={alt}
+        data-hash={formatStrToId(alt)}
         style="background-image: url({src});"
       >
         <img {src} {alt} height="600" />
@@ -60,10 +61,6 @@
 </section>
 
 <style lang="scss">
-  section {
-    --load-fade: 0.1s ease;
-  }
-
   .detail-slider.load,
   .preview-slider.load {
     opacity: 0;

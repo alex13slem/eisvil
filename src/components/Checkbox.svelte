@@ -43,6 +43,6 @@
     background-color: rgb(var(--color-accent));
   }
   input[invalid="true"] ~ span {
-    animation: pulsar-bg-c 0.6s ease infinite alternate;
+    animation: pulsar-bg-c 1s ease infinite alternate;
   }
 </style>

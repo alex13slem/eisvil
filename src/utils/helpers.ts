@@ -34,3 +34,5 @@ export async function fetchStrapiMany<Fields>(type: string) {
 
 export const formatErrors = (error: { _errors: string[] }) =>
   error._errors.join(", ");
+
+export const formatStrToId = (string: string) => string.split(" ").join("-");

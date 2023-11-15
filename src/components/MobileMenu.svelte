@@ -1,7 +1,9 @@
-<script>
+<script lang="ts">
   import { isOpen } from "@/store/site-menu";
   import SiteNav from "./SiteNav.svelte";
   import { fade } from "svelte/transition";
+
+  export let url: URL;
 </script>
 
 <svelte:head>
@@ -16,7 +18,7 @@
 
 {#if $isOpen}
   <div class="m-menu" transition:fade>
-    <SiteNav onMobMenu />
+    <SiteNav onMobMenu {url} />
   </div>
 {/if}
 

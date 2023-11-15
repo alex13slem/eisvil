@@ -7,6 +7,7 @@
   import { register, type SwiperContainer } from "swiper/element/bundle";
   import ModalTrigger from "../ModalTrigger.svelte";
   import { blur, fade, fly } from "svelte/transition";
+  import { formatStrToId } from "../../utils/helpers";
 
   export let data: CollectionEntry<"services">[];
 
@@ -45,7 +46,9 @@
                 <swiper-slide lazy="true">
                   <div class={css["slide-wrap"]}>
                     <a
-                      href="{collection}/{slug.split('/')[1]}/#{alt}"
+                      href="{collection}/{slug.split('/')[1]}/#{formatStrToId(
+                        alt
+                      )}"
                       class={css.image}
                       data-astro-reload
                     >

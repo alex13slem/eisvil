@@ -1,6 +1,5 @@
 <script lang="ts">
   import { cn } from "../utils/helpers";
-  import SVGArrow from "./svg/SVGArrow.svelte";
   export let type: "text" | "email" | "password" = "text";
   export let placeholder: string | null = null;
   export let value: string | null = null;
@@ -24,17 +23,13 @@
   />
   <slot />
   <div class="bg" />
-  <span class="arrow left"><SVGArrow /></span>
-  <span class="arrow right"><SVGArrow /></span>
 </div>
 
 <style lang="scss">
   @import "../styles/mixins";
 
   .form-field {
-    position: relative;
-
-    @include firm-arrows(0.3);
+    @include fields-bg();
   }
 
   input {
@@ -53,9 +48,5 @@
       font-size: 12px;
       color: rgb(var(--color-bg));
     }
-  }
-
-  .bg {
-    @include fields-bg;
   }
 </style>

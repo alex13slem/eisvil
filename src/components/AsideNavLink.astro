@@ -36,9 +36,32 @@ const { href, ...props } = Astro.props;
     transition-property: text-shadow;
     transition: var(--trans-default);
 
+    &::after {
+      position: absolute;
+      content: "";
+      inset: 0;
+      right: auto;
+      width: 25%;
+      background: linear-gradient(
+        90deg,
+        rgb(var(--color-accent), 25%),
+        transparent
+      );
+
+      transition-property: width;
+      transition: var(--trans-default);
+    }
+
     &:hover,
     &.active {
       @include hover-text1();
+    }
+
+    &:hover::after {
+      width: 75%;
+    }
+    &.active::after {
+      width: 100%;
     }
   }
 </style>

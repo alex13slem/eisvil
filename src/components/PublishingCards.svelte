@@ -11,6 +11,15 @@
   });
   const lastElem = [...data].shift();
   const firstElem = [...data].pop();
+
+  function handleWheel(e: WheelEvent) {
+    if (curIdx >= 1 && e.deltaY < 0) {
+      $pubTabIdx -= 1;
+    }
+    if (curIdx <= 1 && e.deltaY > 0) {
+      $pubTabIdx += 1;
+    }
+  }
 </script>
 
 <div class="cards">
@@ -19,6 +28,7 @@
     class:center={curIdx === 1}
     class:left={curIdx === 0}
     class:right={curIdx === 2}
+    on:wheel|preventDefault={handleWheel}
   >
     {#if firstElem}
       <PublishingCard data={firstElem} targetIdx={null} />

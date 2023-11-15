@@ -1,16 +1,16 @@
 @keyframes pulsar-bg-c {
   0% {
-    background-color: transparent;
+    background-color: rgb(var(--color-accent), 65%);
   }
   100% {
-    background-color: rgba(255, 0, 0, 0.459);
+    background-color: rgb(var(--color-accent), 100%);
   }
 }
 @keyframes pulsar-bt-c {
   0% {
-    border-top-color: transparent;
+    border-top-color: rgb(var(--color-accent), 65%);
   }
   100% {
-    border-top-color: rgba(255, 0, 0, 0.459);
+    border-top-color: rgb(var(--color-accent), 100%);
   }
 }

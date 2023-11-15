@@ -4,7 +4,6 @@ import AsideLayout from "@/layouts/AsideLayout.astro";
 import type { InferGetStaticParamsType } from "astro";
 import FullscreenSliderWThumbs from "../../sections/SectSliderWThumbs.svelte";
 import { parse } from "marked";
-import type { CollectionEntry } from "astro:content";
 import ModalTrigger from "../../components/ModalTrigger.svelte";
 import ServicesModalForm from "../../components/ServicesModalForm.svelte";
 
@@ -37,19 +36,20 @@ const category = services.find(
 );
 ---
 
-<AsideLayout title="E I S V I L | Услуги" category="Услуги" links={links}>
+<AsideLayout title="E I S V I L | Услуги" links={links}>
   {
     category && (
       <>
         <FullscreenSliderWThumbs client:load data={category.data.images} />
 
-        <section class="prose w-aside">
+        <section class="prose detail">
+          <h1>{category.data.title}</h1>
           <Fragment set:html={parse(category.body)} />
         </section>
 
         <ModalTrigger
           client:visible
-          type={"services"}
+          type={category.collection}
           variant="contrast"
           flexPosition="start"
           slug={category.slug}
