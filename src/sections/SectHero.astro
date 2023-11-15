@@ -9,8 +9,8 @@ import ModalTrigger from "@/components/ModalTrigger.svelte";
   <Image class="banner" src={banner} alt="Site-banner" />
   <div class="content">
     <SVGHeroText />
-    <h2 class="description">место, где идея становится игрой</h2>
-    <ModalTrigger client:load type={"services"}>Создать новый мир</ModalTrigger>
+    <h1><span hidden>Eisvil -</span> место, где идея становится игрой</h1>
+    <slot />
   </div>
 </div>
 
@@ -48,9 +48,10 @@ import ModalTrigger from "@/components/ModalTrigger.svelte";
 
     display: flex;
     flex-direction: column;
+    gap: 1rem;
   }
 
-  h1 {
+  /* h1 {
     user-select: none;
     text-align: center;
     font-size: 125px;
@@ -74,18 +75,13 @@ import ModalTrigger from "@/components/ModalTrigger.svelte";
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-  }
+  } */
 
-  .description {
+  h1 {
     user-select: none;
-    margin-top: 1rem;
+    margin-bottom: 1rem;
     text-align: center;
     font-size: 1.5rem;
     font-weight: 400;
-  }
-
-  .sect-hero :global(.btn-firm) {
-    align-self: center;
-    margin-inline: auto;
   }
 </style>

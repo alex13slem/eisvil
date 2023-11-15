@@ -3,28 +3,37 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-h1 {
-  font-weight: 700;
-}
-
-h2 {
+.sect-title {
   margin-bottom: 1.2em;
   font-size: 2rem;
   font-weight: 700;
-}
-
-section h2 {
   text-transform: uppercase;
 }
 
-h3 {
-  margin-bottom: 1.5em;
+.prose {
+  text-indent: 2ch;
+  h2,
+  h3 {
+    margin-bottom: 1em;
+  }
+  h2:not(:first-child),
+  h3:not(:first-child) {
+    margin-top: 2em;
+  }
 
-  font-size: 1.25rem;
-  line-height: 1.25;
-  font-weight: 700;
-}
+  p:not(:last-child) {
+    margin-bottom: 1em;
+  }
 
-p {
-  margin-bottom: 0.7em;
+  &.w-aside {
+    h2 {
+      font-size: 50px;
+    }
+    h3 {
+      font-size: 40px;
+    }
+    p {
+      font-size: 30px;
+    }
+  }
 }

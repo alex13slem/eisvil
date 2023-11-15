@@ -17,7 +17,7 @@ const orderedPublishing = [...publishing].sort(
 
 <section class:list={["publishing", className]} {...props}>
   <div class="container">
-    <h2>Издательство</h2>
+    <h2 class="sect-title">Издательство</h2>
     <div class="body">
       <PublishingTabs client:load data={orderedPublishing} />
       <PublishingCards client:load data={orderedPublishing} />

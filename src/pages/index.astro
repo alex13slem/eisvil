@@ -10,6 +10,7 @@ import SectPublishing from "@/sections/SectPublishing.astro";
 import SectCarrier from "@/sections/SectCarrier.astro";
 import ServicesModalForm from "@/components/ServicesModalForm.svelte";
 import PublishingModalForm from "../components/PublishingModalForm.svelte";
+import ModalTrigger from "../components/ModalTrigger.svelte";
 
 const services = await getCollection("services");
 const publishing = await getCollection("publishing");
@@ -17,7 +18,11 @@ const publishing = await getCollection("publishing");
 
 <HtmlBase title="E I S V I L">
   <main>
-    <SectHero />
+    <SectHero>
+      <ModalTrigger client:load type={"services"} flexPosition="center">
+        Создать новый мир
+      </ModalTrigger>
+    </SectHero>
     <SectGames />
     <SectServices />
     <SectPublishing />

@@ -43,7 +43,7 @@ const category = services.find(
       <>
         <FullscreenSliderWThumbs client:load data={category.data.images} />
 
-        <section class="prose">
+        <section class="prose w-aside">
           <Fragment set:html={parse(category.body)} />
         </section>
 

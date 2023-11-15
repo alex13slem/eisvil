@@ -70,10 +70,15 @@
             </swiper-container>
           </div>
 
-          {@html parse(description)}
+          <div class="prose">
+            {@html parse(description)}
+          </div>
 
-          <ModalTrigger variant="contrast" type="services" {slug}
-            >Расчитать</ModalTrigger
+          <ModalTrigger
+            variant="contrast"
+            type="services"
+            flexPosition="start"
+            {slug}>Расчитать</ModalTrigger
           >
         </div>
       {/if}

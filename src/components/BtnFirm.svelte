@@ -1,7 +1,7 @@
 <script lang="ts">
   import SVGArrow from "@/components/svg/SVGArrow.svelte";
   export let variant: "firm" | "transparent" | "contrast" = "firm";
-  export let flexPosition: "start" | "end" | null = null;
+  export let flexPosition: "start" | "end" | "center" | null = null;
 </script>
 
 <button
@@ -39,6 +39,9 @@
     }
     &.end {
       align-self: flex-end;
+    }
+    &.center {
+      align-self: center;
     }
   }
   .v-firm {

@@ -11,7 +11,7 @@ const { category, links } = Astro.props;
 ---
 
 <aside>
-  <h2>{category}</h2>
+  <h2 class="sect-title">{category}</h2>
   <nav>
     {
       links.map(({ text, href }) => (

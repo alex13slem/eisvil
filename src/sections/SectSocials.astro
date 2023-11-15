@@ -12,7 +12,7 @@ const socials = await getCollection("socials");
 
 <section class:list={["sect-socials", className]} {...props}>
   <div class="container">
-    <h2>Наши сообщества</h2>
+    <h2 class="sect-title">Наши сообщества</h2>
     <div class="body">
       {socials.map((data) => <SocialCard {...data} />)}
     </div>
