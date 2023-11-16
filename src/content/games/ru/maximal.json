@@ -1,0 +1,50 @@
+{
+  "platforms": {
+    "playstation": "maximal",
+    "epic": "maximal",
+    "ru_store": "maximal",
+    "steam": "maximal",
+    "yandex": "maximal",
+    "xbox": "maximal",
+    "app_gallery": "maximal",
+    "vk": "maximal",
+    "nintendo": "maximal",
+    "google": "maximal",
+    "apple": "maximal"
+  },
+  "body": "maximal",
+  "genre": "rpg",
+  "langs": {
+    "ru": {
+      "voice": false,
+      "text": false
+    },
+    "en": {
+      "voice": false,
+      "text": false
+    }
+  },
+  "ad_banner": {
+    "src": "/images/uploads/eisvil.jpg",
+    "alt": "maximal"
+  },
+  "developer": "maximal",
+  "thumbnail": "/images/uploads/eisvil.jpg",
+  "date": "11/17/2023",
+  "gallery": [
+    {
+      "src": "/images/uploads/eisvil.jpg",
+      "alt": "maximal1"
+    },
+    {
+      "src": "/images/uploads/eisvil.jpg",
+      "alt": "maximal2"
+    }
+  ],
+  "status": "new",
+  "hero_image": "/images/uploads/eisvil.jpg",
+  "favorites": "top",
+  "title": "maximal",
+  "publisher": "maximal",
+  "description": "maximal"
+}
