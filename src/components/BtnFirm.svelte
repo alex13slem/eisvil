@@ -72,7 +72,7 @@
         transform: rotate(45deg);
       }
       &::before {
-        top: -1px;
+        top: -2px;
         left: 25px;
         transform-origin: top;
       }

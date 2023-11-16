@@ -33,7 +33,7 @@ export const gamesSchema = z.object({
   ]),
   developer: z.string(),
   publisher: z.string(),
-  date: z.date(),
+  date: z.string(),
   description: z.string(),
   body: z.string(),
   langs: z.object({ ru: zLang, en: zLang }),

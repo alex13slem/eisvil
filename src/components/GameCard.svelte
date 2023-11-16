@@ -8,26 +8,24 @@
 
   export let game: CollectionEntry<"games">;
 
-  const { title, thumbnail, tags, links, link, category } = game.data;
+  const { title, genre, thumbnail } = game.data;
 </script>
 
 <article class="game-card" {...$$restProps}>
-  {#if category}
+  <!-- {#if category}
     <CardBadge type={category} />
-  {/if}
+  {/if} -->
 
   <div class="image">
     <img src={thumbnail} alt={title} width="336" height="202" />
-    <BtnFirm variant="transparent"><a href={link}>ПОДРОБНЕЕ</a></BtnFirm>
+    <BtnFirm variant="transparent"><a href="/">ПОДРОБНЕЕ</a></BtnFirm>
   </div>
   <div class="body">
     <h3>{title}</h3>
-    <p class="genre">
-      {#each tags as tag}
-        <span>{tag}</span>
-      {/each}
+    <p class="tags">
+      <span>{genre}</span>
     </p>
-    <div class="links">
+    <!-- <div class="links">
       {#if links?.playgame}
         <a href={links.playgame}>
           <SVGPlaygame />
@@ -43,7 +41,7 @@
           <SVGGoogle />
         </a>
       {/if}
-    </div>
+    </div> -->
   </div>
 </article>
 
@@ -114,7 +112,7 @@
     display: grid;
     grid-template-areas:
       "title title"
-      "genre links";
+      "tags links";
     transition-property: border-color;
     transition: var(--trans-default);
   }
@@ -125,9 +123,9 @@
     text-transform: uppercase;
   }
 
-  .genre {
+  .tags {
     margin: 0;
-    grid-area: genre;
+    grid-area: tags;
     display: flex;
     align-items: flex-end;
     gap: 0.5ch;
@@ -136,9 +134,7 @@
     color: rgb(var(--color-text), 30%);
     font-weight: 300;
   }
-  .genre :global(span) {
-  }
-  .genre :global(span):not(:last-of-type)::after {
+  .tags :global(span):not(:last-of-type)::after {
     content: "|";
     margin-left: 0.5ch;
   }
