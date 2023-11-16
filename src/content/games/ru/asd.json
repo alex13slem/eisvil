@@ -1,6 +1,11 @@
 {
-  "body": "asd",
+  "title": "asd",
   "genre": "arcade",
+  "developer": "asd",
+  "publisher": "asd",
+  "date": "11/17/2023",
+  "description": "asd",
+  "body": "asd",
   "langs": {
     "ru": {
       "voice": false,
@@ -11,15 +16,10 @@
       "text": false
     }
   },
+  "thumbnail": "/images/uploads/eisvil.jpg",
+  "hero_image": "/images/uploads/eisvil.jpg",
   "ad_banner": {
     "src": "/images/uploads/eisvil.jpg",
     "alt": "asd"
-  },
-  "developer": "asd",
-  "thumbnail": "/images/uploads/eisvil.jpg",
-  "date": "11/17/2023",
-  "hero_image": "/images/uploads/eisvil.jpg",
-  "title": "asd",
-  "publisher": "asd",
-  "description": "asd"
+  }
 }
