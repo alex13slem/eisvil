@@ -32,32 +32,87 @@ collections:
     extention: "json"
     format: "json"
     fields:
-      - label: "Заголовок"
+      - label: "Название"
+        hint: "(до 30 символов)"
         name: "title"
         widget: "string"
 
-      - label: "Обложка"
-        name: "thumbnail"
-        allow_multiple: false
-        widget: "image"
+      - label: "Краткое описание"
+        hint: "(до 300 символов)"
+        name: "description"
+        widget: "markdown"
 
-      - label: "Теги"
-        name: "tags"
-        widget: "list"
+      - label: "Подробное описание"
+        hint: "(до 4000 символов)"
+        name: "body"
+        widget: "markdown"
 
-      - label: "Ссылки на платформы"
-        name: "links"
-        widget: "object"
-        fields:
-          - { label: "Google", name: "google", widget: "string" }
-          - { label: "Apple", name: "apple", widget: "string" }
+      - label: "Жанр"
+        name: "genre"
+        widget: "select"
+        options:
+          - { label: "Аркада", value: "arcade" }
+          - { label: "RPG", value: "rpg" }
+          - { label: "Шутер", value: "shooter" }
+          - { label: "Гонки", value: "racing" }
+          - { label: "Экшен", value: "action" }
+          - { label: "Стратегия", value: "strategy" }
+          - { label: "Файтинг", value: "fighting" }
+          - { label: "Хоррор", value: "horror" }
+          - { label: "Симулятор", value: "simulator" }
+          - { label: "Стелс", value: "stealth" }
 
-      - label: "Ссылка на раздел"
-        name: "link"
+      - label: "Разработчик"
+        name: "developer"
         widget: "string"
 
-      - label: "Категория"
-        name: "category"
+      - label: "Издатель"
+        name: "publisher"
+        widget: "string"
+
+      - label: "Дата выхода"
+        name: "date"
+        widget: "datetime"
+        date_format: "DD.MM.YYYY"
+        format: "L"
+
+      - label: "Языки"
+        name: "langs"
+        widget: "object"
+        summary: "{{fields.name}}"
+        collapsed: true
+        fields:
+          - label: "Русский"
+            name: "ru"
+            widget: "object"
+            fields:
+              - { label: "Озвучка", name: "voice", widget: "boolean" }
+              - { label: "Текст", name: "text", widget: "boolean" }
+          - label: "Английский"
+            name: "en"
+            widget: "object"
+            fields:
+              - { label: "Озвучка", name: "voice", widget: "boolean" }
+              - { label: "Текст", name: "text", widget: "boolean" }
+
+      - label: "Площадки"
+        name: "platforms"
+        widget: "object"
+        fields:
+          - { label: "App Store", name: "apple", widget: "string" }
+          - { label: "Google Play", name: "google", widget: "string" }
+          - { label: "RuStore", name: "ru_store", widget: "string" }
+          - { label: "AppGallery", name: "app_gallery", widget: "string" }
+          - { label: "Яндекс Игры", name: "yandex", widget: "string" }
+          - { label: "VK Play", name: "vk", widget: "string" }
+          - { label: "Steam", name: "steam", widget: "string" }
+          - { label: "Epic Games", name: "epic", widget: "string" }
+          - { label: "Xbox", name: "xbox", widget: "string" }
+          - { label: "Sony PlayStation", name: "playstation", widget: "string" }
+          - { label: "Nintendo Switch", name: "nintendo", widget: "string" }
+
+      - label: "Статус"
+        name: "status"
         widget: "select"
         default: { label: "Нет", value: "" }
         options:
@@ -66,6 +121,38 @@ collections:
           - { label: "Новинка", value: "new" }
           - { label: "Популярные", value: "hot" }
           - { label: "В тесте", value: "test" }
+
+      - label: "В избранном"
+        name: "favorites"
+        widget: "select"
+        default: { label: "Нет", value: "" }
+        options:
+          - { label: "Нет", value: "" }
+          - { label: "Топ", value: "top" }
+          - { label: "Лучшие", value: "best" }
+
+      - label: "Картинка для описания"
+        hint: "(Размер 1024 х 500) - строгие требования"
+        name: "thumbnail"
+        widget: "image"
+        allow_multiple: false
+
+      - label: "Шапка для секции"
+        hint: "(1920 х 760) - строгие требования"
+        name: "thumbnail"
+        widget: "image"
+        allow_multiple: false
+
+      - label: "Рекламный баннер"
+        hint: "(16:9 Лучше 1920х1080) - строгие требования"
+        name: "banner"
+        widget: "image"
+        allow_multiple: false
+
+      - label: "Галлерея"
+        hint: "(от 4 до 10, Размер 16:9 или 9:16, длина каждой стороны – от 320 до 3840)  - строгие требования"
+        name: "gallery"
+        widget: "image"
 
   - name: "publishing-rus"
     label: "Издательство (Рус)"
@@ -113,9 +200,13 @@ collections:
         name: "title"
         widget: "string"
 
-      - label: "Ссылка на раздел"
-        name: "link"
-        widget: "string"
+      - label: "Краткое описание"
+        name: "description"
+        widget: "markdown"
+
+      - label: "Подробное описание"
+        name: "body"
+        widget: "markdown"
 
       - label: "Галлерея"
         name: "images"
@@ -130,11 +221,3 @@ collections:
         name: "order"
         widget: "number"
         value_type: "int"
-
-      - label: "Краткое описание"
-        name: "description"
-        widget: "markdown"
-
-      - label: "Подробное описание"
-        name: "body"
-        widget: "markdown"

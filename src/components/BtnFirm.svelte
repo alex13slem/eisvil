@@ -61,6 +61,26 @@
   .v-transparent {
     span.bg {
       border: 1px solid currentColor;
+
+      &::after,
+      &::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 1px;
+        background-color: rgb(var(--color-white));
+        transform: rotate(45deg);
+      }
+      &::before {
+        top: -1px;
+        left: 25px;
+        transform-origin: top;
+      }
+      &::after {
+        bottom: -2px;
+        right: 25px;
+        transform-origin: bottom;
+      }
     }
   }
 
