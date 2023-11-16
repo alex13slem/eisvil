@@ -41,5 +41,21 @@ export const gamesSchema = z.object({
   hero_image: z.string(),
   ad_banner: z.object({ src: z.string(), alt: z.string() }),
 
-  // category: z.enum(["test", "dev", "hot", "new", ""]).optional(),
+  status: z.enum(["test", "dev", "hot", "new"]).optional(),
+  favorites: z.enum(["top", "best"]).optional(),
+  platforms: z
+    .object({
+      playstation: z.string().optional(),
+      epic: z.string().optional(),
+      ru_store: z.string().optional(),
+      steam: z.string().optional(),
+      yandex: z.string().optional(),
+      xbox: z.string().optional(),
+      app_gallery: z.string().optional(),
+      vk: z.string().optional(),
+      nintendo: z.string().optional(),
+      google: z.string().optional(),
+      apple: z.string().optional(),
+    })
+    .optional(),
 });

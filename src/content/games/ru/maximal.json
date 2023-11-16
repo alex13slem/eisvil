@@ -12,6 +12,9 @@
     "google": "maximal",
     "apple": "maximal"
   },
+  "status": "new",
+  "favorites": "top",
+  "hero_image": "/images/uploads/eisvil.jpg",
   "body": "maximal",
   "genre": "rpg",
   "langs": {
@@ -41,9 +44,6 @@
       "alt": "maximal2"
     }
   ],
-  "status": "new",
-  "hero_image": "/images/uploads/eisvil.jpg",
-  "favorites": "top",
   "title": "maximal",
   "publisher": "maximal",
   "description": "maximal"
