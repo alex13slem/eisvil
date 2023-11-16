@@ -195,25 +195,29 @@ collections:
         hint: "(Размер 1024 х 500) - строгие требования"
         name: "thumbnail"
         widget: "image"
-        allow_multiple: false
 
       - label: "Шапка для секции"
         hint: "(1920 х 760) - строгие требования"
         name: "hero_image"
         widget: "image"
-        allow_multiple: false
 
       - label: "Рекламный баннер"
         hint: "(16:9 Лучше 1920х1080) - строгие требования"
-        name: "banner"
-        widget: "image"
-        allow_multiple: false
+        name: "ad_banner"
+        widget: "object"
+        fields:
+          - { label: Источник, name: src, widget: image }
+          - { label: Описание, name: alt, widget: string }
 
       - label: "Галлерея"
-        hint: "(от 4 до 10, Размер 16:9 или 9:16, длина каждой стороны – от 320 до 3840)  - строгие требования"
-        required: false
+        hint: "(от 4 до 10, Размер 16:9 или 9:16, длина каждой стороны – от 320 до 3840) - строгие требования"
         name: "gallery"
-        widget: "image"
+        widget: "list"
+        summary: "{{fields.alt}}"
+        label_singular: "Добавить картинку"
+        fields:
+          - { label: Источник, name: src, widget: image }
+          - { label: Описание, name: alt, widget: string }
 
   - name: "publishing-rus"
     label: "Издательство (Рус)"
@@ -270,12 +274,12 @@ collections:
         widget: "markdown"
 
       - label: "Галлерея"
-        name: "images"
+        name: "gallery"
         widget: "list"
         summary: "{{fields.alt}}"
         label_singular: "Добавить картинку"
         fields:
-          - { label: Ссылка, name: src, widget: image }
+          - { label: Источник, name: src, widget: image }
           - { label: Описание, name: alt, widget: string }
 
       - label: "Порядок в секции"
