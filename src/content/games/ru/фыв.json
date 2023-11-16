@@ -1,0 +1,30 @@
+{
+  "body": "фыв",
+  "genre": "arcade",
+  "langs": {
+    "ru": {
+      "voice": false,
+      "text": false
+    },
+    "en": {
+      "voice": false,
+      "text": false
+    }
+  },
+  "ad_banner": {
+    "src": "/images/uploads/eisvil.jpg",
+    "alt": "фыв"
+  },
+  "developer": "фыв",
+  "thumbnail": "/images/uploads/eisvil.jpg",
+  "date": "11/16/2023",
+  "status": "dev",
+  "hero_image": "/images/uploads/eisvil.jpg",
+  "favorites": {
+    "label": "Нет",
+    "value": ""
+  },
+  "title": "фыв",
+  "publisher": "фыв",
+  "description": "фыв"
+}
