@@ -86,17 +86,38 @@ collections:
             name: "ru"
             widget: "object"
             fields:
-              - { label: "Озвучка", name: "voice", widget: "boolean" }
-              - { label: "Текст", name: "text", widget: "boolean" }
+              - {
+                  label: "Озвучка",
+                  name: "voice",
+                  widget: "boolean",
+                  default: false,
+                }
+              - {
+                  label: "Текст",
+                  name: "text",
+                  widget: "boolean",
+                  default: false,
+                }
           - label: "Английский"
             name: "en"
             widget: "object"
             fields:
-              - { label: "Озвучка", name: "voice", widget: "boolean" }
-              - { label: "Текст", name: "text", widget: "boolean" }
+              - {
+                  label: "Озвучка",
+                  name: "voice",
+                  widget: "boolean",
+                  default: false,
+                }
+              - {
+                  label: "Текст",
+                  name: "text",
+                  widget: "boolean",
+                  default: false,
+                }
 
       - label: "Площадки"
         name: "platforms"
+        required: false
         widget: "object"
         fields:
           - { label: "App Store", name: "apple", widget: "string" }
@@ -151,6 +172,7 @@ collections:
 
       - label: "Галлерея"
         hint: "(от 4 до 10, Размер 16:9 или 9:16, длина каждой стороны – от 320 до 3840)  - строгие требования"
+        required: false
         name: "gallery"
         widget: "image"
 
