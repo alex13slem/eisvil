@@ -1,0 +1,26 @@
+{
+  "body": "asd",
+  "genre": "rpg",
+  "langs": {
+    "ru": {
+      "voice": false,
+      "text": false
+    },
+    "en": {
+      "voice": false,
+      "text": false
+    }
+  },
+  "ad_banner": {
+    "src": "/images/uploads/eisvil.jpg",
+    "alt": "asd"
+  },
+  "developer": "asd",
+  "thumbnail": "/images/uploads/eisvil.jpg",
+  "date": "11/16/2023",
+  "status": null,
+  "hero_image": "/images/uploads/eisvil.jpg",
+  "title": "asd",
+  "publisher": "asd",
+  "description": "asd"
+}
