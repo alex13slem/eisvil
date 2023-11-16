@@ -1,0 +1,41 @@
+{
+  "platforms": {
+    "apple": "максимал",
+    "yandex": "максимал"
+  },
+  "body": "максимал",
+  "genre": "racing",
+  "langs": {
+    "ru": {
+      "voice": true,
+      "text": true
+    },
+    "en": {
+      "voice": true,
+      "text": false
+    }
+  },
+  "ad_banner": {
+    "src": "/images/uploads/eisvil.jpg",
+    "alt": "максимал"
+  },
+  "developer": "максимал",
+  "thumbnail": "/images/uploads/eisvil.jpg",
+  "date": "11/16/2023",
+  "gallery": [
+    {
+      "src": "/images/uploads/eisvil.jpg",
+      "alt": "максимал1"
+    },
+    {
+      "src": "/images/uploads/eisvil.jpg",
+      "alt": "максимал2"
+    }
+  ],
+  "status": "dev",
+  "hero_image": "/images/uploads/eisvil.jpg",
+  "favorites": "top",
+  "title": "максимал",
+  "publisher": "максимал",
+  "description": "максимал"
+}
