@@ -1,0 +1,33 @@
+{
+  "platforms": {
+    "steam": "фыва"
+  },
+  "body": "фыва",
+  "genre": "arcade",
+  "langs": {
+    "ru": {
+      "voice": true,
+      "text": false
+    },
+    "en": {
+      "voice": false,
+      "text": false
+    }
+  },
+  "developer": "фыва",
+  "thumbnail": "/images/uploads/eisvil.jpg",
+  "banner": "/images/uploads/eisvil.jpg",
+  "date": "11/16/2023",
+  "status": {
+    "label": "Нет",
+    "value": ""
+  },
+  "hero_image": "/images/uploads/eisvil.jpg",
+  "favorites": {
+    "label": "Нет",
+    "value": ""
+  },
+  "title": "фыва",
+  "publisher": "фыва",
+  "description": "фыва"
+}
