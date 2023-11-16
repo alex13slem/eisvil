@@ -1,0 +1,25 @@
+{
+  "body": "asd",
+  "genre": "arcade",
+  "langs": {
+    "ru": {
+      "voice": false,
+      "text": false
+    },
+    "en": {
+      "voice": false,
+      "text": false
+    }
+  },
+  "ad_banner": {
+    "src": "/images/uploads/eisvil.jpg",
+    "alt": "asd"
+  },
+  "developer": "asd",
+  "thumbnail": "/images/uploads/eisvil.jpg",
+  "date": "11/17/2023",
+  "hero_image": "/images/uploads/eisvil.jpg",
+  "title": "asd",
+  "publisher": "asd",
+  "description": "asd"
+}
