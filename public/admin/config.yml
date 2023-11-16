@@ -139,7 +139,7 @@ collections:
 
       - label: "Шапка для секции"
         hint: "(1920 х 760) - строгие требования"
-        name: "thumbnail"
+        name: "hero_image"
         widget: "image"
         allow_multiple: false
 
