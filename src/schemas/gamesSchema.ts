@@ -2,6 +2,12 @@ import { z } from "astro/zod";
 
 export const gamesSchema = z.object({
   title: z.string(),
+  genre: z.enum([]),
+  developer: z.string(),
+  publisher: z.string(),
+  date: z.date(),
+  description: z.string(),
+  body: z.string(),
   thumbnail: z.string(),
   tags: z.array(z.string().optional()),
   link: z.string().url().optional(),

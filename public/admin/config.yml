@@ -174,7 +174,7 @@ collections:
       - label: "Статус"
         name: "status"
         widget: "select"
-        default: { label: "Нет", value: "" }
+        required: false
         options:
           - { label: "Нет", value: "" }
           - { label: "В разработке", value: "dev" }
@@ -185,7 +185,7 @@ collections:
       - label: "В избранном"
         name: "favorites"
         widget: "select"
-        default: { label: "Нет", value: "" }
+        required: false
         options:
           - { label: "Нет", value: "" }
           - { label: "Топ", value: "top" }
