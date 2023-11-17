@@ -69,7 +69,7 @@
   .detail-slider {
     margin-bottom: 2rem;
     background-color: rgb(var(--color-white), 10%);
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow-active);
 
     transition-property: opacity;
     transition: var(--load-fade);
@@ -149,7 +149,7 @@
           rgba(255, 255, 255, 0) 60%
         )
         30;
-      box-shadow: var(--box-shadow);
+      box-shadow: var(--box-shadow-active);
       &::after {
         opacity: 1;
       }

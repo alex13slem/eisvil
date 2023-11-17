@@ -22,16 +22,21 @@
 
     border: none;
     background: transparent;
+    filter: drop-shadow(var(--box-shadow-hover));
     &:not(:disabled) {
       cursor: pointer;
     }
 
     color: rgb(var(--color-text));
 
-    transition-property: transform, filter;
+    transition-property: filter;
     transition: var(--trans-default);
 
     @include firm-arrows;
+
+    &:hover {
+      filter: drop-shadow(var(--box-shadow-active));
+    }
 
     &.start {
       align-self: flex-start;
@@ -115,5 +120,8 @@
     font-weight: 900;
     color: currentColor;
     text-transform: uppercase;
+
+    transition-property: text-shadow;
+    transition: var(--trans-default);
   }
 </style>

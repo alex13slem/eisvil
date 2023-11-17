@@ -113,7 +113,7 @@
         rgba(255, 255, 255, 0) 60%
       )
       30;
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow-hover);
     &::after {
       opacity: 1;
     }

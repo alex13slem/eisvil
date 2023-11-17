@@ -60,7 +60,7 @@
       // --img-size: 280px;
       transform: scale(107%);
 
-      filter: drop-shadow(var(--box-shadow)) brightness(100%);
+      filter: drop-shadow(var(--box-shadow-active)) brightness(100%);
       // filter: drop-shadow(0 0 70px rgb(var(--color-bg)));
 
       button {

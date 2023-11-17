@@ -165,7 +165,7 @@
   .game-card:hover {
     /* --op-border: var(--border); */
     transform: scale(102%);
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow-hover);
     border-image: linear-gradient(
         160deg,
         rgb(255, 255, 255, 30%) 0%,

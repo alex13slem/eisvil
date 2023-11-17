@@ -78,42 +78,22 @@ collections:
 
       - label: "Языки"
         name: "langs"
-        widget: "object"
-        summary: "{{fields.name}}"
+        widget: "list"
+        summary: "{{fields.lang}}"
         collapsed: true
+        default:
+          - { lang: "Русский", slug: ru, voice: false, text: false }
+          - { lang: "Английский", slug: en, voice: false, text: false }
         fields:
-          - label: "Русский"
-            name: "ru"
-            widget: "object"
-            fields:
-              - {
-                  label: "Озвучка",
-                  name: "voice",
-                  widget: "boolean",
-                  default: false,
-                }
-              - {
-                  label: "Текст",
-                  name: "text",
-                  widget: "boolean",
-                  default: false,
-                }
-          - label: "Английский"
-            name: "en"
-            widget: "object"
-            fields:
-              - {
-                  label: "Озвучка",
-                  name: "voice",
-                  widget: "boolean",
-                  default: false,
-                }
-              - {
-                  label: "Текст",
-                  name: "text",
-                  widget: "boolean",
-                  default: false,
-                }
+          - { label: "Язык", name: "lang", widget: "string" }
+          - { label: "ID", name: "slug", widget: "string" }
+          - {
+              label: "Озвучка",
+              name: "voice",
+              widget: "boolean",
+              default: false,
+            }
+          - { label: "Текст", name: "text", widget: "boolean", default: false }
 
       - label: "Площадки"
         name: "platforms"
