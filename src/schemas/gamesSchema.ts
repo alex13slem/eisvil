@@ -15,8 +15,6 @@ import { z } from "astro/zod";
 //   category: z.enum(["test", "dev", "hot", "new", ""]).optional(),
 // });
 
-const zLang = z.object({ voice: z.boolean(), text: z.boolean() });
-
 export const gamesSchema = z.object({
   title: z.string(),
   genre: z.enum([
@@ -36,7 +34,16 @@ export const gamesSchema = z.object({
   date: z.string(),
   description: z.string(),
   body: z.string(),
-  langs: z.object({ ru: zLang, en: zLang }),
+  langs: z.array(
+    z
+      .object({
+        lang: z.string(),
+        slug: z.string(),
+        voice: z.boolean(),
+        text: z.boolean(),
+      })
+      .optional(),
+  ),
   thumbnail: z.string(),
   hero_image: z.string(),
   ad_banner: z.object({ src: z.string(), alt: z.string() }),
