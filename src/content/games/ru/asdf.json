@@ -1,0 +1,43 @@
+{
+  "platforms": {
+    "apple": "asd",
+    "google": "asdf"
+  },
+  "body": "asdf",
+  "genre": "rpg",
+  "langs": [
+    {
+      "lang": "Русский",
+      "slug": "ru",
+      "voice": false,
+      "text": false
+    },
+    {
+      "lang": "Английский",
+      "slug": "en",
+      "voice": false,
+      "text": false
+    }
+  ],
+  "ad_banner": {
+    "src": "../img/asdf/chain_banner.png",
+    "alt": "asdf"
+  },
+  "developer": "asdf",
+  "thumbnail": "../img/asdf/chain-1024x500.jpg",
+  "date": "11/21/2023",
+  "gallery": [
+    {
+      "src": "../img/asdf/chain_banner.png",
+      "alt": "asdf"
+    },
+    {
+      "src": "../img/asdf/chain-512x512.png",
+      "alt": "asdf"
+    }
+  ],
+  "hero_image": "../img/asdf/chain_banner.png",
+  "title": "asdf",
+  "publisher": "asdf",
+  "description": "asdf"
+}
