@@ -9,14 +9,14 @@
     {
       "lang": "Русский",
       "slug": "ru",
-      "voice": false,
+      "voice": true,
       "text": false
     },
     {
       "lang": "Английский",
       "slug": "en",
       "voice": false,
-      "text": false
+      "text": true
     }
   ],
   "ad_banner": {
@@ -24,7 +24,7 @@
     "alt": "asdf"
   },
   "developer": "asdf",
-  "thumbnail": "../img/asdf/chain-1024x500.jpg",
+  "thumbnail": "../img/chain/chain-1024x500.jpg",
   "date": "11/21/2023",
   "gallery": [
     {
@@ -36,7 +36,7 @@
       "alt": "asdf"
     }
   ],
-  "hero_image": "../img/asdf/chain_banner.png",
+  "hero_image": "../img/chain/chain_banner.png",
   "title": "Chain",
   "publisher": "asdf",
   "description": "### Заголовок\n\nКак уже неоднократно упомянуто, тщательные исследования конкурентов в равной степени предоставлены сами себе. Как уже неоднократно упомянуто, явные признаки победы институционализации указаны как претенденты на роль ключевых факторов."
