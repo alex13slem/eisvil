@@ -62,6 +62,7 @@
     min-height: 40px;
     padding: 0;
     padding-bottom: 13px;
+    cursor: default;
 
     display: flex;
     justify-content: center;
@@ -70,7 +71,6 @@
     font-weight: 700;
     color: rgb(var(--color-text), 30%);
 
-    cursor: pointer;
     background-color: transparent;
     border: 0;
     border-bottom: 4px solid rgb(var(--color-text), 30%);
