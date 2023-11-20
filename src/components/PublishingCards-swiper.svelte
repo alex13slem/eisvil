@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { pubTabIdx } from "@/components/PublishingTabs/store.ts";
+  import { pubTabIdx } from "@/store/publishing";
   import type { CollectionEntry } from "astro:content";
   import PublishingCard from "./PublishingCard.svelte";
   import { onMount } from "svelte";

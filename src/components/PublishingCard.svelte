@@ -1,119 +1,53 @@
 <script lang="ts">
-  import type { CollectionEntry } from "astro:content";
-  import { pubTabIdx } from "./PublishingTabs/store";
+  import { fly } from "svelte/transition";
+  import { type SlideData, initLeft } from "../store/publishing";
+  import { onMount } from "svelte";
+  import { sineInOut } from "svelte/easing";
 
-  export let data: CollectionEntry<"publishing">;
+  export let data: SlideData;
   export let isActive: boolean = false;
-  export let targetIdx: number | null;
 
   const {
     data: { thumbnail, description, title },
+    infIdx,
   } = data;
 
-  let currentIdx: number;
-  $: targetIdx;
-
-  function handleClick() {
-    if (targetIdx === null) return;
-    pubTabIdx.set(targetIdx);
-  }
-  function setCurrIxd(idx: number) {
-    currentIdx = idx;
-  }
-
-  pubTabIdx.subscribe(setCurrIxd);
+  let load = false;
+  onMount(() => (load = true));
 </script>
 
-<article class:active={isActive} class:inactive={targetIdx === null}>
-  <button on:click={handleClick}>
+{#if load}
+  <article
+    transition:fly={{
+      duration: 700,
+      x: $initLeft ? "-100%" : "100%",
+      easing: sineInOut,
+    }}
+    class:active={isActive}
+    style="--idx: {infIdx}; "
+  >
     <div class="image"><img src={thumbnail} alt={title} /></div>
     <div class="body">
       <h3>{title}</h3>
       <p>{description}</p>
     </div>
-  </button>
-</article>
+  </article>
+{/if}
 
 <style lang="scss">
-  /* 
-  style="--idx: {targetIdx === currentIdx
-    ? targetIdx - 1
-    : currentIdx - targetIdx}"
-  */
   article {
-    /* order: var(--idx); */
-    // --img-size: 255px;
+    --width: calc(33.3% - 10px);
     aspect-ratio: 4/5;
-    flex: 0 0 calc(33.3% - 20px);
-    position: relative;
+    position: absolute;
+    width: var(--width);
+    left: calc(
+      calc(var(--width) + 30px) * calc(var(--idx) + var(--offset-idx) * -1)
+    );
 
     transform-origin: top;
-    transition-property: transform, filter, left;
+    transition-property: transform, filter, left, opacity;
     transition: var(--trans-slow);
 
-    &:hover {
-      .image {
-        filter: brightness(75%);
-      }
-    }
-    &.active {
-      // --img-size: 280px;
-      transform: scale(107%);
-
-      filter: drop-shadow(var(--box-shadow-active)) brightness(100%);
-      // filter: drop-shadow(0 0 70px rgb(var(--color-bg)));
-
-      button {
-        &::after,
-        &::before {
-          opacity: 1;
-        }
-      }
-
-      .image {
-        filter: brightness(100%);
-        &::after {
-          border-color: rgb(var(--color-accent), 50%);
-        }
-        &::before {
-          opacity: 1;
-        }
-        img {
-          border-image: linear-gradient(
-              135deg,
-              rgb(var(--color-accent), 50%) 25%,
-              transparent 50%
-            )
-            30;
-        }
-      }
-    }
-
-    &.inactive {
-      pointer-events: none;
-      position: relative;
-      &::after {
-        z-index: 2;
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          90deg,
-          rgb(var(--color-bg)) 20%,
-          transparent 200%
-        );
-      }
-      &:last-child::after {
-        transform: rotate(180deg);
-      }
-    }
-  }
-  button {
-    all: unset;
-    box-sizing: border-box;
-    cursor: pointer;
-    text-align: center;
-    height: 100%;
     display: flex;
     flex-direction: column;
     &::after {
@@ -125,10 +59,6 @@
       left: 13px;
       width: calc(100% - 13px);
       aspect-ratio: 1;
-      // height: calc(var(--img-size) - 13px);
-      // height: calc(280px - 13px);
-
-      // border: var(--border-card-accent);
       border: 1px solid;
       border-image: linear-gradient(
           135deg,
@@ -136,12 +66,6 @@
           transparent 50%
         )
         30;
-      // border-image: linear-gradient(
-      //     140deg,
-      //     rgb(var(--border-card-accent-color)) calc(var(--img-size) / 4),
-      //     transparent 45%
-      //   )
-      //   30;
 
       border-bottom: none;
       border-right: none;
@@ -163,7 +87,88 @@
 
       transition: opacity var(--trans-slow);
     }
+
+    &:hover {
+      .image {
+        filter: brightness(75%);
+      }
+    }
+    &.active {
+      z-index: 2;
+      transform: scale(107%);
+
+      filter: drop-shadow(var(--box-shadow-active)) brightness(100%);
+
+      &::after,
+      &::before {
+        opacity: 1;
+      }
+
+      .image {
+        filter: brightness(100%);
+        &::after {
+          border-color: rgb(var(--color-accent), 50%);
+        }
+        &::before {
+          opacity: 1;
+        }
+        img {
+          border-image: linear-gradient(
+              135deg,
+              rgb(var(--color-accent), 50%) 25%,
+              transparent 50%
+            )
+            30;
+        }
+      }
+    }
   }
+  // button {
+  //   all: unset;
+  //   box-sizing: border-box;
+  //   cursor: pointer;
+  //   text-align: center;
+  //   height: 100%;
+  //   display: flex;
+  //   flex-direction: column;
+  //   &::after {
+  //     content: "";
+  //     opacity: 0;
+  //     z-index: 2;
+  //     position: absolute;
+  //     top: 13px;
+  //     left: 13px;
+  //     width: calc(100% - 13px);
+  //     aspect-ratio: 1;
+  //     border: 1px solid;
+  //     border-image: linear-gradient(
+  //         135deg,
+  //         rgb(var(--border-card-accent-color)),
+  //         transparent 50%
+  //       )
+  //       30;
+
+  //     border-bottom: none;
+  //     border-right: none;
+
+  //     transition-property: width, height, opacity;
+  //     transition: var(--trans-slow);
+  //   }
+  //   &::before {
+  //     content: "";
+  //     opacity: 0;
+  //     z-index: 2;
+  //     position: absolute;
+  //     inset: 0;
+  //     width: 6px;
+  //     height: 6px;
+  //     top: 11px;
+  //     left: 11px;
+  //     background: rgb(var(--border-card-accent-color));
+
+  //     transition: opacity var(--trans-slow);
+  //   }
+  // }
   .image {
     flex: 1 1 auto;
     overflow: hidden;
@@ -205,7 +210,6 @@
     }
 
     img {
-      // height: var(--img-size);
       height: 100%;
       width: 100%;
       object-fit: cover;
