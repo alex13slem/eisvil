@@ -71,7 +71,7 @@
     }
   }
 
-  pubTabIdx.subscribe(())
+  // pubTabIdx.subscribe(())
 </script>
 
 <div
