@@ -1,0 +1,16 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div
+  class:list={["games-hero", className]}
+  {...props}
+  style="background-image: url(images/);"
+>
+</div>
+
+<style></style>

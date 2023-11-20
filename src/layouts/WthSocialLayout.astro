@@ -1,0 +1,19 @@
+---
+import AsideNav from "../components/AsideNav.astro";
+import SectSocials from "../sections/SectSocials.astro";
+import HtmlBase from "./HtmlBase.astro";
+---
+
+<HtmlBase title="E I S V I L | Игры" description="Секция игр">
+  <main>
+    <slot />
+    <SectSocials />
+  </main>
+</HtmlBase>
+
+<style>
+  main :global(section) {
+    padding-block: 50px;
+    overflow: hidden;
+  }
+</style>
