@@ -26,7 +26,9 @@
           <article>
             <h3>{title}</h3>
             <div class="links">
-              {#each platforms as { type: value }}{/each}
+              <!-- {#each platforms as }
+              
+              {/each} -->
             </div>
           </article>
         </div>
