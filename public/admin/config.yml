@@ -99,7 +99,7 @@ collections:
       - label: "Площадки"
         name: "platforms"
         widget: "list"
-        summary: "{{fields.name}}"
+        summary: "{{fields.title}}"
         default:
           - { title: "Sony Playstation", href: playstation, svg_href: "" }
           - { title: "RuStore", href: ru_store, svg_href: "" }
