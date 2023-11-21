@@ -11,36 +11,25 @@ import SectCarrier from "@/sections/SectCarrier.astro";
 import ServicesModalForm from "@/components/ServicesModalForm.svelte";
 import PublishingModalForm from "../components/PublishingModalForm.svelte";
 import ModalTrigger from "../components/ModalTrigger.svelte";
+import BasicLayout from "../layouts/BasicLayout.astro";
 
 const services = await getCollection("services");
 const publishing = await getCollection("publishing");
 ---
 
-<HtmlBase title="E I S V I L">
-  <main>
-    <SectHero>
-      <ModalTrigger client:load type={"services"} flexPosition="center">
-        Создать новый мир
-      </ModalTrigger>
-    </SectHero>
-    <SectGames />
-    <SectServices />
-    <SectPublishing />
-    <SectCarrier />
-    <SectSocials />
-    <SectForm />
-  </main>
+<BasicLayout title="E I S V I L">
+  <SectHero>
+    <ModalTrigger client:load type={"services"} flexPosition="center">
+      Создать новый мир
+    </ModalTrigger>
+  </SectHero>
+  <SectGames />
+  <SectServices />
+  <SectPublishing />
+  <SectCarrier />
 
-  <ServicesModalForm client:load services={services} />
-  <PublishingModalForm client:load publishing={publishing} />
-</HtmlBase>
-
-<style>
-  main {
-    min-height: calc(100vh - 60px);
-  }
-  main :global(section) {
-    padding-block: 50px;
-    overflow: hidden;
-  }
-</style>
+  <Fragment slot="after-main">
+    <ServicesModalForm client:load services={services} />
+    <PublishingModalForm client:load publishing={publishing} />
+  </Fragment>
+</BasicLayout>

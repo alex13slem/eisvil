@@ -137,6 +137,59 @@
   </div>
 </article>
 
+<!-- fields:
+- {
+    label: "App Store",
+    name: "apple",
+    widget: "string",
+    required: false,
+  }
+- {
+    label: "Google Play",
+    name: "google",
+    widget: "string",
+    required: false,
+  }
+- {
+    label: "RuStore",
+    name: "ru_store",
+    widget: "string",
+    required: false,
+  }
+- {
+label: "AppGallery",
+name: "app_gallery",
+widget: "string",
+required: false,
+}
+- {
+label: "Яндекс Игры",
+name: "yandex",
+widget: "string",
+required: false,
+}
+- { label: "VK Play", name: "vk", widget: "string", required: false }
+- { label: "Steam", name: "steam", widget: "string", required: false }
+- {
+label: "Epic Games",
+name: "epic",
+widget: "string",
+required: false,
+}
+- { label: "Xbox", name: "xbox", widget: "string", required: false }
+- {
+label: "Sony PlayStation",
+name: "playstation",
+widget: "string",
+required: false,
+}
+- {
+label: "Nintendo Switch",
+name: "nintendo",
+widget: "string",
+required: false,
+} -->
+
 <style lang="scss">
   swiper-container {
     width: calc(30px * 5);

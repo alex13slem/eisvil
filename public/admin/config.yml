@@ -98,58 +98,27 @@ collections:
 
       - label: "Площадки"
         name: "platforms"
-        widget: "object"
+        widget: "list"
+        summary: "{{fields.name}}"
+        default:
+          - { title: "Sony Playstation", href: playstation, svg_href: "" }
+          - { title: "RuStore", href: ru_store, svg_href: "" }
+          - { title: "Steam", href: steam, svg_href: "" }
+          - { title: "Yandex", href: yandex, svg_href: "" }
+          - { title: "X-Box", href: xbox, svg_href: "" }
+          - { title: "App Gallery (Huawei)", href: app_gallery, svg_href: "" }
+          - { title: "VK", href: vk, svg_href: "" }
+          - { title: "Nintendo", href: nintendo, svg_href: "" }
+          - { title: "Play Market", href: google, svg_href: "" }
+          - { title: "App Store", href: apple, svg_href: "" }
         fields:
+          - { label: "Name", name: "title", widget: "string" }
+          - { label: "ID", name: "href", widget: "string" }
           - {
-              label: "App Store",
-              name: "apple",
+              label: "Ссылка на SVG",
+              name: "svg_href",
               widget: "string",
-              required: false,
-            }
-          - {
-              label: "Google Play",
-              name: "google",
-              widget: "string",
-              required: false,
-            }
-          - {
-              label: "RuStore",
-              name: "ru_store",
-              widget: "string",
-              required: false,
-            }
-          - {
-              label: "AppGallery",
-              name: "app_gallery",
-              widget: "string",
-              required: false,
-            }
-          - {
-              label: "Яндекс Игры",
-              name: "yandex",
-              widget: "string",
-              required: false,
-            }
-          - { label: "VK Play", name: "vk", widget: "string", required: false }
-          - { label: "Steam", name: "steam", widget: "string", required: false }
-          - {
-              label: "Epic Games",
-              name: "epic",
-              widget: "string",
-              required: false,
-            }
-          - { label: "Xbox", name: "xbox", widget: "string", required: false }
-          - {
-              label: "Sony PlayStation",
-              name: "playstation",
-              widget: "string",
-              required: false,
-            }
-          - {
-              label: "Nintendo Switch",
-              name: "nintendo",
-              widget: "string",
-              required: false,
+              default: false,
             }
 
       - label: "Статус"

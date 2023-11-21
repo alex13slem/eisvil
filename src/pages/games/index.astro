@@ -1,10 +1,13 @@
 ---
+import { getCollection } from "astro:content";
 import GamesHero from "../../components/GamesHero.astro";
-import WthSocialLayout from "../../layouts/WthSocialLayout.astro";
+import BasicLayout from "../../layouts/BasicLayout.astro";
+import SectBestGames from "../../sections/SectBestGames.astro";
 ---
 
-<WthSocialLayout>
+<BasicLayout title="E I S V I L | Игры">
   <GamesHero />
-</WthSocialLayout>
+  <SectBestGames />
+</BasicLayout>
 
 <style></style>

@@ -1,14 +1,19 @@
 ---
 import AsideNav from "../components/AsideNav.astro";
+import SectForm from "../sections/SectForm.astro";
 import SectSocials from "../sections/SectSocials.astro";
 import HtmlBase from "./HtmlBase.astro";
+
+const { title, description } = Astro.props;
 ---
 
-<HtmlBase title="E I S V I L | Игры" description="Секция игр">
+<HtmlBase title={title} description={description}>
   <main>
     <slot />
     <SectSocials />
+    <SectForm />
   </main>
+  <slot name="after-main" />
 </HtmlBase>
 
 <style>

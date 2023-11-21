@@ -1,13 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import AsideLayout from "@/layouts/AsideLayout.astro";
 import type { InferGetStaticParamsType } from "astro";
-import FullscreenSliderWThumbs from "../../sections/SectSliderWThumbs.svelte";
-import { parse } from "marked";
-import ModalTrigger from "../../components/ModalTrigger.svelte";
-import ServicesModalForm from "../../components/ServicesModalForm.svelte";
-import WthSocialLayout from "../../layouts/WthSocialLayout.astro";
-import SectHero from "../../components/LandingHero.astro";
+import BasicLayout from "../../layouts/BasicLayout.astro";
 
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 
@@ -27,8 +21,8 @@ const { slug } = Astro.params as Params;
 const { games } = Astro.props;
 ---
 
-<WthSocialLayout>
+<BasicLayout>
   <!-- <ServicesModalForm client:load services={services} /> -->
-</WthSocialLayout>
+</BasicLayout>
 
 <style></style>

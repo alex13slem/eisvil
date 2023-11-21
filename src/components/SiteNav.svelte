@@ -6,13 +6,16 @@
 </script>
 
 <nav class="site-nav" class:onHeader class:onMobMenu {...$$restProps}>
-  <NavLink active={url.pathname.includes("asd")} {onHeader} {onMobMenu}
-    >Наши игры</NavLink
-  >
   <NavLink
-    active={url.pathname.includes("/services")}
     {onHeader}
     {onMobMenu}
+    active={url.pathname.includes("/games")}
+    href="/games">Наши игры</NavLink
+  >
+  <NavLink
+    {onHeader}
+    {onMobMenu}
+    active={url.pathname.includes("/services")}
     href="/services/2d-graphics">Услуги</NavLink
   >
   <NavLink active={url.pathname.includes("asd")} {onHeader} {onMobMenu}

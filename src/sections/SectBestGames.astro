@@ -1,0 +1,22 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import BestGamesSlider from "../components/BestGamesSlider.svelte";
+import { getCollection } from "astro:content";
+
+interface Props extends HTMLAttributes<"section"> {}
+const bestGames = await getCollection(
+  "games",
+  (game) => game.data.favorites === "best",
+);
+
+const { class: className, ...props } = Astro.props;
+---
+
+<section class:list={["sect-best-games", className]} {...props}>
+  <div class="container">
+    <h2 class="sect-title">Лучшие игры</h2>
+    <BestGamesSlider games={bestGames} />
+  </div>
+</section>
+
+<style></style>
