@@ -1,33 +1,10 @@
 <script lang="ts">
-  import SVGPlaygame from "./svg/platforms/SVGYandex.svelte";
-  import SVGApple from "./svg/platforms/SVGApple.svelte";
-  import SVGGoogle from "./svg/platforms/SVGGoogle.svelte";
   import CardBadge from "./CardBadge.svelte";
   import BtnFirm from "./BtnFirm.svelte";
   import type { CollectionEntry } from "astro:content";
-  import SvgSony from "./svg/platforms/SVGSony.svelte";
-  import SvgRusstore from "./svg/platforms/SVGRusstore.svelte";
-  import SvgSteam from "./svg/platforms/SVGSteam.svelte";
-  import SvgYandex from "./svg/platforms/SVGYandex.svelte";
-  import SvgxBox from "./svg/platforms/SVGXBox.svelte";
-  import SvgHuawei from "./svg/platforms/SVGHuawei.svelte";
-  import SvgVk from "./svg/platforms/SVGVk.svelte";
-  import SvgNintendo from "./svg/platforms/SVGNintendo.svelte";
-  import { register, type SwiperContainer } from "swiper/element";
+  import GameCardPlatformsSlider from "./GameCardPlatformsSlider.svelte";
 
   export let game: CollectionEntry<"games">;
-
-  register();
-  let swiperEl: SwiperContainer;
-
-  let isEnd: boolean;
-  let isBeginning: boolean;
-
-  const onProgress = (e: any) => {
-    const [swiper, progress] = e.detail;
-    isEnd = swiper.isEnd;
-    isBeginning = swiper.isBeginning;
-  };
 
   const { title, genre, thumbnail, status, favorites, platforms } = game.data;
 </script>
@@ -49,154 +26,13 @@
         <span>{favorites}</span>
       {/if}
     </p>
-    <div
-      class="links"
-      class:scrollable={platforms && Object.values(platforms).length > 4}
-      class:isBeginning
-      class:isEnd
-    >
-      <swiper-container
-        bind:this={swiperEl}
-        on:swiperprogress={onProgress}
-        mousewheel
-        slides-per-view="auto"
-        space-between="10"
-      >
-        <!-- {#if platforms?.playstation}
-          <swiper-slide>
-            <a href={platforms.playstation} title="Sony Playstation">
-              <SvgSony />
-            </a>
-          </swiper-slide>
-        {/if}
-        {#if platforms?.ru_store}
-          <swiper-slide>
-            <a href={platforms.ru_store} title="RuStore">
-              <SvgRusstore />
-            </a>
-          </swiper-slide>
-        {/if}
-        {#if platforms?.steam}
-          <swiper-slide>
-            <a href={platforms.steam} title="Steam">
-              <SvgSteam />
-            </a>
-          </swiper-slide>
-        {/if}
-        {#if platforms?.yandex}
-          <swiper-slide>
-            <a href={platforms.yandex} title="Yandex">
-              <SvgYandex />
-            </a>
-          </swiper-slide>
-        {/if}
-        {#if platforms?.xbox}
-          <swiper-slide>
-            <a href={platforms.xbox} title="X-Box">
-              <SvgxBox />
-            </a>
-          </swiper-slide>
-        {/if}
-        {#if platforms?.app_gallery}
-          <swiper-slide>
-            <a href={platforms.app_gallery} title="App Gallery (Huawei)">
-              <SvgHuawei />
-            </a>
-          </swiper-slide>
-        {/if}
-        {#if platforms?.vk}
-          <swiper-slide>
-            <a href={platforms.vk} title="VK">
-              <SvgVk />
-            </a>
-          </swiper-slide>
-        {/if}
-        {#if platforms?.nintendo}
-          <swiper-slide>
-            <a href={platforms.nintendo} title="Nintendo">
-              <SvgNintendo />
-            </a>
-          </swiper-slide>
-        {/if}
-        {#if platforms?.google}
-          <swiper-slide>
-            <a href={platforms.google} title="Play Market">
-              <SVGGoogle />
-            </a>
-          </swiper-slide>
-        {/if}
-        {#if platforms?.apple}
-          <swiper-slide>
-            <a href={platforms.apple} title="App Store">
-              <SVGApple />
-            </a>
-          </swiper-slide>
-        {/if} -->
-      </swiper-container>
-    </div>
+    {#if platforms?.length}
+      <GameCardPlatformsSlider {platforms} />
+    {/if}
   </div>
 </article>
 
-<!-- fields:
-- {
-    label: "App Store",
-    name: "apple",
-    widget: "string",
-    required: false,
-  }
-- {
-    label: "Google Play",
-    name: "google",
-    widget: "string",
-    required: false,
-  }
-- {
-    label: "RuStore",
-    name: "ru_store",
-    widget: "string",
-    required: false,
-  }
-- {
-label: "AppGallery",
-name: "app_gallery",
-widget: "string",
-required: false,
-}
-- {
-label: "Яндекс Игры",
-name: "yandex",
-widget: "string",
-required: false,
-}
-- { label: "VK Play", name: "vk", widget: "string", required: false }
-- { label: "Steam", name: "steam", widget: "string", required: false }
-- {
-label: "Epic Games",
-name: "epic",
-widget: "string",
-required: false,
-}
-- { label: "Xbox", name: "xbox", widget: "string", required: false }
-- {
-label: "Sony PlayStation",
-name: "playstation",
-widget: "string",
-required: false,
-}
-- {
-label: "Nintendo Switch",
-name: "nintendo",
-widget: "string",
-required: false,
-} -->
-
 <style lang="scss">
-  swiper-container {
-    width: calc(30px * 5);
-  }
-  swiper-slide {
-    width: 30px;
-  }
   .game-card {
     position: relative;
     aspect-ratio: 8/7;
@@ -290,63 +126,5 @@ required: false,
   .tags :global(span):not(:last-of-type)::after {
     content: "|";
     margin-left: 0.5ch;
-  }
-
-  .links {
-    position: relative;
-    grid-area: links;
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.5rem;
-
-    &.scrollable {
-      &:hover {
-        &::after,
-        &::before {
-          opacity: 0;
-        }
-      }
-      &::after,
-      &::before {
-        content: "";
-        pointer-events: none;
-        z-index: 2;
-        position: absolute;
-        width: 20px;
-        height: 100%;
-        background-image: linear-gradient(
-          90deg,
-          rgb(var(--color-card)),
-          transparent
-        );
-        top: 0;
-        transition-duration: opacity;
-        transition: var(--trans-default);
-      }
-      &::before {
-        left: -1px;
-      }
-      &::after {
-        right: -1px;
-        transform: rotate(180deg);
-      }
-      &.isEnd {
-        &::after {
-          display: none;
-        }
-      }
-      &.isBeginning {
-        &::before {
-          display: none;
-        }
-      }
-    }
-  }
-  .links a {
-    color: rgb(var(--color-text), 10%);
-    transition: color var(--trans-default);
-  }
-  .links a:hover {
-    color: rgb(var(--color-text), 30%);
   }
 </style>

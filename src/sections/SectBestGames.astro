@@ -15,7 +15,7 @@ const { class: className, ...props } = Astro.props;
 <section class:list={["sect-best-games", className]} {...props}>
   <div class="container">
     <h2 class="sect-title">Лучшие игры</h2>
-    <BestGamesSlider games={bestGames} />
+    <BestGamesSlider games={bestGames} client:load />
   </div>
 </section>
 
