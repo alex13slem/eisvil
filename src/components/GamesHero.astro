@@ -1,7 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import { Image } from "astro:assets";
-import banner from "../content/games/img/chain/chain_banner.png";
 
 interface Props extends HTMLAttributes<"div"> {}
 
@@ -9,12 +8,12 @@ const { class: className, ...props } = Astro.props;
 ---
 
 <div class:list={["games-hero", className]} {...props}>
-  <Image
+  <!-- <Image
     src="@/content/games/img/chain/chain_banner.png"
     alt="Chain"
     width="1920"
     height="760"
-  />
+  /> -->
 
   <style></style>
 </div>
