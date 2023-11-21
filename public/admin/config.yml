@@ -101,19 +101,20 @@ collections:
         widget: "list"
         summary: "{{fields.title}}"
         default:
-          - { title: "Sony Playstation", href: playstation, svg_href: "" }
-          - { title: "RuStore", href: ru_store, svg_href: "" }
-          - { title: "Steam", href: steam, svg_href: "" }
-          - { title: "Yandex", href: yandex, svg_href: "" }
-          - { title: "X-Box", href: xbox, svg_href: "" }
-          - { title: "App Gallery (Huawei)", href: app_gallery, svg_href: "" }
-          - { title: "VK", href: vk, svg_href: "" }
-          - { title: "Nintendo", href: nintendo, svg_href: "" }
-          - { title: "Play Market", href: google, svg_href: "" }
-          - { title: "App Store", href: apple, svg_href: "" }
+          - { title: "Sony Playstation", slug: playstation, svg_href: "", href: "" }
+          - { title: "RuStore", slug: ru_store, svg_href: "", href: "" }
+          - { title: "Steam", slug: steam, svg_href: "", href: "" }
+          - { title: "Yandex", slug: yandex, svg_href: "", href: "" }
+          - { title: "X-Box", slug: xbox, svg_href: "", href: "" }
+          - { title: "App Gallery (Huawei)", href: app_gallery, svg_href: "", href: "" }
+          - { title: "VK", slug: vk, svg_href: "", href: "" }
+          - { title: "Nintendo", slug: nintendo, svg_href: "", href: "" }
+          - { title: "Play Market", slug: google, svg_href: "", href: "" }
+          - { title: "App Store", slug: apple, svg_href: "", href: "" }
         fields:
           - { label: "Name", name: "title", widget: "string" }
-          - { label: "ID", name: "href", widget: "string" }
+          - { label: "ID", name: "slug", widget: "string" }
+          - { label: "Ссылка", name: "href", widget: "string" }
           - {
               label: "Ссылка на SVG",
               name: "svg_href",
