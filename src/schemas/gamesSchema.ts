@@ -51,18 +51,13 @@ export const gamesSchema = z.object({
   status: z.enum(["test", "dev", "hot", "new"]).optional(),
   favorites: z.enum(["top", "best"]).optional(),
   platforms: z
-    .object({
-      playstation: z.string().optional(),
-      epic: z.string().optional(),
-      ru_store: z.string().optional(),
-      steam: z.string().optional(),
-      yandex: z.string().optional(),
-      xbox: z.string().optional(),
-      app_gallery: z.string().optional(),
-      vk: z.string().optional(),
-      nintendo: z.string().optional(),
-      google: z.string().optional(),
-      apple: z.string().optional(),
-    })
+    .array(
+      z.object({
+        title: z.string(),
+        slug: z.string(),
+        href: z.string(),
+        svg_href: z.string().optional(),
+      }),
+    )
     .optional(),
 });

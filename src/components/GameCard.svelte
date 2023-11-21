@@ -62,7 +62,7 @@
         slides-per-view="auto"
         space-between="10"
       >
-        {#if platforms?.playstation}
+        <!-- {#if platforms?.playstation}
           <swiper-slide>
             <a href={platforms.playstation} title="Sony Playstation">
               <SvgSony />
@@ -131,7 +131,7 @@
               <SVGApple />
             </a>
           </swiper-slide>
-        {/if}
+        {/if} -->
       </swiper-container>
     </div>
   </div>
