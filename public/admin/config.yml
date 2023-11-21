@@ -27,7 +27,7 @@ collections:
   - name: "games-rus"
     label: "Игры (Рус)"
     folder: "src/content/games/ru"
-    media_folder: "../img/{{fields.title}}"
+    media_folder: "/public/images/games/{{fields.title}}"
     create: true
     slug: "{{title}}"
     extention: "json"
