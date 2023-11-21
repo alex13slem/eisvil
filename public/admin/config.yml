@@ -138,7 +138,13 @@ collections:
         fields:
           - { label: "Name", name: "title", widget: "string" }
           - { label: "ID", name: "slug", widget: "string" }
-          - { label: "Ссылка", name: "href", widget: "string" }
+          - {
+              label: "Ссылка",
+              name: "href",
+              widget: "string",
+              default: "",
+              required: false,
+            }
           - {
               label: "Ссылка на SVG",
               name: "svg_href",
@@ -183,7 +189,12 @@ collections:
         widget: "object"
         fields:
           - { label: Источник, name: src, widget: image }
-          - { label: Описание, name: alt, widget: string }
+          - {
+              label: Описание,
+              name: alt,
+              widget: string,
+              default: "Реклама игры",
+            }
 
       - label: "Галлерея"
         hint: "(от 4 до 10, Размер 16:9 или 9:16, длина каждой стороны – от 320 до 3840) - строгие требования"
