@@ -79,19 +79,19 @@
   ],
   "ad_banner": {
     "alt": "Реклама игры",
-    "src": "/public/images/games/purrfect-academy/academy-baner.jpg"
+    "src": "/images/games/purrfect-academy/academy-baner.jpg"
   },
   "developer": "alex13slem",
-  "thumbnail": "/public/images/games/purrfect-academy/academy-1024x500.jpg",
+  "thumbnail": "/images/games/purrfect-academy/academy-1024x500.jpg",
   "date": "11/21/2023",
   "gallery": [
     {
-      "src": "/public/images/games/purrfect-academy/academy-thumbnail.jpg",
+      "src": "/images/games/purrfect-academy/academy-thumbnail.jpg",
       "alt": "thumbnail"
     }
   ],
   "status": "hot",
-  "hero_image": "/public/images/games/purrfect-academy/academy-baner.jpg",
+  "hero_image": "/images/games/purrfect-academy/academy-baner.jpg",
   "favorites": "best",
   "title": "Purrfect Academy",
   "publisher": "eisvil",

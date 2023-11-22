@@ -79,19 +79,19 @@
   ],
   "ad_banner": {
     "alt": "Реклама игры",
-    "src": "/public/images/games/chain/chain_banner.png"
+    "src": "/images/games/chain/chain_banner.png"
   },
   "developer": "asdf",
-  "thumbnail": "/public/images/games/chain/chain-1024x500.jpg",
+  "thumbnail": "/images/games/chain/chain-1024x500.jpg",
   "date": "11/21/2023",
   "gallery": [
     {
-      "src": "/public/images/games/chain/chain-512x512.png",
+      "src": "/images/games/chain/chain-512x512.png",
       "alt": "chain-512"
     }
   ],
   "status": "new",
-  "hero_image": "/public/images/games/chain/chain_banner.png",
+  "hero_image": "/images/games/chain/chain_banner.png",
   "favorites": "top",
   "title": "Chain",
   "publisher": "asdf",
