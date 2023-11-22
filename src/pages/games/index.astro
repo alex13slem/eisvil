@@ -1,12 +1,17 @@
 ---
 import { getCollection } from "astro:content";
-import GamesHero from "../../components/GamesHero.astro";
+import GamesHero from "../../components/GamesHero.svelte";
 import BasicLayout from "../../layouts/BasicLayout.astro";
 import SectBestGames from "../../sections/SectBestGames.astro";
+
+const topGames = await getCollection(
+  "games",
+  (game) => game.data.favorites === "top",
+);
 ---
 
 <BasicLayout title="E I S V I L | Игры">
-  <GamesHero />
+  <GamesHero games={topGames} client:load />
   <SectBestGames />
 </BasicLayout>
 

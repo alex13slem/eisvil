@@ -5,9 +5,9 @@
 
   export let data: { src: string; alt: string }[];
 
-  onMount(() => {
-    register();
-  });
+  // onMount(() => {
+  //   register();
+  // });
 
   let swiperDetail: SwiperContainer;
   let swiperPreview: SwiperContainer;

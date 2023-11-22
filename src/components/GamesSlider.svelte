@@ -11,7 +11,7 @@
   let swiperEl: SwiperContainer;
 
   onMount(() => {
-    register();
+    // register();
     const swiperParams: SwiperOptions = {
       modules: [Pagination, Mousewheel],
       slidesPerView: 1,

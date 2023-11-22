@@ -13,7 +13,7 @@
   export let data: CollectionEntry<"services">[];
 
   onMount(() => {
-    register();
+    // register();
   });
 
   let swiperEl: SwiperContainer;
@@ -38,7 +38,7 @@
               class={css["slider-wrap"]}
               class:isEnd
               class:isBeginning
-              mousewheel={{}}
+              mousewheel
               bind:this={swiperEl}
               slidesPerView="3.5"
               spaceBetween="-10"
@@ -50,7 +50,7 @@
                   <div class={css["slide-wrap"]}>
                     <a
                       href="{collection}/{slug.split('/')[1]}/#{formatStrToId(
-                        alt
+                        alt,
                       )}"
                       class={css.image}
                       data-astro-reload

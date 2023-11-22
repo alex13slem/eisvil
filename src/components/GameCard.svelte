@@ -27,7 +27,7 @@
       {/if}
     </p>
     {#if platforms?.length}
-      <GameCardPlatformsSlider {platforms} />
+      <GameCardPlatformsSlider {platforms} num={4} />
     {/if}
   </div>
 </article>

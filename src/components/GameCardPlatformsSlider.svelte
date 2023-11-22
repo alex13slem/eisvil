@@ -10,10 +10,6 @@
   import SvgYandex from "./svg/platforms/SVGYandex.svelte";
   import SvgGoogle from "./svg/platforms/SVGGoogle.svelte";
   import SvgApple from "./svg/platforms/SVGApple.svelte";
-  import { onMount } from "svelte";
-  onMount(() => {
-    register();
-  });
   let swiperEl: SwiperContainer;
 
   export let platforms: {
@@ -23,6 +19,7 @@
     href: string;
   }[];
   const platformsWithLinks = platforms.filter((platform) => !!platform.href);
+  export let num: number = platformsWithLinks.length;
 
   let isEnd: boolean = false;
   let isBeginning: boolean = false;
@@ -39,10 +36,12 @@
 
 <div class="links" class:isBeginning class:isEnd class:isScrollable>
   <swiper-container
+    style="--num: {num}"
     bind:this={swiperEl}
     on:swiperprogress={onProgress}
     mousewheel
     slides-per-view="auto"
+    nested
   >
     {#each platformsWithLinks as { href, slug, title, svg_href }}
       <swiper-slide>
@@ -79,7 +78,7 @@
 <style style="scss">
   swiper-container {
     display: flex;
-    max-width: calc(30px * 5);
+    max-width: calc(30px * var(--num) + 10px * (var(--num) - 1));
   }
   swiper-slide {
     width: 30px;

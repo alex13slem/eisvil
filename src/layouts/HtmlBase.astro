@@ -43,7 +43,13 @@ const {
 
     <MobileMenu client:load url={Astro.url} />
 
+    <script
+      is:inline
+      src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"
+    ></script>
     <script>
+      // import { register } from "swiper/element";
+      // register();
       // declare global {
       //   interface Window {
       //     netlifyIdentity: any;

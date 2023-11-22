@@ -15,7 +15,7 @@
   let curIdx: number;
 
   onMount(() => {
-    register();
+    // register();
   });
 
   let swiperEl: SwiperContainer;

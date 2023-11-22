@@ -5,17 +5,23 @@
   import { parse } from "marked";
   import BtnFirm from "./BtnFirm.svelte";
   import { onMount } from "svelte";
-  import { Mousewheel, Pagination } from "swiper/modules";
+  import {
+    EffectCube,
+    EffectFade,
+    Mousewheel,
+    Pagination,
+  } from "swiper/modules";
   import type { SwiperOptions } from "swiper/types";
 
   export let games: CollectionEntry<"games">[];
 
   onMount(() => {
-    register();
-
-    const swiperParams: SwiperOptions = {
-      modules: [Pagination, Mousewheel],
-      mousewheel: {},
+    const swiperThumbParams: SwiperOptions = {
+      modules: [Pagination, Mousewheel, EffectFade],
+      effect: "fade",
+      mousewheel: true,
+      autoplay: { delay: 10000 },
+      speed: 700,
       pagination: {
         clickable: true,
         el: ".pagination",
@@ -23,12 +29,35 @@
         bulletActiveClass: "active",
       },
     };
+    Object.assign(swiperThumb, swiperThumbParams);
 
-    // now we need to assign all parameters to Swiper element
-    Object.assign(swiperThumb, swiperParams);
-
-    // and now initialize it
     swiperThumb.initialize();
+
+    const swiperContentParams: SwiperOptions = {
+      modules: [EffectCube],
+      effect: "creative",
+      creativeEffect: {
+        prev: {
+          opacity: 0,
+          translate: [0, 0, -400],
+        },
+        next: {
+          translate: ["100%", 0, 0],
+        },
+      },
+      speed: 700,
+      enabled: false,
+    };
+    Object.assign(swiperContent, swiperContentParams);
+
+    swiperContent.initialize();
+
+    Object.assign(swiperThumb, {
+      controller: { control: swiperContent.swiper },
+    });
+    // Object.assign(swiperContent, {
+    //   controller: { control: swiperThumb.swiper },
+    // });
   });
 
   let swiperThumb: SwiperContainer;
@@ -38,11 +67,7 @@
 <div class="root">
   <div class="bg" />
   <div class="left">
-    <swiper-container
-      bind:this={swiperThumb}
-      class:load={!swiperThumb}
-      init={false}
-    >
+    <swiper-container bind:this={swiperThumb} init={false} class="swiper-thumb">
       {#each games as { data: { thumbnail, title } }}
         <swiper-slide>
           <img src={thumbnail} alt={title} loading="lazy" height="306" />
@@ -52,24 +77,31 @@
     <div class="pagination" />
   </div>
   <div class="right">
-    <swiper-container bind:this={swiperContent} class:load={!swiperContent}>
-      {#each games as { data: { title, platforms, description } }}
-        <swiper-slide>
-          <article>
-            <h3>{title}</h3>
-            {#if platforms?.length}
-              <GameCardPlatformsSlider {platforms} />
-            {/if}
-            <div class="prose">
-              {@html parse(description)}
-            </div>
-            <div class="btns">
-              <BtnFirm>Играть сейчас</BtnFirm>
-              <BtnFirm variant="transparent">Подробнее</BtnFirm>
-            </div>
-          </article>
-        </swiper-slide>
-      {/each}
+    <swiper-container
+      bind:this={swiperContent}
+      init={false}
+      class:load={!swiperContent}
+      class="swiper-content"
+    >
+      {#if swiperContent}
+        {#each games as { data: { title, platforms, description } }}
+          <swiper-slide>
+            <article>
+              <h3>{title}</h3>
+              {#if platforms?.length}
+                <GameCardPlatformsSlider {platforms} />
+              {/if}
+              <div class="prose">
+                {@html parse(description)}
+              </div>
+              <div class="btns">
+                <BtnFirm>Играть сейчас</BtnFirm>
+                <BtnFirm variant="transparent">Подробнее</BtnFirm>
+              </div>
+            </article>
+          </swiper-slide>
+        {/each}
+      {/if}
     </swiper-container>
   </div>
 </div>
@@ -86,7 +118,7 @@
   .root {
     --clip-radius: 44px;
     position: relative;
-    min-height: 470px;
+    min-height: 505px;
     padding-block: 60px;
     display: flex;
     gap: 30px;
@@ -135,6 +167,7 @@
   }
 
   article {
+    background-color: rgb(var(--color-card));
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -163,6 +196,7 @@
     swiper-slide {
       position: relative;
       border: var(--border-card);
+
       clip-path: polygon(
         var(--clip-radius) 0,
         100% 0,
@@ -193,7 +227,27 @@
   }
 
   .right {
-    padding-inline: 30px 110px;
+    position: relative;
+    padding-inline: 30px var(--clip-radius);
+    // padding-inline: 30px 110px;
+
+    swiper-slide {
+      padding-right: calc(110px - var(--clip-radius));
+    }
+    &::after {
+      z-index: 1;
+      content: "";
+      position: absolute;
+      inset: 0;
+      left: auto;
+      right: calc(var(--clip-radius) - 2px);
+      width: calc(110px - var(--clip-radius));
+      background-image: linear-gradient(
+        90deg,
+        transparent,
+        rgb(var(--color-card))
+      );
+    }
   }
 
   /* PAGINATION */
