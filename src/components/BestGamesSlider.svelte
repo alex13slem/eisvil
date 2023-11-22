@@ -4,10 +4,32 @@
   import GameCardPlatformsSlider from "./GameCardPlatformsSlider.svelte";
   import { parse } from "marked";
   import BtnFirm from "./BtnFirm.svelte";
+  import { onMount } from "svelte";
+  import { Mousewheel, Pagination } from "swiper/modules";
+  import type { SwiperOptions } from "swiper/types";
 
   export let games: CollectionEntry<"games">[];
 
-  register();
+  onMount(() => {
+    register();
+
+    const swiperParams: SwiperOptions = {
+      modules: [Pagination, Mousewheel],
+      mousewheel: {},
+      pagination: {
+        clickable: true,
+        el: ".pagination",
+        bulletClass: "bullet",
+        bulletActiveClass: "active",
+      },
+    };
+
+    // now we need to assign all parameters to Swiper element
+    Object.assign(swiperThumb, swiperParams);
+
+    // and now initialize it
+    swiperThumb.initialize();
+  });
 
   let swiperThumb: SwiperContainer;
   let swiperContent: SwiperContainer;
@@ -19,32 +41,18 @@
     <swiper-container
       bind:this={swiperThumb}
       class:load={!swiperThumb}
-      pagination={{
-        clickable: true,
-        el: ".pagination",
-        bulletClass: "bullet",
-        bulletActiveClass: "active",
-      }}
+      init={false}
     >
       {#each games as { data: { thumbnail, title } }}
         <swiper-slide>
-          <img src={thumbnail} alt={title} />
+          <img src={thumbnail} alt={title} loading="lazy" height="306" />
         </swiper-slide>
       {/each}
     </swiper-container>
     <div class="pagination" />
   </div>
   <div class="right">
-    <swiper-container
-      bind:this={swiperContent}
-      class:load={!swiperContent}
-      pagination={{
-        clickable: true,
-        el: ".pagination",
-        bulletClass: "bullet",
-        bulletActiveClass: "active",
-      }}
-    >
+    <swiper-container bind:this={swiperContent} class:load={!swiperContent}>
       {#each games as { data: { title, platforms, description } }}
         <swiper-slide>
           <article>
@@ -68,34 +76,27 @@
 
 <style lang="scss">
   swiper-container {
-    transition-property: height;
-    transition: var(--load-fade);
-  }
-  swiper-container.load {
-    height: 30px;
-    swiper-slide {
-      opacity: 0;
-    }
-  }
-  swiper-slide {
     transition-property: opacity;
     transition: var(--load-fade);
   }
+  swiper-container.load {
+    opacity: 0;
+  }
+
   .root {
-    /* overflow: hidden; */
+    --clip-radius: 44px;
     position: relative;
     min-height: 470px;
     padding-block: 60px;
     display: flex;
-    /* align-items: start; */
     gap: 30px;
     filter: drop-shadow(var(--box-shadow-hover));
     & > * {
       flex: 1 1 100%;
     }
   }
+
   .bg {
-    --clip-radius: 44px;
     z-index: -1;
     position: absolute;
     inset: 0;
@@ -132,10 +133,67 @@
       background-color: rgb(var(--border-card-color));
     }
   }
+
   article {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    gap: 34px;
+
+    h3 {
+      font-size: 40px;
+      text-transform: uppercase;
+    }
+  }
+
+  .prose {
+    height: 160px;
+    overflow-y: auto;
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    swiper-container {
+      filter: drop-shadow(var(--box-shadow-hover));
+    }
+
+    swiper-slide {
+      position: relative;
+      border: var(--border-card);
+      clip-path: polygon(
+        var(--clip-radius) 0,
+        100% 0,
+        100% 100%,
+        0 100%,
+        0 var(--clip-radius)
+      );
+      &::before {
+        z-index: 2;
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: calc(var(--clip-radius) * 1.4);
+        top: -1px;
+        left: calc(var(--clip-radius) - 1px);
+        transform-origin: top;
+        transform: rotate(45deg);
+        background-color: rgb(var(--border-card-color));
+      }
+    }
+
+    img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  .right {
+    padding-inline: 30px 110px;
   }
 
   /* PAGINATION */
@@ -158,5 +216,10 @@
   .pagination :global(.bullet.active) {
     transform: rotate(45deg) scale(150%);
     background-color: rgb(var(--color-accent));
+  }
+
+  .btns {
+    display: flex;
+    gap: 10px;
   }
 </style>

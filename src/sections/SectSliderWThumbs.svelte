@@ -1,10 +1,13 @@
 <script lang="ts">
   import { register, type SwiperContainer } from "swiper/element/bundle";
   import { formatStrToId } from "../utils/helpers";
+  import { onMount } from "svelte";
 
   export let data: { src: string; alt: string }[];
 
-  register();
+  onMount(() => {
+    register();
+  });
 
   let swiperDetail: SwiperContainer;
   let swiperPreview: SwiperContainer;

@@ -8,10 +8,13 @@
   import ModalTrigger from "../ModalTrigger.svelte";
   import { blur, fade, fly } from "svelte/transition";
   import { formatStrToId } from "../../utils/helpers";
+  import { onMount } from "svelte";
 
   export let data: CollectionEntry<"services">[];
 
-  register();
+  onMount(() => {
+    register();
+  });
 
   let swiperEl: SwiperContainer;
 

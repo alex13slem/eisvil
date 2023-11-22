@@ -8,11 +8,10 @@
   import type { SwiperOptions } from "swiper/types";
   export let games: CollectionEntry<"games">[];
 
-  register();
-
   let swiperEl: SwiperContainer;
 
   onMount(() => {
+    register();
     const swiperParams: SwiperOptions = {
       modules: [Pagination, Mousewheel],
       slidesPerView: 1,
