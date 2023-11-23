@@ -14,7 +14,7 @@
   @import "../styles/mixins";
 
   .form-textarea {
-    @include fields-bg();
+    @include fields-bg;
   }
 
   textarea {

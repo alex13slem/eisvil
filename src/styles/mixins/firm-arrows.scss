@@ -1,11 +1,11 @@
-@mixin firm-arrows($opacity: 1, $color: currentColor) {
+@mixin firm-arrows($opacity: 1, $color: currentColor, $size: 9px) {
   &::after,
   &::before {
     content: "";
     position: absolute;
     border: 1px solid $color;
-    width: 9px;
-    height: 9px;
+    width: $size;
+    height: $size;
     opacity: $opacity;
 
     transition: border-color var(--trans-default);

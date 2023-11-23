@@ -1,9 +1,38 @@
 @mixin fields-bg {
-  --field-color: rgb(var(--color-white), 30%);
   position: relative;
 
-  @include firm-arrows($color: var(--field-color));
+  &.v-default {
+    --clip-size: 25px;
+    --field-color: rgb(var(--color-white), 30%);
+  }
+  &.v-dark {
+    --clip-size: 16px;
+    --field-color: rgb(var(--color-card));
 
+    .bg {
+      border: 1px solid rgb(var(--border-card-color));
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: calc(var(--clip-size) * 1.41);
+        background-color: rgb(var(--border-card-color));
+        transform: rotate(45deg);
+      }
+      &::before {
+        top: 0;
+        left: calc(var(--clip-size) - 2px);
+        transform-origin: top;
+      }
+      &::after {
+        right: calc(var(--clip-size) - 1px);
+        bottom: 0;
+        transform-origin: bottom;
+      }
+    }
+  }
   &:hover {
     --field-color: rgb(var(--color-white), 45%);
   }
@@ -16,7 +45,7 @@
     position: absolute;
     inset: 0;
 
-    @include firm-clip;
+    @include firm-clip($size: var(--clip-size));
     background-color: var(--field-color);
     transition: background-color var(--trans-default);
   }

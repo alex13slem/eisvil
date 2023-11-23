@@ -68,7 +68,10 @@
   <div class="pagination" />
 </div>
 
-<style style="scss">
+<style lang="scss">
+  @import "../styles/mixins";
+  @include pagination;
+
   .wrap {
     position: relative;
     z-index: 0;
@@ -104,26 +107,5 @@
     &.load {
       opacity: 0;
     }
-  }
-
-  .pagination {
-    gap: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .pagination :global(.bullet) {
-    font-size: 10px;
-    height: 1em;
-    width: 1em;
-    margin: 0.65em;
-    border: 1px solid rgb(var(--color-accent));
-    cursor: pointer;
-    transition-property: transform, background-color;
-    transition: 0.3s ease-in-out;
-  }
-  .pagination :global(.bullet.active) {
-    transform: rotate(45deg) scale(150%);
-    background-color: rgb(var(--color-accent));
   }
 </style>

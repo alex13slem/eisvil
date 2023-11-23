@@ -107,6 +107,9 @@
 </div>
 
 <style lang="scss">
+  @import "../styles/mixins";
+  @include pagination;
+
   swiper-container {
     transition-property: opacity;
     transition: var(--load-fade);
@@ -250,30 +253,8 @@
     }
   }
 
-  /* PAGINATION */
-  .pagination {
-    gap: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .pagination :global(.bullet) {
-    font-size: 10px;
-    height: 1em;
-    width: 1em;
-    margin: 0.65em;
-    border: 1px solid rgb(var(--color-accent));
-    cursor: pointer;
-    transition-property: transform, background-color;
-    transition: 0.3s ease-in-out;
-  }
-  .pagination :global(.bullet.active) {
-    transform: rotate(45deg) scale(150%);
-    background-color: rgb(var(--color-accent));
-  }
-
   .btns {
     display: flex;
-    gap: 10px;
+    gap: 20px;
   }
 </style>

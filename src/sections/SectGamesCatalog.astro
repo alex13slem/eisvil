@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { getCollection } from "astro:content";
+import GamesCatalog from "../components/GamesCatalog.svelte";
+
+interface Props extends HTMLAttributes<"section"> {}
+
+const { class: className, ...props } = Astro.props;
+const games = await getCollection("games");
+---
+
+<section class:list={["sect-games-catalog", className]} {...props}>
+  <div class="container">
+    <h2 class="sect-title">Наши игры</h2>
+    <GamesCatalog games={games} client:load />
+  </div>
+</section>
+
+<style></style>

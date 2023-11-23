@@ -58,7 +58,7 @@
     }
     &:not(:disabled):hover {
       span.text {
-        @include hover-text1();
+        @include hover-text1;
       }
     }
   }

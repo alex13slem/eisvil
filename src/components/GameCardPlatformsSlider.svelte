@@ -75,7 +75,7 @@
   </swiper-container>
 </div>
 
-<style style="scss">
+<style lang="scss">
   swiper-container {
     display: flex;
     max-width: calc(30px * var(--num) + 10px * (var(--num) - 1));
