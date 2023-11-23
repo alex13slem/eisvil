@@ -114,6 +114,7 @@
     position: relative;
     z-index: 1;
     width: 100%;
+    padding: 0;
 
     background-color: transparent;
     border: none;
