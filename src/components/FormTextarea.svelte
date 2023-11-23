@@ -3,9 +3,14 @@
   export let placeholder: string | null = null;
   export let value: string | null = null;
   export let className: string = "";
+  export let variant: "default" | "dark" = "default";
+  export let size: "md" = "md";
 </script>
 
-<div class={cn("form-textarea", className)} class:typing={value}>
+<div
+  class="form-textarea {className} v-{variant} size-{size}"
+  class:typing={value}
+>
   <textarea on:input bind:value {placeholder} {...$$restProps} />
   <div class="bg" />
 </div>
@@ -15,6 +20,30 @@
 
   .form-textarea {
     @include fields-bg;
+    @include firm-arrows(
+      $color: var(--firm-arrows-color),
+      $size: var(--firm-arrow-size)
+    );
+
+    &.v-default {
+      --firm-arrows-color: var(--field-color);
+    }
+
+    &.v-dark {
+      --firm-arrows-color: rgb(var(--border-card-color));
+    }
+
+    &.size-sm {
+      --clip-size: 16px;
+      --firm-arrow-size: 6px;
+
+      font-size: 14px;
+    }
+
+    &.size-md {
+      --clip-size: 20px;
+      --firm-arrow-size: 9px;
+    }
   }
 
   textarea {
