@@ -282,8 +282,8 @@
           opacity: 0;
         }
         :global(.selected-option-arrow) {
-          transform: scale(-1)
-            translateY(calc(var(--lh) * var(--curr-idx) * -1));
+          transform: translateY(calc(var(--lh) * var(--curr-idx)))
+            rotateX(180deg);
         }
       }
 
