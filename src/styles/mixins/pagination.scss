@@ -14,8 +14,8 @@
     margin: 0.65em;
     border: 1px solid rgb(var(--color-accent));
     cursor: pointer;
-    transition-property: transform, background-color;
     transition: 0.3s ease-in-out;
+    transition-property: transform, background-color;
   }
   .pagination :global(.bullet.active) {
     transform: rotate(45deg) scale(150%);

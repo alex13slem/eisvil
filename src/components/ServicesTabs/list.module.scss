@@ -37,8 +37,8 @@
     right: -2em;
     background-color: rgb(var(--color-accent));
 
-    transition-property: opacity, right;
     transition: var(--trans-slow);
+    transition-property: opacity, right;
   }
   &::after {
     top: -1em;

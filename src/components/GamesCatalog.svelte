@@ -127,8 +127,8 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
 
-    transition-property: height;
     transition: var(--trans-default);
+    transition-property: height;
 
     .placeholder {
       position: absolute;

@@ -29,8 +29,8 @@
 
     color: rgb(var(--color-text));
 
-    transition-property: filter;
     transition: var(--trans-default);
+    transition-property: filter;
 
     @include firm-arrows;
 
@@ -65,24 +65,24 @@
 
   .v-transparent {
     span.bg {
-      border: 1px solid currentColor;
+      border: 2px solid currentColor;
 
       &::after,
       &::before {
         content: "";
         position: absolute;
         height: 100%;
-        width: 1px;
+        width: 2px;
         background-color: rgb(var(--color-white));
         transform: rotate(45deg);
       }
       &::before {
-        top: -2px;
+        top: -4px;
         left: 25px;
         transform-origin: top;
       }
       &::after {
-        bottom: -2px;
+        bottom: -4px;
         right: 25px;
         transform-origin: bottom;
       }
@@ -106,6 +106,7 @@
   }
 
   .bg {
+    overflow: hidden;
     position: absolute;
     inset: 0;
     transition: background-color var(--trans-default);
@@ -121,7 +122,7 @@
     color: currentColor;
     text-transform: uppercase;
 
-    transition-property: text-shadow;
     transition: var(--trans-default);
+    transition-property: text-shadow;
   }
 </style>

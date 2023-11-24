@@ -70,7 +70,7 @@
     <swiper-container bind:this={swiperThumb} init={false} class="swiper-thumb">
       {#each games as { data: { thumbnail, title } }}
         <swiper-slide>
-          <img src={thumbnail} alt={title} loading="lazy" height="306" />
+          <img src={thumbnail} alt={title} loading="lazy" height="333" />
         </swiper-slide>
       {/each}
     </swiper-container>
@@ -111,8 +111,8 @@
   @include pagination;
 
   swiper-container {
-    transition-property: opacity;
     transition: var(--load-fade);
+    transition-property: opacity;
   }
   swiper-container.load {
     opacity: 0;
@@ -223,7 +223,6 @@
 
     img {
       width: 100%;
-      aspect-ratio: 16 / 9;
       object-fit: cover;
       object-position: center;
     }

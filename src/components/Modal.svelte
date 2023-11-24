@@ -133,8 +133,8 @@
     transform: rotate(45deg);
     color: white;
 
-    transition-property: transform, color;
     transition: var(--trans-default);
+    transition-property: transform, color;
 
     &:hover {
       transform: rotate(0);
@@ -160,8 +160,8 @@
       font-size: 12px;
       font-weight: 600;
 
-      transition-property: color;
       transition: var(--trans-default);
+      transition-property: color;
 
       &:hover {
         color: rgb(var(--color-accent));

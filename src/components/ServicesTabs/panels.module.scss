@@ -33,8 +33,8 @@
     width: 15%;
     background: linear-gradient(90deg, transparent, rgb(var(--color-bg)));
 
-    transition-property: opacity;
     transition: var(--trans-default);
+    transition-property: opacity;
   }
   &::after {
     left: auto;
@@ -87,8 +87,8 @@
 
   filter: brightness(0.5);
 
-  transition-property: box-shadow, border-image, filter;
   transition: var(--trans-default);
+  transition-property: box-shadow, border-image, filter;
 
   &::after {
     pointer-events: none;

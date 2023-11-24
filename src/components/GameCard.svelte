@@ -15,7 +15,7 @@
   {/if}
 
   <div class="image">
-    <img src={thumbnail} alt={title} width="336" height="202" />
+    <img src={thumbnail} alt={title} width="336" height="163" />
     <BtnFirm variant="transparent"><a href="/">ПОДРОБНЕЕ</a></BtnFirm>
   </div>
   <div class="body">
@@ -34,13 +34,13 @@
 
 <style lang="scss">
   .game-card {
+    height: fit-content;
     position: relative;
-    aspect-ratio: 8/7;
     display: flex;
     flex-direction: column;
     background-color: rgb(var(--color-card));
-    transition-property: transform, box-shadow, border-image;
     transition: var(--trans-default);
+    transition-property: transform, box-shadow, border-image;
     /* border: var(--op-border); */
     border-image: linear-gradient(
         160deg,
@@ -70,7 +70,8 @@
   }
 
   .image {
-    flex: 1 1 auto;
+    height: 163px;
+    flex: 0 1 auto;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -79,8 +80,8 @@
   }
   .image :global(.btn-firm) {
     opacity: 0;
-    transition-property: opacity;
     transition: var(--trans-default);
+    transition-property: opacity;
   }
   .image img {
     position: absolute;
@@ -89,8 +90,8 @@
     width: 100%;
     object-fit: cover;
     object-position: center;
-    transition-property: filter;
     transition: var(--trans-default);
+    transition-property: filter;
   }
 
   .body {
@@ -102,8 +103,8 @@
       "tags links";
     grid-auto-rows: minmax(30px, auto);
     grid-template-columns: 1fr auto;
-    transition-property: border-color;
     transition: var(--trans-default);
+    transition-property: border-color;
   }
   .body h3 {
     grid-area: title;

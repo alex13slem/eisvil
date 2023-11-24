@@ -74,8 +74,8 @@
     background-color: rgb(var(--color-white), 10%);
     box-shadow: var(--box-shadow-active);
 
-    transition-property: opacity;
     transition: var(--load-fade);
+    transition-property: opacity;
   }
 
   .detail-slide {
@@ -100,8 +100,8 @@
   .preview-slider {
     margin: -16px;
     position: relative;
-    transition-property: opacity;
     transition: var(--load-fade);
+    transition-property: opacity;
     &::after,
     &::before {
       pointer-events: none;
@@ -179,8 +179,8 @@
 
       filter: brightness(0.5);
 
-      transition-property: box-shadow, border-image, filter;
       transition: var(--trans-default);
+      transition-property: box-shadow, border-image, filter;
 
       &::after {
         pointer-events: none;

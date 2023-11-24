@@ -341,8 +341,8 @@
 
       line-height: 3;
 
-      transition-property: color;
       transition: var(--trans-default);
+      transition-property: color;
 
       &::before {
         position: absolute;
@@ -352,8 +352,8 @@
         opacity: 0;
         width: calc(100% + 2rem + 25px);
 
-        transition-property: opacity;
         transition: var(--trans-default);
+        transition-property: opacity;
       }
 
       &:is(.active) {
@@ -398,7 +398,7 @@
     position: absolute;
     clip-path: polygon(100% 0, 0 0, 50% 100%);
 
-    transition-property: border-color transform;
     transition: var(--trans-default);
+    transition-property: border-color transform;
   }
 </style>

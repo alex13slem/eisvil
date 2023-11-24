@@ -75,8 +75,8 @@
     border: 0;
     border-bottom: 4px solid rgb(var(--color-text), 30%);
 
-    transition-property: color, font-size;
     transition: var(--trans-default);
+    transition-property: color, font-size;
     &.active {
       font-size: 20px;
       font-weight: 600;
