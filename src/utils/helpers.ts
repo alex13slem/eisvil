@@ -40,3 +40,10 @@ export const formatStrToId = (string: string) => string.split(" ").join("-");
 export function getRandom<T>(list: T[]): T {
   return list[Math.floor(Math.random() * list.length)];
 }
+
+export function getMapKey(map: Map<string, string>, searchKey: string) {
+  for (const [key, value] of map.entries()) {
+    if (value === searchKey) return key;
+  }
+  return undefined;
+}

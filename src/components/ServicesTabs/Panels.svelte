@@ -1,20 +1,15 @@
 <script lang="ts">
   import type { CollectionEntry } from "astro:content";
   import { parse } from "marked";
-  import { TabPanel, TabPanels } from "@rgossiaux/svelte-headlessui";
+  import { TabPanels } from "@rgossiaux/svelte-headlessui";
   import css from "./panels.module.scss";
   import BtnFirm from "../BtnFirm.svelte";
-  import { register, type SwiperContainer } from "swiper/element/bundle";
+  import { type SwiperContainer } from "swiper/element/bundle";
   import ModalTrigger from "../ModalTrigger.svelte";
-  import { blur, fade, fly } from "svelte/transition";
+  import { fade } from "svelte/transition";
   import { formatStrToId } from "../../utils/helpers";
-  import { onMount } from "svelte";
 
   export let data: CollectionEntry<"services">[];
-
-  onMount(() => {
-    // register();
-  });
 
   let swiperEl: SwiperContainer;
 
@@ -32,17 +27,16 @@
   <TabPanels let:selectedIndex>
     {#each data as { data: { images, description }, collection, slug }, idx (slug)}
       {#if selectedIndex === idx}
-        <div class={css.panel} transition:fly>
+        <div class={css.panel} transition:fade>
           <div class={css.slider}>
             <swiper-container
               class={css["slider-wrap"]}
               class:isEnd
               class:isBeginning
-              mousewheel
               bind:this={swiperEl}
-              slidesPerView="3.5"
-              spaceBetween="-10"
-              cssMode
+              mousewheel={true}
+              slides-per-view="3.5"
+              space-between="-10"
               on:swiperprogress={onProgress}
             >
               {#each images as { src, alt }}
