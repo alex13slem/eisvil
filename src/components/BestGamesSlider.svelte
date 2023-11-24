@@ -170,6 +170,7 @@
   }
 
   article {
+    padding: 2px;
     background-color: rgb(var(--color-card));
     display: flex;
     flex-direction: column;
