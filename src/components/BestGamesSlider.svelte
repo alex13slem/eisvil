@@ -12,6 +12,7 @@
     Pagination,
   } from "swiper/modules";
   import type { SwiperOptions } from "swiper/types";
+  import ShadowDecor1024x500 from "./svg/ShadowDecor1024x500.svelte";
 
   export let games: CollectionEntry<"games">[];
 
@@ -68,6 +69,7 @@
   <div class="bg" />
   <div class="left">
     <swiper-container bind:this={swiperThumb} init={false} class="swiper-thumb">
+      <ShadowDecor1024x500 class="shadow" />
       {#each games as { data: { thumbnail, title } }}
         <swiper-slide>
           <img src={thumbnail} alt={title} loading="lazy" height="333" />
@@ -199,16 +201,22 @@
       --clip-d-size: calc(var(--clip-radius) * 1.41);
 
       position: relative;
-      border: 2px solid;
+      // border: 2px solid;
 
-      border-image: linear-gradient(
-          155deg,
-          rgb(var(--color-accent), 50%) 25%,
-          transparent 45%
-        )
-        30;
-      border-bottom: none;
-      border-right: none;
+      // border-image: linear-gradient(
+      //     155deg,
+      //     rgb(var(--color-accent), 50%) 25%,
+      //     transparent 45%
+      //   )
+      //   30;
+      // border-bottom: none;
+      // border-right: none;
+
+      :global(.shadow) {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+      }
 
       clip-path: polygon(
         var(--clip-radius) 0,
@@ -217,18 +225,18 @@
         0 100%,
         0 var(--clip-radius)
       );
-      &::before {
-        z-index: 2;
-        content: "";
-        position: absolute;
-        width: 2px;
-        height: var(--clip-d-size);
-        top: -2px;
-        left: calc(var(--clip-radius) - 2px);
-        transform-origin: top;
-        transform: rotate(45deg);
-        background-color: rgb(var(--color-accent), 50%);
-      }
+      // &::before {
+      //   z-index: 2;
+      //   content: "";
+      //   position: absolute;
+      //   width: 2px;
+      //   height: var(--clip-d-size);
+      //   top: -2px;
+      //   left: calc(var(--clip-radius) - 2px);
+      //   transform-origin: top;
+      //   transform: rotate(45deg);
+      //   background-color: rgb(var(--color-accent), 50%);
+      // }
     }
 
     img {

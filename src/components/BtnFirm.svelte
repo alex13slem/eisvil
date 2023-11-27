@@ -1,4 +1,6 @@
 <script lang="ts">
+  import BorderEdge from "./svg/BorderEdge.svelte";
+
   export let variant: "firm" | "transparent" | "contrast" = "firm";
   export let flexPosition: "start" | "end" | "center" | null = null;
 </script>
@@ -8,6 +10,10 @@
   on:click
   {...$$restProps}
 >
+  {#if variant === "transparent"}
+    <BorderEdge class="border-edge left" />
+    <BorderEdge class="border-edge right" />
+  {/if}
   <span class="bg" />
   <span class="text"><slot /></span>
 </button>
@@ -64,29 +70,59 @@
   }
 
   .v-transparent {
-    span.bg {
-      border: 2px solid currentColor;
-
-      &::after,
-      &::before {
-        content: "";
-        position: absolute;
-        height: calc(var(--firm-clip-size) * 1.41 + 4px);
-        width: 2px;
-        background-color: rgb(var(--color-white));
-        transform: rotate(45deg);
-      }
-      &::before {
-        top: -2px;
-        left: calc(var(--firm-clip-size) - 2px);
-        transform-origin: top;
-      }
-      &::after {
-        bottom: -2px;
-        right: calc(var(--firm-clip-size) - 2px);
-        transform-origin: bottom;
-      }
+    overflow: hidden;
+    .bg {
+      border: 1px solid currentColor;
+      // border-image: linear-gradient(
+      //     135deg,
+      //     transparent 25px,
+      //     currentColor,
+      //     transparent calc(100% - 25px)
+      //   )
+      //   30;
     }
+    :global(.border-edge) {
+      position: absolute;
+      height: 49px;
+      width: 49px;
+    }
+    :global(.border-edge.left) {
+      top: 0px;
+      left: 0px;
+    }
+    :global(.border-edge.right) {
+      bottom: 0px;
+      right: 0px;
+      transform: rotate(180deg);
+    }
+    // .border {
+    //   position: absolute;
+    //   inset: 0;
+    //   z-index: 1;
+    // }
+    // span.bg {
+    //   border: 2px solid currentColor;
+
+    //   &::after,
+    //   &::before {
+    //     content: "";
+    //     position: absolute;
+    //     height: calc(var(--firm-clip-size) * 1.41 + 4px);
+    //     width: 2px;
+    //     background-color: rgb(var(--color-white));
+    //     transform: rotate(45deg);
+    //   }
+    //   &::before {
+    //     top: -2px;
+    //     left: calc(var(--firm-clip-size) - 2px);
+    //     transform-origin: top;
+    //   }
+    //   &::after {
+    //     bottom: -2px;
+    //     right: calc(var(--firm-clip-size) - 2px);
+    //     transform-origin: bottom;
+    //   }
+    // }
   }
 
   .v-contrast {

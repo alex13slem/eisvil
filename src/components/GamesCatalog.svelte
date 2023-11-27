@@ -103,6 +103,7 @@
       bind:value={genreValue}
     >
       <button
+        class="select-icon-btn"
         slot="left"
         on:click={(e) => {
           if (!genreValue) return;
@@ -126,6 +127,7 @@
       bind:value={platformValue}
     >
       <button
+        class="select-icon-btn"
         slot="left"
         on:click={(e) => {
           if (!platformValue) return;
@@ -206,6 +208,7 @@
     display: flex;
     gap: 10px;
   }
+
   .catalog {
     position: relative;
     z-index: 0;
@@ -311,5 +314,15 @@
     display: flex;
     gap: 10px;
     align-items: center;
+  }
+
+  .select-icon-btn {
+    height: 1.5em;
+    width: 1.5em;
+
+    :global(svg) {
+      height: 100%;
+      width: 100%;
+    }
   }
 </style>

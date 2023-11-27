@@ -27,6 +27,23 @@
       class={cn("selected-option", open && "open", value && "active")}
       style="--curr-idx: {targetIdx || 0}"
     >
+      {#if variant === "dark" && size === "sm"}
+        <svg
+          width="231"
+          height="35"
+          viewBox="0 0 231 35"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="border"
+        >
+          <path
+            id="Vector"
+            d="M204.037 21.694H203.825L203.678 21.8466L191.452 34.5H0.5V16.4321L16.834 0.5H230.5V18.5905L226.968 21.694H204.037Z"
+            stroke="#8C8C8C"
+            stroke-miterlimit="10"
+          />
+        </svg>
+      {/if}
       <slot name="left" />
       {#if open && !value}
         ...
@@ -71,7 +88,7 @@
     display: contents;
 
     &.size-md {
-      --clip-size: 20px;
+      --clip-size: 25px;
       --firm-arrows-size: 9px;
 
       :global(.box) {
@@ -80,6 +97,31 @@
 
       :global(.selected-option) {
         line-height: 3.375rem;
+      }
+      :global(.options-list) {
+        top: calc(100% - var(--clip-size) + 7px);
+        &::after {
+          clip-path: polygon(
+            calc(100% - 54px) 20px,
+            calc(100% - 34px) 0,
+            100% 0,
+            100% 100%,
+            0 100%,
+            0 20px
+          );
+        }
+      }
+      .selected-option-bg {
+        clip-path: polygon(
+          25px 0%,
+          100% 0,
+          100% calc(100% - 25px - 0px),
+          calc(100% - 5px) calc(100% - 20px),
+          calc(100% - 40px) calc(100% - 20px),
+          calc(100% - 60px) 100%,
+          0 100%,
+          0 25px
+        );
       }
 
       .selected-option-arrow {
@@ -94,17 +136,44 @@
       --firm-arrows-size: 6px;
 
       :global(.box) {
-        min-width: 230px;
+        width: 231px;
       }
 
       :global(.selected-option) {
         line-height: 35px;
       }
 
+      :global(.options-list) {
+        top: calc(100% - var(--clip-size) + 6px);
+        &::after {
+          clip-path: polygon(
+            calc(100% - 35px) 13px,
+            calc(100% - 22px) 0,
+            100% 0,
+            100% 100%,
+            0 100%,
+            0 13px
+          );
+        }
+      }
+
       .selected-option-arrow {
-        right: 8px;
-        width: 20px;
-        height: 10px;
+        right: 6px;
+        width: 18px;
+        height: 9px;
+      }
+
+      .selected-option-bg {
+        clip-path: polygon(
+          16px 0%,
+          100% 0,
+          100% calc(100% - 16px - 0px),
+          calc(100% - 4px) calc(100% - 13px),
+          calc(100% - 27px) calc(100% - 13px),
+          calc(100% - 40px) 100%,
+          0 100%,
+          0 16px
+        );
       }
     }
 
@@ -178,45 +247,11 @@
         }
       }
 
-      .selected-option-bg {
-        border: 2px solid var(--border-color);
-        .clip-border {
-          width: 2px;
-          position: absolute;
-          background-color: var(--border-color);
-
-          &_1 {
-            height: calc(var(--clip-size) * 1.41);
-            top: -2px;
-            left: calc(var(--clip-size) - 2px);
-            transform-origin: top;
-            transform: rotate(45deg);
-          }
-
-          &_2 {
-            height: calc(var(--clip-size) / 4 * 1.41);
-            right: -2px;
-            bottom: calc(var(--clip-size) - 3px);
-            transform: rotate(45deg);
-            transform-origin: top;
-          }
-
-          &_3 {
-            height: calc(var(--clip-size) * 1.5 + var(--clip-size) / 4);
-            right: calc(var(--clip-size) / 4 - 2px);
-            bottom: calc(var(--clip-size) - 1px);
-            transform: rotate(-90deg);
-            transform-origin: bottom;
-          }
-
-          &_4 {
-            height: calc(var(--clip-size) * 1.41);
-            bottom: -1px;
-            right: calc(var(--clip-size) * 3 - 2px);
-            transform-origin: bottom;
-            transform: rotate(45deg);
-          }
-        }
+      .border {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
       }
 
       :global(.options-list) {
@@ -259,10 +294,7 @@
       position: relative;
 
       padding: 0;
-      padding-inline: calc(var(--clip-size) + calc(var(--clip-size) / 2));
-      &:has(svg) {
-        padding-inline: var(--clip-size);
-      }
+      padding-inline: var(--clip-size);
 
       display: flex;
       gap: 5px;
@@ -271,11 +303,6 @@
       background-color: transparent;
       border: none;
       text-align: left;
-
-      :global(svg) {
-        height: 100%;
-        width: calc(var(--clip-size) * 1.5);
-      }
 
       &:is(.open) {
         &::after {
@@ -293,7 +320,6 @@
 
       &:is(.open):not(.active) {
         :global(.selected-option-arrow) {
-          // animation: pulsar-bg-c 0.6s ease infinite alternate;
           transform: scale(0);
           opacity: 0;
         }
@@ -308,8 +334,8 @@
       flex-direction: column;
 
       position: absolute;
-      width: calc(100% - var(--clip-size) / 4);
-      top: calc(100% - var(--clip-size) + 3px);
+      width: calc(100% - var(--clip-size) / 5);
+      top: calc(100% - var(--clip-size) + 4px);
       left: 0;
 
       padding-inline: 2rem;
@@ -321,15 +347,6 @@
         position: absolute;
         inset: 0;
         content: "";
-        clip-path: polygon(
-          calc(100% - var(--clip-size) * 3 + var(--clip-size) / 4 + 1px)
-            var(--clip-size),
-          calc(100% - var(--clip-size) * 2 + var(--clip-size) / 4 + 1px) 0,
-          100% 0,
-          100% 100%,
-          0 100%,
-          0 var(--clip-size)
-        );
       }
     }
 
@@ -374,16 +391,7 @@
     inset: 0;
 
     background-color: var(--field-color);
-    clip-path: polygon(
-      var(--clip-size) 0%,
-      100% 0,
-      100% calc(100% - var(--clip-size) - calc(var(--clip-size) / 4)),
-      calc(100% - calc(var(--clip-size) / 4)) calc(100% - var(--clip-size)),
-      calc(100% - calc(var(--clip-size) * 2)) calc(100% - var(--clip-size)),
-      calc(100% - calc(var(--clip-size) * 3)) 100%,
-      0 100%,
-      0 var(--clip-size)
-    );
+
     transition: background-color var(--trans-default);
   }
 
