@@ -1,4 +1,4 @@
-@mixin firm-clip($size: 25px) {
+@mixin firm-clip($size: var(--firm-clip-size)) {
   clip-path: polygon(
     $size 0%,
     100% 0,

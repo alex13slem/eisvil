@@ -25,6 +25,7 @@ const {
 ---
 
 <article class:list={["social-card", className]} {...props}>
+  <div class="bg"></div>
   <a href={link}>
     <h3>{title}</h3>
     <div class="body">
@@ -80,113 +81,122 @@ const {
   </a>
 </article>
 
-<style>
+<style lang="scss">
   .social-card {
+    --clip-width: 86px;
+    --clip-height: 28px;
+
     overflow: hidden;
     position: relative;
-    --hover-white: rgb(var(--color-white), 60%);
-    /* --border: 1px solid var(--hover-white); */
-    --h-width: 86px;
-    --h-height: 28px;
     aspect-ratio: 16/9;
-
-    display: flex;
-    flex-direction: column;
     cursor: pointer;
+    color: rgb(var(--color-white), 60%);
 
     transition: filter var(--trans-default);
+
+    &:hover {
+      filter: drop-shadow(var(--box-shadow-hover));
+
+      color: rgb(var(--color-white));
+      --border-card-color: var(--color-white);
+      --border-card: 2px solid rgb(var(--color-white));
+    }
+
+    &:hover .bg {
+      &::before {
+        opacity: 1;
+      }
+    }
   }
-  .social-card a {
-    all: unset;
-    display: contents;
-  }
-  .social-card::after,
-  .social-card::before {
-    content: "";
-    /* z-index: -1; */
+
+  .bg {
     position: absolute;
     inset: 0;
     clip-path: polygon(
-      calc(var(--h-width) + var(--h-height)) 0,
+      calc(var(--clip-width) + var(--clip-height)) 0,
       100% 0,
-      100% calc(100% - var(--h-height)),
-      calc(100% - var(--h-height)) 100%,
+      100% calc(100% - var(--clip-height)),
+      calc(100% - var(--clip-height)) 100%,
       0 100%,
-      0 var(--h-height),
-      var(--h-width) var(--h-height)
+      0 var(--clip-height),
+      var(--clip-width) var(--clip-height)
     );
-  }
-  .social-card::before {
-    z-index: -1;
     background-color: rgb(var(--color-card));
     border: var(--border-card);
 
     transition: var(--trans-default);
-    transition-property: border-color, background-color;
+    transition-property: border-color;
+
+    &::before {
+      inset: 0;
+      content: "";
+      position: absolute;
+
+      opacity: 0;
+      background: var(--gradient);
+      transition: var(--trans-default);
+      transition-property: opacity;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: calc(var(--clip-height) * 1.41);
+      background-color: rgb(var(--border-card-color));
+      bottom: -1px;
+      right: calc(var(--clip-height) - 2px);
+      transform: rotate(45deg);
+      transform-origin: bottom;
+
+      transition: var(--trans-default);
+      transition-property: background-color;
+    }
   }
-  .social-card::after {
-    z-index: -2;
-    background: var(--gradient);
-    opacity: 0;
-    transition: opacity var(--trans-default);
-  }
-  .social-card:hover {
-    filter: drop-shadow(var(--box-shadow-hover));
-    --hover-white: rgb(var(--color-white), 100%);
-    --border-card: 1px solid var(--hover-white);
-  }
-  .social-card:hover::after {
-    opacity: 1;
-  }
-  .social-card:hover::before {
-    background-color: transparent;
+
+  .social-card a {
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    color: currentColor;
   }
 
   h3 {
     position: relative;
     align-self: flex-start;
-    min-width: var(--h-width);
-    min-height: var(--h-height);
+    min-width: var(--clip-width);
+    min-height: var(--clip-height);
     font-size: 12px;
     margin: 0;
     text-transform: uppercase;
     border-bottom: var(--border-card);
     transition: var(--trans-default);
-    transition-property: border-color;
-  }
-  h3::after {
-    bottom: -1px;
-    right: -1px;
+    transition-property: border-color, color;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: calc(var(--clip-height) * 1.41);
+      background-color: rgb(var(--border-card-color));
+      bottom: -1px;
+      right: 0;
+      transform: rotate(45deg);
+      transform-origin: bottom;
+
+      transition: var(--trans-default);
+      transition-property: background-color;
+    }
   }
 
   .body {
-    position: relative;
-    min-height: calc(var(--h-height) * 3);
+    min-height: calc(var(--clip-height) * 3);
     flex: 1 1 auto;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    color: var(--hover-white);
+    color: currentColor;
     transition: color var(--trans-default);
-  }
-  .body::after {
-    bottom: -0.5px;
-    right: calc(var(--h-height) - 0.5px);
-  }
-
-  h3::after,
-  .body::after {
-    z-index: 1;
-    position: absolute;
-    content: "";
-    height: calc(var(--h-height) * 1.5);
-    aspect-ratio: 1 / 1;
-    transform-origin: right bottom;
-    transform: rotate(45deg);
-
-    border-right: var(--border-card);
-    transition: var(--trans-default);
-    transition-property: border-color;
   }
 </style>

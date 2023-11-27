@@ -179,31 +179,31 @@
       }
 
       .selected-option-bg {
-        border: 1px solid var(--border-color);
+        border: 2px solid var(--border-color);
         .clip-border {
-          width: 1px;
+          width: 2px;
           position: absolute;
           background-color: var(--border-color);
 
           &_1 {
             height: calc(var(--clip-size) * 1.41);
-            top: -1px;
-            left: calc(var(--clip-size) - 1px);
+            top: -2px;
+            left: calc(var(--clip-size) - 2px);
             transform-origin: top;
             transform: rotate(45deg);
           }
 
           &_2 {
             height: calc(var(--clip-size) / 4 * 1.41);
-            right: -1px;
-            bottom: calc(var(--clip-size) - 2px);
+            right: -2px;
+            bottom: calc(var(--clip-size) - 3px);
             transform: rotate(45deg);
             transform-origin: top;
           }
 
           &_3 {
             height: calc(var(--clip-size) * 1.5 + var(--clip-size) / 4);
-            right: calc(var(--clip-size) / 4 - 1px);
+            right: calc(var(--clip-size) / 4 - 2px);
             bottom: calc(var(--clip-size) - 1px);
             transform: rotate(-90deg);
             transform-origin: bottom;
@@ -212,7 +212,7 @@
           &_4 {
             height: calc(var(--clip-size) * 1.41);
             bottom: -1px;
-            right: calc(var(--clip-size) * 3 - 1px);
+            right: calc(var(--clip-size) * 3 - 2px);
             transform-origin: bottom;
             transform: rotate(45deg);
           }

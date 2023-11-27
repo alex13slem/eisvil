@@ -9,6 +9,7 @@
     opacity: $opacity;
 
     transition: border-color var(--trans-default);
+    transition-property: color, border-color;
   }
 
   &::after {

@@ -10,25 +10,25 @@
     --field-color: rgb(var(--color-card));
 
     .bg {
-      border: 1px solid rgb(var(--border-card-color));
+      border: 2px solid rgb(var(--border-card-color));
 
       &::before,
       &::after {
         content: "";
         position: absolute;
-        width: 1px;
+        width: 2px;
         height: calc(var(--clip-size) * 1.41);
         background-color: rgb(var(--border-card-color));
         transform: rotate(45deg);
       }
       &::before {
-        top: 0;
+        top: -2px;
         left: calc(var(--clip-size) - 2px);
         transform-origin: top;
       }
       &::after {
-        right: calc(var(--clip-size) - 1px);
-        bottom: 0;
+        right: calc(var(--clip-size) - 2px);
+        bottom: -2px;
         transform-origin: bottom;
       }
     }

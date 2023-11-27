@@ -195,11 +195,20 @@
 
     swiper-container {
       filter: drop-shadow(var(--box-shadow-hover));
-    }
 
-    swiper-slide {
+      --clip-d-size: calc(var(--clip-radius) * 1.41);
+
       position: relative;
-      border: var(--border-card);
+      border: 2px solid;
+
+      border-image: linear-gradient(
+          155deg,
+          rgb(var(--color-accent), 50%) 25%,
+          transparent 45%
+        )
+        30;
+      border-bottom: none;
+      border-right: none;
 
       clip-path: polygon(
         var(--clip-radius) 0,
@@ -212,13 +221,13 @@
         z-index: 2;
         content: "";
         position: absolute;
-        width: 1px;
-        height: calc(var(--clip-radius) * 1.4);
-        top: -1px;
-        left: calc(var(--clip-radius) - 1px);
+        width: 2px;
+        height: var(--clip-d-size);
+        top: -2px;
+        left: calc(var(--clip-radius) - 2px);
         transform-origin: top;
         transform: rotate(45deg);
-        background-color: rgb(var(--border-card-color));
+        background-color: rgb(var(--color-accent), 50%);
       }
     }
 

@@ -123,52 +123,7 @@
       }
     }
   }
-  // button {
-  //   all: unset;
-  //   box-sizing: border-box;
-  //   cursor: pointer;
-  //   text-align: center;
-  //   height: 100%;
-  //   display: flex;
-  //   flex-direction: column;
-  //   &::after {
-  //     content: "";
-  //     opacity: 0;
-  //     z-index: 2;
-  //     position: absolute;
-  //     top: 13px;
-  //     left: 13px;
-  //     width: calc(100% - 13px);
-  //     aspect-ratio: 1;
-  //     border: 1px solid;
-  //     border-image: linear-gradient(
-  //         135deg,
-  //         rgb(var(--border-card-accent-color)),
-  //         transparent 50%
-  //       )
-  //       30;
 
-  //     border-bottom: none;
-  //     border-right: none;
-
-  //     transition: var(--trans-slow);
-  //     transition-property: width, height, opacity;
-  //   }
-  //   &::before {
-  //     content: "";
-  //     opacity: 0;
-  //     z-index: 2;
-  //     position: absolute;
-  //     inset: 0;
-  //     width: 6px;
-  //     height: 6px;
-  //     top: 11px;
-  //     left: 11px;
-  //     background: rgb(var(--border-card-accent-color));
-
-  //     transition: opacity var(--trans-slow);
-  //   }
-  // }
   .image {
     flex: 1 1 auto;
     overflow: hidden;

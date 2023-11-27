@@ -166,8 +166,6 @@
       height: 170px;
       width: 100%;
 
-      border: 1px solid transparent;
-
       border-image: linear-gradient(
           160deg,
           rgba(255, 255, 255, 0) 0%,

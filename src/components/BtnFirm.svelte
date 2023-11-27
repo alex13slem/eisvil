@@ -71,19 +71,19 @@
       &::before {
         content: "";
         position: absolute;
-        height: 100%;
+        height: calc(var(--firm-clip-size) * 1.41 + 4px);
         width: 2px;
         background-color: rgb(var(--color-white));
         transform: rotate(45deg);
       }
       &::before {
-        top: -4px;
-        left: 25px;
+        top: -2px;
+        left: calc(var(--firm-clip-size) - 2px);
         transform-origin: top;
       }
       &::after {
-        bottom: -4px;
-        right: 25px;
+        bottom: -2px;
+        right: calc(var(--firm-clip-size) - 2px);
         transform-origin: bottom;
       }
     }
@@ -95,6 +95,8 @@
     }
     span.bg {
       background-color: currentColor;
+      transition: var(--trans-default);
+      transition-property: color;
     }
     &:not(:disabled):hover {
       color: rgb(var(--color-accent));
