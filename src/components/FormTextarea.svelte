@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { cn } from "../utils/helpers";
+  import InputBg from "./InputBg.svelte";
+  import BorderEdge from "./svg/BorderEdge.svelte";
   export let placeholder: string | null = null;
   export let value: string | null = null;
   export let className: string = "";
@@ -9,41 +10,108 @@
 
 <div
   class="form-textarea {className} v-{variant} size-{size}"
-  class:typing={value}
+  class:typing={!!value}
 >
   <textarea on:input bind:value {placeholder} {...$$restProps} />
-  <div class="bg" />
+  <div class="bg">
+    {#if variant === "dark"}
+      <BorderEdge {size} pos={"lt"} />
+      <BorderEdge {size} pos={"rb"} />
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">
   @import "../styles/mixins";
 
   .form-textarea {
-    @include fields-bg;
-    @include firm-arrows(
-      $color: var(--firm-arrows-color),
-      $size: var(--firm-arrow-size)
-    );
+    @include firm-arrows($color: var(--color-border));
+
+    isolation: isolate;
+    position: relative;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    color: rgb(var(--color-text));
+
+    &.typing {
+      textarea {
+        font-size: 1rem;
+      }
+    }
 
     &.v-default {
-      --firm-arrows-color: var(--field-color);
+      --color-field: rgb(var(--color-white), 30%);
+      --color-border: var(--color-field);
+      color: rgb(var(--color-bg));
+
+      // Hover and Focus state
+      &:hover,
+      &:not(.typing):has(textarea:focus-visible) {
+        --color-field: rgb(var(--color-white), 45%);
+        color: rgb(var(--color-bg));
+      }
+
+      // Typing state
+      &.typing {
+        --color-field: rgb(var(--color-accent), 65%);
+        color: rgb(var(--color-text));
+      }
     }
 
     &.v-dark {
-      --firm-arrows-color: rgb(var(--border-card-color));
+      --color-field: rgb(var(--color-field_dark));
+      --color-border: rgb(var(--color-field-border_dark));
+      color: rgb(var(--color-field-border_dark));
+
+      .bg {
+        color: rgb(var(--color-field-border_dark));
+        border: 1px solid rgb(var(--color-field-border_dark));
+      }
+
+      // Hover and Focus state
+      &:hover,
+      &:not(.typing):has(input:focus-visible) {
+        --color-field: rgb(var(--color-white), 45%);
+        color: rgb(var(--color-bg));
+      }
+
+      // Typing state
+      &.typing {
+        --color-field: rgb(var(--color-accent), 65%);
+        color: rgb(var(--color-text));
+      }
     }
 
     &.size-sm {
-      --clip-size: 16px;
-      --firm-arrow-size: 6px;
-
-      font-size: 14px;
+      .v-dark {
+        min-width: var(--c-input-sm-width);
+      }
+      font-size: var(--c-input-sm-fsz);
     }
 
     &.size-md {
-      --clip-size: 20px;
-      --firm-arrow-size: 9px;
+      .v-dark {
+        min-width: var(--c-input-md-width);
+      }
+      font-size: var(--c-input-md-fsz);
     }
+  }
+
+  .bg {
+    @include firm-clip();
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+
+    color: rgb(var(--color-bg));
+
+    background-color: var(--color-field);
+    transition: var(--trans-default);
+    transition-property: color background-color;
   }
 
   textarea {
@@ -53,17 +121,16 @@
     height: 100%;
     resize: none;
 
-    padding: 23px 30px;
+    padding: 1.5em;
 
-    color: rgb(var(--color-text));
     background-color: transparent;
     border: none;
     outline: none;
+    color: currentColor;
 
-    transition: background-color var(--trans-default);
     &::placeholder {
-      font-size: 12px;
-      color: rgb(var(--color-bg));
+      color: currentColor;
+      transition: color var(--trans-default);
     }
   }
 </style>

@@ -1,44 +1,105 @@
+<script lang="ts">
+  export let pos: "lt" | "rt" | "lb" | "rb" = "lt";
+  export let size: "sm" | "md";
+</script>
+
 <svg
-  {...$$restProps}
-  viewBox="0 0 87 87"
-  fill="none"
+  width="86"
+  height="86"
+  viewBox="0 0 86 86"
+  fill="currentColor"
   xmlns="http://www.w3.org/2000/svg"
+  class="border-edge pos-{pos} size-{size}"
+  {...$$props}
 >
-  <g id="Group 668">
-    <path id="Vector 70" d="M49 1L44 1L1 44V49" stroke="currentColor" />
-    <path
-      id="Vector 71"
-      d="M49 1H86.5"
-      stroke="url(#paint0_linear_2155_3428)"
-    />
-    <path
-      id="Vector 72"
-      d="M1 49L0.999998 86.5"
-      stroke="url(#paint1_linear_2155_3428)"
-    />
-  </g>
-  <defs>
+  <!-- <svg xmlns="http://www.w3.org/2000/svg" width="86" height="86" viewBox="0 0 86 86" fill="none"> -->
+  <rect x="48" width="38" height="1" fill="currentColor" />
+  <rect
+    y="86"
+    width="38"
+    height="1"
+    transform="rotate(-90 0 86)"
+    fill="currentColor"
+  />
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M43.0059 0H48V1H43.4625L1 43.4625V48H0V43.0059V43H0.00585938L43 0.00585938V0H43.0059Z"
+    fill="currentColor"
+  />
+  <!-- <defs>
     <linearGradient
-      id="paint0_linear_2155_3428"
-      x1="49"
-      y1="2"
-      x2="86.5"
-      y2="2"
+      id="paint0_linear_2153_3415"
+      x1="48"
+      y1="0"
+      x2="86"
+      y2="8.89413e-08"
       gradientUnits="userSpaceOnUse"
     >
-      <stop stop-color="currentColor" />
-      <stop offset="1" stop-color="currentColor" stop-opacity="0" />
+      <stop style="stop-color: currentColor" />
+      <stop offset="1" style="stop-color: currentColor" stop-opacity="0" />
     </linearGradient>
     <linearGradient
-      id="paint1_linear_2155_3428"
-      x1="-2.94676e-06"
-      y1="49"
-      x2="-4.58594e-06"
-      y2="86.5"
+      id="paint1_linear_2153_3415"
+      x1="38"
+      y1="86"
+      x2="0"
+      y2="86"
       gradientUnits="userSpaceOnUse"
     >
-      <stop stop-color="currentColor" />
-      <stop offset="1" stop-color="currentColor" stop-opacity="0" />
+      <stop style="stop-color: currentColor" />
+      <stop offset="1" style="stop-color: currentColor" stop-opacity="0" />
     </linearGradient>
-  </defs>
+  </defs> -->
 </svg>
+
+<style lang="scss">
+  .border-edge {
+    position: absolute;
+
+    &.size {
+      &-sm {
+      }
+      &-md {
+      }
+    }
+
+    &.pos {
+      &-lt {
+        &.size {
+          &-sm {
+            left: -14px;
+            top: -14px;
+          }
+          &-md {
+            left: -14px;
+            top: -14px;
+          }
+        }
+      }
+      &-rt {
+        right: 0px;
+        top: 0px;
+        transform: rotate(-90deg);
+      }
+      &-lb {
+        left: 0px;
+        bottom: 0px;
+        transform: rotate(90deg);
+      }
+      &-rb {
+        &.size {
+          &-sm {
+            right: -14px;
+            bottom: -14px;
+          }
+          &-md {
+            right: -14px;
+            bottom: -14px;
+          }
+        }
+        transform: rotate(180deg);
+      }
+    }
+  }
+</style>

@@ -93,7 +93,7 @@
   }
 
   .window {
-    overflow: hidden;
+    // overflow: hidden;
     max-width: 960px;
     width: 100%;
     background-color: rgb(var(--color-bg));
@@ -115,11 +115,14 @@
       content: "";
       position: absolute;
       width: 20px;
-      height: 20px;
-      top: -10px;
-      right: -10px;
+      height: 10px;
+      transform-origin: bottom;
+      top: -3px;
+      right: -3px;
+
       transform: rotate(45deg);
       background-color: rgb(var(--color-white), 30%);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     }
   }
   .btn-x {

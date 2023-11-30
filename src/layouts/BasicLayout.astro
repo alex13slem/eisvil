@@ -10,15 +10,26 @@ const { title, description } = Astro.props;
 <HtmlBase title={title} description={description}>
   <main>
     <slot />
-    <SectSocials />
-    <SectForm />
+    <SectSocials class="layout" />
+    <SectForm class="layout" />
   </main>
   <slot name="after-main" />
 </HtmlBase>
 
-<style>
-  main :global(section) {
-    padding-block: 50px;
-    overflow: hidden;
+<style lang="scss">
+  main {
+    :global(section) {
+      overflow: hidden;
+      padding-block: 75px;
+    }
+    :global(section):first-of-type {
+      padding-top: 100px;
+      padding-bottom: 75px;
+    }
+    section {
+      &.layout {
+        padding-block: 50px;
+      }
+    }
   }
 </style>

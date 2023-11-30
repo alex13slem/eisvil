@@ -1,15 +1,24 @@
 ---
+import { parse } from "marked";
 import AsideNav from "../components/AsideNav.astro";
 import HtmlBase from "./HtmlBase.astro";
 
-const { title, description, links } = Astro.props;
+const { title, description, links, markdown } = Astro.props;
 ---
 
 <HtmlBase title={title} description={description}>
   <div class="container">
     <AsideNav links={links} />
     <main>
-      <slot />
+      <slot name="before" />
+      {
+        markdown && (
+          <section class="prose detail">
+            <Fragment set:html={parse(markdown)} />
+          </section>
+        )
+      }
+      <slot name="after" />
     </main>
   </div>
 </HtmlBase>

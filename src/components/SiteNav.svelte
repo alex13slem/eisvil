@@ -18,8 +18,11 @@
     active={url.pathname.includes("/services")}
     href="/services/2d-graphics">Услуги</NavLink
   >
-  <NavLink active={url.pathname.includes("asd")} {onHeader} {onMobMenu}
-    >Издательство</NavLink
+  <NavLink
+    active={url.pathname.includes("/publishing")}
+    href="/publishing"
+    {onHeader}
+    {onMobMenu}>Издательство</NavLink
   >
   <NavLink active={url.pathname.includes("asd")} {onHeader} {onMobMenu}
     >Карьера</NavLink

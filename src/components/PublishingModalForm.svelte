@@ -28,7 +28,7 @@
       slug,
       value,
       disabled: false,
-    })
+    }),
   );
 
   const formValuesInit: FormValues = {
@@ -123,7 +123,7 @@
 
 <style lang="scss">
   form {
-    flex: 1 1 auto;
+    flex: 1 0 auto;
     display: flex;
     flex-direction: column;
     gap: 20px;

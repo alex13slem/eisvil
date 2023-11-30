@@ -1,4 +1,7 @@
 <script lang="ts">
+  import InputBg from "./InputBg.svelte";
+  import BorderEdge from "./svg/BorderEdge.svelte";
+
   export let type: "text" | "email" | "password" = "text";
   export let placeholder: string | null = null;
   export let value: string | null = null;
@@ -13,7 +16,7 @@
 
 <div
   class="form-field {className} size-{size} v-{variant}"
-  class:typing={value}
+  class:typing={!!value}
 >
   <slot name="left" />
   <input
@@ -26,87 +29,113 @@
     autocomplete="new-password"
     {...$$restProps}
   />
-  <div class="bg" />
+  <div class="bg">
+    {#if variant === "dark"}
+      <BorderEdge {size} pos={"lt"} />
+      <BorderEdge {size} pos={"rb"} />
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">
   @import "../styles/mixins";
 
   .form-field {
-    @include fields-bg;
-    @include firm-arrows(
-      $color: var(--firm-arrows-color),
-      $size: var(--firm-arrow-size)
-    );
-    height: 100%;
-    padding-inline: calc(var(--clip-size) * 1.5);
-    &:has(svg) {
-      padding-inline: var(--clip-size);
-    }
-    color: rgb(var(--color-text));
+    @include firm-arrows($color: var(--color-border));
 
+    isolation: isolate;
+    position: relative;
+    height: 100%;
+
+    padding-inline: 1.5em;
     display: flex;
     align-items: center;
     gap: 5px;
 
-    & > :global(svg) {
+    color: rgb(var(--color-text));
+
+    &.typing {
+      input {
+        font-size: 1rem;
+      }
+    }
+
+    & > :global(svg.iconify) {
       z-index: 1;
       height: 100%;
-      width: calc(var(--clip-size));
+      width: 1.25em;
+      transition: color var(--trans-default);
     }
 
     &.v-default {
-      --firm-arrows-color: var(--field-color);
-      input {
-        &::placeholder {
-          color: rgb(var(--color-bg));
-        }
+      --color-field: rgb(var(--color-white), 30%);
+      --color-border: var(--color-field);
+      color: rgb(var(--color-bg));
+
+      // Hover and Focus state
+      &:hover,
+      &:not(.typing):has(input:focus-visible) {
+        --color-field: rgb(var(--color-white), 45%);
+        color: rgb(var(--color-bg));
+      }
+
+      // Typing state
+      &.typing {
+        --color-field: rgb(var(--color-accent), 65%);
+        color: rgb(var(--color-text));
       }
     }
 
     &.v-dark {
-      --firm-arrows-color: rgb(var(--border-card-color));
-      input {
-        &::placeholder {
-          color: rgb(var(--border-card-color));
-          transition: color var(--trans-default);
-        }
+      --color-field: rgb(var(--color-field_dark));
+      --color-border: rgb(var(--color-field-border_dark));
+      color: rgb(var(--color-field-border_dark));
+
+      .bg {
+        color: rgb(var(--color-field-border_dark));
+        border: 1px solid rgb(var(--color-field-border_dark));
       }
-      &:hover {
-        input {
-          &::placeholder {
-            color: rgb(var(--color-bg));
-          }
-        }
-        :global(svg) {
-          color: rgb(var(--color-bg));
-        }
+
+      // Hover and Focus state
+      &:hover,
+      &:not(.typing):has(input:focus-visible) {
+        --color-field: rgb(var(--color-white), 45%);
+        color: rgb(var(--color-bg));
       }
+
+      // Typing state
       &.typing {
-        :global(svg) {
-          color: rgb(var(--color-text));
-          transition: none;
-        }
-      }
-      :global(svg) {
-        color: rgb(var(--border-card-color));
-        transition: color var(--trans-default);
+        --color-field: rgb(var(--color-accent), 65%);
+        color: rgb(var(--color-text));
       }
     }
 
     &.size-sm {
-      --clip-size: 16px;
-      --firm-arrow-size: 6px;
-
-      font-size: 14px;
-      line-height: 35px;
+      .v-dark {
+        min-width: var(--c-input-sm-width);
+      }
+      font-size: var(--c-input-sm-fsz);
+      line-height: var(--c-input-sm-size);
     }
 
     &.size-md {
-      --clip-size: 20px;
-      --firm-arrow-size: 9px;
-      line-height: 3.375rem;
+      .v-dark {
+        min-width: var(--c-input-md-width);
+      }
+      font-size: var(--c-input-md-fsz);
+      line-height: var(--c-input-md-size);
     }
+  }
+
+  .bg {
+    @include firm-clip();
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+
+    background-color: var(--color-field);
+    transition: var(--trans-default);
+    transition-property: color background-color;
   }
 
   input {
@@ -122,7 +151,8 @@
     color: currentColor;
 
     &::placeholder {
-      font-size: 12px;
+      color: currentColor;
+      transition: color var(--trans-default);
     }
   }
 </style>

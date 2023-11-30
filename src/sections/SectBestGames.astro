@@ -14,9 +14,57 @@ const { class: className, ...props } = Astro.props;
 
 <section class:list={["sect-best-games", className]} {...props}>
   <div class="container">
-    <h2 class="sect-title">Лучшие игры</h2>
+    <!-- <h2 class="sect-title">Лучшие игры</h2> -->
+    <div class="left-title">
+      <svg
+        class="sect-logo"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        ><path
+          fill="currentColor"
+          d="M23 10a2 2 0 0 0-2-2h-6.32l.96-4.57c.02-.1.03-.21.03-.32c0-.41-.17-.79-.44-1.06L14.17 1L7.59 7.58C7.22 7.95 7 8.45 7 9v10a2 2 0 0 0 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2M1 21h4V9H1v12Z"
+        ></path></svg
+      >
+      <h2>{"Лучшие".split("").map((char) => <span>{char}</span>)}</h2>
+    </div>
     <BestGamesSlider games={bestGames} client:load />
   </div>
 </section>
 
-<style></style>
+<style>
+  .container {
+    position: relative;
+  }
+  .left-title {
+    position: relative;
+    right: 50px;
+  }
+  .sect-logo {
+    color: rgb(var(--color-accent), 40%);
+    filter: blur(1px) drop-shadow(-12px -6px 1px rgb(var(--color-accent), 30%));
+    position: absolute;
+    top: calc(-50px - 3px);
+    /* left: -50px; */
+    right: calc(100% - 50px);
+
+    width: 200px;
+    height: 200px;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    top: 0;
+    right: 100%;
+    text-transform: uppercase;
+    font-weight: 900;
+    /* text-shadow: -11px 4px 5px rgb(var(--color-bg), 50%); */
+    /* filter: drop-shadow(-11px -5px 5px -2px rgb(var(--color-bg), 50%)); */
+  }
+</style>

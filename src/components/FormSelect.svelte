@@ -27,22 +27,41 @@
       class={cn("selected-option", open && "open", value && "active")}
       style="--curr-idx: {targetIdx || 0}"
     >
-      {#if variant === "dark" && size === "sm"}
-        <svg
-          width="231"
-          height="35"
-          viewBox="0 0 231 35"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          class="border"
-        >
-          <path
-            id="Vector"
-            d="M204.037 21.694H203.825L203.678 21.8466L191.452 34.5H0.5V16.4321L16.834 0.5H230.5V18.5905L226.968 21.694H204.037Z"
-            stroke="#8C8C8C"
-            stroke-miterlimit="10"
-          />
-        </svg>
+      {#if variant === "dark"}
+        {#if size === "sm"}
+          <svg
+            width="231"
+            height="35"
+            viewBox="0 0 231 35"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="border"
+            preserveAspectRatio="none"
+          >
+            <path
+              id="Vector"
+              d="M204.037 21.694H203.825L203.678 21.8466L191.452 34.5H0.5V16.4321L16.834 0.5H230.5V18.5905L226.968 21.694H204.037Z"
+              stroke="#555660"
+              stroke-miterlimit="10"
+            />
+          </svg>
+        {/if}
+        {#if size === "md"}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="630"
+            height="56"
+            viewBox="0 0 630 56"
+            fill="none"
+            class="border"
+          >
+            <path
+              d="M586.71 35.5H586.5L586.353 35.649L566.791 55.5H0.5V26.3543L13.7506 13.4297L27.0064 0.5H629.5V30.1105L623.771 35.5H586.71Z"
+              stroke="#555660"
+              stroke-miterlimit="10"
+            />
+          </svg>
+        {/if}
       {/if}
       <slot name="left" />
       {#if open && !value}
@@ -50,14 +69,7 @@
       {:else}
         {value || placeholder}
       {/if}
-      <span class="selected-option-bg">
-        {#if variant === "dark"}
-          <span class="clip-border clip-border_1" />
-          <span class="clip-border clip-border_2" />
-          <span class="clip-border clip-border_3" />
-          <span class="clip-border clip-border_4" />
-        {/if}
-      </span>
+      <span class="selected-option-bg"></span>
       <button class="selected-option-arrow" />
     </ListboxButton>
     {#if open}
@@ -90,6 +102,8 @@
     &.size-md {
       --clip-size: 25px;
       --firm-arrows-size: 9px;
+
+      font-size: 1rem;
 
       :global(.box) {
         min-width: 270px;
@@ -135,6 +149,8 @@
       --clip-size: 16px;
       --firm-arrows-size: 6px;
 
+      font-size: 14px;
+
       :global(.box) {
         width: 231px;
       }
@@ -165,14 +181,14 @@
 
       .selected-option-bg {
         clip-path: polygon(
-          16px 0%,
+          17px 0%,
           100% 0,
-          100% calc(100% - 16px - 0px),
-          calc(100% - 4px) calc(100% - 13px),
+          100% calc(100% - 17px - 0px),
+          calc(100% - 5px) calc(100% - 13px),
           calc(100% - 27px) calc(100% - 13px),
           calc(100% - 40px) 100%,
           0 100%,
-          0 16px
+          0 17px
         );
       }
     }
@@ -224,12 +240,18 @@
 
     &.v-dark {
       --field-color: rgb(var(--color-card));
-      --arrow-color: rgb(var(--border-card-color));
-      --border-color: rgb(var(--border-card-color));
+      --arrow-color: rgb(var(--color-card-border));
+      --border-color: rgb(var(--color-card-border));
       --firm-arrows-color: var(--border-color);
 
+      &.size-md {
+        :global(.selected-option) {
+          width: var(--c-input-md-width);
+        }
+      }
+
       :global(.selected-option) {
-        color: rgb(var(--border-card-color));
+        color: rgb(var(--color-card-border));
         transition: color var(--trans-default);
 
         &:hover,
@@ -248,10 +270,13 @@
       }
 
       .border {
+        height: 100%;
+        width: 100%;
         position: absolute;
         inset: 0;
         z-index: 1;
         pointer-events: none;
+        // width: var(--c-input-md-width);
       }
 
       :global(.options-list) {
@@ -284,10 +309,7 @@
     }
 
     :global(.selected-option) {
-      @include firm-arrows(
-        $color: var(--firm-arrows-color),
-        $size: var(--firm-arrows-size)
-      );
+      @include firm-arrows($color: var(--firm-arrows-color));
 
       z-index: 2;
       width: 100%;

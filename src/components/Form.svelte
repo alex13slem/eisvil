@@ -92,7 +92,7 @@
       submitting = false;
       handleServerResponse(
         false,
-        "Не удалось отправить сообщение. Попробуйте позже."
+        "Не удалось отправить сообщение. Попробуйте позже.",
       );
     } finally {
       formValues = { ...formValuesInit };

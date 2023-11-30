@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import AsideNavLink from "./AsideNavLink.astro";
+import AsideNavLink from "./AsideNavLink.svelte";
 
 interface Props extends HTMLAttributes<"aside"> {
   links: { href: string; text: string }[];
@@ -13,7 +13,12 @@ const { links } = Astro.props;
   <nav>
     {
       links.map(({ text, href }) => (
-        <AsideNavLink href={href}>{text}</AsideNavLink>
+        <AsideNavLink
+          isActive={Astro.url.pathname.includes(String(href))}
+          href={href}
+        >
+          {text}
+        </AsideNavLink>
       ))
     }
   </nav>
@@ -22,7 +27,7 @@ const { links } = Astro.props;
 <style lang="scss">
   aside {
     flex: 0 0 calc(var(--left-panel-w) + 2px);
-    border-right: 1px solid rgb(var(--border-card-color));
+    border-right: 1px solid rgb(var(--color-card-border));
   }
 
   nav {

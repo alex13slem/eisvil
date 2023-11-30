@@ -1,17 +1,9 @@
----
-import type { HTMLAttributes } from "astro/types";
-import { cn } from "../utils/helpers";
+<script lang="ts">
+  export let href: string;
+  export let isActive: boolean = false;
+</script>
 
-interface Props extends HTMLAttributes<"a"> {}
-
-const { href, ...props } = Astro.props;
----
-
-<a
-  href={href}
-  class={cn(Astro.url.pathname.includes(String(href)) && "active")}
-  {...props}><slot /></a
->
+<a {href} class:active={isActive}><slot /></a>
 
 <style lang="scss">
   @import "../styles/mixins";
@@ -34,7 +26,7 @@ const { href, ...props } = Astro.props;
       1;
 
     transition: var(--trans-default);
-    transition-property: text-shadow;
+    transition-property: text-shadow, font-size;
 
     &::after {
       position: absolute;
@@ -48,7 +40,7 @@ const { href, ...props } = Astro.props;
         transparent
       );
 
-      transition: var(--trans-default);
+      transition: var(--trans-slow);
       transition-property: width;
     }
 
@@ -57,11 +49,23 @@ const { href, ...props } = Astro.props;
       @include hover-text1;
     }
 
-    &:hover::after {
-      width: 75%;
-    }
+    // &.active {
+    //   font-size: 20px;
+    // }
+
+    // &:hover::after {
+    //   width: 75%;
+    // }
     &.active::after {
-      width: 100%;
+      animation: load var(--trans-default) 1 forwards;
+    }
+    @keyframes load {
+      0% {
+        width: 0%;
+      }
+      100% {
+        width: 100%;
+      }
     }
   }
 </style>

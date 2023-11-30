@@ -156,7 +156,7 @@
       top: -10px;
       right: -10px;
       transform: rotate(45deg);
-      background-color: rgb(var(--border-card-color));
+      background-color: rgb(var(--color-card-border));
     }
     &::before {
       content: "";
@@ -167,7 +167,7 @@
       right: calc(var(--clip-radius) - 1px);
       transform-origin: bottom;
       transform: rotate(45deg);
-      background-color: rgb(var(--border-card-color));
+      background-color: rgb(var(--color-card-border));
     }
   }
 
