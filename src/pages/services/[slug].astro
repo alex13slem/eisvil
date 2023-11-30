@@ -36,7 +36,7 @@ const category = services.find(
 ---
 
 <AsideLayout
-  title="E I S V I L | Услуги"
+  title={`Услуги | ${category?.data.title}`}
   links={links}
   h1={category?.data.title}
   markdown={category?.body}
