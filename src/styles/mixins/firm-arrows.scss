@@ -1,6 +1,7 @@
 @mixin firm-arrows($opacity: 1, $color: currentColor) {
   &::after,
   &::before {
+    z-index: 0;
     content: "";
     position: absolute;
     border: 1px solid $color;

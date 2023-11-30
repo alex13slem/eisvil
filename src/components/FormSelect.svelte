@@ -96,22 +96,21 @@
 <style lang="scss">
   @import "../styles/mixins";
   .wrap {
-    font-size: 12px;
+    font-size: var(--fsz);
+
+    line-height: var(--lh);
     display: contents;
 
     &.size-md {
       --clip-size: 25px;
       --firm-arrows-size: 9px;
-
-      font-size: 1rem;
+      ---fsz: var(--c-input-md-fsz);
+      --lh: var(--c-input-md-size);
 
       :global(.box) {
         min-width: 270px;
       }
 
-      :global(.selected-option) {
-        line-height: 3.375rem;
-      }
       :global(.options-list) {
         top: calc(100% - var(--clip-size) + 7px);
         &::after {
@@ -148,15 +147,11 @@
     &.size-sm {
       --clip-size: 16px;
       --firm-arrows-size: 6px;
-
-      font-size: 14px;
+      --fsz: var(--c-input-sm-fsz);
+      --lh: var(--c-input-sm-size);
 
       :global(.box) {
         width: 231px;
-      }
-
-      :global(.selected-option) {
-        line-height: 35px;
       }
 
       :global(.options-list) {
@@ -378,8 +373,6 @@
       cursor: pointer;
       position: relative;
 
-      line-height: 3;
-
       transition: var(--trans-default);
       transition-property: color;
 
@@ -418,7 +411,7 @@
   }
 
   .selected-option-arrow {
-    --lh: 36px;
+    // --lh: 36px;
 
     padding: 0;
     border: none;

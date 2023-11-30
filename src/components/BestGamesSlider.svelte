@@ -66,7 +66,35 @@
 </script>
 
 <div class="root">
-  <div class="bg" />
+  <svg
+    class="decor"
+    xmlns="http://www.w3.org/2000/svg"
+    width="675"
+    height="273"
+    viewBox="0 0 675 273"
+    fill="none"
+  >
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M669 273L675 273L675 267L672.5 267L672.5 -2.18556e-07L671.5 -3.05979e-07L671.5 267L669 267L669 269.5L3.05927e-07 269.501L2.18504e-07 270.501L669 270.5L669 273Z"
+      fill="url(#paint0_linear_2092_3153)"
+    />
+    <defs>
+      <linearGradient
+        id="paint0_linear_2092_3153"
+        x1="675"
+        y1="273"
+        x2="551.125"
+        y2="42.0359"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#3A4F7D" />
+        <stop offset="1" stop-color="#3A4F7D" stop-opacity="0" />
+      </linearGradient>
+    </defs>
+  </svg>
+  <div class="bg"></div>
   <div class="left">
     <swiper-container bind:this={swiperThumb} init={false} class="swiper-thumb">
       <ShadowDecor1024x500 class="shadow" />
@@ -142,8 +170,8 @@
     border: var(--border-card);
     clip-path: polygon(
       100% 0,
-      100% calc(100% - var(--clip-radius)),
-      calc(100% - var(--clip-radius)) 100%,
+      100% calc(100% - 48px),
+      calc(100% - 48px) 100%,
       0 100%,
       0 0
     );
@@ -162,13 +190,18 @@
       content: "";
       position: absolute;
       width: 1px;
-      height: calc(var(--clip-radius) * 1.4);
+      height: calc(48px * 1.4);
       bottom: -1px;
-      right: calc(var(--clip-radius) - 1px);
+      right: calc(48px - 1px);
       transform-origin: bottom;
       transform: rotate(45deg);
       background-color: rgb(var(--color-card-border));
     }
+  }
+  .decor {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
   }
 
   article {
