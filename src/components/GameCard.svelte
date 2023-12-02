@@ -6,6 +6,7 @@
 
   export let game: CollectionEntry<"games">;
 
+  const { id } = game;
   const { title, genre, thumbnail, status, favorites, platforms } = game.data;
 </script>
 
@@ -16,7 +17,9 @@
 
   <div class="image">
     <img src={thumbnail} alt={title} width="336" height="163" />
-    <BtnFirm variant="transparent"><a href="/">ПОДРОБНЕЕ</a></BtnFirm>
+    <BtnFirm variant="transparent"
+      ><a href="/games/{id.split('/')[1]}">ПОДРОБНЕЕ</a></BtnFirm
+    >
   </div>
   <div class="body">
     <h3>{title}</h3>

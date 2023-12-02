@@ -36,7 +36,7 @@
   <div class="preview-wrap">
     {#each data as { body, slug }, idx}
       <div class={cn("preview", idx === currIdx && "active")}>
-        <div class="body">{@html parse(body)}</div>
+        <div class="body prose">{@html parse(body)}</div>
         <ModalTrigger type="publishing" flexPosition="start" {slug}
           >Подать заявку</ModalTrigger
         >

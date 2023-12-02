@@ -114,7 +114,7 @@
       class="swiper-content"
     >
       {#if swiperContent}
-        {#each games as { data: { title, platforms, description } }}
+        {#each games as { data: { title, platforms, description }, collection, id }}
           <swiper-slide>
             <article>
               <h3>{title}</h3>
@@ -126,7 +126,9 @@
               </div>
               <div class="btns">
                 <BtnFirm>Играть сейчас</BtnFirm>
-                <BtnFirm variant="transparent">Подробнее</BtnFirm>
+                <a href="/{collection}/{id.split('/')[1]}"
+                  ><BtnFirm variant="transparent">Подробнее</BtnFirm></a
+                >
               </div>
             </article>
           </swiper-slide>

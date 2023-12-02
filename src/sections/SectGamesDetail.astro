@@ -9,6 +9,8 @@ import GameCardPlatformsSlider from "../components/GameCardPlatformsSlider.svelt
 import { genresRus } from "@/lang";
 import LangTablo from "../components/LangTablo.svelte";
 import Checkbox from "../components/Checkbox.svelte";
+import BtnFirm from "../components/BtnFirm.svelte";
+import { Icon } from "astro-icon";
 
 interface Props extends HTMLAttributes<"section"> {
   // gallery: { src: string; alt: string }[];
@@ -52,80 +54,165 @@ const genreLocale = new Map(Object.entries(genresRus)).get(genre);
       <div class="inner">
         <h1>{title}</h1>
         <img src={thumbnail} alt={title} />
-        <blockquote>
+        <div class="prose">
           <Fragment set:html={parse(description)} />
-        </blockquote>
-        {
-          platforms?.length && (
-            <GameCardPlatformsSlider {platforms} client:load />
-          )
-        }
+        </div>
+
         <ul>
-          <li>Жанр: {genreLocale}</li>
-          <li>Разработчик: {developer}</li>
-          <li>Издатель: {publisher}</li>
-          <li>Дата выхода: {date.split("/").join(".")}</li>
+          <li>Жанр: <strong>{genreLocale}</strong></li>
+          <li>Разработчик: <strong>{developer}</strong></li>
+          <li>Издатель: <strong>{publisher}</strong></li>
+          <li>Дата выхода: <strong>{date.split("/").join(".")}</strong></li>
         </ul>
+
         <table>
           <thead>
             <tr>
               <th>Языки:</th>
-              <th>Озвучка</th>
-              <th>Текст</th>
+              <th class="ta-c">Озвучка</th>
+              <th class="ta-c">Текст</th>
             </tr>
           </thead>
           <tbody>
             {
               langs.map(({ lang, voice, text }) => (
                 <tr>
-                  <td class="lang">{lang}</td>
-                  <td>
-                    <input type="checkbox" checked={voice} />
+                  <td class="lang ">{lang}</td>
+                  <td class="ta-c checkbox">
+                    <Checkbox checked={voice} />
                   </td>
-                  <td>
-                    <input type="checkbox" checked={text} readonly />
+                  <td class="ta-c checkbox">
+                    <Checkbox checked={text} />
                   </td>
                 </tr>
               ))
             }
           </tbody>
         </table>
-        <!-- <LangTablo client:load {langs} /> -->
+
+        <div class="platforms">
+          <strong>Скачать:</strong>
+          {
+            platforms?.length && (
+              <GameCardPlatformsSlider {platforms} num={5} client:load />
+            )
+          }
+        </div>
+
+        <BtnFirm set:html={"Играть сейчас"} />
+
+        <div class="share">
+          <i>Поделиться:</i>
+          <div class="socials-icons">
+            <a href="#">
+              <Icon width="24" height="24" name="ri:twitter-fill" />
+            </a>
+            <a href="#"
+              ><Icon width="24" height="24" name="ri:facebook-circle-fill" />
+            </a>
+            <a href="#"><Icon name="uil:vk" width="24" height="24" /></a>
+            <a href="#"
+              ><Icon width="24" height="24" name="ri:telegram-fill" />
+            </a>
+          </div>
+        </div>
       </div>
     </aside>
   </div>
+</section>
 
-  <style lang="scss">
-    .games-detail {
-      overflow: initial;
-    }
-    .container {
-      display: grid;
-      grid-template-columns: 1fr 410px;
-      column-gap: 30px;
-    }
+<style lang="scss">
+  .games-detail {
+    overflow: initial;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 410px;
+    column-gap: 30px;
+  }
 
-    h1 {
-      text-transform: uppercase;
-      text-align: right;
-      font-size: 2rem;
-    }
+  h1 {
+    text-transform: uppercase;
+    text-align: right;
+    font-size: 2rem;
+  }
 
-    aside {
-      z-index: 1;
-      .inner {
-        height: calc(100svh - 120px);
-        overflow: auto;
-        position: sticky;
-        top: 90px;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        border: 3px solid rgba(255, 255, 255, 0.05);
-        box-shadow: var(--box-shadow-active);
-        backdrop-filter: blur(16px);
+  aside {
+    z-index: 1;
+    .inner {
+      height: calc(100svh - 120px);
+      overflow: auto;
+      position: sticky;
+      top: 90px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      border: 3px solid rgba(255, 255, 255, 0.05);
+      box-shadow: var(--box-shadow-active);
+      backdrop-filter: blur(16px);
+    }
+  }
+
+  blockquote {
+    border-left: 4px solid rgb(var(--color-accent));
+    padding-left: 1rem;
+  }
+
+  ul {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  li {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+  }
+  strong {
+    color: rgb(var(--color-accent));
+  }
+  table {
+    border-collapse: collapse;
+  }
+  th {
+    text-align: left;
+    width: 33.3%;
+  }
+  tr {
+    line-height: 3em;
+    border-bottom: var(--border-card);
+  }
+  .ta-c {
+    text-align: center;
+  }
+  .checkbox {
+    pointer-events: none;
+  }
+  .share {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    i {
+      font-size: 12px;
+    }
+    a {
+      color: rgb(var(--color-text));
+      transition: var(--trans-default);
+      transition-property: color;
+      &:hover {
+        color: rgb(var(--color-accent));
       }
     }
-  </style>
-</section>
+  }
+  .platforms {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .socials-icons {
+    display: flex;
+    gap: 5px;
+  }
+</style>
