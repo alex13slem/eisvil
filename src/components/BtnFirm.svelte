@@ -40,8 +40,6 @@
     color: rgb(var(--color-text));
 
     transition: var(--trans-default);
-    transition-property: filter;
-
     &:hover {
       filter: drop-shadow(var(--box-shadow-active));
     }

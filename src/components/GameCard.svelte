@@ -6,7 +6,7 @@
 
   export let game: CollectionEntry<"games">;
 
-  const { id } = game;
+  const { id, collection } = game;
   const { title, genre, thumbnail, status, favorites, platforms } = game.data;
 </script>
 
@@ -17,18 +17,21 @@
 
   <div class="image">
     <img src={thumbnail} alt={title} width="336" height="163" />
-    <BtnFirm variant="transparent"
-      ><a href="/games/{id.split('/')[1]}">ПОДРОБНЕЕ</a></BtnFirm
-    >
+    <a href="/{collection}/{id.split('/')[1]}">
+      <BtnFirm variant="transparent">ПОДРОБНЕЕ</BtnFirm>
+    </a>
   </div>
+
   <div class="body">
     <h3>{title}</h3>
+
     <p class="tags">
       <span>{genre}</span>
       {#if favorites}
         <span>{favorites}</span>
       {/if}
     </p>
+
     {#if platforms?.length}
       <GameCardPlatformsSlider {platforms} num={4} />
     {/if}
@@ -68,6 +71,10 @@
   .game-card:hover .image img {
     filter: blur(7px);
   }
+
+  .image :global(.btn-firm) {
+    opacity: 0;
+  }
   .game-card:hover .image :global(.btn-firm) {
     opacity: 1;
   }
@@ -80,11 +87,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  .image :global(.btn-firm) {
-    opacity: 0;
-    transition: var(--trans-default);
-    transition-property: opacity;
   }
   .image img {
     position: absolute;
