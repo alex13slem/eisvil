@@ -51,70 +51,68 @@ const genreLocale = new Map(Object.entries(genresRus)).get(genre);
       </section>
     </div>
     <aside>
-      <div class="inner">
-        <h1>{title}</h1>
-        <img src={thumbnail} alt={title} />
-        <div class="prose">
-          <Fragment set:html={parse(description)} />
-        </div>
+      <h1>{title}</h1>
+      <img src={thumbnail} alt={title} />
+      <div class="prose">
+        <Fragment set:html={parse(description)} />
+      </div>
 
-        <ul>
-          <li>Жанр: <strong>{genreLocale}</strong></li>
-          <li>Разработчик: <strong>{developer}</strong></li>
-          <li>Издатель: <strong>{publisher}</strong></li>
-          <li>Дата выхода: <strong>{date.split("/").join(".")}</strong></li>
-        </ul>
+      <ul>
+        <li>Жанр: <strong>{genreLocale}</strong></li>
+        <li>Разработчик: <strong>{developer}</strong></li>
+        <li>Издатель: <strong>{publisher}</strong></li>
+        <li>Дата выхода: <strong>{date.split("/").join(".")}</strong></li>
+      </ul>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Языки:</th>
-              <th class="ta-c">Озвучка</th>
-              <th class="ta-c">Текст</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              langs.map(({ lang, voice, text }) => (
-                <tr>
-                  <td class="lang ">{lang}</td>
-                  <td class="ta-c checkbox">
-                    <Checkbox checked={voice} />
-                  </td>
-                  <td class="ta-c checkbox">
-                    <Checkbox checked={text} />
-                  </td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
-
-        <div class="platforms">
-          <strong>Скачать:</strong>
+      <table>
+        <thead>
+          <tr>
+            <th>Языки:</th>
+            <th class="ta-c">Озвучка</th>
+            <th class="ta-c">Текст</th>
+          </tr>
+        </thead>
+        <tbody>
           {
-            platforms?.length && (
-              <GameCardPlatformsSlider {platforms} num={5} client:load />
-            )
+            langs.map(({ lang, voice, text }) => (
+              <tr>
+                <td class="lang ">{lang}</td>
+                <td class="ta-c checkbox">
+                  <Checkbox checked={voice} />
+                </td>
+                <td class="ta-c checkbox">
+                  <Checkbox checked={text} />
+                </td>
+              </tr>
+            ))
           }
-        </div>
+        </tbody>
+      </table>
 
-        <BtnFirm set:html={"Играть сейчас"} />
+      <div class="platforms">
+        <strong>Скачать:</strong>
+        {
+          platforms?.length && (
+            <GameCardPlatformsSlider {platforms} num={5} client:load />
+          )
+        }
+      </div>
 
-        <div class="share">
-          <i>Поделиться:</i>
-          <div class="socials-icons">
-            <a href="#">
-              <Icon width="24" height="24" name="ri:twitter-fill" />
-            </a>
-            <a href="#"
-              ><Icon width="24" height="24" name="ri:facebook-circle-fill" />
-            </a>
-            <a href="#"><Icon name="uil:vk" width="24" height="24" /></a>
-            <a href="#"
-              ><Icon width="24" height="24" name="ri:telegram-fill" />
-            </a>
-          </div>
+      <BtnFirm set:html={"Играть сейчас"} />
+
+      <div class="share">
+        <i>Поделиться:</i>
+        <div class="socials-icons">
+          <a href="#">
+            <Icon width="24" height="24" name="ri:twitter-fill" />
+          </a>
+          <a href="#"
+            ><Icon width="24" height="24" name="ri:facebook-circle-fill" />
+          </a>
+          <a href="#"><Icon name="uil:vk" width="24" height="24" /></a>
+          <a href="#"
+            ><Icon width="24" height="24" name="ri:telegram-fill" />
+          </a>
         </div>
       </div>
     </aside>
@@ -139,19 +137,18 @@ const genreLocale = new Map(Object.entries(genresRus)).get(genre);
 
   aside {
     z-index: 1;
-    .inner {
-      height: calc(100svh - 120px);
-      overflow: auto;
-      position: sticky;
-      top: 90px;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-      border: 3px solid rgba(255, 255, 255, 0.05);
-      box-shadow: var(--box-shadow-active);
-      backdrop-filter: blur(16px);
-    }
+    position: relative;
+    height: calc(100svh - 120px);
+    position: sticky;
+    top: 90px;
+    overflow: auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    border: 3px solid rgba(255, 255, 255, 0.05);
+    box-shadow: var(--box-shadow-active);
+    backdrop-filter: blur(16px);
   }
 
   blockquote {
