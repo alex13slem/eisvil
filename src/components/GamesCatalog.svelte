@@ -4,9 +4,10 @@
   import FormSelect from "./FormSelect.svelte";
   import Icon from "@iconify/svelte";
   import GameCard from "./GameCard.svelte";
-  import { getMapKey } from "../utils/helpers";
+  import { getMapKey } from "@/utils/helpers";
   import { blur } from "svelte/transition";
   import { paginate, LightPaginationNav, PaginationNav } from "svelte-paginate";
+  import { genresRus } from "@/lang";
 
   export let games: CollectionEntry<"games">[];
 
@@ -22,11 +23,6 @@
   $: minVisibleGame = 1 + pageSize * (currentPage - 1);
   $: maxVisibleGame = pageSize + pageSize * (currentPage - 1);
 
-  const genresRus = {
-    arcade: "Аркада",
-    action: "Экшен",
-    shooter: "Шутер",
-  };
   const genresMap = new Map(Object.entries(genresRus));
   const genres = games
     .filter(

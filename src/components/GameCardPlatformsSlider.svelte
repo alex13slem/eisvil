@@ -90,7 +90,6 @@
     position: relative;
     grid-area: links;
     display: flex;
-    justify-content: flex-end;
     gap: 0.5rem;
   }
   .links.isScrollable {

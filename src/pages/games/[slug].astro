@@ -1,12 +1,17 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import type { InferGetStaticParamsType } from "astro";
 import BasicLayout from "../../layouts/BasicLayout.astro";
+import GameHero from "../../components/GameHero.astro";
+import BtnFirm from "../../components/BtnFirm.svelte";
+import SectGames from "../../sections/SectGames.astro";
+import SectGamesDetail from "../../sections/SectGamesDetail.astro";
 
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 
 export async function getStaticPaths() {
   const games = await getCollection("games");
+
   const gamesPaths = games.map((game) => ({
     params: {
       slug: game.id.split("/")[1],
@@ -19,10 +24,26 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params as Params;
 const { games } = Astro.props;
+
+const game = games.find(
+  (game) => game.id.split("/")[1] === slug,
+) as CollectionEntry<"games">;
+
+// const { gallery } = game.data;
 ---
 
 <BasicLayout>
-  <!-- <ServicesModalForm client:load services={services} /> -->
+  <GameHero game={game}>
+    <BtnFirm>Играть сейчас</BtnFirm>
+  </GameHero>
+
+  <!-- <div class="container">
+      <h1> Игры нет :( </h1>
+    </div> -->
+
+  <SectGamesDetail />
+
+  <SectGames />
 </BasicLayout>
 
 <style></style>

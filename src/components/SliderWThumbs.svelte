@@ -1,7 +1,6 @@
 <script lang="ts">
-  import { register, type SwiperContainer } from "swiper/element/bundle";
+  import { type SwiperContainer } from "swiper/element/bundle";
   import { formatStrToId } from "../utils/helpers";
-  import { onMount } from "svelte";
 
   export let data: { src: string; alt: string }[];
 
@@ -22,7 +21,7 @@
   };
 </script>
 
-<section>
+<div class="root">
   <swiper-container
     class="detail-slider"
     class:load={!swiperDetail}
@@ -33,15 +32,14 @@
     effect="fade"
   >
     {#each data as { src, alt }}
-      <swiper-slide
-        class="detail-slide"
-        data-hash={formatStrToId(alt)}
-        style="background-image: url({src});"
-      >
-        <img {src} {alt} height="600" />
+      <swiper-slide class="detail-slide" data-hash={formatStrToId(alt)}>
+        <div class="detail-slide-wrap" style="background-image: url({src});">
+          <img {src} {alt} height="600" />
+        </div>
       </swiper-slide>
     {/each}
   </swiper-container>
+
   <swiper-container
     class="preview-slider"
     class:isEnd
@@ -61,7 +59,7 @@
       </swiper-slide>
     {/each}
   </swiper-container>
-</section>
+</div>
 
 <style lang="scss">
   .detail-slider.load,
@@ -70,36 +68,53 @@
   }
 
   .detail-slider {
-    margin-bottom: 2rem;
+    margin: -30px;
+    margin-bottom: 0;
     background-color: rgb(var(--color-white), 10%);
-    box-shadow: var(--box-shadow-active);
+    // box-shadow: var(--box-shadow-active);
 
     transition: var(--load-fade);
     transition-property: opacity;
   }
 
+  .detail-slide-wrap {
+    width: 100%;
+    height: 100%;
+    box-shadow: var(--box-shadow-active);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
   .detail-slide {
     height: 600px;
     width: 100%;
+    padding: 30px;
+
     display: flex;
     justify-content: center;
     align-items: center;
 
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-color: rgb(var(--color-bg));
+
+    // transition: var(--trans-default);
+    // transition-property: background-size;
+    // overflow: hidden;
     img {
       object-fit: contain;
-      object-position: center;
-      height: 100%;
       width: 100%;
+      height: 100%;
+      background-color: rgb(var(--color-bg), 0.85);
+
+      // backdrop-filter: blur(6px);
+      // transition: var(--trans-slow);
+      // transition-property: box-shadow;
       backdrop-filter: blur(16px);
     }
   }
 
   .preview-slider {
-    margin: -16px;
     position: relative;
+    margin: -15px;
     transition: var(--load-fade);
     transition-property: opacity;
     &::after,
@@ -152,7 +167,7 @@
           rgba(255, 255, 255, 0) 60%
         )
         30;
-      box-shadow: var(--box-shadow-active);
+      // box-shadow: var(--box-shadow-active);
       &::after {
         opacity: 1;
       }

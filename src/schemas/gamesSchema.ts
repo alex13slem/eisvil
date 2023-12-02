@@ -35,19 +35,17 @@ export const gamesSchema = z.object({
   description: z.string(),
   body: z.string(),
   langs: z.array(
-    z
-      .object({
-        lang: z.string(),
-        slug: z.string(),
-        voice: z.boolean(),
-        text: z.boolean(),
-      })
-      .optional(),
+    z.object({
+      lang: z.string(),
+      slug: z.string(),
+      voice: z.boolean(),
+      text: z.boolean(),
+    }),
   ),
   thumbnail: z.string(),
   hero_image: z.string(),
   ad_banner: z.object({ src: z.string(), alt: z.string() }),
-
+  gallery: z.array(z.object({ src: z.string(), alt: z.string() })),
   status: z.enum(["test", "dev", "hot", "new"]).optional(),
   favorites: z.enum(["top", "best"]).optional(),
   platforms: z

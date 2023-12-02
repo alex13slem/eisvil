@@ -30,9 +30,6 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon-src.svg" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <!-- <script
-      is:inline
-      src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script> -->
     <title>{title}</title>
     <ViewTransitions />
   </head>
@@ -43,27 +40,9 @@ const {
 
     <MobileMenu client:load url={Astro.url} />
 
-    <script
-      is:inline
-      src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"
-    ></script>
     <script>
-      // import { register } from "swiper/element";
-      // register();
-      // declare global {
-      //   interface Window {
-      //     netlifyIdentity: any;
-      //   }
-      // }
-      // if (window.netlifyIdentity) {
-      //   window.netlifyIdentity.on("init", (user: any) => {
-      //     if (!user) {
-      //       window.netlifyIdentity.on("login", () => {
-      //         document.location.href = "/admin/";
-      //       });
-      //     }
-      //   });
-      // }
+      import { register } from "swiper/element/bundle";
+      register();
     </script>
   </body>
 </html>
