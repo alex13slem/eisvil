@@ -53,9 +53,9 @@ const genreLocale = new Map(Object.entries(genresRus)).get(genre);
     <aside>
       <h1>{title}</h1>
       <img src={thumbnail} alt={title} />
-      <div class="prose">
+      <!-- <div class="prose">
         <Fragment set:html={parse(description)} />
-      </div>
+      </div> -->
 
       <ul>
         <li>Жанр: <strong>{genreLocale}</strong></li>
