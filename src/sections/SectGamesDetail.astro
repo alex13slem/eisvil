@@ -89,14 +89,14 @@ const genreLocale = new Map(Object.entries(genresRus)).get(genre);
         </tbody>
       </table>
 
-      <div class="platforms">
+      <!-- <div class="platforms">
         <strong>Скачать:</strong>
         {
           platforms?.length && (
             <GameCardPlatformsSlider {platforms} num={5} client:load />
           )
         }
-      </div>
+      </div> -->
 
       <BtnFirm set:html={"Играть сейчас"} />
 

@@ -7,7 +7,7 @@
 </script>
 
 <button
-  class="btn-firm v-{variant} size-{size} {flexPosition || ''}"
+  class="btn-firm variant-{variant} size-{size} {flexPosition || ''}"
   on:click
   {...$$restProps}
 >
@@ -25,22 +25,27 @@
   .btn-firm {
     @include firm-arrows;
 
+    // margin: 1px;
     position: relative;
+
     padding: 0 4ch;
+
     line-height: 3em;
-    margin: 1px;
+    color: rgb(var(--color-text));
 
     border: none;
     background: transparent;
-    filter: drop-shadow(var(--box-shadow-hover));
-    &:not(:disabled) {
-      cursor: pointer;
+
+    cursor: pointer;
+    &:disabled {
+      cursor: default;
     }
 
-    color: rgb(var(--color-text));
+    filter: drop-shadow(var(--box-shadow-hover));
 
     transition: var(--trans-default);
-    &:hover {
+    transition-property: filter;
+    &:not(:disabled):hover {
       filter: drop-shadow(var(--box-shadow-active));
     }
 
@@ -53,95 +58,101 @@
     &.center {
       align-self: center;
     }
-  }
 
-  .v-firm {
-    &:disabled {
-      filter: grayscale(100%);
+    :global(a) {
+      color: currentColor;
     }
-    .bg {
-      background: var(--gradient);
-    }
-    &:not(:disabled):hover {
-      span.text {
-        @include hover-text1;
-      }
-    }
-  }
-
-  .v-transparent {
-    overflow: hidden;
 
     .bg {
-      border: 1px solid currentColor;
+      overflow: hidden;
+      position: absolute;
+      inset: 0;
 
-      &::after,
-      &::before {
-        content: "";
-        position: absolute;
-        height: 2em;
-        width: 1px;
-        background-color: currentColor;
-        transform: rotate(45deg);
-      }
-      &::before {
-        transform-origin: top;
-      }
-      &::after {
-        transform-origin: bottom;
-      }
+      @include firm-clip;
     }
 
-    &.size-md {
+    .text {
+      position: relative;
+
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+  }
+
+  .variant {
+    &-firm {
+      transition: var(--trans-default);
+      transition-property: text-shadow, filter;
+
       .bg {
+        background: var(--gradient);
+      }
+
+      &:disabled {
+        filter: grayscale(100%);
+      }
+      &:not(:disabled):hover {
+        .text {
+          @include hover-text1;
+        }
+      }
+    }
+
+    &-transparent {
+      overflow: hidden;
+      transition: var(--trans-default);
+      transition-property: filter;
+
+      .bg {
+        border: 1px solid currentColor;
+        &::after,
         &::before {
-          top: -1px;
-          left: calc(1em + 3px);
+          content: "";
+          position: absolute;
+          height: 2em;
+          width: 1px;
+          background-color: currentColor;
+          transform: rotate(45deg);
+        }
+        &::before {
+          transform-origin: top;
         }
         &::after {
-          bottom: -1px;
-          right: calc(1em + 3px);
+          transform-origin: bottom;
+        }
+      }
+
+      &.size-md {
+        .bg {
+          &::before {
+            top: -1px;
+            left: calc(1em + 3px);
+          }
+          &::after {
+            bottom: -1px;
+            right: calc(1em + 3px);
+          }
         }
       }
     }
-  }
 
-  .v-contrast {
-    span.text {
-      color: rgb(var(--color-bg));
+    &-contrast {
+      color: rgb(var(--color-white));
+      .text {
+        color: rgb(var(--color-bg));
+      }
+      .bg {
+        background-color: rgb(var(--color-white));
+        transition: var(--trans-default);
+        transition-property: background-color;
+      }
+      &:not(:disabled):hover {
+        color: rgb(var(--color-accent));
+        .bg {
+          background-color: rgb(var(--color-accent));
+        }
+      }
     }
-    span.bg {
-      background-color: currentColor;
-      transition: var(--trans-default);
-      transition-property: color;
-    }
-    &:not(:disabled):hover {
-      color: rgb(var(--color-accent));
-    }
-  }
-
-  .btn-firm :global(a) {
-    color: currentColor;
-  }
-
-  .bg {
-    overflow: hidden;
-    position: absolute;
-    inset: 0;
-    transition: background-color var(--trans-default);
-
-    @include firm-clip;
-  }
-
-  .text {
-    position: relative;
-
-    font-size: 14px;
-    font-weight: 900;
-    color: currentColor;
-    text-transform: uppercase;
-
-    transition: var(--trans-default);
-    transition-property: text-shadow;
   }
 </style>
