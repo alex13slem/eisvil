@@ -2,7 +2,7 @@
   import type { CollectionEntry } from "astro:content";
   import { parse } from "marked";
   import { cn } from "@/utils/helpers";
-  import { pubTabIdx } from "../store/publishing";
+  import { activeIdx } from "../store/publishing";
   import ModalTrigger from "./ModalTrigger.svelte";
   import { onMount } from "svelte";
   import Icon from "@iconify/svelte";
@@ -10,7 +10,7 @@
   export let data: CollectionEntry<"publishing">[];
 
   let currIdx: number;
-  pubTabIdx.subscribe((idx) => (currIdx = idx));
+  activeIdx.subscribe((idx) => (currIdx = idx));
 </script>
 
 <div class="root">

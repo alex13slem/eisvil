@@ -1,41 +1,64 @@
 <script lang="ts">
   import { fly } from "svelte/transition";
-  import { type SlideData, initLeft } from "../store/publishing";
+  import {
+    type SlideData,
+    initLeft,
+    activeIdx,
+    slidingProcess,
+    moveLeft,
+    moveRight,
+  } from "../store/publishing";
   import { onMount } from "svelte";
   import { sineInOut } from "svelte/easing";
 
   export let data: SlideData;
-  export let isActive: boolean = false;
 
   const {
-    data: { thumbnail, description, title },
+    data: { thumbnail, description, title, order },
     infIdx,
   } = data;
 
   let load = false;
   onMount(() => (load = true));
+
+  const leftIdx = $activeIdx;
+  const centerIdx = $activeIdx + 1;
+  const rightIdx = $activeIdx + 2;
+
+  function handleClick() {
+    if (leftIdx === order) {
+      console.log("left");
+    }
+    if (centerIdx === order) {
+      console.log("center");
+    }
+    if (rightIdx === order) {
+      // !$slidingProcess && moveRight();
+    }
+  }
 </script>
 
 {#if load}
-  <article
+  <button
     transition:fly={{
       duration: 700,
       x: $initLeft ? "-100%" : "100%",
       easing: sineInOut,
     }}
-    class:active={isActive}
+    class:active={order === centerIdx}
     style="--idx: {infIdx}; "
+    on:click={handleClick}
   >
     <div class="image"><img src={thumbnail} alt={title} /></div>
     <div class="body">
       <h3>{title}</h3>
       <p>{description}</p>
     </div>
-  </article>
+  </button>
 {/if}
 
 <style lang="scss">
-  article {
+  button {
     --width: calc(33.3% - 10px);
     aspect-ratio: 4/5;
     position: absolute;
@@ -50,6 +73,8 @@
 
     display: flex;
     flex-direction: column;
+    align-items: stretch;
+
     &::after {
       content: "";
       opacity: 0;

@@ -6,7 +6,7 @@
   import BtnFirm from "../BtnFirm.svelte";
   import { type SwiperContainer } from "swiper/element/bundle";
   import ModalTrigger from "../ModalTrigger.svelte";
-  import { fade } from "svelte/transition";
+  import { fade, fly } from "svelte/transition";
   import { formatStrToId } from "../../utils/helpers";
 
   export let data: CollectionEntry<"services">[];
@@ -27,7 +27,7 @@
   <TabPanels let:selectedIndex>
     {#each data as { data: { images, description }, collection, slug }, idx (slug)}
       {#if selectedIndex === idx}
-        <div class={css.panel} transition:fade>
+        <div class={css.panel} transition:fly={{ y: "100%", duration: 700 }}>
           <div class={css.slider}>
             <swiper-container
               class={css["slider-wrap"]}
