@@ -1,6 +1,4 @@
 <script lang="ts">
-  import BorderEdge from "./svg/BorderEdge.svelte";
-
   export let variant: "firm" | "transparent" | "contrast" = "firm";
   export let size: "md" | "sm" = "md";
   export let flexPosition: "start" | "end" | "center" | null = null;
@@ -11,10 +9,6 @@
   on:click
   {...$$restProps}
 >
-  <!-- {#if variant === "transparent"}
-    <BorderEdge {size} pos={"lt"} />
-    <BorderEdge {size} pos={"rb"} />
-  {/if} -->
   <span class="bg" />
   <span class="text"><slot /></span>
 </button>
@@ -25,7 +19,6 @@
   .btn-firm {
     @include firm-arrows;
 
-    // margin: 1px;
     position: relative;
 
     padding: 0 4ch;
@@ -44,7 +37,7 @@
     filter: drop-shadow(var(--box-shadow-hover));
 
     transition: var(--trans-default);
-    transition-property: filter;
+    transition-property: filter, opacity, text-shadow;
     &:not(:disabled):hover {
       filter: drop-shadow(var(--box-shadow-active));
     }
@@ -64,11 +57,14 @@
     }
 
     .bg {
+      @include firm-clip;
+
       overflow: hidden;
       position: absolute;
       inset: 0;
 
-      @include firm-clip;
+      transition: var(--trans-default);
+      transition-property: background-color;
     }
 
     .text {
@@ -82,9 +78,6 @@
 
   .variant {
     &-firm {
-      transition: var(--trans-default);
-      transition-property: text-shadow, filter;
-
       .bg {
         background: var(--gradient);
       }
@@ -101,8 +94,6 @@
 
     &-transparent {
       overflow: hidden;
-      transition: var(--trans-default);
-      transition-property: filter;
 
       .bg {
         border: 1px solid currentColor;
@@ -144,8 +135,6 @@
       }
       .bg {
         background-color: rgb(var(--color-white));
-        transition: var(--trans-default);
-        transition-property: background-color;
       }
       &:not(:disabled):hover {
         color: rgb(var(--color-accent));

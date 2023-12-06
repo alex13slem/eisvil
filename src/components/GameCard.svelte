@@ -67,16 +67,17 @@
         rgba(255, 255, 255, 0) 90%
       )
       30;
-  }
-  .game-card:hover .image img {
-    filter: blur(7px);
+
+    .image img {
+      filter: blur(7px);
+    }
+    .image :global(.btn-firm) {
+      opacity: 1;
+    }
   }
 
   .image :global(.btn-firm) {
     opacity: 0;
-  }
-  .game-card:hover .image :global(.btn-firm) {
-    opacity: 1;
   }
 
   .image {
