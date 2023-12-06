@@ -1,51 +1,33 @@
 <script lang="ts">
   import {
-    activeIdx,
-    offsetIdx,
-    type SlideData,
+    shiftIdx,
     moveLeft,
     moveRight,
+    slides,
+    slidingProcess,
   } from "@/store/publishing";
-  import type { CollectionEntry } from "astro:content";
   import PublishingCard from "./PublishingCard.svelte";
 
-  export let data: CollectionEntry<"publishing">[];
-
-  let slides = data.map<SlideData>((el) => ({
-    ...el,
-    infIdx: el.data.order,
-  }));
-
   function handleWheel(e: WheelEvent) {
+    if ($slidingProcess) return;
+
     if (e.deltaY < 0) {
-      moveLeft(slides);
+      moveRight();
     }
     if (e.deltaY > 0) {
-      moveRight(slides);
+      moveLeft();
     }
   }
 </script>
 
 <div
   class="cards"
-  style="--offset-idx: {$offsetIdx};"
+  style="--shift-idx: {$shiftIdx};"
   on:wheel|preventDefault={handleWheel}
 >
-  <!-- <button
-    class="left"
-    on:click={() => {
-      !$slidingProcess && moveLeft();
-    }}
-  /> -->
-  {#each slides as item (item.infIdx)}
-    <PublishingCard data={item} />
+  {#each $slides as data, idx (data.infIdx)}
+    <PublishingCard {data} {idx} />
   {/each}
-  <!-- <button
-    class="right"
-    on:click={() => {
-      !$slidingProcess && moveRight();
-    }}
-  /> -->
 </div>
 
 <style lang="scss">

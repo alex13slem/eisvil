@@ -12,29 +12,29 @@
   import { sineInOut } from "svelte/easing";
 
   export let data: SlideData;
+  export let idx: number;
 
   const {
     data: { thumbnail, description, title, order },
     infIdx,
+    collection,
+    slug,
   } = data;
 
   let load = false;
   onMount(() => (load = true));
 
-  const leftIdx = $activeIdx;
-  const centerIdx = $activeIdx + 1;
-  const rightIdx = $activeIdx + 2;
-
   function handleClick() {
-    if (leftIdx === order) {
-      console.log("left");
+    if ($slidingProcess) return;
+
+    if (idx === 0) moveRight();
+
+    if (idx === 1) {
+      console.log("asd");
+      window.location.href = `${collection}/${slug.split("/")[1]}`;
     }
-    if (centerIdx === order) {
-      console.log("center");
-    }
-    if (rightIdx === order) {
-      // !$slidingProcess && moveRight();
-    }
+
+    if (idx === 2) moveLeft();
   }
 </script>
 
@@ -45,7 +45,7 @@
       x: $initLeft ? "-100%" : "100%",
       easing: sineInOut,
     }}
-    class:active={order === centerIdx}
+    class:active={order === $activeIdx + 1}
     style="--idx: {infIdx}; "
     on:click={handleClick}
   >
@@ -63,9 +63,7 @@
     aspect-ratio: 4/5;
     position: absolute;
     width: var(--width);
-    left: calc(
-      calc(var(--width) + 30px) * calc(var(--idx) + var(--offset-idx) * -1)
-    );
+    left: calc(calc(var(--width) + 30px) * calc(var(--idx) + var(--shift-idx)));
 
     transform-origin: top;
     transition: var(--trans-slow);

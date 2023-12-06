@@ -1,13 +1,9 @@
 <script lang="ts">
-  import type { CollectionEntry } from "astro:content";
   import { parse } from "marked";
   import { cn } from "@/utils/helpers";
-  import { activeIdx } from "../store/publishing";
+  import { activeIdx, publishings } from "../store/publishing";
   import ModalTrigger from "./ModalTrigger.svelte";
-  import { onMount } from "svelte";
   import Icon from "@iconify/svelte";
-
-  export let data: CollectionEntry<"publishing">[];
 
   let currIdx: number;
   activeIdx.subscribe((idx) => (currIdx = idx));
@@ -15,11 +11,8 @@
 
 <div class="root">
   <nav class="nav">
-    {#each data as { slug }, idx}
-      <button
-        class={cn("link", idx === currIdx && "active")}
-        on:click={() => {}}
-      >
+    {#each $publishings as { slug }, idx}
+      <button class={cn("link", idx === currIdx && "active")}>
         {#if slug.split("/")[1] === "computer"}
           <Icon icon="bx:desktop" width="36" height="36" />
         {/if}
@@ -34,7 +27,7 @@
   </nav>
 
   <div class="preview-wrap">
-    {#each data as { body, slug }, idx}
+    {#each $publishings as { body, slug }, idx}
       <div class={cn("preview", idx === currIdx && "active")}>
         <div class="body prose">{@html parse(body)}</div>
         <ModalTrigger type="publishing" flexPosition="start" {slug}
