@@ -1,13 +1,11 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { getCollection } from "astro:content";
 import SocialCard from "../components/SocialCard.astro";
+import { socials } from "../store/socials";
 
 interface Props extends HTMLAttributes<"section"> {}
 
 const { class: className, ...props } = Astro.props;
-
-const socials = await getCollection("socials");
 ---
 
 <section class:list={["sect-socials", className]} {...props}>

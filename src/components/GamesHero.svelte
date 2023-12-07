@@ -4,10 +4,10 @@
   import BtnFirm from "./BtnFirm.svelte";
   import { fade } from "svelte/transition";
   import { onMount } from "svelte";
-  export let games: CollectionEntry<"games">[];
+  import { topGames } from "../store/games";
   let bannerGame: CollectionEntry<"games">;
   onMount(() => {
-    bannerGame = getRandom(games);
+    bannerGame = getRandom(topGames);
   });
 </script>
 

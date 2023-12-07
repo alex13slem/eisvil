@@ -1,12 +1,10 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { getCollection } from "astro:content";
 import GamesCatalog from "../components/GamesCatalog.svelte";
 
 interface Props extends HTMLAttributes<"section"> {}
 
 const { class: className, ...props } = Astro.props;
-const games = await getCollection("games");
 ---
 
 <section
@@ -15,62 +13,12 @@ const games = await getCollection("games");
   id="games-catalog"
 >
   <div class="container">
-    <!-- <h2 class="sect-title">Наши игры</h2> -->
-    <div class="left-title">
-      <svg
-        class="sect-logo"
-        xmlns="http://www.w3.org/2000/svg"
-        width="48"
-        height="48"
-        viewBox="0 0 48 48"
-        ><g
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="4"
-          ><path
-            d="M38 14H10a2 2 0 0 0-2 2v26a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2V16a2 2 0 0 0-2-2Z"
-          ></path><path d="M17 18v-7a7 7 0 1 1 14 0v7"></path></g
-        ></svg
-      >
-      <h2>{"каталог".split("").map((char) => <span>{char}</span>)}</h2>
-    </div>
-    <GamesCatalog games={games} client:load />
+    <GamesCatalog client:load />
   </div>
 </section>
 
 <style>
   .container {
     position: relative;
-  }
-  .left-title {
-    position: relative;
-    right: 50px;
-  }
-  .sect-logo {
-    color: rgb(var(--color-accent), 40%);
-    filter: blur(1px) drop-shadow(-12px -6px 1px rgb(var(--color-accent), 30%));
-    position: absolute;
-    top: -50px;
-    right: calc(100% - 50px);
-
-    /* width: 200px; */
-    height: 200px;
-    width: fit-content;
-  }
-  h2 {
-    font-size: 2.5rem;
-    line-height: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    position: absolute;
-    top: 0;
-    right: 100%;
-    text-transform: uppercase;
-    font-weight: 900;
-    /* text-shadow: -11px 4px 5px rgb(var(--color-bg), 50%); */
-    /* filter: drop-shadow(-11px -5px 5px -2px rgb(var(--color-bg), 50%)); */
   }
 </style>

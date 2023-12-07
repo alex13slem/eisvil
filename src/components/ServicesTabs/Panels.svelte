@@ -1,15 +1,13 @@
 <script lang="ts">
-  import type { CollectionEntry } from "astro:content";
   import { parse } from "marked";
   import { TabPanels } from "@rgossiaux/svelte-headlessui";
   import css from "./panels.module.scss";
   import BtnFirm from "../BtnFirm.svelte";
   import { type SwiperContainer } from "swiper/element/bundle";
   import ModalTrigger from "../ModalTrigger.svelte";
-  import { fade, fly } from "svelte/transition";
+  import { fly } from "svelte/transition";
   import { formatStrToId } from "../../utils/helpers";
-
-  export let data: CollectionEntry<"services">[];
+  import { services } from "../../store/services";
 
   let swiperEl: SwiperContainer;
 
@@ -25,7 +23,7 @@
 
 <div class={css.wrap}>
   <TabPanels let:selectedIndex>
-    {#each data as { data: { images, description }, collection, slug }, idx (slug)}
+    {#each services as { data: { images, description }, collection, slug }, idx (slug)}
       {#if selectedIndex === idx}
         <div class={css.panel} transition:fly={{ y: "100%", duration: 700 }}>
           <div class={css.slider}>

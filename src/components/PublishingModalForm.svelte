@@ -1,5 +1,9 @@
 <script lang="ts">
   import { publishingModalForm } from "../store/modals";
+  import {
+    type PublishingFormValues,
+    publishingOptions,
+  } from "../store/publishing";
   import BtnFirm from "./BtnFirm.svelte";
   import Checkbox from "./Checkbox.svelte";
   import FormField from "./FormField.svelte";
@@ -7,31 +11,7 @@
   import FormTextarea from "./FormTextarea.svelte";
   import Modal from "./Modal.svelte";
 
-  import type { CollectionEntry } from "astro:content";
-
-  type FormValues = {
-    accessSecure: boolean;
-    accessUser: boolean;
-    botField: boolean;
-    name: string | null;
-    email: string | null;
-    linkPreview: string | null;
-    linkBuild: string | null;
-    info: string | null;
-    selectedDir: string | null;
-  };
-
-  export let publishing: CollectionEntry<"publishing">[];
-
-  const publishingOptions = publishing.map(
-    ({ slug, data: { title: value } }) => ({
-      slug,
-      value,
-      disabled: false,
-    }),
-  );
-
-  const formValuesInit: FormValues = {
+  const formValuesInit: PublishingFormValues = {
     accessSecure: false,
     accessUser: false,
     botField: false,

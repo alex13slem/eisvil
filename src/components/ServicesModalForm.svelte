@@ -1,13 +1,12 @@
 <script lang="ts">
   import { servicesModalForm } from "../store/modals";
+  import { services } from "../store/services";
   import BtnFirm from "./BtnFirm.svelte";
   import Checkbox from "./Checkbox.svelte";
   import FormField from "./FormField.svelte";
   import FormSelect from "./FormSelect.svelte";
   import FormTextarea from "./FormTextarea.svelte";
   import Modal from "./Modal.svelte";
-
-  import type { CollectionEntry } from "astro:content";
 
   type FormValues = {
     access: boolean;
@@ -17,8 +16,6 @@
     info: string | null;
     selectedService: string | null;
   };
-
-  export let services: CollectionEntry<"services">[];
 
   const servicesOptions = services.map(({ slug, data: { title: value } }) => ({
     slug,

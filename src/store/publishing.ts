@@ -5,19 +5,43 @@ export type SlideData = CollectionEntry<"publishing"> & {
   infIdx: number;
 };
 
-const data = await getCollection("publishing");
+export type PublishingFormValues = {
+  accessSecure: boolean;
+  accessUser: boolean;
+  botField: boolean;
+  name: string | null;
+  email: string | null;
+  linkPreview: string | null;
+  linkBuild: string | null;
+  info: string | null;
+  selectedDir: string | null;
+};
 
-export const publishings = atom(
-  [...data].sort((a, b) => a.data.order - b.data.order),
+export const publishings = [...(await getCollection("publishing"))].sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+export const publishingLinks = publishings
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(({ data: { title }, slug, collection }) => ({
+    text: title,
+    href: `/${collection}/${slug.split("/")[1]}`,
+  }));
+
+export const publishingOptions = publishings.map(
+  ({ slug, data: { title: value } }) => ({
+    slug,
+    value,
+    disabled: false,
+  }),
 );
 
 export const slides = atom(
-  publishings.get().map<SlideData>((el) => ({
+  publishings.map<SlideData>((el) => ({
     ...el,
     infIdx: el.data.order - 1,
   })),
 );
-
 export const activeIdx = atom(1);
 export const shiftIdx = atom(0);
 export const slidingProcess = atom(false);

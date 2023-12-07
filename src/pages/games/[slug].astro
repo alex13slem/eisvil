@@ -1,5 +1,5 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import type { InferGetStaticParamsType } from "astro";
 import BasicLayout from "../../layouts/BasicLayout.astro";
 import GameHero from "../../components/GameHero.astro";
@@ -12,34 +12,30 @@ type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 export async function getStaticPaths() {
   const games = await getCollection("games");
 
-  const gamesPaths = games.map((game) => ({
+  const paths = games.map((game) => ({
     params: {
       slug: game.id.split("/")[1],
     },
     props: { games },
   }));
 
-  return gamesPaths;
+  return paths;
 }
 
 const { slug } = Astro.params as Params;
 const { games } = Astro.props;
 
-const game = games.find(
-  (game) => game.id.split("/")[1] === slug,
-) as CollectionEntry<"games">;
-
-// const { gallery } = game.data;
+const game = games.find((game) => game.id.split("/")[1] === slug);
 ---
 
 <BasicLayout>
-  <GameHero game={game}>
-    <BtnFirm>Играть сейчас</BtnFirm>
-  </GameHero>
-
-  <!-- <div class="container">
-      <h1> Игры нет :( </h1>
-    </div> -->
+  {
+    game && (
+      <GameHero {game}>
+        <BtnFirm>Играть сейчас</BtnFirm>
+      </GameHero>
+    )
+  }
 
   <SectGamesDetail />
 

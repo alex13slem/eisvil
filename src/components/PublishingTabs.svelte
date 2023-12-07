@@ -11,7 +11,7 @@
 
 <div class="root">
   <nav class="nav">
-    {#each $publishings as { slug }, idx}
+    {#each publishings as { slug }, idx}
       <button class={cn("link", idx === currIdx && "active")}>
         {#if slug.split("/")[1] === "computer"}
           <Icon icon="bx:desktop" width="36" height="36" />
@@ -27,7 +27,7 @@
   </nav>
 
   <div class="preview-wrap">
-    {#each $publishings as { body, slug }, idx}
+    {#each publishings as { body, slug }, idx}
       <div class={cn("preview", idx === currIdx && "active")}>
         <div class="body prose">{@html parse(body)}</div>
         <ModalTrigger type="publishing" flexPosition="start" {slug}

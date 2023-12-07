@@ -1,11 +1,8 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import GamesSlider from "../components/GamesSlider.svelte";
-import { getCollection } from "astro:content";
 
 interface Props extends HTMLAttributes<"section"> {}
-
-const games = await getCollection("games");
 
 const { class: className, ...props } = Astro.props;
 ---
@@ -13,7 +10,7 @@ const { class: className, ...props } = Astro.props;
 <section class:list={["sect-games", className]} {...props}>
   <div class="container">
     <h2 class="sect-title">Наши игры</h2>
-    <GamesSlider client:load games={games} />
+    <GamesSlider client:load />
   </div>
 </section>
 

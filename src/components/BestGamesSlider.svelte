@@ -1,6 +1,5 @@
 <script lang="ts">
-  import type { CollectionEntry } from "astro:content";
-  import { register, type SwiperContainer } from "swiper/element";
+  import { type SwiperContainer } from "swiper/element";
   import GameCardPlatformsSlider from "./GameCardPlatformsSlider.svelte";
   import { parse } from "marked";
   import BtnFirm from "./BtnFirm.svelte";
@@ -13,8 +12,7 @@
   } from "swiper/modules";
   import type { SwiperOptions } from "swiper/types";
   import ShadowDecor1024x500 from "./svg/ShadowDecor1024x500.svelte";
-
-  export let games: CollectionEntry<"games">[];
+  import { bestGames } from "../store/games";
 
   onMount(() => {
     const swiperThumbParams: SwiperOptions = {
@@ -56,9 +54,6 @@
     Object.assign(swiperThumb, {
       controller: { control: swiperContent.swiper },
     });
-    // Object.assign(swiperContent, {
-    //   controller: { control: swiperThumb.swiper },
-    // });
   });
 
   let swiperThumb: SwiperContainer;
@@ -98,7 +93,7 @@
   <div class="left">
     <swiper-container bind:this={swiperThumb} init={false} class="swiper-thumb">
       <ShadowDecor1024x500 class="shadow" />
-      {#each games as { data: { thumbnail, title } }}
+      {#each bestGames as { data: { thumbnail, title } }}
         <swiper-slide>
           <img src={thumbnail} alt={title} loading="lazy" height="333" />
         </swiper-slide>
@@ -114,7 +109,7 @@
       class="swiper-content"
     >
       {#if swiperContent}
-        {#each games as { data: { title, platforms, description }, collection, id }}
+        {#each bestGames as { data: { title, platforms, description }, collection, id }}
           <swiper-slide>
             <article>
               <h3>{title}</h3>

@@ -1,22 +1,15 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { getCollection } from "astro:content";
 import ServicesTabs from "@/components/ServicesTabs/ServicesTabs.svelte";
 
 interface Props extends HTMLAttributes<"section"> {}
 
 const { class: className, ...props } = Astro.props;
-
-const services = await getCollection("services");
-
-const orderedServices = [...services].sort(
-  (a, b) => a.data.order - b.data.order,
-);
 ---
 
 <section class:list={["sect-services", className]} {...props}>
   <div class="container">
     <h2 class="sect-title">Услуги</h2>
-    <ServicesTabs client:visible data={orderedServices} />
+    <ServicesTabs client:visible />
   </div>
 </section>

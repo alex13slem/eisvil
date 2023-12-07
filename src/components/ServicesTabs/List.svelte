@@ -2,13 +2,11 @@
   import { Tab, TabList } from "@rgossiaux/svelte-headlessui";
   import css from "./list.module.scss";
   import { cn } from "@/utils/helpers";
-  import type { CollectionEntry } from "astro:content";
-
-  export let data: CollectionEntry<"services">[];
+  import { services } from "../../store/services";
 </script>
 
 <TabList class={css.nav}>
-  {#each data as { data: { title } }}
+  {#each services as { data: { title } }}
     <Tab
       class={({ selected }) => (selected ? cn(css.link, css.active) : css.link)}
       >{title}</Tab

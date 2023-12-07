@@ -6,13 +6,16 @@
   import GameCard from "./GameCard.svelte";
   import { getMapKey } from "@/utils/helpers";
   import { blur } from "svelte/transition";
-  import { paginate, LightPaginationNav, PaginationNav } from "svelte-paginate";
-  import { genresRus } from "@/lang";
-
-  export let games: CollectionEntry<"games">[];
+  import { paginate, PaginationNav } from "svelte-paginate";
+  import {
+    games,
+    genresOptions,
+    genresMap,
+    platformsOptions,
+  } from "@/store/games";
 
   const pageSizeVariant = [16, 24, 40];
-  let items = [...games];
+  let filteredItems = [...games];
 
   let searchValue = "";
   let genreValue = "";
@@ -23,34 +26,7 @@
   $: minVisibleGame = 1 + pageSize * (currentPage - 1);
   $: maxVisibleGame = pageSize + pageSize * (currentPage - 1);
 
-  const genresMap = new Map(Object.entries(genresRus));
-  const genres = games
-    .filter(
-      ({ data: { genre } }, idx, self) =>
-        idx === self.findIndex(({ data }) => data.genre === genre),
-    )
-    .map(({ data }) => ({
-      slug: data.genre,
-      value: genresMap.get(data.genre) || "Добавь перевод",
-      disabled: false,
-    }));
-
-  const platforms = games
-    .flatMap(({ data }) => data.platforms)
-    .filter(
-      (platform, idx, self) =>
-        idx ===
-        self.findIndex(
-          (_platform) => platform?.slug === _platform?.slug && _platform?.href,
-        ),
-    )
-    .map((platform) => ({
-      slug: platform?.slug || "",
-      value: platform?.title || "",
-      disabled: false,
-    }));
-
-  $: items = games
+  $: filteredItems = games
     // Фильтр по названию
     .filter(({ data }) =>
       data.title.toLowerCase().includes(searchValue.trim().toLowerCase()),
@@ -70,7 +46,7 @@
     });
 
   $: paginatedItems = paginate<CollectionEntry<"games">>({
-    items,
+    items: filteredItems,
     pageSize,
     currentPage,
   });
@@ -95,7 +71,7 @@
       size="sm"
       variant="dark"
       placeholder="Жанр"
-      options={genres}
+      options={genresOptions}
       bind:value={genreValue}
     >
       <button
@@ -119,7 +95,7 @@
       size="sm"
       variant="dark"
       placeholder="Платформа"
-      options={platforms}
+      options={platformsOptions}
       bind:value={platformValue}
     >
       <button
@@ -151,7 +127,7 @@
   </div>
   <div class="nav-panel">
     <PaginationNav
-      totalItems={items.length}
+      totalItems={filteredItems.length}
       {pageSize}
       {currentPage}
       limit={1}
@@ -168,11 +144,11 @@
 
     <div class="display-now">
       Показано
-      {minVisibleGame}-{maxVisibleGame > items.length
-        ? items.length
+      {minVisibleGame}-{maxVisibleGame > filteredItems.length
+        ? filteredItems.length
         : maxVisibleGame}
       из
-      {items.length}
+      {filteredItems.length}
     </div>
 
     <div class="page-size">
@@ -268,8 +244,8 @@
   }
 
   // Опция многоточия.
-  .nav-panel :global(.option.ellipsis) {
-  }
+  // .nav-panel :global(.option.ellipsis) {
+  // }
 
   // Номер текущей активной страницы.
   .nav-panel :global(.option.active) {
@@ -288,12 +264,12 @@
   }
 
   // Предыдущая опция.
-  .nav-panel :global(.option.prev) {
-  }
+  // .nav-panel :global(.option.prev) {
+  // }
 
   // Следующий вариант.
-  .nav-panel :global(.option.next) {
-  }
+  // .nav-panel :global(.option.next) {
+  // }
 
   // Настраивает параметры prev и next, когда они отключены (когда вы находитесь на первой или последней странице).
   .nav-panel :global(.option.disabled) {

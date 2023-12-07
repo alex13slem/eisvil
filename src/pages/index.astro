@@ -1,10 +1,6 @@
 ---
-import { getCollection } from "astro:content";
-import HtmlBase from "@/layouts/HtmlBase.astro";
 import SectHero from "@/components/LandingHero.astro";
-import SectForm from "@/sections/SectForm.astro";
 import SectGames from "@/sections/SectGames.astro";
-import SectSocials from "@/sections/SectSocials.astro";
 import SectServices from "@/sections/SectServices.astro";
 import SectPublishing from "@/sections/SectPublishing.astro";
 import SectCarrier from "@/sections/SectCarrier.astro";
@@ -12,9 +8,6 @@ import ServicesModalForm from "@/components/ServicesModalForm.svelte";
 import PublishingModalForm from "../components/PublishingModalForm.svelte";
 import ModalTrigger from "../components/ModalTrigger.svelte";
 import BasicLayout from "../layouts/BasicLayout.astro";
-
-const services = await getCollection("services");
-const publishing = await getCollection("publishing");
 ---
 
 <BasicLayout title="E I S V I L">
@@ -29,7 +22,7 @@ const publishing = await getCollection("publishing");
   <SectCarrier />
 
   <Fragment slot="after-main">
-    <ServicesModalForm client:load services={services} />
-    <PublishingModalForm client:load publishing={publishing} />
+    <ServicesModalForm client:load />
+    <PublishingModalForm client:load />
   </Fragment>
 </BasicLayout>

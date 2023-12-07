@@ -1,12 +1,10 @@
 <script lang="ts">
   import GameCard from "./GameCard.svelte";
-  import { type CollectionEntry } from "astro:content";
   import { onMount } from "svelte";
-  import { fade, fly } from "svelte/transition";
-  import { register, type SwiperContainer } from "swiper/element/bundle";
+  import { type SwiperContainer } from "swiper/element/bundle";
   import { Mousewheel, Pagination } from "swiper/modules";
   import type { SwiperOptions } from "swiper/types";
-  export let games: CollectionEntry<"games">[];
+  import { games } from "../store/games";
 
   let swiperEl: SwiperContainer;
 

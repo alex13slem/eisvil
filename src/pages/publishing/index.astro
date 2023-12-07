@@ -1,19 +1,11 @@
 ---
-import { getCollection } from "astro:content";
 import AsideLayout from "@/layouts/AsideLayout.astro";
-const collection = await getCollection("publishing");
-
-const links = collection
-  .sort((a, b) => a.data.order - b.data.order)
-  .map(({ data: { title }, slug, collection }) => ({
-    text: title,
-    href: `/${collection}/${slug.split("/")[1]}`,
-  }));
+import { publishingLinks } from "../../store/publishing";
 ---
 
 <AsideLayout
+  links={publishingLinks}
   title={`E I S V I L | Издательство`}
-  links={links}
   markdown={`
 # Заголовок
 

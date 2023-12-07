@@ -5,30 +5,24 @@ import type { InferGetStaticParamsType } from "astro";
 import FullscreenSliderWThumbs from "../../components/SliderWThumbs.svelte";
 import ModalTrigger from "../../components/ModalTrigger.svelte";
 import ServicesModalForm from "../../components/ServicesModalForm.svelte";
+import { servicesLinks } from "../../store/services";
 
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 
 export async function getStaticPaths() {
   const services = await getCollection("services");
-  const servicesPaths = services.map((service) => ({
+  const paths = services.map((service) => ({
     params: {
       slug: service.slug.split("/")[1],
     },
     props: { services },
   }));
 
-  return servicesPaths;
+  return paths;
 }
 
 const { slug } = Astro.params as Params;
 const { services } = Astro.props;
-
-const links = services
-  .sort((a, b) => a.data.order - b.data.order)
-  .map(({ data: { title }, slug, collection }) => ({
-    text: title,
-    href: `/${collection}/${slug.split("/")[1]}`,
-  }));
 
 const category = services.find(
   ({ slug: currSlug }) => currSlug.split("/")[1] === slug,
@@ -37,7 +31,7 @@ const category = services.find(
 
 <AsideLayout
   title={`Услуги | ${category?.data.title}`}
-  links={links}
+  links={servicesLinks}
   h1={category?.data.title}
   markdown={category?.body}
 >
@@ -62,4 +56,4 @@ const category = services.find(
   </Fragment>
 </AsideLayout>
 
-<ServicesModalForm client:load services={services} />
+<ServicesModalForm client:load />
