@@ -35,6 +35,7 @@
     position: relative;
     overflow-x: clip;
     min-height: 400px;
+    max-width: 946px;
     width: 100%;
 
     &::after,
