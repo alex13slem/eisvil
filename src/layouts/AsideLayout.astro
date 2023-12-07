@@ -7,7 +7,7 @@ const { title, description, links, markdown } = Astro.props;
 ---
 
 <HtmlBase title={title} description={description}>
-  <div class="container" transition:animate="slide">
+  <div class="container">
     <AsideNav links={links} />
     <main>
       <slot name="before" />
