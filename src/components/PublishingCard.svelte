@@ -54,12 +54,39 @@
       <h3>{title}</h3>
       <p>{description}</p>
     </div>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="280"
+      height="280"
+      viewBox="0 0 280 280"
+      fill="none"
+      class="border"
+    >
+      <path
+        d="M0.5 67.2071L67.2071 0.5H279.5V279.5H0.5V67.2071Z"
+        stroke="url(#paint0_linear_1600_783)"
+        stroke-opacity="0.45"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear_1600_783"
+          x1="0"
+          y1="0"
+          x2="183"
+          y2="280"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#FFBE82" />
+          <stop offset="0.494454" stop-color="#FFBE82" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+    </svg>
   </button>
 {/if}
 
 <style lang="scss">
   button {
-    --width: calc(33.3% - 10px);
+    --width: calc(33.3% - 20px);
     aspect-ratio: 4/5;
     position: absolute;
     width: var(--width);
@@ -127,51 +154,38 @@
         opacity: 1;
       }
 
+      .border {
+        opacity: 1;
+      }
       .image {
         filter: brightness(100%);
-        &::after {
-          border-color: rgb(var(--color-accent), 50%);
-        }
+
         &::before {
           opacity: 1;
-        }
-        img {
-          border-image: linear-gradient(
-              135deg,
-              rgb(var(--color-accent), 50%) 25%,
-              transparent 50%
-            )
-            30;
         }
       }
     }
   }
 
+  .border {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity var(--trans-slow);
+  }
+
   .image {
+    --clip: 67px;
     flex: 1 1 auto;
-    overflow: hidden;
     position: relative;
     z-index: 1;
-    clip-path: polygon(4rem 0, 100% 0, 100% 100%, 0 100%, 0 4rem);
+    clip-path: polygon(var(--clip) 0, 100% 0, 100% 100%, 0 100%, 0 var(--clip));
     border-bottom: 2px solid rgb(var(--border-card-accent-color));
     filter: brightness(50%);
 
     transition: var(--trans-slow);
     transition-property: clip-path, filter;
-
-    &::after {
-      --size: calc(4rem * 1.45);
-      content: "";
-      position: absolute;
-      top: calc(var(--size) / 2 * -1);
-      left: calc(var(--size) / 2 * -1);
-      width: var(--size);
-      transform: rotate(-45deg);
-      aspect-ratio: 1 / 1;
-      border: 1px solid rgb(var(--color-card));
-
-      transition: border-color var(--trans-slow);
-    }
 
     &::before {
       opacity: 0;
@@ -193,19 +207,11 @@
       object-fit: cover;
       object-position: center;
 
-      border: 1px solid;
-      border-image: linear-gradient(
-          135deg,
-          rgb(var(--color-card)) 0%,
-          rgb(var(--color-card)) 50%
-        )
-        30;
-      border-bottom: none;
-
       transition: var(--trans-slow);
-      transition-property: filter, border-image;
+      transition-property: filter;
     }
   }
+
   .body {
     position: relative;
     padding: 1rem;
@@ -221,7 +227,7 @@
       30;
     border-width: 4px;
     border-style: solid;
-    border-top: 0;
+    border-top: none;
 
     transition: border-image var(--trans-slow);
   }

@@ -3,6 +3,7 @@
   --container-offset: 1rem;
 
   // --grey-55: hsl(0deg 0% 55%);
+  // color: rgb(85, 86, 96);
 
   --color-bg: 28, 29, 43;
   --color-card: 29, 36, 52;
@@ -24,7 +25,8 @@
   --trans-steps: 0.3s steps(5);
   --load-fade: 0.1s ease;
 
-  --border: 1px solid rgb(var(--color-white), 10%);
+  --color-border: 85, 86, 96;
+  --border: 1px solid rgb(var(--color-border));
   --border-image-head-foot: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0.04) 15.71%,

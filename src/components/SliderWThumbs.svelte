@@ -4,10 +4,6 @@
 
   export let data: { src: string; alt: string }[];
 
-  // onMount(() => {
-  //   register();
-  // });
-
   let swiperDetail: SwiperContainer;
   let swiperPreview: SwiperContainer;
 
@@ -96,18 +92,12 @@
 
     background-color: rgb(var(--color-bg));
 
-    // transition: var(--trans-default);
-    // transition-property: background-size;
-    // overflow: hidden;
     img {
       object-fit: contain;
       width: 100%;
       height: 100%;
       background-color: rgb(var(--color-bg), 0.85);
 
-      // backdrop-filter: blur(6px);
-      // transition: var(--trans-slow);
-      // transition-property: box-shadow;
       backdrop-filter: blur(16px);
     }
   }
@@ -167,7 +157,6 @@
           rgba(255, 255, 255, 0) 60%
         )
         30;
-      // box-shadow: var(--box-shadow-active);
       &::after {
         opacity: 1;
       }
@@ -218,8 +207,8 @@
       width: 100%;
     }
 
-    &:global(.swiper-slide-thumb-active button) {
-      // border: 3px solid white;
-    }
+    // &:global(.swiper-slide-thumb-active button) {
+    //   // border: 3px solid white;
+    // }
   }
 </style>

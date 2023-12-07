@@ -1,6 +1,8 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import { atom } from "nanostores";
 
+const DELAY_BETWEEN_SLIDE = 750;
+
 export type SlideData = CollectionEntry<"publishing"> & {
   infIdx: number;
 };
@@ -66,7 +68,7 @@ export function moveRight() {
   setTimeout(() => {
     slides.set(slides.get().slice(0, -1));
     slidingProcess.set(false);
-  }, 700);
+  }, DELAY_BETWEEN_SLIDE);
 }
 
 export function moveLeft() {
@@ -88,5 +90,5 @@ export function moveLeft() {
   setTimeout(() => {
     slides.set(slides.get().slice(1, slides.get().length));
     slidingProcess.set(false);
-  }, 700);
+  }, DELAY_BETWEEN_SLIDE);
 }

@@ -19,8 +19,8 @@
     transition: background-color var(--trans-default);
 
     &.v {
-      &-default {
-      }
+      // &-default {
+      // }
       &-dark {
         border: 1px solid rgb(var(--color-field-border));
       }

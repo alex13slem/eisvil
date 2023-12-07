@@ -33,7 +33,7 @@
 <style lang="scss">
   .cards {
     position: relative;
-    overflow: hidden;
+    overflow-x: clip;
     min-height: 485px;
     width: 100%;
 
