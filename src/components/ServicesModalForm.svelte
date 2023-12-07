@@ -1,6 +1,6 @@
 <script lang="ts">
   import { servicesModalForm } from "../store/modals";
-  import { services } from "../store/services";
+  import { servicesOptions, type ServicesFormValues } from "../store/services";
   import BtnFirm from "./BtnFirm.svelte";
   import Checkbox from "./Checkbox.svelte";
   import FormField from "./FormField.svelte";
@@ -8,22 +8,7 @@
   import FormTextarea from "./FormTextarea.svelte";
   import Modal from "./Modal.svelte";
 
-  type FormValues = {
-    access: boolean;
-    botField: boolean;
-    name: string | null;
-    email: string | null;
-    info: string | null;
-    selectedService: string | null;
-  };
-
-  const servicesOptions = services.map(({ slug, data: { title: value } }) => ({
-    slug,
-    value,
-    disabled: false,
-  }));
-
-  const formValuesInit: FormValues = {
+  const formValuesInit: ServicesFormValues = {
     access: false,
     botField: false,
     name: "",

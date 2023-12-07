@@ -30,7 +30,6 @@
     if (idx === 0) moveRight();
 
     if (idx === 1) {
-      console.log("asd");
       window.location.href = `${collection}/${slug.split("/")[1]}`;
     }
 
@@ -86,11 +85,11 @@
 
 <style lang="scss">
   button {
-    --width: calc(33.3% - 20px);
+    --width: calc(33.3% - 30px);
     aspect-ratio: 4/5;
     position: absolute;
     width: var(--width);
-    left: calc(calc(var(--width) + 30px) * calc(var(--idx) + var(--shift-idx)));
+    left: calc(calc(var(--width) + 45px) * calc(var(--idx) + var(--shift-idx)));
 
     transform-origin: top;
     transition: var(--trans-slow);

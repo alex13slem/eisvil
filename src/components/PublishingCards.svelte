@@ -34,7 +34,7 @@
   .cards {
     position: relative;
     overflow-x: clip;
-    min-height: 485px;
+    min-height: 400px;
     width: 100%;
 
     &::after,
