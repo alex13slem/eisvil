@@ -18,7 +18,7 @@
   <div class="image">
     <img src={thumbnail} alt={title} width="336" height="163" />
     <a href="/{collection}/{id.split('/')[1]}">
-      <BtnFirm variant="transparent">ПОДРОБНЕЕ</BtnFirm>
+      <BtnFirm variant="transparent" size="sm">ПОДРОБНЕЕ</BtnFirm>
     </a>
   </div>
 
@@ -81,7 +81,7 @@
   }
 
   .image {
-    height: 163px;
+    height: 146px;
     flex: 0 1 auto;
     overflow: hidden;
     position: relative;
@@ -107,15 +107,17 @@
     grid-template-areas:
       "title title"
       "tags links";
-    grid-auto-rows: minmax(30px, auto);
     grid-template-columns: 1fr auto;
+    row-gap: 16px;
     transition: var(--trans-default);
     transition-property: border-color;
   }
   .body h3 {
+    overflow: hidden;
     grid-area: title;
     font-size: 16px;
-    margin-bottom: 1em;
+    line-height: 1;
+    white-space: nowrap;
     text-transform: uppercase;
   }
 

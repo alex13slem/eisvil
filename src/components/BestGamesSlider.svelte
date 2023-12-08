@@ -95,7 +95,7 @@
       <ShadowDecor1024x500 class="shadow" />
       {#each bestGames as { data: { thumbnail, title } }}
         <swiper-slide>
-          <img src={thumbnail} alt={title} loading="lazy" height="333" />
+          <img src={thumbnail} alt={title} loading="lazy" height="297" />
         </swiper-slide>
       {/each}
     </swiper-container>
@@ -146,7 +146,7 @@
   }
 
   .root {
-    --clip-radius: 44px;
+    --clip-radius: 42px;
     position: relative;
     min-height: 505px;
     padding-block: 60px;
@@ -231,21 +231,12 @@
       --clip-d-size: calc(var(--clip-radius) * 1.41);
 
       position: relative;
-      // border: 2px solid;
-
-      // border-image: linear-gradient(
-      //     155deg,
-      //     rgb(var(--color-accent), 50%) 25%,
-      //     transparent 45%
-      //   )
-      //   30;
-      // border-bottom: none;
-      // border-right: none;
 
       :global(.shadow) {
         position: absolute;
         inset: 0;
         z-index: 2;
+        height: 100%;
       }
 
       clip-path: polygon(
@@ -255,18 +246,6 @@
         0 100%,
         0 var(--clip-radius)
       );
-      // &::before {
-      //   z-index: 2;
-      //   content: "";
-      //   position: absolute;
-      //   width: 2px;
-      //   height: var(--clip-d-size);
-      //   top: -2px;
-      //   left: calc(var(--clip-radius) - 2px);
-      //   transform-origin: top;
-      //   transform: rotate(45deg);
-      //   background-color: rgb(var(--color-accent), 50%);
-      // }
     }
 
     img {
@@ -279,7 +258,6 @@
   .right {
     position: relative;
     padding-inline: 30px var(--clip-radius);
-    // padding-inline: 30px 110px;
 
     swiper-slide {
       padding-right: calc(110px - var(--clip-radius));

@@ -18,15 +18,17 @@
       moveLeft();
     }
   }
+  let clientHeight: number;
 </script>
 
 <div
   class="cards"
-  style="--shift-idx: {$shiftIdx};"
+  style="--shift-idx: {$shiftIdx}; height: {clientHeight +
+    (clientHeight / 100) * 7}px"
   on:wheel|preventDefault={handleWheel}
 >
   {#each $slides as data, idx (data.infIdx)}
-    <PublishingCard {data} {idx} />
+    <PublishingCard {data} {idx} bind:clientHeight />
   {/each}
 </div>
 
@@ -34,8 +36,7 @@
   .cards {
     position: relative;
     overflow-x: clip;
-    min-height: 400px;
-    max-width: 946px;
+
     width: 100%;
 
     &::after,

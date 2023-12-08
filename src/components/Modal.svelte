@@ -93,7 +93,6 @@
   }
 
   .window {
-    // overflow: hidden;
     max-width: 960px;
     width: 100%;
     background-color: rgb(var(--color-bg));

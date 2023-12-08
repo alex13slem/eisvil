@@ -9,7 +9,6 @@
   let swiperEl: SwiperContainer;
 
   onMount(() => {
-    // register();
     const swiperParams: SwiperOptions = {
       modules: [Pagination, Mousewheel],
       slidesPerView: 1,
@@ -74,6 +73,7 @@
     position: relative;
     z-index: 0;
     margin: -30px;
+    margin-bottom: -60px;
     min-height: 378px;
   }
   .wrap::after,

@@ -271,7 +271,6 @@
         inset: 0;
         z-index: 1;
         pointer-events: none;
-        // width: var(--c-input-md-width);
       }
 
       :global(.options-list) {
@@ -411,8 +410,6 @@
   }
 
   .selected-option-arrow {
-    // --lh: 36px;
-
     padding: 0;
     border: none;
     background-color: var(--arrow-color);

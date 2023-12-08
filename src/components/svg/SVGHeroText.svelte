@@ -233,3 +233,12 @@
     ></g
   ></svg
 >
+
+<style>
+  svg {
+    height: 100%;
+    filter: drop-shadow(0px -8px 40px rgba(2, 10, 17, 0.6))
+      drop-shadow(0px -8px 40px rgba(2, 10, 17, 0.85))
+      drop-shadow(-3px 3px 5px rgba(68, 147, 137, 0.2));
+  }
+</style>

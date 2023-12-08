@@ -26,21 +26,21 @@
     {/each}
   </nav>
 
-  <div class="preview-wrap">
-    {#each publishings as { body, slug }, idx}
-      <div class={cn("preview", idx === currIdx && "active")}>
+  {#each publishings as { body, slug }, idx}
+    {#if idx === currIdx}
+      <div class="preview">
         <div class="body prose">{@html parse(body)}</div>
-        <ModalTrigger type="publishing" flexPosition="start" {slug}
-          >Подать заявку</ModalTrigger
-        >
+        <ModalTrigger type="publishing" flexPosition="start" {slug}>
+          Подать заявку
+        </ModalTrigger>
       </div>
-    {/each}
-  </div>
+    {/if}
+  {/each}
 </div>
 
 <style lang="scss">
   .root {
-    flex: 0 0 var(--left-panel-w);
+    flex: 0 0 360px;
 
     display: flex;
     flex-direction: column;
@@ -49,6 +49,7 @@
 
   .nav {
     display: flex;
+    max-width: 330px;
   }
   .link {
     flex: 1 1 auto;
@@ -74,34 +75,21 @@
       font-size: 20px;
       font-weight: 600;
       color: rgb(var(--color-accent));
-      // background: linear-gradient(180deg, #e32521 0%, #ef811b 40%);
-      // background-clip: text;
-      // -webkit-background-clip: text;
-      // color: transparent;
+
       border-color: rgb(var(--color-accent));
     }
   }
 
-  .preview-wrap {
-    position: relative;
-  }
-
   .preview {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
     display: flex;
     flex-direction: column;
-    min-height: 235px;
-    pointer-events: none;
-
-    &.active {
-      pointer-events: all;
-      opacity: 1;
-    }
+    gap: 30px;
   }
 
   .body {
+    --lines: 6;
     flex: 1 1 auto;
+    height: calc(var(--lines) * 1.125em * 1.25);
+    overflow: hidden;
   }
 </style>

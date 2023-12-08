@@ -49,13 +49,6 @@
       @include hover-text1;
     }
 
-    // &.active {
-    //   font-size: 20px;
-    // }
-
-    // &:hover::after {
-    //   width: 75%;
-    // }
     &.active::after {
       animation: load var(--trans-default) 1 forwards;
     }

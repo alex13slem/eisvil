@@ -67,7 +67,6 @@
     margin: -30px;
     margin-bottom: 0;
     background-color: rgb(var(--color-white), 10%);
-    // box-shadow: var(--box-shadow-active);
 
     transition: var(--load-fade);
     transition-property: opacity;
@@ -206,9 +205,5 @@
       height: 100%;
       width: 100%;
     }
-
-    // &:global(.swiper-slide-thumb-active button) {
-    //   // border: 3px solid white;
-    // }
   }
 </style>

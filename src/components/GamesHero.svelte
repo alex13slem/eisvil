@@ -25,7 +25,7 @@
 <style lang="scss">
   .games-hero {
     z-index: 0;
-    height: 80vh;
+    height: 100svh;
     margin-top: -60px;
     position: relative;
 
@@ -34,10 +34,6 @@
     justify-content: flex-end;
     align-items: center;
     padding-block: 80px;
-
-    // background-position: center;
-    // background-size: cover;
-    // background-repeat: no-repeat;
 
     &::after {
       z-index: -1;
@@ -48,6 +44,7 @@
         180deg,
         rgba(28, 29, 43, 0) 50%,
         rgba(28, 29, 43, 0.31) 80%,
+        #1c1d2b calc(100% - 20px),
         #1c1d2b 100%
       );
     }

@@ -17,8 +17,8 @@
 
 .slider {
   position: relative;
-  margin: -16px;
-  --height: 170px;
+  margin: -10px;
+  margin-right: 0;
 }
 
 .slider-wrap {
@@ -56,10 +56,9 @@
 }
 
 .slide-wrap {
-  padding: 16px;
+  padding: 10px;
   width: 100%;
   aspect-ratio: 4/3;
-  // height: calc(var(--height) + 30px);
 
   display: flex;
   align-items: center;

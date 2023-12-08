@@ -54,12 +54,6 @@
 
     color: rgb(var(--color-text));
 
-    // &.typing {
-    //   input {
-    //     font-size: 1rem;
-    //   }
-    // }
-
     & > :global(svg.iconify) {
       z-index: 1;
       height: 100%;

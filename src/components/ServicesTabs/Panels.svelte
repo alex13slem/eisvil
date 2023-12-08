@@ -33,8 +33,7 @@
               class:isBeginning
               bind:this={swiperEl}
               mousewheel={true}
-              slides-per-view="3.5"
-              space-between="-10"
+              slides-per-view="3.75"
               on:swiperprogress={onProgress}
             >
               {#each images as { src, alt }}

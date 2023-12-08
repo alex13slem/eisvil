@@ -21,9 +21,9 @@
 
     position: relative;
 
-    padding: 0 4ch;
-
-    line-height: 3em;
+    line-height: 1;
+    font-weight: 900;
+    text-transform: uppercase;
     color: rgb(var(--color-text));
 
     border: none;
@@ -69,10 +69,6 @@
 
     .text {
       position: relative;
-
-      font-size: 14px;
-      font-weight: 900;
-      text-transform: uppercase;
     }
   }
 
@@ -93,17 +89,31 @@
     }
 
     &-transparent {
-      overflow: hidden;
+      &:hover {
+        color: rgb(var(--color-accent));
+        .bg {
+          background-color: rgb(var(--color-white), 30%);
+        }
+      }
+
+      .text {
+        color: rgb(var(--color-white));
+      }
 
       .bg {
-        border: 1px solid currentColor;
+        // border: 1px solid rgb(var(--color-white));
+        box-shadow: inset 0px 0px 2px 1px rgb(var(--color-white));
+
+        transition: var(--trans-default);
+        transition-property: background-color;
         &::after,
         &::before {
           content: "";
           position: absolute;
           height: 2em;
           width: 1px;
-          background-color: currentColor;
+          filter: blur(1px);
+          background-color: rgb(var(--color-white));
           transform: rotate(45deg);
         }
         &::before {
@@ -114,15 +124,27 @@
         }
       }
 
+      &.size-sm {
+        .bg {
+          &::before {
+            top: 1px;
+            left: calc(1em + 1px);
+          }
+          &::after {
+            bottom: 1px;
+            right: calc(1em + 1px);
+          }
+        }
+      }
       &.size-md {
         .bg {
           &::before {
-            top: -1px;
-            left: calc(1em + 3px);
+            top: 1px;
+            left: calc(1em + 2px);
           }
           &::after {
-            bottom: -1px;
-            right: calc(1em + 3px);
+            bottom: 1px;
+            right: calc(1em + 2px);
           }
         }
       }
@@ -142,6 +164,18 @@
           background-color: rgb(var(--color-accent));
         }
       }
+    }
+  }
+
+  .size {
+    &-sm {
+      padding: 8px 2ch;
+      font-size: 10px;
+    }
+    &-md {
+      padding: 18px 4ch;
+
+      font-size: 14px;
     }
   }
 </style>

@@ -13,6 +13,7 @@
 
   export let data: SlideData;
   export let idx: number;
+  export let clientHeight: number;
 
   const {
     data: { thumbnail, description, title, order },
@@ -47,6 +48,7 @@
     class:active={order === $activeIdx + 1}
     style="--idx: {infIdx}; "
     on:click={handleClick}
+    bind:clientHeight
   >
     <div class="image"><img src={thumbnail} alt={title} /></div>
     <div class="body">
@@ -55,8 +57,8 @@
     </div>
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="280"
-      height="280"
+      width="260"
+      height="260"
       viewBox="0 0 280 280"
       fill="none"
       class="border"
@@ -144,7 +146,7 @@
     }
     &.active {
       z-index: 2;
-      transform: scale(107%);
+      transform: scale(108%);
 
       filter: drop-shadow(var(--box-shadow-active)) brightness(100%);
 
@@ -175,7 +177,7 @@
   }
 
   .image {
-    --clip: 67px;
+    --clip: 62px;
     flex: 1 1 auto;
     position: relative;
     z-index: 1;
@@ -234,6 +236,7 @@
   h3 {
     margin-bottom: 9px;
     font-size: 16px;
+    text-transform: uppercase;
   }
 
   p {

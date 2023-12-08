@@ -32,22 +32,24 @@ const { class: className, ...props } = Astro.props;
 
 <style lang="scss">
   .sect-carrier {
+    --sect-inset: 40px;
+    --sect-offset-x: calc(var(--container-offset) + var(--sect-inset));
     filter: drop-shadow(var(--box-shadow-active));
   }
   .container {
-    --sect-offset-x: calc(var(--container-offset) + 30px);
-    padding: 40px var(--container-offset) 40px var(--sect-offset-x);
+    padding: var(--sect-inset) var(--container-offset) var(--sect-inset)
+      var(--sect-offset-x);
     position: relative;
     min-height: 400px;
 
     display: flex;
     flex-direction: column;
 
-    &::after {
-      z-index: -1;
+    &::before {
       content: "";
       position: absolute;
       inset: 0;
+
       background:
         url("../img/sections/career/decor.svg") var(--container-offset) 50% /
           320px 100% no-repeat,
@@ -67,19 +69,14 @@ const { class: className, ...props } = Astro.props;
     flex: 1 1 auto;
 
     display: flex;
-    gap: 1rem;
+    gap: 45px;
 
-    &::after,
     &::before {
       content: "";
       z-index: -1;
       position: absolute;
       inset: 0;
-    }
-    &::after {
       background: url("../img/sections/career/mask.svg") center/cover no-repeat;
-    }
-    &::before {
       background-color: rgb(var(--color-accent));
       clip-path: polygon(
         100% 0,
