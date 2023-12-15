@@ -8,16 +8,14 @@
   import FormFieldError from "./FormFieldError.svelte";
 
   const formValuesInit = {
-    botField: false,
-    access: false,
-    comment: "",
-    contact: "",
     email: "",
-    fromLink: "",
     name: "",
+    fromLink: "",
+    access: false,
+    botField: false,
+    contact: "",
+    comment: "",
   };
-
-  type ServerState = { ok: boolean; msg: string };
 
   let formValues = { ...formValuesInit };
   $: validationResult = formSchema.safeParse(formValues);
@@ -27,10 +25,6 @@
   let submitting = false;
   let sendingAttempt = false;
 
-  function handleServerResponse(ok: boolean, msg: string) {
-    serverState = { ok, msg };
-  }
-
   function getErrors<Input, Output>(
     validationResult: SafeParseReturnType<Input, Output>,
   ) {
@@ -38,36 +32,60 @@
     return null;
   }
 
-  const handleSubmit = async () => {
-    sendingAttempt = true;
+  type ServerState = { ok: boolean; msg: string };
 
-    if (!validationResult.success || !formValues.access) return;
+  type SendFormOptions<Values> = {
+    url: string;
+    values: Values;
+  };
 
+  /**
+   * @param {Object} options
+   * @param {String} options.url URL для отправки формы
+   * @param {FormValues} options.values поля формы
+   * @return {ServerState} { ok: boolean; msg: string } - Состояние отправки
+   */
+  const sendForm = async <FormValues,>({
+    url,
+    values,
+  }: SendFormOptions<FormValues>): Promise<ServerState> => {
     try {
-      submitting = true;
-
-      await fetch("/api/contact-form-message", {
+      const { ok } = await fetch(url, {
         method: "POST",
         credentials: "omit",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formValues),
+        body: JSON.stringify(values),
       });
-
-      submitting = false;
-      handleServerResponse(true, "");
+      if (!ok) return { ok, msg: "Ошибка отправки. Смотри в консоль." };
+      return { ok, msg: "" };
     } catch (error) {
-      console.error(`Eror: ${error}`);
-      submitting = false;
-      handleServerResponse(
-        false,
-        "Не удалось отправить сообщение. Попробуйте позже.",
-      );
-    } finally {
+      console.error(`Error: ${error}`);
+      return { ok: false, msg: "Ошибка отправки. Смотри в консоль." };
+    }
+  };
+
+  const handleSubmit = async () => {
+    sendingAttempt = true;
+
+    if (!validationResult.success || !formValues.access) return;
+
+    submitting = true;
+
+    serverState = await sendForm({
+      url: "/api/contact-form-message",
+      values: formValues,
+    });
+
+    submitting = false;
+
+    if (serverState.ok) {
       formValues = { ...formValuesInit };
     }
   };
+
+  $: console.log(sendingAttempt, submitting, serverState);
 </script>
 
 <form on:submit|preventDefault={handleSubmit} data-astro-reload>
