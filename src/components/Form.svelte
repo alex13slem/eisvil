@@ -4,18 +4,8 @@
   import FormField from "./FormField.svelte";
   import FormTextarea from "./FormTextarea.svelte";
   import { formSchema } from "../schemas/formSchema";
-  import type { ZodFormattedError } from "astro/zod";
+  import type { SafeParseReturnType } from "astro/zod";
   import FormFieldError from "./FormFieldError.svelte";
-
-  type Errors = {
-    botField?: boolean | undefined;
-    access: boolean;
-    comment?: string | undefined;
-    contact?: string | undefined;
-    name: string;
-    email: string;
-    fromLink: string;
-  };
 
   const formValuesInit = {
     botField: false,
@@ -30,38 +20,28 @@
   type ServerState = { ok: boolean; msg: string };
 
   let formValues = { ...formValuesInit };
-  let errors: ZodFormattedError<Errors, string>;
+  $: validationResult = formSchema.safeParse(formValues);
+  $: errors = getErrors(validationResult);
 
   let serverState: ServerState = { ok: false, msg: "" };
   let submitting = false;
   let sendingAttempt = false;
 
-  $: validationResult = formSchema.safeParse(formValues);
-  $: if (validationResult && !serverState.ok) {
-    checkValidate();
-  }
-
   function handleServerResponse(ok: boolean, msg: string) {
     serverState = { ok, msg };
   }
 
-  function checkValidate() {
-    if (!validationResult.success) {
-      errors = validationResult.error.format();
-      return false;
-    } else {
-      errors = { _errors: [] };
-      return true;
-    }
+  function getErrors<Input, Output>(
+    validationResult: SafeParseReturnType<Input, Output>,
+  ) {
+    if (!validationResult.success) return validationResult.error.format();
+    return null;
   }
 
   const handleSubmit = async () => {
     sendingAttempt = true;
 
-    if (!checkValidate() || !formValues.access) return;
-
-    const { botField, name, email, fromLink, contact, comment, access } =
-      formValues;
+    if (!validationResult.success || !formValues.access) return;
 
     try {
       submitting = true;
@@ -72,15 +52,7 @@
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          botField,
-          email,
-          name,
-          fromLink,
-          contact,
-          comment,
-          access,
-        }),
+        body: JSON.stringify(formValues),
       });
 
       submitting = false;
@@ -170,13 +142,11 @@
       </p>
     </label>
   </fieldset>
-  <BtnFirm
-    type="submit"
-    disabled={((!validationResult.success || !formValues.access) &&
+  <BtnFirm type="submit">
+    <!-- disabled={((!validationResult.success || !formValues.access) &&
       sendingAttempt) ||
       submitting ||
-      serverState.ok}
-  >
+      serverState.ok} -->
     {serverState.ok ? "Благодарим!" : "Отправить"}
   </BtnFirm>
 </form>
