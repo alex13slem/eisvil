@@ -7,11 +7,19 @@
   import type { ZodFormattedError } from "astro/zod";
   import FormFieldError from "./FormFieldError.svelte";
 
-  type ServerState = { ok: boolean; msg: string };
+  type Errors = {
+    botField?: boolean | undefined;
+    access: boolean;
+    comment?: string | undefined;
+    contact?: string | undefined;
+    name: string;
+    email: string;
+    fromLink: string;
+  };
 
   const formValuesInit = {
-    access: false,
     botField: false,
+    access: false,
     comment: "",
     contact: "",
     email: "",
@@ -19,20 +27,10 @@
     name: "",
   };
 
-  let formValues = { ...formValuesInit };
+  type ServerState = { ok: boolean; msg: string };
 
-  let errors: ZodFormattedError<
-    {
-      botField?: boolean | undefined;
-      contact?: string | undefined;
-      comment?: string | undefined;
-      name: string;
-      email: string;
-      fromLink: string;
-      access: boolean;
-    },
-    string
-  >;
+  let formValues = { ...formValuesInit };
+  let errors: ZodFormattedError<Errors, string>;
 
   let serverState: ServerState = { ok: false, msg: "" };
   let submitting = false;
@@ -96,12 +94,11 @@
       );
     } finally {
       formValues = { ...formValuesInit };
-      console.log(formValues);
     }
   };
 </script>
 
-<form on:submit|preventDefault={handleSubmit}>
+<form on:submit|preventDefault={handleSubmit} data-astro-reload>
   <input
     name="bot-field"
     aria-hidden="true"

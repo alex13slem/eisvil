@@ -36,7 +36,7 @@
     ],
   }}
 >
-  <form>
+  <form data-astro-reload>
     <input
       name="bot-field"
       aria-hidden="true"
