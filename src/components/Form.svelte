@@ -4,8 +4,10 @@
   import FormField from "./FormField.svelte";
   import FormTextarea from "./FormTextarea.svelte";
   import { formSchema } from "../schemas/formSchema";
-  import type { SafeParseReturnType } from "astro/zod";
   import FormFieldError from "./FormFieldError.svelte";
+  import { type ServerState, sendForm } from "../utils/sendForm";
+  import { getErrors } from "../utils/zod";
+  import { formatErrors } from "../utils/helpers";
 
   const formValuesInit = {
     email: "",
@@ -18,53 +20,12 @@
   };
 
   let formValues = { ...formValuesInit };
-  $: validationResult = formSchema.safeParse(formValues);
-  $: errors = getErrors(validationResult);
-
-  let serverState: ServerState = { ok: false, msg: "" };
+  let serverState: ServerState;
   let submitting = false;
   let sendingAttempt = false;
 
-  function getErrors<Input, Output>(
-    validationResult: SafeParseReturnType<Input, Output>,
-  ) {
-    if (!validationResult.success) return validationResult.error.format();
-    return null;
-  }
-
-  type ServerState = { ok: boolean; msg: string };
-
-  type SendFormOptions<Values> = {
-    url: string;
-    values: Values;
-  };
-
-  /**
-   * @param {Object} options
-   * @param {String} options.url URL для отправки формы
-   * @param {FormValues} options.values поля формы
-   * @return {ServerState} { ok: boolean; msg: string } - Состояние отправки
-   */
-  const sendForm = async <FormValues,>({
-    url,
-    values,
-  }: SendFormOptions<FormValues>): Promise<ServerState> => {
-    try {
-      const { ok } = await fetch(url, {
-        method: "POST",
-        credentials: "omit",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-      if (!ok) return { ok, msg: "Ошибка отправки. Смотри в консоль." };
-      return { ok, msg: "" };
-    } catch (error) {
-      console.error(`Error: ${error}`);
-      return { ok: false, msg: "Ошибка отправки. Смотри в консоль." };
-    }
-  };
+  $: validationResult = formSchema.safeParse(formValues);
+  $: errors = getErrors(validationResult);
 
   const handleSubmit = async () => {
     sendingAttempt = true;
@@ -76,16 +37,14 @@
     serverState = await sendForm({
       url: "/api/contact-form-message",
       values: formValues,
+    }).finally(() => {
+      submitting = false;
     });
-
-    submitting = false;
 
     if (serverState.ok) {
       formValues = { ...formValuesInit };
     }
   };
-
-  $: console.log(sendingAttempt, submitting, serverState);
 </script>
 
 <form on:submit|preventDefault={handleSubmit} data-astro-reload>
@@ -101,44 +60,38 @@
       name="name"
       placeholder="Ваше имя"
       bind:value={formValues.name}
-    >
-      {#if errors?.name && sendingAttempt}
-        <FormFieldError errors={errors.name} />
-      {/if}
-    </FormField>
+      error={errors?.name && sendingAttempt ? formatErrors(errors.name) : null}
+    />
 
     <FormField
       name="from_link"
       className="from-link"
       placeholder="Из какого вы издания или блога? Пожалуйста, укажите ссылку"
       bind:value={formValues.fromLink}
-    >
-      {#if errors?.fromLink && sendingAttempt}
-        <FormFieldError errors={errors.fromLink} />
-      {/if}
-    </FormField>
+      error={errors?.fromLink && sendingAttempt
+        ? formatErrors(errors.fromLink)
+        : null}
+    />
 
     <FormField
       type="email"
       className="email"
       placeholder="E-mail"
       bind:value={formValues.email}
-    >
-      {#if errors?.email && sendingAttempt}
-        <FormFieldError errors={errors.email} />
-      {/if}
-    </FormField>
+      error={errors?.email && sendingAttempt
+        ? formatErrors(errors.email)
+        : null}
+    />
 
     <FormField
       name="contact"
       className="contact"
       placeholder="Другой удобный способ связи с Вами"
       bind:value={formValues.contact}
-    >
-      {#if errors?.contact && sendingAttempt}
-        <FormFieldError errors={errors.contact} />
-      {/if}
-    </FormField>
+      error={errors?.contact && sendingAttempt
+        ? formatErrors(errors.contact)
+        : null}
+    />
 
     <FormTextarea
       name="comment"
@@ -150,7 +103,7 @@
     <label class="access">
       <Checkbox
         name="access"
-        invalid={sendingAttempt && !formValues.access && !serverState.ok}
+        invalid={sendingAttempt && !formValues.access && !serverState?.ok}
         bind:checked={formValues.access}
       />
       <p>
@@ -165,7 +118,7 @@
       sendingAttempt) ||
       submitting ||
       serverState.ok} -->
-    {serverState.ok ? "Благодарим!" : "Отправить"}
+    {serverState?.ok ? "Благодарим!" : "Отправить"}
   </BtnFirm>
 </form>
 

@@ -13,7 +13,7 @@
 
 <div class="error-wrapper">
   <Popover class="inner">
-    <PopoverButton class="error-btn">!</PopoverButton>
+    <PopoverButton class="error-btn" />
     <PopoverPanel class="error-message">
       {formatErrors(errors)}
     </PopoverPanel>
@@ -24,22 +24,35 @@
   .error-wrapper {
     z-index: 2;
     position: absolute;
+    // top: 1rem;
+    // right: 1rem;
     inset: 0;
     left: auto;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    padding-top: 1rem;
-    padding-inline: 1rem;
+
+    // justify-content: flex-end;
+    // align-items: flex-start;
+    // padding-top: 1rem;
+    // padding-inline: 1rem;
+
+    :global(.inner) {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
     :global(.error-btn) {
-      width: 1.5rem;
-      aspect-ratio: 1 / 1;
+      // width: 1.5rem;
+      // height: 1.5rem;
+      height: 100%;
+      width: 1.25em;
+      line-height: 1;
+      // aspect-ratio: 1 / 1;
       padding: 0;
 
       color: rgb(var(--color-bg));
 
-      border-radius: 50%;
+      // border-radius: 50%;
       border: 1px solid rgb(var(--color-bg));
       background-color: rgb(var(--color-accent));
       cursor: pointer;

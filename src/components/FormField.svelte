@@ -1,6 +1,7 @@
 <script lang="ts">
-  import InputBg from "./InputBg.svelte";
+  import { blur } from "svelte/transition";
   import BorderEdge from "./svg/BorderEdge.svelte";
+  import { clickOutside } from "../utils/svelte/clickOutside";
 
   export let type: "text" | "email" | "password" = "text";
   export let placeholder: string | null = null;
@@ -8,17 +9,19 @@
   export let className: string = "";
   export let size: "md" | "sm" = "md";
   export let variant: "default" | "dark" = "default";
+  export let error: string | null = null;
+  let errorVisible = false;
 
   function typeAction(node: HTMLInputElement) {
     node.type = type;
   }
+  let errorBtn: HTMLElement;
 </script>
 
 <div
   class="form-field {className} size-{size} v-{variant}"
   class:typing={!!value}
 >
-  <slot />
   <input
     on:input
     on:blur
@@ -29,7 +32,28 @@
     autocomplete="new-password"
     {...$$restProps}
   />
+  {#if error && errorVisible}
+    <p
+      class="error-message"
+      transition:blur={{ duration: 300 }}
+      use:clickOutside={[errorBtn]}
+      on:outclick={() => (errorVisible = false)}
+    >
+      {error}
+    </p>
+  {/if}
   <div class="bg">
+    {#if error}
+      <button
+        class="error-btn"
+        bind:this={errorBtn}
+        on:click={() => {
+          console.log(errorVisible);
+
+          errorVisible = !errorVisible;
+        }}
+      />
+    {/if}
     {#if variant === "dark"}
       <BorderEdge {size} pos={"lt"} />
       <BorderEdge {size} pos={"rb"} />
@@ -121,6 +145,26 @@
     }
   }
 
+  .error {
+    &-btn {
+      position: absolute;
+      inset: 0;
+      left: auto;
+      background-color: rgb(var(--color-accent));
+      width: 1.25em;
+      animation: pulsar-bg-c 1s ease infinite alternate;
+    }
+    &-message {
+      z-index: 2;
+      position: absolute;
+      top: 0;
+      right: 1.25em;
+      padding-inline: 1.25em;
+      background-color: rgb(var(--color-accent), 65%);
+      color: rgb(var(--color-text));
+    }
+  }
+
   .bg {
     @include firm-clip();
     position: absolute;
@@ -129,7 +173,7 @@
 
     background-color: var(--color-field);
     transition: var(--trans-default);
-    transition-property: color background-color;
+    transition-property: color, background-color;
   }
 
   input {
