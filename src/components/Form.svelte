@@ -4,7 +4,6 @@
   import FormField from "./FormField.svelte";
   import FormTextarea from "./FormTextarea.svelte";
   import { formSchema } from "../schemas/formSchema";
-  import FormFieldError from "./FormFieldError.svelte";
   import { type ServerState, sendForm } from "../utils/sendForm";
   import { getErrors } from "../utils/zod";
   import { formatErrors } from "../utils/helpers";
@@ -14,7 +13,7 @@
     name: "",
     fromLink: "",
     access: false,
-    botField: false,
+    botFlaggedSpam: false,
     contact: "",
     comment: "",
   };
@@ -35,7 +34,7 @@
     submitting = true;
 
     serverState = await sendForm({
-      url: "/api/contact-form-message",
+      url: "/api/bloger-form",
       values: formValues,
     }).finally(() => {
       submitting = false;
@@ -52,7 +51,7 @@
     name="bot-field"
     aria-hidden="true"
     type="hidden"
-    bind:value={formValues.botField}
+    bind:value={formValues.botFlaggedSpam}
   />
   <fieldset>
     <FormField

@@ -3,7 +3,7 @@ import { z } from "astro/zod";
 const reqErrorText = "Это поле обязательно к заполнению";
 
 export const formSchema = z.object({
-  botField: z.boolean().optional(),
+  botFlaggedSpam: z.boolean().optional(),
   name: z
     .string({ required_error: reqErrorText })
     .min(2, "Имя должно состоять хотя бы из двух букв"),
@@ -17,3 +17,5 @@ export const formSchema = z.object({
   comment: z.string().optional(),
   access: z.boolean({ required_error: reqErrorText }),
 });
+
+export type FormSchema = z.infer<typeof formSchema>;
