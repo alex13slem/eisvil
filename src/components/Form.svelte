@@ -34,7 +34,7 @@
     submitting = true;
 
     serverState = await sendForm({
-      url: "/api/bloger-form",
+      url: "/api/blogers-form",
       values: formValues,
     }).finally(() => {
       submitting = false;

@@ -15,10 +15,10 @@ export async function notifyViaTelegramBot({
 }) {
   try {
     if (!access) {
-      throw new Error("Нет соглашения с обработкой персональных данных");
+      throw new Error("No digital data processing agreement");
     }
     if (botFlaggedSpam) {
-      throw new Error("Обнаружен спам");
+      throw new Error("Spam detected");
     }
 
     await axios({
@@ -29,11 +29,12 @@ export async function notifyViaTelegramBot({
         text: htmlMessage,
       },
     });
+
     return { successful: true };
   } catch (error: any) {
     let message: string;
     if (error.response) {
-      message = `Telegram server responded with non 2xx code: ${error.response.data}`;
+      message = `Telegram server responded with ${error.response.data.error_code} code: ${error.response.data.description}`;
     } else if (error.request) {
       message = `No Telegram response received: ${error.request}`;
     } else {

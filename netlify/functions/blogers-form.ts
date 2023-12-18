@@ -1,7 +1,8 @@
+import type { Context } from "@netlify/functions";
 import type { FormSchema } from "../../src/schemas/formSchema";
 import { notifyViaTelegramBot } from "../../src/utils/notifyViaTelegramBot";
 
-const { TELEGRAM_BOT_API_TOKEN, TELEGRAM_BOT_CHAT_ID } = process.env;
+const { TG_BOT_BLOGERS_API_TOKEN, TG_BOT_BLOGERS_CHAT_ID } = process.env;
 
 async function sendBlogerForm(data: FormSchema) {
   const { botFlaggedSpam, access, name, email, fromLink, contact, comment } =
@@ -18,46 +19,29 @@ async function sendBlogerForm(data: FormSchema) {
     botFlaggedSpam,
     access,
     htmlMessage,
-    apiToken: TELEGRAM_BOT_API_TOKEN,
-    chatId: TELEGRAM_BOT_CHAT_ID,
+    apiToken: TG_BOT_BLOGERS_API_TOKEN,
+    chatId: TG_BOT_BLOGERS_CHAT_ID,
   });
 }
 
-const handler = async ({
-  body,
-  httpMethod,
-}: {
-  body: string;
-  httpMethod: string;
-}) => {
+export default async (request: Request, context: Context) => {
   try {
-    if (httpMethod.toLowerCase() !== "post") {
-      return {
-        statusCode: 405,
-        body: "Method Not Allowed",
-      };
+    if (request.method !== "POST") {
+      return Response.json({ error: "Method Not Allowed" }, { status: 405 });
     }
-    if (!body) {
-      return {
-        statusCode: 400,
-        body: "Body not correct",
-      };
-    }
-    const data = JSON.parse(body);
+
+    const data = await request.json();
 
     const { error } = await sendBlogerForm(data);
 
     if (error) {
-      return {
-        statusCode: 400,
-        body: error,
-      };
+      console.error(error);
+      return Response.json({ error }, { status: 400 });
     }
 
-    return { statusCode: 200, body: "successful" };
-  } catch (error: unknown) {
-    return { statusCode: 400, body: error };
+    return Response.json({ message: "Form submitted" });
+  } catch (error) {
+    console.error(error);
+    return Response.json({ error: "Failed sending email" }, { status: 500 });
   }
 };
-
-export { handler };
