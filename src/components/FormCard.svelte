@@ -1,42 +1,37 @@
----
-import type { HTMLAttributes } from "astro/types";
-import BtnFirm from "./BtnFirm.svelte";
-import Form from "./Form.svelte";
-import { Image } from "astro:assets";
-import bgPreview from "@/img/hero.jpg";
-
-interface Props extends HTMLAttributes<"div"> {}
-
-const { class: className, ...props } = Astro.props;
----
-
 <script>
-  const formCard = document.querySelector(".form-card");
-  const fields = formCard?.querySelectorAll("input, textarea");
-  fields?.length &&
-    fields.forEach((field) => {
-      field.addEventListener("blur", () => {
-        formCard?.classList.remove("active");
-      });
-    });
-  fields?.length &&
-    fields.forEach((field) => {
-      field.addEventListener("focus", () => {
-        formCard?.classList.add("active");
-      });
-    });
+  import BtnFirm from "./BtnFirm.svelte";
+  import Form from "./Form.svelte";
+  import bgPreview from "@/img/hero.jpg";
+  import { blogerFormSubmitted } from "../store/forms";
+
+  let active = false;
+  let submitted = false;
+
+  blogerFormSubmitted.subscribe((val) => (submitted = val));
 </script>
 
-<div class:list={["form-card", className]} {...props}>
-  <Image class={"img"} src={bgPreview} alt={""} />
+<div
+  class="form-card"
+  class:active
+  class:submitted
+  on:blur|capture={() => (active = false)}
+  on:focus|capture={() => (active = true)}
+  style="background-image: url({bgPreview.src});"
+>
   <p class="description">
     <slot name="description" />
   </p>
   <div class="body">
     <div class="preview">
-      <BtnFirm>Заполнить форму</BtnFirm>
+      <BtnFirm>
+        {#if !submitted}
+          Заполнить форму
+        {:else}
+          Спасибо за сотрудничество!
+        {/if}
+      </BtnFirm>
     </div>
-    <Form client:visible />
+    <Form />
   </div>
 </div>
 
@@ -45,6 +40,8 @@ const { class: className, ...props } = Astro.props;
     overflow: hidden;
     position: relative;
     border: var(--border-card);
+    background-position: center;
+    background-size: cover;
 
     // Углы start
     --clip-lb: 120px;
@@ -90,8 +87,8 @@ const { class: className, ...props } = Astro.props;
     // Углы end
 
     // Фокус start
-    &:hover,
-    &.active {
+    &:not(.submitted):hover,
+    &:not(.submitted).active {
       .body {
         background-color: rgb(var(--color-card), 90%);
         &::after {
@@ -111,16 +108,12 @@ const { class: className, ...props } = Astro.props;
       }
     }
     // Фокус end
-  }
 
-  .img {
-    z-index: -1;
-    position: absolute;
-    object-fit: cover;
-    object-position: center;
-    inset: 0;
-    height: 100%;
-    width: 100%;
+    &.submitted {
+      :global(form) {
+        pointer-events: none;
+      }
+    }
   }
 
   .description {
@@ -146,7 +139,6 @@ const { class: className, ...props } = Astro.props;
     position: absolute;
     inset: 0;
     border-top: var(--border-card);
-    pointer-events: none;
 
     display: flex;
     justify-content: center;
@@ -154,9 +146,12 @@ const { class: className, ...props } = Astro.props;
 
     transition: border-color var(--trans-slow);
 
-    :global(.btn-firm) {
-      transition: opacity var(--trans-slow);
-    }
+    // :not(.submitted) & {
+    //   pointer-events: none;
+    // }
+    // :global(.btn-firm) {
+    //   transition: opacity var(--trans-slow);
+    // }
     /* display: none; */
   }
 

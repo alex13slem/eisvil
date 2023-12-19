@@ -7,6 +7,8 @@
   import { type ServerState, sendForm } from "../utils/sendForm";
   import { getErrors } from "../utils/zod";
   import { formatErrors } from "../utils/helpers";
+  import localforage from "localforage";
+  import { blogerFormSubmitted } from "../store/forms";
 
   const formValuesInit = {
     email: "",
@@ -41,9 +43,13 @@
     });
 
     if (serverState.ok) {
-      formValues = { ...formValuesInit };
+      // formValues = { ...formValuesInit };
+      await localforage.setItem("blogerFormSubmitted", "true", () => {
+        blogerFormSubmitted.set(true);
+      });
     }
   };
+  // console.log(await localforage.getItem("blogerFormSend"));
 </script>
 
 <form on:submit|preventDefault={handleSubmit} data-astro-reload>

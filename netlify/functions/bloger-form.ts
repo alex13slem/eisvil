@@ -3,9 +3,9 @@ import { notifyViaTelegramBot } from "../../src/utils/notifyViaTelegramBot";
 
 const { TELEGRAM_BOT_API_TOKEN, TELEGRAM_BOT_CHAT_ID } = process.env;
 
-async function sendBlogerForm(data: FormSchema) {
+async function sendBlogerForm(fields: FormSchema) {
   const { botFlaggedSpam, access, name, email, fromLink, contact, comment } =
-    data;
+    fields;
 
   const htmlMessage = /* html */ `<b>Новая заявка</b>
 <i>имя</i>: ${name}
