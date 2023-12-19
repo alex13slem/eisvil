@@ -566,13 +566,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/inter@npm:^5.0.16":
-  version: 5.0.16
-  resolution: "@fontsource/inter@npm:5.0.16"
-  checksum: c928a831d2c9445e358b3e3b43df80e451f7e4de5ffb63274802feac8e98dce618a8b054ffa768c8e2ad46c5d44d1dc812844a68e681a843066096197937568b
-  languageName: node
-  linkType: hard
-
 "@iconify/svelte@npm:^3.1.4":
   version: 3.1.4
   resolution: "@iconify/svelte@npm:3.1.4"
@@ -1899,7 +1892,6 @@ __metadata:
   resolution: "eisvil@workspace:."
   dependencies:
     "@astrojs/svelte": "npm:^5.0.0"
-    "@fontsource/inter": "npm:^5.0.16"
     "@iconify/svelte": "npm:^3.1.4"
     "@netlify/functions": "npm:^2.3.0"
     "@rgossiaux/svelte-headlessui": "npm:^2.0.0"

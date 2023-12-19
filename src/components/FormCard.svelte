@@ -23,11 +23,11 @@
   </p>
   <div class="body">
     <div class="preview">
-      <BtnFirm>
+      <BtnFirm on:click={() => blogerFormSubmitted.set(false)}>
         {#if !submitted}
           Заполнить форму
         {:else}
-          Спасибо за сотрудничество!!!
+          Отправить ещё раз
         {/if}
       </BtnFirm>
     </div>

@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@astrojs/svelte": "^5.0.0",
-    "@fontsource/inter": "^5.0.16",
     "@iconify/svelte": "^3.1.4",
     "@netlify/functions": "^2.3.0",
     "astro": "^4.0.3",
