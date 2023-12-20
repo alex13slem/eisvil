@@ -41,6 +41,9 @@ export default async (request: Request, context: Context) => {
       return Response.json(statusText, { status, statusText });
     }
 
-    return Response.json("Unknown Error", { status: 500 });
+    return Response.json(error.message || error, {
+      status: 500,
+      statusText: error.message || error,
+    });
   }
 };
