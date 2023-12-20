@@ -26,22 +26,21 @@ async function sendBlogerForm(data: FormSchema) {
 
 export default async (request: Request, context: Context) => {
   try {
-    if (request.method !== "POST") {
-      return Response.json({ error: "Method Not Allowed" }, { status: 405 });
+    if (request.method.toUpperCase() !== "POST") {
+      return Response.json("Method Not Allowed", {
+        status: 405,
+        statusText: "Method Not Allowed",
+      });
     }
-
     const data = await request.json();
 
-    const { error } = await sendBlogerForm(data);
-
-    if (error) {
-      console.error(error);
-      return Response.json({ error }, { status: 400 });
+    await sendBlogerForm(data);
+  } catch (error: any) {
+    if (error.status) {
+      const { status, statusText } = error;
+      return Response.json(statusText, { status, statusText });
     }
 
-    return Response.json({ message: "Form submitted" });
-  } catch (error) {
-    console.error(error);
-    return Response.json({ error: "Failed sending email" }, { status: 500 });
+    return Response.json("Unknown Error", { status: 500 });
   }
 };

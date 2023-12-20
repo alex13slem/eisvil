@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export async function notifyViaTelegramBot({
   botFlaggedSpam,
@@ -21,25 +21,41 @@ export async function notifyViaTelegramBot({
       throw new Error("Spam detected");
     }
 
-    await axios({
-      url: `https://api.telegram.org/bot${apiToken}/sendMessage?parse_mode=HTML`,
-      method: "POST",
-      data: {
+    const { data } = await axios.post(
+      `https://api.telegram.org/bot${apiToken}/sendMessage`,
+      {
         chat_id: chatId,
         text: htmlMessage,
       },
-    });
+      {
+        params: {
+          parse_mode: "HTML",
+        },
+      },
+    );
 
-    return { successful: true };
+    return Response.json(data, {
+      status: 200,
+      statusText: "Message Submitted",
+    });
   } catch (error: any) {
-    let message: string;
-    if (error.response) {
-      message = `Telegram server responded with ${error.response.data.error_code} code: ${error.response.data.description}`;
-    } else if (error.request) {
-      message = `No Telegram response received: ${error.request}`;
+    let status: number;
+    let statusText: string;
+    if (error instanceof AxiosError) {
+      if (error.response) {
+        const { error_code, description } = error.response.data;
+        statusText = `Telegram server error: ${description}`;
+        status = error_code;
+      } else {
+        statusText = `No Telegram response received`;
+        status = 500;
+      }
     } else {
-      message = `Error setting up telegram response: ${error.message}`;
+      statusText = `Error setting up telegram response: ${error.message}`;
+      status = 400;
     }
-    return { successful: false, error: message };
+
+    console.error(new Error(statusText));
+    return Promise.reject({ status, statusText });
   }
 }

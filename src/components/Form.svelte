@@ -4,7 +4,7 @@
   import FormField from "./FormField.svelte";
   import FormTextarea from "./FormTextarea.svelte";
   import { formSchema } from "../schemas/formSchema";
-  import { type ServerState, sendForm } from "../utils/sendForm";
+  import { sendForm, type SubmittingStatus } from "../utils/sendForm";
   import { getErrors } from "../utils/zod";
   import { formatErrors } from "../utils/helpers";
   import localforage from "localforage";
@@ -21,8 +21,8 @@
   };
 
   let formValues = { ...formValuesInit };
-  let serverState: ServerState;
   let submitting = false;
+  let status: SubmittingStatus = { ok: false, error: "" };
   let sendingAttempt = false;
 
   $: validationResult = formSchema.safeParse(formValues);
@@ -35,14 +35,14 @@
 
     submitting = true;
 
-    serverState = await sendForm({
+    const { ok } = await sendForm({
       url: "/api/blogers-form",
       values: formValues,
     }).finally(() => {
       submitting = false;
     });
 
-    if (serverState.ok) {
+    if (ok) {
       // formValues = { ...formValuesInit };
       await localforage.setItem("blogerFormSubmitted", "true", () => {
         blogerFormSubmitted.set(true);
@@ -108,7 +108,7 @@
     <label class="access">
       <Checkbox
         name="access"
-        invalid={sendingAttempt && !formValues.access && !serverState?.ok}
+        invalid={sendingAttempt && !formValues.access}
         bind:checked={formValues.access}
       />
       <p>
@@ -118,13 +118,7 @@
       </p>
     </label>
   </fieldset>
-  <BtnFirm type="submit">
-    <!-- disabled={((!validationResult.success || !formValues.access) &&
-      sendingAttempt) ||
-      submitting ||
-      serverState.ok} -->
-    {serverState?.ok ? "Благодарим!" : "Отправить"}
-  </BtnFirm>
+  <BtnFirm type="submit">Отправить</BtnFirm>
 </form>
 
 <style lang="scss">
