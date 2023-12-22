@@ -1,3 +1,6 @@
+# Local folders
+.*/
+
 # build output
 dist/
 
@@ -21,5 +24,4 @@ pnpm-debug.log*
 .DS_Store
 
 not_in_repo/
-# Local Netlify folder
-.netlify
+
