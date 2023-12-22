@@ -1,4 +1,4 @@
-import { atom, onSet } from "nanostores";
+import { action, atom, onSet } from "nanostores";
 import { areSetsEqual } from "../utils/helpers";
 
 export const toasterHub = atom<string[]>([]);
@@ -7,12 +7,15 @@ onSet(toasterHub, ({ newValue, abort }) => {
   if (areSetsEqual(new Set(toasterHub.get()), new Set([...newValue]))) {
     return abort();
   }
+  removeToast();
 });
 
-toasterHub.subscribe((value) => {
-  if (value.length) {
-    setTimeout(() => {
-      toasterHub.set(value.slice(0, value.length - 1));
-    }, 3000);
-  }
+let removeProcess = false;
+const removeToast = action(toasterHub, "removeToast", ({ set, get }) => {
+  if (removeProcess) return;
+  removeProcess = true;
+  setTimeout(() => {
+    set(get().slice(0, get().length - 1));
+    removeProcess = false;
+  }, 3000);
 });
