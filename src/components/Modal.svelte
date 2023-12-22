@@ -15,7 +15,7 @@
 </script>
 
 {#if isOpen}
-  <Portal>
+  <Portal lock>
     <div class="modal" transition:blur>
       <div
         class="overlay"

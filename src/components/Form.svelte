@@ -9,6 +9,7 @@
   import { formatErrors } from "../utils/helpers";
   import localforage from "localforage";
   import { blogerFormSubmitted } from "../store/forms";
+  import { toasterHub } from "../store/toasterHub";
 
   const formValuesInit = {
     email: "",
@@ -22,7 +23,6 @@
 
   let formValues = { ...formValuesInit };
   let submitting = false;
-  let status: SubmittingStatus = { ok: false, error: "" };
   let sendingAttempt = false;
 
   $: validationResult = formSchema.safeParse(formValues);
@@ -35,14 +35,16 @@
 
     submitting = true;
 
-    const { ok } = await sendForm({
-      url: "/api/blogers-form",
+    const { ok, error } = await sendForm({
+      url: "/api/blogers-form1",
       values: formValues,
     }).finally(() => {
       submitting = false;
     });
 
-    if (ok) {
+    if (!ok) {
+      toasterHub.set([error, ...$toasterHub]);
+    } else {
       // formValues = { ...formValuesInit };
       await localforage.setItem("blogerFormSubmitted", "true", () => {
         blogerFormSubmitted.set(true);

@@ -47,3 +47,6 @@ export function getMapKey(map: Map<string, string>, searchKey: string) {
   }
   return undefined;
 }
+
+export const areSetsEqual = (a: Set<any>, b: Set<any>) =>
+  a.size === b.size && [...a].every((value) => b.has(value));

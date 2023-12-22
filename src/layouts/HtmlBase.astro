@@ -4,6 +4,7 @@ import SiteHeader from "../components/Header.astro";
 import "@/styles/index.scss";
 import SiteFooter from "../components/Footer.astro";
 import MobileMenu from "../components/MobileMenu.svelte";
+import Toaster from "../components/Toaster.svelte";
 
 interface Props {
   title: string;
@@ -32,6 +33,7 @@ const {
     <SiteFooter />
 
     <MobileMenu client:load url={Astro.url} />
+    <Toaster client:load />
 
     <script>
       import { register } from "swiper/element/bundle";
