@@ -9,10 +9,10 @@ onSet(toasterHub, ({ newValue, abort }) => {
   }
 });
 
-toasterHub.subscribe(() => {
-  if (toasterHub.get().length) {
+toasterHub.subscribe((value) => {
+  if (value.length) {
     setTimeout(() => {
-      toasterHub.set(toasterHub.get().slice(0, toasterHub.get().length - 1));
+      toasterHub.set(value.slice(0, value.length - 1));
     }, 3000);
   }
 });
