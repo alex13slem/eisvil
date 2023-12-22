@@ -20,7 +20,7 @@
   .toaster-hub {
     z-index: 2;
     position: fixed;
-    inset: 0;
+    right: 0;
     top: 60px;
     left: auto;
     padding: 1rem;

@@ -1,7 +1,7 @@
 import { action, atom, onSet } from "nanostores";
 import { areSetsEqual } from "../utils/helpers";
 
-export const toasterHub = atom<string[]>([]);
+export const toasterHub = atom<string[]>(["asdf"]);
 
 onSet(toasterHub, ({ newValue, abort }) => {
   if (areSetsEqual(new Set(toasterHub.get()), new Set([...newValue]))) {
