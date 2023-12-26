@@ -1,6 +1,6 @@
 <script>
   import BtnFirm from "./BtnFirm.svelte";
-  import Form from "./Form.svelte";
+  import BlogersForm from "./BlogersForm.svelte";
   import bgPreview from "@/img/hero.jpg";
   import { blogerFormSubmitted } from "../store/forms";
 
@@ -31,7 +31,7 @@
         {/if}
       </BtnFirm>
     </div>
-    <Form />
+    <BlogersForm />
   </div>
 </div>
 

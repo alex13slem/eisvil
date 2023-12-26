@@ -1,4 +1,5 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
+import { getAxiosErrorText } from "./axios";
 
 export type SubmittingStatus = {
   ok: boolean;
@@ -23,19 +24,9 @@ export const sendForm = async <FormValues>({
   try {
     await axios.post(url, values);
     return { ok: true, error: "" };
-  } catch (error: any) {
-    let message;
-    if (error instanceof AxiosError) {
-      if (error.response) {
-        message = `[API Error]: ${error.message}`;
-      } else {
-        message = `[Network Error]: No Response Received At ${url}`;
-      }
-    } else {
-      message = "[Non-HTTP Error]:" + (error.message || error);
-    }
-
-    console.error(message);
+  } catch (error) {
+    const { errorText, message } = getAxiosErrorText(error, url);
+    console.error(new Error(errorText));
     return { ok: false, error: message };
   }
 };

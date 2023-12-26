@@ -36,26 +36,27 @@ export async function notifyViaTelegramBot({
 
     return Response.json(data, {
       status: 200,
-      statusText: "Message Submitted",
+      statusText: "ok",
+      // statusText: "Message Submitted",
     });
   } catch (error: any) {
     let status: number;
-    let statusText: string;
+    let errorText: string;
     if (error instanceof AxiosError) {
       if (error.response) {
         const { error_code, description } = error.response.data;
-        statusText = `Telegram server error: ${description}`;
+        errorText = `Telegram server error: ${description}`;
         status = error_code;
       } else {
-        statusText = `No Telegram response received`;
+        errorText = `No Telegram response received`;
         status = 500;
       }
     } else {
-      statusText = `Error setting up telegram response: ${error.message}`;
+      errorText = `Error setting up telegram response: ${error.message}`;
       status = 400;
     }
 
-    console.error(new Error(statusText));
-    return Promise.reject({ status, statusText });
+    console.error(new Error(errorText));
+    return Promise.reject({ status, statusText: errorText });
   }
 }

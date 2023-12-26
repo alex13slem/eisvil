@@ -36,7 +36,7 @@
     submitting = true;
 
     const { ok, error } = await sendForm({
-      url: "/api/blogers-form1",
+      url: "/api/blogers-form",
       values: formValues,
     }).finally(() => {
       submitting = false;
@@ -45,13 +45,12 @@
     if (!ok) {
       toasterHub.set([error, ...$toasterHub]);
     } else {
-      // formValues = { ...formValuesInit };
+      formValues = { ...formValuesInit };
       await localforage.setItem("blogerFormSubmitted", "true", () => {
         blogerFormSubmitted.set(true);
       });
     }
   };
-  // console.log(await localforage.getItem("blogerFormSend"));
 </script>
 
 <form on:submit|preventDefault={handleSubmit} data-astro-reload>
