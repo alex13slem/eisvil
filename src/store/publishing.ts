@@ -7,17 +7,19 @@ export type SlideData = CollectionEntry<"publishing"> & {
   infIdx: number;
 };
 
-export type PublishingFormValues = {
-  accessSecure: boolean;
-  accessUser: boolean;
-  botField: boolean;
-  name: string | null;
-  email: string | null;
-  linkPreview: string | null;
-  linkBuild: string | null;
-  info: string | null;
-  selectedDir: string | null;
-};
+// export type PublishingFormValues = {
+//   access: {
+//     secure: boolean;
+//     user: boolean;
+//   };
+//   botField: boolean;
+//   name: string | null;
+//   email: string | null;
+//   linkPreview: string | null;
+//   linkBuild: string | null;
+//   info: string | null;
+//   selectedDir: string | null;
+// };
 
 export const publishings = [...(await getCollection("publishing"))].sort(
   (a, b) => a.data.order - b.data.order,

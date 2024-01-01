@@ -3,7 +3,7 @@
   import BorderEdge from "./svg/BorderEdge.svelte";
   import { clickOutside } from "../utils/svelte/clickOutside";
 
-  export let type: "text" | "email" | "password" = "text";
+  export let type: "text" | "email" | "password" | "url" = "text";
   export let placeholder: string | null = null;
   export let value: string | null = null;
   export let className: string = "";
@@ -47,11 +47,7 @@
       <button
         class="error-btn"
         bind:this={errorBtn}
-        on:click={() => {
-          console.log(errorVisible);
-
-          errorVisible = !errorVisible;
-        }}
+        on:click={() => (errorVisible = !errorVisible)}
       />
     {/if}
     {#if variant === "dark"}
@@ -71,7 +67,7 @@
     position: relative;
     height: 100%;
 
-    padding-inline: 1.5em;
+    padding-inline: 1.3em;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -159,6 +155,10 @@
       position: absolute;
       top: 0;
       right: 1.25em;
+      height: 100%;
+
+      display: flex;
+      align-items: center;
       padding-inline: 1.25em;
       background-color: rgb(var(--color-accent), 65%);
       color: rgb(var(--color-text));
@@ -182,6 +182,7 @@
     z-index: 1;
     width: 100%;
     padding: 0;
+    padding-inline: 0.2em;
 
     background-color: transparent;
     border: none;

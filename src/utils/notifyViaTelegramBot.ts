@@ -1,26 +1,15 @@
 import axios, { AxiosError } from "axios";
 
 export async function notifyViaTelegramBot({
-  botFlaggedSpam,
-  access,
   htmlMessage,
   apiToken,
   chatId,
 }: {
-  botFlaggedSpam: boolean | undefined;
-  access: boolean;
   htmlMessage: string;
   apiToken: string;
   chatId: string;
 }) {
   try {
-    if (!access) {
-      throw new Error("No digital data processing agreement");
-    }
-    if (botFlaggedSpam) {
-      throw new Error("Spam detected");
-    }
-
     const { data } = await axios.post(
       `https://api.telegram.org/bot${apiToken}/sendMessage`,
       {
@@ -37,7 +26,6 @@ export async function notifyViaTelegramBot({
     return Response.json(data, {
       status: 200,
       statusText: "ok",
-      // statusText: "Message Submitted",
     });
   } catch (error: any) {
     let status: number;

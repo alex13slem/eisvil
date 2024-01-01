@@ -1,6 +1,7 @@
 <script lang="ts">
   import BtnFirm from "@/components/BtnFirm.svelte";
-  import { publishingModalForm, servicesModalForm } from "../store/modals";
+  import { pubModalIsOpen, servModalIsOpen } from "../store/modals";
+  import { pubTargetSlug, servTargetSlug } from "../store/forms";
 
   export let type: "services" | "publishing" | null = null;
   export let slug: string | null = null;
@@ -9,16 +10,12 @@
 
   function handleClick() {
     if (type === "services") {
-      servicesModalForm.set({
-        isOpen: true,
-        slug,
-      });
+      servModalIsOpen.set(true);
+      servTargetSlug.set(slug);
     }
     if (type === "publishing") {
-      publishingModalForm.set({
-        isOpen: true,
-        slug,
-      });
+      pubModalIsOpen.set(true);
+      pubTargetSlug.set(slug);
     }
   }
 </script>

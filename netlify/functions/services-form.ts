@@ -1,12 +1,11 @@
-import type { BlogersFormSchema } from "../../src/schemas/forms";
+import type { ServicesFormSchema } from "../../src/schemas/forms";
 import { notifyViaTelegramBot } from "../../src/utils/notifyViaTelegramBot";
 import { post } from "../../src/utils/serverless";
 
 const { TG_BOT_BLOGERS_API_TOKEN, TG_BOT_BLOGERS_CHAT_ID } = process.env;
 
-async function sendBlogerForm(data: BlogersFormSchema) {
-  const { botFlaggedSpam, access, name, email, fromLink, contact, comment } =
-    data;
+async function sendBlogerForm(data: ServicesFormSchema) {
+  const { botFlaggedSpam, access, name, email, info, selectedService } = data;
 
   let error = false;
   let statusText;
@@ -26,11 +25,11 @@ async function sendBlogerForm(data: BlogersFormSchema) {
     return Promise.reject({ status: 400, statusText });
   }
 
-  const htmlMessage = /* html */ `<i>имя</i>: ${name}
+  const htmlMessage = /* html */ `<b>${selectedService}</b>
+	
+<i>имя</i>: ${name}
 <i>почта</i>: <a href="mailto:${email}">${email}</a>
-<i>откуда</i>: <a href="${fromLink}">${fromLink}</a>
-<i>способ связи</i>: ${contact || "нет"}
-<i>комментарий</i>: ${comment || "нет"}`;
+<i>о проекте</i>: ${info || "нет"}`;
 
   return await notifyViaTelegramBot({
     htmlMessage,

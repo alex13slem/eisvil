@@ -1,11 +1,15 @@
 <script lang="ts">
-  import InputBg from "./InputBg.svelte";
+  import { blur } from "svelte/transition";
   import BorderEdge from "./svg/BorderEdge.svelte";
+  import { clickOutside } from "../utils/svelte/clickOutside";
   export let placeholder: string | null = null;
   export let value: string | null = null;
   export let className: string = "";
   export let variant: "default" | "dark" = "default";
   export let size: "md" = "md";
+  export let error: string | null = null;
+  let errorVisible = false;
+  let errorBtn: HTMLElement;
 </script>
 
 <div
@@ -13,7 +17,24 @@
   class:typing={!!value}
 >
   <textarea on:input bind:value {placeholder} {...$$restProps} />
+  {#if error && errorVisible}
+    <p
+      class="error-message"
+      transition:blur={{ duration: 300 }}
+      use:clickOutside={[errorBtn]}
+      on:outclick={() => (errorVisible = false)}
+    >
+      {error}
+    </p>
+  {/if}
   <div class="bg">
+    {#if error}
+      <button
+        class="error-btn"
+        bind:this={errorBtn}
+        on:click={() => (errorVisible = !errorVisible)}
+      />
+    {/if}
     {#if variant === "dark"}
       <BorderEdge {size} pos={"lt"} />
       <BorderEdge {size} pos={"rb"} />
@@ -31,6 +52,7 @@
     position: relative;
     height: 100%;
 
+    padding-inline: 1.3em;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -101,6 +123,30 @@
     }
   }
 
+  .error {
+    &-btn {
+      position: absolute;
+      inset: 0;
+      left: auto;
+      background-color: rgb(var(--color-accent));
+      width: 1.25em;
+      animation: pulsar-bg-c 1s ease infinite alternate;
+    }
+    &-message {
+      z-index: 2;
+      position: absolute;
+      top: 0;
+      right: 1.25em;
+      height: 100%;
+
+      display: flex;
+      align-items: center;
+      padding-inline: 1.25em;
+      background-color: rgb(var(--color-accent), 65%);
+      color: rgb(var(--color-text));
+    }
+  }
+
   .bg {
     @include firm-clip();
     position: absolute;
@@ -121,7 +167,7 @@
     height: 100%;
     resize: none;
 
-    padding: 1.5em;
+    padding: 1.2em 0.2em;
 
     background-color: transparent;
     border: none;

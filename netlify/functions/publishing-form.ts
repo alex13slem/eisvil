@@ -1,49 +1,58 @@
-import type { Context } from "@netlify/functions";
-import type { FormSchema } from "../../src/schemas/formSchema";
+import type { PublishingFormSchema } from "../../src/schemas/forms";
 import { notifyViaTelegramBot } from "../../src/utils/notifyViaTelegramBot";
+import { post } from "../../src/utils/serverless";
 
 const { TG_BOT_BLOGERS_API_TOKEN, TG_BOT_BLOGERS_CHAT_ID } = process.env;
 
-async function sendBlogerForm(data: FormSchema) {
-  const { botFlaggedSpam, access, name, email, fromLink, contact, comment } =
-    data;
-
-  const htmlMessage = /* html */ `<b>Новая заявка</b>
-<i>имя</i>: ${name}
-<i>почта</i>: <a href="mailto:${email}">${email}</a>
-<i>откуда</i>: <a href="${fromLink}">${fromLink}</a>
-<i>способ связи</i>: ${contact || "нет"}
-<i>комментарий</i>: ${comment || "нет"}`;
-
-  return await notifyViaTelegramBot({
+async function sendBlogerForm(data: PublishingFormSchema) {
+  const {
     botFlaggedSpam,
     access,
+    name,
+    email,
+    info,
+    linkBuild,
+    selectedDir,
+    linkPreview,
+  } = data;
+
+  let error = false;
+  let statusText;
+
+  if (!access.secure) {
+    error = true;
+    statusText =
+      "There is no agreement with the privacy policy on the processing of personal data";
+  }
+  if (!access.user) {
+    error = true;
+    statusText = "There is no user agreement";
+  }
+  if (botFlaggedSpam) {
+    error = true;
+    statusText = "Spam detected";
+  }
+
+  if (error) {
+    console.error(new Error(statusText));
+    return Promise.reject({ status: 400, statusText });
+  }
+
+  const htmlMessage = /* html */ `<b>${selectedDir}</b>
+
+<i>имя</i>: ${name}
+<i>почта</i>: <a href="mailto:${email}">${email}</a>
+<i>ссылка на геймплей</i>: ${
+    linkPreview ? `<a href="${linkPreview}">${linkPreview}</a>` : "нет"
+  }
+<i>ссылка на билд</i>: <a href="${linkBuild}">${linkBuild}</a>
+<i>описание</i>: ${info}`;
+
+  return await notifyViaTelegramBot({
     htmlMessage,
     apiToken: TG_BOT_BLOGERS_API_TOKEN,
     chatId: TG_BOT_BLOGERS_CHAT_ID,
   });
 }
 
-export default async (request: Request, context: Context) => {
-  try {
-    if (request.method.toUpperCase() !== "POST") {
-      return Response.json("Method Not Allowed", {
-        status: 405,
-        statusText: "Method Not Allowed",
-      });
-    }
-    const data = await request.json();
-
-    await sendBlogerForm(data);
-  } catch (error: any) {
-    if (error.status) {
-      const { status, statusText } = error;
-      return Response.json(statusText, { status, statusText });
-    }
-
-    return Response.json(error.message || error, {
-      status: 500,
-      statusText: error.message || error,
-    });
-  }
-};
+export default post(sendBlogerForm);

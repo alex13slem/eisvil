@@ -3,13 +3,14 @@
   import Checkbox from "./Checkbox.svelte";
   import FormField from "./FormField.svelte";
   import FormTextarea from "./FormTextarea.svelte";
-  import { formSchema } from "../schemas/formSchema";
-  import { sendForm, type SubmittingStatus } from "../utils/sendForm";
+  import { blogersFormSchema } from "../schemas/forms";
+  import { sendForm } from "../utils/sendForm";
   import { getErrors } from "../utils/zod";
   import { formatErrors } from "../utils/helpers";
   import localforage from "localforage";
   import { blogerFormSubmitted } from "../store/forms";
   import { toasterHub } from "../store/toasterHub";
+  import { pubModalIsOpen } from "../store/modals";
 
   const formValuesInit = {
     email: "",
@@ -25,7 +26,7 @@
   let submitting = false;
   let sendingAttempt = false;
 
-  $: validationResult = formSchema.safeParse(formValues);
+  $: validationResult = blogersFormSchema.safeParse(formValues);
   $: errors = getErrors(validationResult);
 
   const handleSubmit = async () => {
@@ -45,8 +46,10 @@
     if (!ok) {
       toasterHub.set([error, ...$toasterHub]);
     } else {
+      toasterHub.set(["Ваша заявка отправлена!", ...$toasterHub]);
+      sendingAttempt = false;
       formValues = { ...formValuesInit };
-      await localforage.setItem("blogerFormSubmitted", "true", () => {
+      await localforage.setItem("blogerFormSubmitted", "true").then(() => {
         blogerFormSubmitted.set(true);
       });
     }
@@ -70,6 +73,7 @@
     />
 
     <FormField
+      type="url"
       name="from_link"
       className="from-link"
       placeholder="Из какого вы издания или блога? Пожалуйста, укажите ссылку"

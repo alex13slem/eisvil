@@ -1,11 +1,5 @@
 import { atom } from "nanostores";
 
-export const servicesModalForm = atom<{
-  isOpen: boolean;
-  slug: string | null;
-}>({ isOpen: false, slug: null });
+export const servModalIsOpen = atom<boolean>(false);
 
-export const publishingModalForm = atom<{
-  isOpen: boolean;
-  slug: string | null;
-}>({ isOpen: false, slug: null });
+export const pubModalIsOpen = atom<boolean>(false);

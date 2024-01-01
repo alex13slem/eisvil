@@ -7,71 +7,80 @@
   } from "@rgossiaux/svelte-headlessui";
   import { fade, fly } from "svelte/transition";
   import { cn } from "../utils/helpers";
-
-  let targetIdx: number;
+  import { clickOutside } from "../utils/svelte/clickOutside";
 
   export let value: string | null = null;
   export let options: { slug: string; value: string; disabled: boolean }[];
   export let placeholder: string = "";
   export let size: "md" | "sm" = "md";
   export let variant: "default" | "dark" = "default";
+  export let open = false;
+
+  let targetIdx: number;
+  let listBoxBtn: HTMLElement;
 
   $: options.map((option, idx) => {
     if (option.value === value) targetIdx = idx + 1;
   });
 </script>
 
-<div class="wrap size-{size} v-{variant}">
-  <Listbox class="box" bind:value let:open>
-    <ListboxButton
-      class={cn("selected-option", open && "open", value && "active")}
-      style="--curr-idx: {targetIdx || 0}"
-    >
-      {#if variant === "dark"}
-        {#if size === "sm"}
-          <svg
-            width="231"
-            height="35"
-            viewBox="0 0 231 35"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="border"
-            preserveAspectRatio="none"
-          >
-            <path
-              id="Vector"
-              d="M204.037 21.694H203.825L203.678 21.8466L191.452 34.5H0.5V16.4321L16.834 0.5H230.5V18.5905L226.968 21.694H204.037Z"
-              stroke="#555660"
-              stroke-miterlimit="10"
-            />
-          </svg>
+<div
+  class="wrap size-{size} v-{variant}"
+  use:clickOutside={[listBoxBtn]}
+  on:outclick={() => (open = false)}
+>
+  <Listbox class="box" bind:value on:click={() => (open = !open)}>
+    <div bind:this={listBoxBtn}>
+      <ListboxButton
+        class={cn("selected-option", open && "open", value && "active")}
+        style="--curr-idx: {targetIdx || 0}"
+      >
+        {#if variant === "dark"}
+          {#if size === "sm"}
+            <svg
+              width="231"
+              height="35"
+              viewBox="0 0 231 35"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="border"
+              preserveAspectRatio="none"
+            >
+              <path
+                id="Vector"
+                d="M204.037 21.694H203.825L203.678 21.8466L191.452 34.5H0.5V16.4321L16.834 0.5H230.5V18.5905L226.968 21.694H204.037Z"
+                stroke="#555660"
+                stroke-miterlimit="10"
+              />
+            </svg>
+          {/if}
+          {#if size === "md"}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="630"
+              height="56"
+              viewBox="0 0 630 56"
+              fill="none"
+              class="border"
+            >
+              <path
+                d="M586.71 35.5H586.5L586.353 35.649L566.791 55.5H0.5V26.3543L13.7506 13.4297L27.0064 0.5H629.5V30.1105L623.771 35.5H586.71Z"
+                stroke="#555660"
+                stroke-miterlimit="10"
+              />
+            </svg>
+          {/if}
         {/if}
-        {#if size === "md"}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="630"
-            height="56"
-            viewBox="0 0 630 56"
-            fill="none"
-            class="border"
-          >
-            <path
-              d="M586.71 35.5H586.5L586.353 35.649L566.791 55.5H0.5V26.3543L13.7506 13.4297L27.0064 0.5H629.5V30.1105L623.771 35.5H586.71Z"
-              stroke="#555660"
-              stroke-miterlimit="10"
-            />
-          </svg>
+        <slot name="left" />
+        {#if open && !value}
+          ...
+        {:else}
+          {value || placeholder}
         {/if}
-      {/if}
-      <slot name="left" />
-      {#if open && !value}
-        ...
-      {:else}
-        {value || placeholder}
-      {/if}
-      <span class="selected-option-bg"></span>
-      <button class="selected-option-arrow" />
-    </ListboxButton>
+        <span class="selected-option-bg"></span>
+        <button class="selected-option-arrow" />
+      </ListboxButton>
+    </div>
     {#if open}
       <div transition:fade>
         <ListboxOptions class="options-list" static>

@@ -1,32 +1,11 @@
 <script lang="ts">
-  import { servicesModalForm } from "../store/modals";
-  import { servicesOptions, type ServicesFormValues } from "../store/services";
-  import BtnFirm from "./BtnFirm.svelte";
-  import Checkbox from "./Checkbox.svelte";
-  import FormField from "./FormField.svelte";
-  import FormSelect from "./FormSelect.svelte";
-  import FormTextarea from "./FormTextarea.svelte";
+  import { servModalIsOpen } from "../store/modals";
   import Modal from "./Modal.svelte";
-
-  const formValuesInit: ServicesFormValues = {
-    access: false,
-    botField: false,
-    name: "",
-    email: "",
-    info: "",
-    selectedService: null,
-  };
-
-  let formValues = { ...formValuesInit };
-
-  servicesModalForm.subscribe(({ slug }) => {
-    formValues.selectedService =
-      servicesOptions.find((option) => option.slug === slug)?.value || null;
-  });
+  import ServicesForm from "./ServicesForm.svelte";
 </script>
 
 <Modal
-  bind:isOpen={$servicesModalForm.isOpen}
+  bind:isOpen={$servModalIsOpen}
   title="СВЯЗЬ С НАМИ"
   links={{
     contacts: [{ href: "mailto:mail@to.aw", text: "mail@to.aw" }],
@@ -36,80 +15,5 @@
     ],
   }}
 >
-  <form data-astro-reload>
-    <input
-      name="bot-field"
-      aria-hidden="true"
-      type="hidden"
-      bind:value={formValues.botField}
-    />
-    <fieldset>
-      <FormField placeholder="Имя" name="name" bind:value={formValues.name} />
-      <FormField
-        placeholder="E-mail"
-        name="email"
-        bind:value={formValues.email}
-      />
-      <FormTextarea
-        placeholder="Ссылка на документацию проекта или иные данные ..."
-        name="info"
-        bind:value={formValues.info}
-      />
-    </fieldset>
-
-    <FormSelect
-      options={servicesOptions}
-      bind:value={formValues.selectedService}
-      placeholder="Выбрать направление"
-    />
-
-    <div class="access">
-      <Checkbox name="access" bind:checked={formValues.access} />
-      <span>
-        Нажимая на кнопку, вы соглашаетесь с
-        <a href="/">политикой конфиденциальности</a>
-        и на обработку персональных данных
-      </span>
-    </div>
-
-    <BtnFirm variant="contrast">Отправить</BtnFirm>
-  </form>
+  <ServicesForm />
 </Modal>
-
-<style lang="scss">
-  form {
-    flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  fieldset {
-    all: unset;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  form :global(textarea) {
-    min-height: 118px;
-  }
-  form :global(button) {
-    align-self: flex-start;
-  }
-
-  .access {
-    display: flex;
-    align-items: center;
-    font-size: 10px;
-    gap: 10px;
-
-    span {
-      max-width: 360px;
-    }
-
-    a {
-      color: rgb(var(--color-accent));
-      text-decoration: underline;
-    }
-  }
-</style>
