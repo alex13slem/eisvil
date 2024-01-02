@@ -1,18 +1,18 @@
 <script lang="ts">
-  import { servModalIsOpen } from "../store/modals";
-  import { servicesOptions } from "../store/services";
-  import BtnFirm from "./BtnFirm.svelte";
-  import Checkbox from "./Checkbox.svelte";
-  import FormField from "./FormField.svelte";
-  import FormTextarea from "./FormTextarea.svelte";
-  import FormSelect from "./FormSelect.svelte";
-  import { servicesFormSchema } from "../schemas/forms";
-  import { getErrors } from "../utils/zod";
-  import { sendForm } from "../utils/sendForm";
-  import { toasterHub } from "../store/toasterHub";
+  import { servModalIsOpen } from "../../store/modals";
+  import { servicesOptions } from "../../store/services";
+  import BtnFirm from "../BtnFirm.svelte";
+  import Checkbox from "../Checkbox.svelte";
+  import FormField from "../FormField.svelte";
+  import FormTextarea from "../FormTextarea.svelte";
+  import FormSelect from "../FormSelect.svelte";
+  import { servicesFormSchema } from "../../schemas/forms";
+  import { getErrors } from "../../utils/zod";
+  import { sendForm } from "../../utils/sendForm";
+  import { toasterHub } from "../../store/toasterHub";
   import localforage from "localforage";
-  import { servFormSubmitted, servTargetSlug } from "../store/forms";
-  import { formatErrors } from "../utils/helpers";
+  import { servFormSubmitted, servTargetSlug } from "../../store/forms";
+  import { formatErrors } from "../../utils/helpers";
 
   type Fields = {
     botField: boolean;
@@ -39,15 +39,15 @@
 
   $: validationResult = servicesFormSchema.safeParse(formValues);
   $: errors = getErrors(validationResult);
+  $: if (!formValues.info) formValues.info = null;
 
   const handleSubmit = async () => {
     sendingAttempt = true;
-
-    if (!formValues.info) formValues.info = null;
-    if (errors?.selectedService) selectIsOpen = true;
-    if (!validationResult.success || !formValues.access) return;
-
     submitting = true;
+
+    if (errors?.selectedService) selectIsOpen = true;
+    if (!validationResult.success || !formValues.access)
+      return (submitting = false);
 
     const { ok, error } = await sendForm({
       url: "/api/services-form",
@@ -70,8 +70,8 @@
   };
 
   servTargetSlug.subscribe((slug) => {
-    formValues.selectedService =
-      servicesOptions.find((option) => option.slug === slug)?.value || null;
+    const servTarget = servicesOptions.find((option) => option.slug === slug);
+    formValues.selectedService = servTarget?.value || null;
   });
 </script>
 
@@ -127,7 +127,7 @@
     </span>
   </div>
 
-  <BtnFirm variant="contrast">Отправить</BtnFirm>
+  <BtnFirm variant="contrast" disabled={submitting}>Отправить</BtnFirm>
 </form>
 
 <style lang="scss">

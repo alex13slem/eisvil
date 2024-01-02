@@ -1,16 +1,16 @@
 <script lang="ts">
-  import BtnFirm from "./BtnFirm.svelte";
-  import Checkbox from "./Checkbox.svelte";
-  import FormField from "./FormField.svelte";
-  import FormTextarea from "./FormTextarea.svelte";
-  import { blogersFormSchema } from "../schemas/forms";
-  import { sendForm } from "../utils/sendForm";
-  import { getErrors } from "../utils/zod";
-  import { formatErrors } from "../utils/helpers";
+  import BtnFirm from "../BtnFirm.svelte";
+  import Checkbox from "../Checkbox.svelte";
+  import FormField from "../FormField.svelte";
+  import FormTextarea from "../FormTextarea.svelte";
+  import { blogersFormSchema } from "../../schemas/forms";
+  import { sendForm } from "../../utils/sendForm";
+  import { getErrors } from "../../utils/zod";
+  import { formatErrors } from "../../utils/helpers";
   import localforage from "localforage";
-  import { blogerFormSubmitted } from "../store/forms";
-  import { toasterHub } from "../store/toasterHub";
-  import { pubModalIsOpen } from "../store/modals";
+  import { blogerFormSubmitted } from "../../store/forms";
+  import { toasterHub } from "../../store/toasterHub";
+  import { pubModalIsOpen } from "../../store/modals";
 
   const formValuesInit = {
     email: "",
@@ -31,10 +31,10 @@
 
   const handleSubmit = async () => {
     sendingAttempt = true;
-
-    if (!validationResult.success || !formValues.access) return;
-
     submitting = true;
+
+    if (!validationResult.success || !formValues.access)
+      return (submitting = false);
 
     const { ok, error } = await sendForm({
       url: "/api/blogers-form",
@@ -123,7 +123,7 @@
       </p>
     </label>
   </fieldset>
-  <BtnFirm type="submit">Отправить</BtnFirm>
+  <BtnFirm type="submit" disabled={submitting}>Отправить</BtnFirm>
 </form>
 
 <style lang="scss">

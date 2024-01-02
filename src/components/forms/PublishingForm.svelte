@@ -1,18 +1,18 @@
 <script lang="ts">
-  import { publishingOptions } from "../store/publishing";
-  import { pubModalIsOpen } from "../store/modals";
-  import BtnFirm from "./BtnFirm.svelte";
-  import Checkbox from "./Checkbox.svelte";
-  import FormField from "./FormField.svelte";
-  import FormSelect from "./FormSelect.svelte";
-  import FormTextarea from "./FormTextarea.svelte";
-  import { publishingFormSchema } from "../schemas/forms";
-  import { getErrors } from "../utils/zod";
+  import { publishingOptions } from "../../store/publishing";
+  import { pubModalIsOpen } from "../../store/modals";
+  import BtnFirm from "../BtnFirm.svelte";
+  import Checkbox from "../Checkbox.svelte";
+  import FormField from "../FormField.svelte";
+  import FormSelect from "../FormSelect.svelte";
+  import FormTextarea from "../FormTextarea.svelte";
+  import { publishingFormSchema } from "../../schemas/forms";
+  import { getErrors } from "../../utils/zod";
   import localforage from "localforage";
-  import { pubFormSubmitted, pubTargetSlug } from "../store/forms";
-  import { toasterHub } from "../store/toasterHub";
-  import { sendForm } from "../utils/sendForm";
-  import { formatErrors } from "../utils/helpers";
+  import { pubFormSubmitted, pubTargetSlug } from "../../store/forms";
+  import { toasterHub } from "../../store/toasterHub";
+  import { sendForm } from "../../utils/sendForm";
+  import { formatErrors } from "../../utils/helpers";
 
   type Fields = {
     botField: boolean;
@@ -34,12 +34,12 @@
       secure: false,
       user: false,
     },
-    name: "",
-    email: "",
-    linkPreview: "",
-    linkBuild: "",
-    info: "",
-    selectedDir: "",
+    name: null,
+    email: null,
+    linkPreview: null,
+    linkBuild: null,
+    info: null,
+    selectedDir: null,
   };
 
   let formValues = { ...formValuesInit };
@@ -48,17 +48,17 @@
 
   $: validationResult = publishingFormSchema.safeParse(formValues);
   $: errors = getErrors(validationResult);
+  $: if (!formValues.linkPreview) formValues.linkPreview = null;
 
   const handleSubmit = async () => {
     sendingAttempt = true;
+    submitting = true;
 
     if (
       !validationResult.success ||
       !Object.values(formValues.access).every(Boolean)
     )
-      return;
-
-    submitting = true;
+      return (submitting = false);
 
     const { ok, error } = await sendForm({
       url: "/api/publishing-form",
@@ -81,8 +81,8 @@
   };
 
   pubTargetSlug.subscribe((slug) => {
-    formValues.selectedDir =
-      publishingOptions.find((option) => option.slug === slug)?.value || "";
+    const pubTarget = publishingOptions.find((option) => option.slug === slug);
+    formValues.selectedDir = pubTarget?.value || null;
   });
 </script>
 
@@ -164,7 +164,7 @@
     </span>
   </div>
 
-  <BtnFirm variant="contrast">Отправить</BtnFirm>
+  <BtnFirm variant="contrast" disabled={submitting}>Отправить</BtnFirm>
 </form>
 
 <style lang="scss">

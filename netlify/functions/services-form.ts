@@ -2,7 +2,7 @@ import type { ServicesFormSchema } from "../../src/schemas/forms";
 import { notifyViaTelegramBot } from "../../src/utils/notifyViaTelegramBot";
 import { post } from "../../src/utils/serverless";
 
-const { TG_BOT_BLOGERS_API_TOKEN, TG_BOT_BLOGERS_CHAT_ID } = process.env;
+const { TG_BOT_SERVICES_API_TOKEN, TG_BOT_SERVICES_CHAT_ID } = process.env;
 
 async function sendBlogerForm(data: ServicesFormSchema) {
   const { botFlaggedSpam, access, name, email, info, selectedService } = data;
@@ -33,8 +33,8 @@ async function sendBlogerForm(data: ServicesFormSchema) {
 
   return await notifyViaTelegramBot({
     htmlMessage,
-    apiToken: TG_BOT_BLOGERS_API_TOKEN,
-    chatId: TG_BOT_BLOGERS_CHAT_ID,
+    apiToken: TG_BOT_SERVICES_API_TOKEN,
+    chatId: TG_BOT_SERVICES_CHAT_ID,
   });
 }
 

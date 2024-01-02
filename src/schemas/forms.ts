@@ -41,6 +41,7 @@ export type BlogersFormSchema = z.infer<typeof blogersFormSchema>;
 
 export const publishingFormSchema = z.object({
   botFlaggedSpam: z.boolean().optional(),
+
   access: z.object({
     secure: z.boolean({
       required_error: invalidText["REQUIRED"],
@@ -51,37 +52,37 @@ export const publishingFormSchema = z.object({
       invalid_type_error: invalidText["REQUIRED"],
     }),
   }),
+
   name: z
     .string({
       required_error: invalidText["REQUIRED"],
       invalid_type_error: invalidText["REQUIRED"],
     })
     .min(2, invalidText["NAME_MIN"]),
+
   email: z
     .string({
       required_error: invalidText["REQUIRED"],
       invalid_type_error: invalidText["REQUIRED"],
     })
     .email(invalidText["EMAIL"]),
-  linkPreview: z
-    .string({
-      required_error: invalidText["REQUIRED"],
-      invalid_type_error: invalidText["REQUIRED"],
-    })
-    .regex(regex.URL, invalidText["URL"])
-    .optional(),
+
+  linkPreview: z.string().regex(regex.URL, invalidText["URL"]).nullish(),
+
   linkBuild: z
     .string({
       required_error: invalidText["REQUIRED"],
       invalid_type_error: invalidText["REQUIRED"],
     })
     .regex(regex.URL, invalidText["URL"]),
+
   info: z
     .string({
       required_error: invalidText["REQUIRED"],
       invalid_type_error: invalidText["REQUIRED"],
     })
     .min(30, invalidText["DESCRIPTION_MIN"]),
+
   selectedDir: z.string({
     required_error: invalidText["REQUIRED"],
     invalid_type_error: invalidText["REQUIRED"],
@@ -111,7 +112,7 @@ export const servicesFormSchema = z.object({
       invalid_type_error: invalidText["REQUIRED"],
     })
     .email(invalidText["EMAIL"]),
-  info: z.string().min(30, invalidText["DESCRIPTION_MIN"]).nullable(),
+  info: z.string().min(30, invalidText["DESCRIPTION_MIN"]).nullish(),
   selectedService: z.string({
     required_error: invalidText["REQUIRED"],
     invalid_type_error: invalidText["REQUIRED"],

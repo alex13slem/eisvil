@@ -1,7 +1,7 @@
 <script lang="ts">
   import { servModalIsOpen } from "../store/modals";
   import Modal from "./Modal.svelte";
-  import ServicesForm from "./ServicesForm.svelte";
+  import ServicesForm from "./forms/ServicesForm.svelte";
 </script>
 
 <Modal

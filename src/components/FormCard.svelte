@@ -1,6 +1,6 @@
 <script>
   import BtnFirm from "./BtnFirm.svelte";
-  import BlogersForm from "./BlogersForm.svelte";
+  import BlogersForm from "./forms/BlogersForm.svelte";
   import bgPreview from "@/img/hero.jpg";
   import { blogerFormSubmitted } from "../store/forms";
 

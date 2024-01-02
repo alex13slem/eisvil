@@ -1,7 +1,7 @@
 <script lang="ts">
   import { pubModalIsOpen } from "../store/modals";
   import Modal from "./Modal.svelte";
-  import PublishingForm from "./PublishingForm.svelte";
+  import PublishingForm from "./forms/PublishingForm.svelte";
 </script>
 
 <Modal
