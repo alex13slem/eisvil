@@ -63,20 +63,20 @@
 
     font-size: 12px;
     font-weight: 700;
-    color: rgb(var(--color-text), 30%);
+    color: rgb(var(--c-text), 30%);
 
     background-color: transparent;
     border: 0;
-    border-bottom: 4px solid rgb(var(--color-text), 30%);
+    border-bottom: 4px solid rgb(var(--c-text), 30%);
 
     transition: var(--trans-default);
     transition-property: color, font-size;
     &.active {
       font-size: 20px;
       font-weight: 600;
-      color: rgb(var(--color-accent));
+      color: rgb(var(--c-accent));
 
-      border-color: rgb(var(--color-accent));
+      border-color: rgb(var(--c-accent));
     }
   }
 

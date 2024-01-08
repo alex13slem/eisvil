@@ -1,6 +1,6 @@
 :root {
-  --sb-c-bg: rgb(var(--color-bg));
-  --sb-c-tb: rgb(var(--color-accent));
+  --sb-c-bg: rgb(var(--c-bg));
+  --sb-c-tb: rgb(var(--c-accent));
   --sb-size: 8px;
 
   scrollbar-color: var(--sb-c-tb) var(--sb-c-bg);

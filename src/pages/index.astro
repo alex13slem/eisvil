@@ -1,6 +1,6 @@
 ---
 import SectHero from "@/components/LandingHero.astro";
-import SectGames from "@/sections/SectGames.astro";
+import SectOurGames from "@/sections/SectOurGames.astro";
 import SectServices from "@/sections/SectServices.astro";
 import SectPublishing from "@/sections/SectPublishing.astro";
 import SectCarrier from "@/sections/SectCarrier.astro";
@@ -8,6 +8,7 @@ import ServicesModalForm from "@/components/ServicesModalForm.svelte";
 import PublishingModalForm from "../components/PublishingModalForm.svelte";
 import ModalTrigger from "../components/ModalTrigger.svelte";
 import BasicLayout from "../layouts/BasicLayout.astro";
+import GamesSlider from "../components/GamesSlider.svelte";
 ---
 
 <BasicLayout title="E I S V I L">
@@ -16,7 +17,9 @@ import BasicLayout from "../layouts/BasicLayout.astro";
       Создать новый мир
     </ModalTrigger>
   </SectHero>
-  <SectGames />
+  <SectOurGames>
+    <GamesSlider client:load />
+  </SectOurGames>
   <SectServices />
   <SectPublishing />
   <SectCarrier />

@@ -33,7 +33,7 @@
     position: relative;
     overflow: hidden;
     overflow: clip;
-    background: rgb(var(--color-white), 30%);
+    background: rgb(var(--c-white), 30%);
     line-height: 3em;
     padding-inline: 1em 2em;
 
@@ -41,7 +41,7 @@
     &::before {
       content: "";
       position: absolute;
-      background: rgb(var(--color-accent));
+      background: rgb(var(--c-accent));
       width: 2em;
       height: 2em;
       right: -1em;

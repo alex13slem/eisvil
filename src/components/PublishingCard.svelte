@@ -195,7 +195,7 @@
       inset: 0;
       background: linear-gradient(
         135deg,
-        rgb(var(--color-accent), 50%) 0%,
+        rgb(var(--c-accent), 50%) 0%,
         transparent 60%
       );
 
@@ -217,14 +217,10 @@
     position: relative;
     padding: 1rem;
 
-    color: rgb(var(--color-text));
+    color: rgb(var(--c-text));
 
-    background-color: rgb(var(--color-card));
-    border-image: linear-gradient(
-        160deg,
-        rgb(var(--color-card)),
-        rgb(var(--color-bg))
-      )
+    background-color: rgb(var(--c-card));
+    border-image: linear-gradient(160deg, rgb(var(--c-card)), rgb(var(--c-bg)))
       30;
     border-width: 4px;
     border-style: solid;

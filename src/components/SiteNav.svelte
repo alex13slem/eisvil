@@ -28,7 +28,7 @@
     >Карьера</NavLink
   >
   <NavLink active={url.pathname.includes("asd")} {onHeader} {onMobMenu}
-    >Контакты</NavLink
+    >О нас</NavLink
   >
 </nav>
 

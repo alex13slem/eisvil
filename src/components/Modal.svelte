@@ -81,7 +81,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    background: rgb(var(--color-bg), 50%);
+    background: rgb(var(--c-bg), 50%);
     backdrop-filter: blur(13px);
   }
   .overlay {
@@ -95,7 +95,7 @@
   .window {
     max-width: 960px;
     width: 100%;
-    background-color: rgb(var(--color-bg));
+    background-color: rgb(var(--c-bg));
     border: var(--border-card);
   }
   .header {
@@ -120,7 +120,7 @@
       right: -3px;
 
       transform: rotate(45deg);
-      background-color: rgb(var(--color-white), 30%);
+      background-color: rgb(var(--c-white), 30%);
       clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     }
   }
@@ -140,7 +140,7 @@
 
     &:hover {
       transform: rotate(0);
-      color: rgb(var(--color-accent));
+      color: rgb(var(--c-accent));
     }
   }
   .body {
@@ -158,7 +158,7 @@
 
     a {
       margin-top: 20px;
-      color: rgb(var(--color-text));
+      color: rgb(var(--c-text));
       font-size: 12px;
       font-weight: 600;
 
@@ -166,13 +166,13 @@
       transition-property: color;
 
       &:hover {
-        color: rgb(var(--color-accent));
+        color: rgb(var(--c-accent));
       }
     }
   }
   h3 {
     margin: 0;
-    color: rgb(var(--color-label));
+    color: rgb(var(--c-label));
     font-size: 10px;
 
     &:not(:first-child) {

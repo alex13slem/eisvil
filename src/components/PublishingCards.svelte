@@ -52,7 +52,7 @@
       position: absolute;
       inset: 0;
       width: calc(33.3% - 20px);
-      background: linear-gradient(90deg, rgb(var(--color-bg)), transparent);
+      background: linear-gradient(90deg, rgb(var(--c-bg)), transparent);
     }
     &::after {
       left: auto;

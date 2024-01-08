@@ -170,7 +170,7 @@
     gap: 10px;
     font-size: 10px;
     a {
-      color: rgb(var(--color-accent));
+      color: rgb(var(--c-accent));
     }
     p {
       margin: 0;

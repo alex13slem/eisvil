@@ -44,7 +44,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: rgb(var(--color-card));
+    background-color: rgb(var(--c-card));
     transition: var(--trans-default);
     transition-property: transform, box-shadow, border-image;
     /* border: var(--op-border); */
@@ -129,7 +129,7 @@
     gap: 0.5ch;
     font-size: 10px;
     letter-spacing: 0.15ch;
-    color: rgb(var(--color-text), 30%);
+    color: rgb(var(--c-text), 30%);
     font-weight: 300;
   }
   .tags :global(span):not(:last-of-type)::after {

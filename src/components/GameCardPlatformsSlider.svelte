@@ -107,11 +107,7 @@
       position: absolute;
       width: 20px;
       height: 100%;
-      background-image: linear-gradient(
-        90deg,
-        rgb(var(--color-card)),
-        transparent
-      );
+      background-image: linear-gradient(90deg, rgb(var(--c-card)), transparent);
       top: 0;
       transition-duration: opacity;
       transition: var(--trans-default);
@@ -135,10 +131,10 @@
     }
   }
   .links a {
-    color: rgb(var(--color-text), 10%);
+    color: rgb(var(--c-text), 10%);
     transition: color var(--trans-default);
   }
   .links a:hover {
-    color: rgb(var(--color-text), 30%);
+    color: rgb(var(--c-text), 30%);
   }
 </style>

@@ -84,7 +84,7 @@
     height: 100%;
     width: 30px;
     top: 0;
-    background: linear-gradient(90deg, rgb(var(--color-bg)), transparent);
+    background: linear-gradient(90deg, rgb(var(--c-bg)), transparent);
   }
   .wrap::after {
     right: 0;

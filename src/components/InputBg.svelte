@@ -13,7 +13,7 @@
     position: absolute;
     inset: 0;
 
-    color: rgb(var(--color-field-border));
+    color: rgb(var(--c-field-border));
 
     background-color: var(--field-color);
     transition: background-color var(--trans-default);
@@ -22,7 +22,7 @@
       // &-default {
       // }
       &-dark {
-        border: 1px solid rgb(var(--color-field-border));
+        border: 1px solid rgb(var(--c-field-border));
       }
     }
   }

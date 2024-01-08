@@ -31,12 +31,14 @@
     font-size: 14px;
     line-height: 3.5em;
     font-weight: 700;
-    color: rgb(var(--color-text));
+    color: rgb(var(--c-text));
 
     text-transform: uppercase;
 
-    transition: background-color var(--trans-default),
-      color var(--trans-default), text-shadow var(--trans-steps);
+    transition:
+      background-color var(--trans-default),
+      color var(--trans-default),
+      text-shadow var(--trans-steps);
     @media (orientation: portrait), (max-width: 1024px) {
       font-size: 3vmax;
     }
@@ -51,7 +53,7 @@
     background: linear-gradient(
       180deg,
       transparent 47%,
-      rgb(var(--color-accent), 0.25) 100%
+      rgb(var(--c-accent), 0.25) 100%
     );
     transition: opacity var(--trans-default);
     @media (orientation: portrait), (max-width: 1024px) {
@@ -61,7 +63,7 @@
 
   .nav-link:hover,
   .nav-link.active {
-    @include hover-text1($t-color: rgb(var(--color-accent)));
+    @include hover-text1($t-color: rgb(var(--c-accent)));
 
     &::after {
       opacity: 1;

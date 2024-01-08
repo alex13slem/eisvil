@@ -85,7 +85,7 @@
   }
 
   .card-badge span {
-    text-shadow: 0px 0px 4px rgb(var(--color-bg), 50%);
+    text-shadow: 0px 0px 4px rgb(var(--c-bg), 50%);
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;

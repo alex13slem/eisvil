@@ -81,7 +81,7 @@
       right: auto;
     }
     .body::after {
-      background-color: rgb(var(--color-card));
+      background-color: rgb(var(--c-card));
       transition: border-color var(--trans-slow);
     }
     // Углы end
@@ -90,7 +90,7 @@
     &:not(.submitted):hover,
     &:not(.submitted).active {
       .body {
-        background-color: rgb(var(--color-card), 90%);
+        background-color: rgb(var(--c-card), 90%);
         &::after {
           border-color: transparent;
         }
@@ -117,19 +117,19 @@
   }
 
   .description {
-    background-color: rgb(var(--color-card), 90%);
+    background-color: rgb(var(--c-card), 90%);
     padding: 2rem;
     font-size: 18px;
     font-weight: 600;
     margin: 0;
   }
   .description :global(span) {
-    color: rgb(var(--color-accent));
+    color: rgb(var(--c-accent));
   }
 
   .body {
     position: relative;
-    background-color: rgb(var(--color-card), 50%);
+    background-color: rgb(var(--c-card), 50%);
 
     transition: background-color var(--trans-slow);
   }

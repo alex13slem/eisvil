@@ -2,6 +2,7 @@
 import type { HTMLAttributes } from "astro/types";
 import PublishingTabs from "@/components/PublishingTabs.svelte";
 import PublishingCards from "@/components/PublishingCards.svelte";
+import LinkToDetailPage from "../components/LinkToDetailPage.svelte";
 
 interface Props extends HTMLAttributes<"section"> {}
 
@@ -10,7 +11,10 @@ const { class: className, ...props } = Astro.props;
 
 <section class:list={["publishing", className]} {...props}>
   <div class="container">
-    <h2 class="sect-title">Издательство</h2>
+    <h2 class="sect-title">
+      Издательство
+      <LinkToDetailPage to="/games" />
+    </h2>
     <div class="body">
       <PublishingTabs client:load />
       <PublishingCards client:load />
@@ -24,5 +28,10 @@ const { class: className, ...props } = Astro.props;
     display: flex;
     gap: 60px;
     justify-content: space-between;
+  }
+  .sect-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
   }
 </style>

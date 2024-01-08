@@ -11,7 +11,7 @@
   a {
     padding: 0 1rem;
     line-height: 3;
-    color: rgb(var(--color-white));
+    color: rgb(var(--c-white));
     transition: var(--trans-default);
     transition-property: text-shadow;
 
@@ -20,8 +20,8 @@
     border-bottom: 1px solid;
     border-image: linear-gradient(
         90deg,
-        rgb(var(--color-white), 0) -1rem,
-        rgb(var(--color-white), 0.1) 100%
+        rgb(var(--c-white), 0) -1rem,
+        rgb(var(--c-white), 0.1) 100%
       )
       1;
 
@@ -36,7 +36,7 @@
       width: 0;
       background: linear-gradient(
         90deg,
-        rgb(var(--color-accent), 25%),
+        rgb(var(--c-accent), 25%),
         transparent
       );
 

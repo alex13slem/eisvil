@@ -24,7 +24,7 @@
     line-height: 1;
     font-weight: 900;
     text-transform: uppercase;
-    color: rgb(var(--color-text));
+    color: rgb(var(--c-text));
 
     border: none;
     background: transparent;
@@ -90,19 +90,19 @@
 
     &-transparent {
       &:hover {
-        color: rgb(var(--color-accent));
+        color: rgb(var(--c-accent));
         .bg {
-          background-color: rgb(var(--color-white), 30%);
+          background-color: rgb(var(--c-white), 30%);
         }
       }
 
       .text {
-        color: rgb(var(--color-white));
+        color: rgb(var(--c-white));
       }
 
       .bg {
-        // border: 1px solid rgb(var(--color-white));
-        box-shadow: inset 0px 0px 2px 1px rgb(var(--color-white));
+        // border: 1px solid rgb(var(--c-white));
+        box-shadow: inset 0px 0px 2px 1px rgb(var(--c-white));
 
         transition: var(--trans-default);
         transition-property: background-color;
@@ -113,7 +113,7 @@
           height: 2em;
           width: 1px;
           filter: blur(1px);
-          background-color: rgb(var(--color-white));
+          background-color: rgb(var(--c-white));
           transform: rotate(45deg);
         }
         &::before {
@@ -151,17 +151,17 @@
     }
 
     &-contrast {
-      color: rgb(var(--color-white));
+      color: rgb(var(--c-white));
       .text {
-        color: rgb(var(--color-bg));
+        color: rgb(var(--c-bg));
       }
       .bg {
-        background-color: rgb(var(--color-white));
+        background-color: rgb(var(--c-white));
       }
       &:not(:disabled):hover {
-        color: rgb(var(--color-accent));
+        color: rgb(var(--c-accent));
         .bg {
-          background-color: rgb(var(--color-accent));
+          background-color: rgb(var(--c-accent));
         }
       }
     }

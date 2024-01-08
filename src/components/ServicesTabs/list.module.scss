@@ -9,41 +9,59 @@
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
-  line-height: 3em;
   padding-inline: 2ch;
+
+  font-weight: 700;
+  line-height: 3em;
   text-transform: uppercase;
   cursor: pointer;
   transition: background-color var(--trans-default);
+
   &:hover {
-    background-color: rgb(var(--color-white), 15%);
+    background-color: rgb(var(--c-white), 3%);
   }
+
   &.active {
-    background-color: rgb(var(--color-white), 25%);
-    &::after,
-    &::before {
-      opacity: 1;
-      right: -1em;
-    }
-  }
-  &::after,
-  &::before {
-    content: "";
-    opacity: 0;
-    position: absolute;
-    transform: rotate(45deg);
-    width: 2em;
-    height: 2em;
+    background-color: rgb(var(--c-accent), 25%);
 
-    right: -2em;
-    background-color: rgb(var(--color-accent));
-
-    transition: var(--trans-default);
-    transition-property: opacity, right;
+    // Треугольники
+    // &::after,
+    // &::before {
+    //   opacity: 1;
+    //   right: -1em;
+    // }
   }
+
   &::after {
-    top: -1em;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: rgb(var(--c-accent));
   }
-  &::before {
-    bottom: -1em;
-  }
+
+  // Треугольники
+  // &::after,
+  // &::before {
+  //   content: "";
+  //   opacity: 0;
+  //   position: absolute;
+  //   transform: rotate(45deg);
+  //   width: 2em;
+  //   height: 2em;
+
+  //   right: -2em;
+  //   background-color: rgb(var(--c-accent));
+
+  //   transition: var(--trans-default);
+  //   transition-property: opacity, right;
+  // }
+  // &::after {
+  //   top: -1em;
+  // }
+  // &::before {
+  //   bottom: -1em;
+  // }
 }

@@ -1,6 +1,5 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import ServicesTabs from "@/components/ServicesTabs/ServicesTabs.svelte";
 import LinkToDetailPage from "../components/LinkToDetailPage.svelte";
 
 interface Props extends HTMLAttributes<"section"> {}
@@ -8,13 +7,13 @@ interface Props extends HTMLAttributes<"section"> {}
 const { class: className, ...props } = Astro.props;
 ---
 
-<section class:list={["sect-services", className]} {...props}>
+<section class:list={["sect-games", className]} {...props}>
   <div class="container">
     <h2 class="sect-title">
-      Услуги
+      Наши игры
       <LinkToDetailPage to="/games" />
     </h2>
-    <ServicesTabs client:visible />
+    <slot />
   </div>
 </section>
 

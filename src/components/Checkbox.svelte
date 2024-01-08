@@ -19,7 +19,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 2px;
-    border: 1px solid rgb(var(--color-white), 50%);
+    border: 1px solid rgb(var(--c-white), 50%);
     cursor: pointer;
   }
 
@@ -37,10 +37,10 @@
     opacity: 0;
   }
   input:hover ~ span {
-    background-color: rgb(var(--color-white), 30%);
+    background-color: rgb(var(--c-white), 30%);
   }
   input:checked ~ span {
-    background-color: rgb(var(--color-accent));
+    background-color: rgb(var(--c-accent));
   }
   input[invalid="true"] ~ span {
     animation: pulsar-bg-c 1s ease infinite alternate;

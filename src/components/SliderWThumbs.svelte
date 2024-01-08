@@ -66,7 +66,7 @@
   .detail-slider {
     margin: -30px;
     margin-bottom: 0;
-    background-color: rgb(var(--color-white), 10%);
+    background-color: rgb(var(--c-white), 10%);
 
     transition: var(--load-fade);
     transition-property: opacity;
@@ -89,13 +89,13 @@
     justify-content: center;
     align-items: center;
 
-    background-color: rgb(var(--color-bg));
+    background-color: rgb(var(--c-bg));
 
     img {
       object-fit: contain;
       width: 100%;
       height: 100%;
-      background-color: rgb(var(--color-bg), 0.85);
+      background-color: rgb(var(--c-bg), 0.85);
 
       backdrop-filter: blur(16px);
     }
@@ -114,7 +114,7 @@
       z-index: 2;
       inset: -1px;
       width: 15%;
-      background: linear-gradient(90deg, transparent, rgb(var(--color-bg)));
+      background: linear-gradient(90deg, transparent, rgb(var(--c-bg)));
     }
     &::after {
       left: auto;

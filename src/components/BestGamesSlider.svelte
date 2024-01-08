@@ -163,7 +163,7 @@
     position: absolute;
     inset: 0;
     left: 90px;
-    background-color: rgb(var(--color-card));
+    background-color: rgb(var(--c-card));
     border: var(--border-card);
     clip-path: polygon(
       100% 0,
@@ -181,7 +181,7 @@
       top: -10px;
       right: -10px;
       transform: rotate(45deg);
-      background-color: rgb(var(--color-card-border));
+      background-color: rgb(var(--c-card-border));
     }
     &::before {
       content: "";
@@ -192,7 +192,7 @@
       right: calc(48px - 1px);
       transform-origin: bottom;
       transform: rotate(45deg);
-      background-color: rgb(var(--color-card-border));
+      background-color: rgb(var(--c-card-border));
     }
   }
   .decor {
@@ -203,7 +203,7 @@
 
   article {
     padding: 2px;
-    background-color: rgb(var(--color-card));
+    background-color: rgb(var(--c-card));
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -270,11 +270,7 @@
       left: auto;
       right: calc(var(--clip-radius) - 2px);
       width: calc(110px - var(--clip-radius));
-      background-image: linear-gradient(
-        90deg,
-        transparent,
-        rgb(var(--color-card))
-      );
+      background-image: linear-gradient(90deg, transparent, rgb(var(--c-card)));
     }
   }
 

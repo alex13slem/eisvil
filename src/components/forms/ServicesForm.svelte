@@ -162,7 +162,7 @@
     }
 
     a {
-      color: rgb(var(--color-accent));
+      color: rgb(var(--c-accent));
       text-decoration: underline;
     }
   }

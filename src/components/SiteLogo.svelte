@@ -9,11 +9,11 @@
     /* padding-inline: 1rem; */
     display: flex;
     align-items: center;
-    color: rgb(var(--color-white));
+    color: rgb(var(--c-white));
     transition: filter var(--trans-default);
   }
   /* .site-logo:hover {
-    filter: drop-shadow(0px 0px 0.5rem rgb(var(--color-accent)));
+    filter: drop-shadow(0px 0px 0.5rem rgb(var(--c-accent)));
   } */
   .site-logo :global(.SVGSiteLogo) {
     height: 43px;

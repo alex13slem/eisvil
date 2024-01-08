@@ -146,7 +146,7 @@ const genreLocale = new Map(Object.entries(genresRus)).get(genre);
   }
 
   blockquote {
-    border-left: 4px solid rgb(var(--color-accent));
+    border-left: 4px solid rgb(var(--c-accent));
     padding-left: 1rem;
   }
 
@@ -162,7 +162,7 @@ const genreLocale = new Map(Object.entries(genresRus)).get(genre);
     justify-content: space-between;
   }
   strong {
-    color: rgb(var(--color-accent));
+    color: rgb(var(--c-accent));
   }
   table {
     border-collapse: collapse;
@@ -189,11 +189,11 @@ const genreLocale = new Map(Object.entries(genresRus)).get(genre);
       font-size: 12px;
     }
     a {
-      color: rgb(var(--color-text));
+      color: rgb(var(--c-text));
       transition: var(--trans-default);
       transition-property: color;
       &:hover {
-        color: rgb(var(--color-accent));
+        color: rgb(var(--c-accent));
       }
     }
   }

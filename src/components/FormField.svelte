@@ -61,7 +61,7 @@
   @import "../styles/mixins";
 
   .form-field {
-    @include firm-arrows($color: var(--color-border));
+    @include firm-arrows($color: var(--c-border));
 
     isolation: isolate;
     position: relative;
@@ -72,7 +72,7 @@
     align-items: center;
     gap: 5px;
 
-    color: rgb(var(--color-text));
+    color: rgb(var(--c-text));
 
     & > :global(svg.iconify) {
       z-index: 1;
@@ -82,45 +82,45 @@
     }
 
     &.v-default {
-      --color-field: rgb(var(--color-white), 30%);
-      --color-border: var(--color-field);
-      color: rgb(var(--color-bg));
+      --c-field: rgb(var(--c-white), 30%);
+      --c-border: var(--c-field);
+      color: rgb(var(--c-bg));
 
       // Hover and Focus state
       &:hover,
       &:not(.typing):has(input:focus-visible) {
-        --color-field: rgb(var(--color-white), 45%);
-        color: rgb(var(--color-bg));
+        --c-field: rgb(var(--c-white), 45%);
+        color: rgb(var(--c-bg));
       }
 
       // Typing state
       &.typing {
-        --color-field: rgb(var(--color-accent), 65%);
-        color: rgb(var(--color-text));
+        --c-field: rgb(var(--c-accent), 65%);
+        color: rgb(var(--c-text));
       }
     }
 
     &.v-dark {
-      --color-field: rgb(var(--color-field_dark));
-      --color-border: rgb(var(--color-field-border_dark));
-      color: rgb(var(--color-field-border_dark));
+      --c-field: rgb(var(--c-field_dark));
+      --c-border: rgb(var(--c-field-border_dark));
+      color: rgb(var(--c-field-border_dark));
 
       .bg {
-        color: rgb(var(--color-field-border_dark));
-        border: 1px solid rgb(var(--color-field-border_dark));
+        color: rgb(var(--c-field-border_dark));
+        border: 1px solid rgb(var(--c-field-border_dark));
       }
 
       // Hover and Focus state
       &:hover,
       &:not(.typing):has(input:focus-visible) {
-        --color-field: rgb(var(--color-white), 45%);
-        color: rgb(var(--color-bg));
+        --c-field: rgb(var(--c-white), 45%);
+        color: rgb(var(--c-bg));
       }
 
       // Typing state
       &.typing {
-        --color-field: rgb(var(--color-accent), 65%);
-        color: rgb(var(--color-text));
+        --c-field: rgb(var(--c-accent), 65%);
+        color: rgb(var(--c-text));
       }
     }
 
@@ -146,7 +146,7 @@
       position: absolute;
       inset: 0;
       left: auto;
-      background-color: rgb(var(--color-accent));
+      background-color: rgb(var(--c-accent));
       width: 1.25em;
       animation: pulsar-bg-c 1s ease infinite alternate;
     }
@@ -160,8 +160,8 @@
       display: flex;
       align-items: center;
       padding-inline: 1.25em;
-      background-color: rgb(var(--color-accent), 65%);
-      color: rgb(var(--color-text));
+      background-color: rgb(var(--c-accent), 65%);
+      color: rgb(var(--c-text));
     }
   }
 
@@ -171,7 +171,7 @@
     inset: 0;
     overflow: hidden;
 
-    background-color: var(--color-field);
+    background-color: var(--c-field);
     transition: var(--trans-default);
     transition-property: color, background-color;
   }

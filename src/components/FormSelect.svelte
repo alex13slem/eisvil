@@ -198,54 +198,54 @@
     }
 
     &.v-default {
-      --field-color: rgb(var(--color-white), 30%);
-      --arrow-color: rgb(var(--color-white), 25%);
+      --field-color: rgb(var(--c-white), 30%);
+      --arrow-color: rgb(var(--c-white), 25%);
       --firm-arrows-color: var(--field-color);
 
       :global(.selected-option) {
-        color: rgb(var(--color-bg));
+        color: rgb(var(--c-bg));
 
         &:hover,
         &:is(.open) {
-          --field-color: rgb(var(--color-white), 45%);
-          --arrow-color: rgb(var(--color-accent), 70%);
+          --field-color: rgb(var(--c-white), 45%);
+          --arrow-color: rgb(var(--c-accent), 70%);
         }
         &:is(.open) {
-          --arrow-color: rgb(var(--color-white));
+          --arrow-color: rgb(var(--c-white));
         }
         &:is(.active) {
-          --field-color: rgb(var(--color-accent), 65%);
-          color: rgb(var(--color-text));
+          --field-color: rgb(var(--c-accent), 65%);
+          color: rgb(var(--c-text));
         }
       }
 
       :global(.options-list) {
         &::after {
-          background-color: rgb(var(--color-grey));
+          background-color: rgb(var(--c-grey));
         }
       }
 
       :global(.option) {
-        color: rgb(var(--color-bg));
+        color: rgb(var(--c-bg));
 
         &::before {
-          background-color: rgb(var(--color-accent));
+          background-color: rgb(var(--c-accent));
         }
 
         &:hover {
-          color: rgb(var(--color-accent));
+          color: rgb(var(--c-accent));
         }
 
         &:is(.active) {
-          color: rgb(var(--color-white));
+          color: rgb(var(--c-white));
         }
       }
     }
 
     &.v-dark {
-      --field-color: rgb(var(--color-card));
-      --arrow-color: rgb(var(--color-card-border));
-      --border-color: rgb(var(--color-card-border));
+      --field-color: rgb(var(--c-card));
+      --arrow-color: rgb(var(--c-card-border));
+      --border-color: rgb(var(--c-card-border));
       --firm-arrows-color: var(--border-color);
 
       &.size-md {
@@ -255,21 +255,21 @@
       }
 
       :global(.selected-option) {
-        color: rgb(var(--color-card-border));
+        color: rgb(var(--c-card-border));
         transition: color var(--trans-default);
 
         &:hover,
         &:is(.open) {
-          color: rgb(var(--color-bg));
-          --field-color: rgb(var(--color-white), 45%);
-          --arrow-color: rgb(var(--color-accent), 70%);
+          color: rgb(var(--c-bg));
+          --field-color: rgb(var(--c-white), 45%);
+          --arrow-color: rgb(var(--c-accent), 70%);
         }
         &:is(.open) {
-          --arrow-color: rgb(var(--color-white));
+          --arrow-color: rgb(var(--c-white));
         }
         &:is(.active) {
-          --field-color: rgb(var(--color-accent), 65%);
-          color: rgb(var(--color-text));
+          --field-color: rgb(var(--c-accent), 65%);
+          color: rgb(var(--c-text));
         }
       }
 
@@ -284,23 +284,23 @@
 
       :global(.options-list) {
         &::after {
-          background-color: rgb(var(--color-grey));
+          background-color: rgb(var(--c-grey));
         }
       }
 
       :global(.option) {
-        color: rgb(var(--color-bg));
+        color: rgb(var(--c-bg));
 
         &::before {
-          background-color: rgb(var(--color-accent));
+          background-color: rgb(var(--c-accent));
         }
 
         &:hover {
-          color: rgb(var(--color-accent));
+          color: rgb(var(--c-accent));
         }
 
         &:is(.active) {
-          color: rgb(var(--color-white));
+          color: rgb(var(--c-white));
         }
       }
     }

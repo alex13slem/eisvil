@@ -214,7 +214,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    background-color: rgb(var(--color-card));
+    background-color: rgb(var(--c-card));
   }
 
   // Элемент навигационного контейнера.
@@ -250,15 +250,15 @@
   // Номер текущей активной страницы.
   .nav-panel :global(.option.active) {
     font-weight: 900;
-    background-color: rgb(var(--color-white), 30%);
+    background-color: rgb(var(--c-white), 30%);
     border-radius: 5px;
-    color: rgb(var(--color-card));
+    color: rgb(var(--c-card));
   }
 
   // Только номера страниц.
   .nav-panel :global(.option.number) {
     &:not(.active):hover {
-      background-color: rgb(var(--color-white), 10%);
+      background-color: rgb(var(--c-white), 10%);
       border-radius: 0.5em;
     }
   }
@@ -273,12 +273,12 @@
 
   // Настраивает параметры prev и next, когда они отключены (когда вы находитесь на первой или последней странице).
   .nav-panel :global(.option.disabled) {
-    color: rgb(var(--color-white), 30%);
+    color: rgb(var(--c-white), 30%);
     pointer-events: none;
   }
 
   .display-now {
-    color: rgb(var(--color-white), 30%);
+    color: rgb(var(--c-white), 30%);
     font-weight: 300;
   }
 

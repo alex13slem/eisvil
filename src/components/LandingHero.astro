@@ -1,13 +1,13 @@
 ---
 import { Image } from "astro:assets";
 import banner from "@/img/hero.jpg";
-import SVGHeroText from "@/components/svg/SVGHeroText.svelte";
+import textPng from "@/img/hero-logo.png";
 ---
 
 <div class="sect-hero">
   <Image class="banner" src={banner} alt="Site-banner" />
   <div class="logo">
-    <SVGHeroText />
+    <Image src={textPng} alt="EISVIL" />
   </div>
   <h1><span hidden>Eisvil -</span> место, где идея становится игрой</h1>
   <slot />

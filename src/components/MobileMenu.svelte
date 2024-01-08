@@ -29,7 +29,7 @@
     margin-top: 60px;
     inset: 0;
     min-height: calc(100dvh - 60px);
-    background-color: rgb(var(--color-bg), 90%);
+    background-color: rgb(var(--c-bg), 90%);
   }
   @media (min-width: 1024.1px) {
     .m-menu {
